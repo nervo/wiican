@@ -11,4 +11,4 @@ HAL_DEVICE_IFACE = "org.freedesktop.Hal.Device"
 HAL_MANAGER_URI = "org.freedesktop.Hal.Manager"
 HAL_MANAGER_PATH = "/org/freedesktop/Hal/Manager"
 
-WMINPUT_CMD = "/usr/bin/wminput"
+WMINPUT_CMD = ["/usr/bin/wminput", "-w"]
