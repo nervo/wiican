@@ -57,7 +57,8 @@ class WiimoteManager:
             if "Nintendo Wiimote" in properties["input.product"]:
                 self.__wiimote_udi = udi
                 print "CONECTADO"
-                self.__notificator.show_notification("Connected", "Press 1+2", icon=ICON_NOTIFY)
+                self.__notificator.show_notification("Connected", 
+				"Press 1+2", icon=ICON_NOTIFY)
 		self.__icon.set_state("discovering")
         except:
             pass
@@ -65,7 +66,8 @@ class WiimoteManager:
     def unplug_cb(self, udi):
         if self.__wiimote_udi == udi:
             print "DESCONECTADO"
-            self.__notificator.show_notification("Disconnected", "Wiimote off", icon=ICON_NOTIFY)
+            self.__notificator.show_notification("Disconnected", 
+			    "Wiimote off", icon=ICON_NOTIFY)
 	    self.__icon.set_state("idle")
 
 
@@ -73,6 +75,8 @@ class WiimoteStatusIcon(gtk.StatusIcon):
     def __init__(self):
         gtk.StatusIcon.__init__(self)
         self.__deploy_menus()
+        self.__notificator = Notificator()
+	self.__notificator.set_status_icon(self)
 
 	self.__states = {"nobluetooth": self.__no_bluetooth_st,
 			"idle": self.__idle_st,
@@ -179,9 +183,13 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             self.__wminput.stop()
 
     def __wminput_retcode(self, retcode):
-        if retcode:
+        if not retcode in [-15, 0]:
             print "FALLLO!!!!!!!!!!!!!"
-            #self.__notificator.show_notification("Error while discovering Wiimote", "Can't discovering or using wiimote. Maybe uinput it's not loaded?", icon=ICON_NOTIFY)
+            if retcode == 255:
+                self.__notificator.show_notification("Error while discovering Wiimote", "Maybe uinput it's not loaded?", icon=ICON_NOTIFY)
+            else:
+                self.__notificator.show_notification("Unknown error", "Can't discovering or using wiimote", icon=ICON_NOTIFY)
+        self.set_state("idle")
 
 
 class WMInputLauncher(threading.Thread):
@@ -198,7 +206,7 @@ class WMInputLauncher(threading.Thread):
         self.__callback(retcode)
 
     def stop(self):
-        # TODO: That's awful!
+        # FIXME: That's awful!
         if self.__pid:
             try:
                 os.kill(self.__pid, signal.SIGTERM)
