@@ -18,3 +18,4 @@ class Notificator:
         notification.show()
 
     __instance = None
+

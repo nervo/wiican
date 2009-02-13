@@ -2,6 +2,8 @@ import sys
 import os
 
 import gtk
+from gtk import glade
+
 import pynotify
 import gobject
 import dbus
@@ -11,6 +13,7 @@ import signal
 
 from defs import *
 from notificator import Notificator
+from pixbufanimation import PixbufAnimation
 
 gtk.gdk.threads_init()
 
@@ -58,7 +61,7 @@ class WiimoteManager:
                 self.__wiimote_udi = udi
                 print "CONECTADO"
                 self.__notificator.show_notification("Connected", 
-				"Press 1+2", icon=ICON_NOTIFY)
+				"Press 1+2")
 		self.__icon.set_state("discovering")
         except:
             pass
@@ -67,7 +70,7 @@ class WiimoteManager:
         if self.__wiimote_udi == udi:
             print "DESCONECTADO"
             self.__notificator.show_notification("Disconnected", 
-			    "Wiimote off", icon=ICON_NOTIFY)
+			    "Wiimote off")
 	    self.__icon.set_state("idle")
 
 
@@ -77,12 +80,19 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__deploy_menus()
         self.__notificator = Notificator()
 	self.__notificator.set_status_icon(self)
-
-	self.__states = {"nobluetooth": self.__no_bluetooth_st,
+        self.__animation = PixbufAnimation([ICON_CONN1, 
+		ICON_CONN2, ICON_CONN3, ICON_ON])
+        self.__states = {"nobluetooth": self.__no_bluetooth_st,
 			"idle": self.__idle_st,
 			"discovering": self.__discovering_st,
 			"discovered": self.__discovered_st}
+	
+        self.__current_state = "idle"
+        self.__wminput = None
 
+        about_xml = glade.XML(ABOUT_DLG, None, None)
+        self.__aboutdlg = about_xml.get_widget('WiiAboutDialog')
+        self.__aboutdlg.connect("response", lambda d, r: d.hide())
         self.connect("popup-menu", self.__icon_popupmenu_cb, None)
 
 	self.set_visible(True)
@@ -92,6 +102,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         if not self.__states.has_key(state):
             return
         self.__states[state]()
+        self.__current_state = state
 
     def __no_bluetooth_st(self):
         self.set_from_file(ICON_OFF)
@@ -117,8 +128,15 @@ class WiimoteStatusIcon(gtk.StatusIcon):
 	self.__discover_item.set_active(False)
 
     def __discovering_st(self):
-        self.set_from_file(ICON_ON)
+        def animate():
+	    if self.__current_state != "discovering":
+                return False
+            else:
+                self.set_from_pixbuf(self.__animation.next())
+                return True
+
         self.set_tooltip('Discovering Wiimote')
+	gobject.timeout_add(500, animate)
 
     def __discovered_st(self):
         self.set_from_file(ICON_ON)
@@ -170,9 +188,12 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         pass
 
     def __about_cb(self, widget):
-        pass
+        self.__aboutdlg.show()
 
     def __quit_cb(self, widget):
+        if self.__wminput:
+            self.__wminput.stop()
+
         sys.exit(0)
 
     def __discover_cb(self, discover_item):
@@ -186,9 +207,9 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         if not retcode in [-15, 0]:
             print "FALLLO!!!!!!!!!!!!!"
             if retcode == 255:
-                self.__notificator.show_notification("Error while discovering Wiimote", "Maybe uinput it's not loaded?", icon=ICON_NOTIFY)
+                self.__notificator.show_notification("Error while discovering Wiimote", "Maybe uinput it's not loaded?")
             else:
-                self.__notificator.show_notification("Unknown error", "Can't discovering or using wiimote", icon=ICON_NOTIFY)
+                self.__notificator.show_notification("Unknown error", "Can't discovering or using wiimote")
         self.set_state("idle")
 
 
