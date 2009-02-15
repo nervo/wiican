@@ -5,13 +5,13 @@ import dbus
 import gobject
 import pynotify
 
-import wiistray
+import wiimotemanager
 
 from defs import * 
 from dbus.mainloop.glib import DBusGMainLoop
 dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 
-wiimanager = wiistray.WiimoteManager()
+wiimanager = wiimotemanager.WiimoteManager()
 
 bus = dbus.SystemBus()
 

@@ -1,6 +1,5 @@
 import pynotify
 
-pynotify.init("wiistray")
 
 class Notificator:
     __urgency = pynotify.URGENCY_LOW
