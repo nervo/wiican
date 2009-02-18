@@ -64,7 +64,7 @@ class WiimoteManager:
             if "Nintendo Wiimote" in properties["input.product"]:
                 self.__wiimote_udi = udi
                 print "CONECTADO"
-                self.__notificator.show_notification("Connected", "Press 1+2")
+                self.__notificator.show_notification("Connected", "Put Wiimote in discoverable mode now (press 1+2)")
                 self.__icon.set_state("discovering")
         except:
             pass

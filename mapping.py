@@ -9,11 +9,13 @@ class WiiMappingDialog:
         self.__mapping_dlg = xml.get_widget('mapping_dlg')
         self.__mapping_list = xml.get_widget('mapping_list')
 
+        # Get main widgets
         self.__mapping_list.set_model(gtk.ListStore(str))
         self.__mapping_list.append_column(gtk.TreeViewColumn('mapping',
                     gtk.CellRendererText(), text=0))
         self.__mapping_list.set_search_column(0)
 
+        # Get buttons      
         self.__close_btn = xml.get_widget('close_btn')
         self.__new_btn = xml.get_widget('new_btn')
         self.__edit_btn = xml.get_widget('edit_btn')
@@ -21,6 +23,7 @@ class WiiMappingDialog:
         self.__up_btn = xml.get_widget('up_btn')
         self.__down_btn = xml.get_widget('down_btn')
 
+        # Connect buttons to methods
         self.__close_btn.connect('clicked', self.__close_cb)
         self.__new_btn.connect('clicked', self.__new_cb)
         self.__edit_btn.connect('clicked', self.__edit_cb)
