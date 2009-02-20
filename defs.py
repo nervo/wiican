@@ -1,3 +1,6 @@
+USER_CONFIG_DIR = ".wiizard"
+CONFIG_SKEL = "config_skel"
+
 BLUEZ_PATH = '/'
 BLUEZ_URI = 'org.bluez'
 BLUEZMANAGER_IFACE = 'org.bluez.Manager'

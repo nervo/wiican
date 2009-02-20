@@ -1,6 +1,5 @@
 import pynotify
 
-
 class Notificator:
     __urgency = pynotify.URGENCY_LOW
     __status_icon = None
@@ -17,4 +16,3 @@ class Notificator:
         notification.show()
 
     __instance = None
-

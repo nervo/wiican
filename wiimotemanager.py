@@ -12,6 +12,7 @@ import threading
 import signal
 
 from defs import *
+from dotconfig import *
 from notificator import Notificator
 from pixbufanimation import PixbufAnimation
 from mapping import WiiMappingDialog
@@ -79,7 +80,8 @@ class WiimoteManager:
 class WiimoteStatusIcon(gtk.StatusIcon):
     def __init__(self):
         gtk.StatusIcon.__init__(self)
-        self.__deploy_menus()
+        self.__load_menu()
+        self.__load_mappers_menu()
         self.__notificator = Notificator()
         self.__notificator.set_status_icon(self)
         self.__animation = PixbufAnimation([ICON_CONN1, 
@@ -97,6 +99,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__aboutdlg = about_xml.get_widget('WiiAboutDialog')
         self.__aboutdlg.connect("response", lambda d, r: d.hide())
         self.connect("popup-menu", self.__icon_popupmenu_cb, None)
+        self.connect("activate", self.__activate_cb)
 
         self.set_visible(True)
 
@@ -110,25 +113,11 @@ class WiimoteStatusIcon(gtk.StatusIcon):
     def __no_bluetooth_st(self):
         self.set_from_file(ICON_OFF)
         self.set_tooltip('Plug a bluetooth adapter')
-        for menu_item, enabled in self.__disabled_menu.items():
-            if enabled:
-                menu_item.show()
-            else:
-                menu_item.hide()
-	
-        self.__discover_item.set_active(False)
 
     def __idle_st(self):
+        self.__disconnect_item.hide()
         self.set_from_file(ICON_ON)
         self.set_tooltip('Right click for menu')
-
-        for menu_item, enabled in self.__enabled_menu.items():
-            if enabled:
-                menu_item.show()
-            else:
-                menu_item.hide()
-
-        self.__discover_item.set_active(False)
 
     def __discovering_st(self):
         def animate():
@@ -138,25 +127,25 @@ class WiimoteStatusIcon(gtk.StatusIcon):
                 self.set_from_pixbuf(self.__animation.next())
                 return True
 
+        self.__disconnect_item.show()
         self.set_tooltip('Discovering Wiimote')
         gobject.timeout_add(500, animate)
 
+    #TODO: Useless yet!
     def __discovered_st(self):
+        self.__disconnect_item.show()
         self.set_from_file(ICON_ON)
         self.set_tooltip('Use your wiimote')
        
-    def __deploy_menus(self):
+    def __load_menu(self):
         self.__menu = gtk.Menu()
-
-        discover_item = gtk.CheckMenuItem("Discover wiimote")
-        discover_item.connect("toggled", self.__discover_cb)
-        self.__menu.append(discover_item)
 
         nobluez_item = gtk.MenuItem("No bluetooth adapters")
         self.__menu.append(nobluez_item)
 
         prefs_item = gtk.ImageMenuItem(gtk.STOCK_PREFERENCES)
         prefs_item.connect("activate", self.__show_preferences_cb)
+        prefs_item.show()
         self.__menu.append(prefs_item)
 
         sep_item = gtk.SeparatorMenuItem()
@@ -173,24 +162,38 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         quit_item.show()
         self.__menu.append(quit_item)
 
-        self.__enabled_menu = {discover_item:True, prefs_item:True, 
-                        nobluez_item:False}
-        self.__disabled_menu = {discover_item:False, prefs_item:False, 
-                        nobluez_item:True}
-
-        self.__discover_item = discover_item
-
         # Init Icon Factory
         self.icon_theme = gtk.icon_theme_get_default()
 
+    def __load_mappers_menu(self):
+        self.__mappers_menu = gtk.Menu()
+        config_files = DotConfig(USER_CONFIG_DIR, CONFIG_SKEL)
+
+        item = gtk.ImageMenuItem(gtk.STOCK_DISCONNECT)
+        item.connect('activate', self.__discover_cb, -1)
+        self.__mappers_menu.append(item)
+        self.__disconnect_item = item
+
+        for file in config_files.get_files('*.wminput'):
+            meta = get_mapping_file_metadata(file)
+            icon = gtk.gdk.pixbuf_new_from_file_at_size(meta['icon'], 16, 16)
+            item = gtk.ImageMenuItem(meta['name'])
+            item.set_image(gtk.image_new_from_pixbuf(icon))
+            item.connect('activate', self.__discover_cb, file)
+            item.show()
+            self.__mappers_menu.append(item)
+    
     def __icon_popupmenu_cb(self, status_icon, button, activate_time, data):
         self.__menu.popup(None, None, gtk.status_icon_position_menu, button, 
-			activate_time, status_icon)
+			        activate_time, status_icon)
+
+    def __activate_cb(self, status_icon):
+        if self.__current_state not in ["nobluetooth"]:
+            self.__mappers_menu.popup(None, None, 
+                    gtk.status_icon_position_menu, 0, 0, status_icon)
 
     def __show_preferences_cb(self, widget):
-        if not self.__mapping_dlg:
-            self.__mapping_dlg = WiiMappingDialog()
-
+        self.__mapping_dlg = WiiMappingDialog()
         self.__mapping_dlg.show()
 
     def __about_cb(self, widget):
@@ -202,12 +205,13 @@ class WiimoteStatusIcon(gtk.StatusIcon):
 
         sys.exit(0)
 
-    def __discover_cb(self, discover_item):
-        if discover_item.get_active():
-            self.__wminput = WMInputLauncher(self.__wminput_retcode)
-            self.__wminput.start()
-        else:
+    def __discover_cb(self, discover_item, config=None):
+        if self.__wminput and self.__wminput.running():
             self.__wminput.stop()
+        
+        if config and config != -1:
+            self.__wminput = WMInputLauncher(config, self.__wminput_retcode)
+            self.__wminput.start()
 
     def __wminput_retcode(self, retcode):
         if not retcode in [-15, 0]:
@@ -215,18 +219,23 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             if retcode == 255:
                 self.__notificator.show_notification("Error while discovering Wiimote", "Maybe uinput it's not loaded?")
             else:
-                self.__notificator.show_notification("Unknown error", "Can't discovering or using wiimote")
+                self.__notificator.show_notification("Unknown error", "Can't discover or use wiimote")
         self.set_state("idle")
 
 
 class WMInputLauncher(threading.Thread):
-    def __init__(self, callback):
+    def __init__(self, config_file, callback):
         threading.Thread.__init__(self)
+        self.__config_file = config_file
         self.__callback = callback
         self.__pid = None
 
     def run(self):
         cmd = WMINPUT_CMD
+
+        if self.__config_file:
+            cmd += ['-c', self.__config_file]
+
         proc = subprocess.Popen(cmd, stdout = subprocess.PIPE)
         self.__pid = proc.pid
         retcode = proc.wait()
@@ -241,6 +250,12 @@ class WMInputLauncher(threading.Thread):
                 pass
 
             self.__pid = None
+
+    def running(self):
+        if self.__pid:
+            return True
+
+        return False
 
 if __name__ == '__main__':
     from dbus.mainloop.glib import DBusGMainLoop
