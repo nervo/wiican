@@ -14,7 +14,7 @@ import signal
 from defs import *
 from dotconfig import *
 from notificator import Notificator
-from pixbufanimation import PixbufAnimation
+from pnganimation import PngAnimation
 from mapping import WiiMappingDialog
 
 gtk.gdk.threads_init()
@@ -64,7 +64,7 @@ class WiimoteManager:
         try:
             if "Nintendo Wiimote" in properties["input.product"]:
                 self.__wiimote_udi = udi
-                print "CONECTADO"
+                print "Connected"
                 self.__notificator.show_notification("Connected", "Put Wiimote in discoverable mode now (press 1+2)")
                 self.__icon.set_state("discovering")
         except:
@@ -72,7 +72,7 @@ class WiimoteManager:
 
     def unplug_cb(self, udi):
         if self.__wiimote_udi == udi:
-            print "DESCONECTADO"
+            print "Disconnected"
             self.__notificator.show_notification("Disconnected", "Wiimote off")
             self.__icon.set_state("idle")
 
@@ -84,8 +84,8 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__load_mappers_menu()
         self.__notificator = Notificator()
         self.__notificator.set_status_icon(self)
-        self.__animation = PixbufAnimation([ICON_CONN1, 
-        ICON_CONN2, ICON_CONN3, ICON_ON])
+        #self.__animation = PngAnimation([ICON_CONN1, 
+        #        ICON_CONN2, ICON_CONN3, ICON_ON])
         self.__states = {"nobluetooth": self.__no_bluetooth_st,
             "idle": self.__idle_st,
             "discovering": self.__discovering_st,
@@ -115,9 +115,9 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.set_tooltip('Plug a bluetooth adapter')
 
     def __idle_st(self):
-        self.__disconnect_item.hide()
+        self.__disconnect_item.set_sensitive(False)
         self.set_from_file(ICON_ON)
-        self.set_tooltip('Right click for menu')
+        self.set_tooltip('Hold left button for use wiimote\nRight button for menu')
 
     def __discovering_st(self):
         def animate():
@@ -127,7 +127,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
                 self.set_from_pixbuf(self.__animation.next())
                 return True
 
-        self.__disconnect_item.show()
+        self.__disconnect_item.set_sensitive(True)
         self.set_tooltip('Discovering Wiimote')
         gobject.timeout_add(500, animate)
 
@@ -169,15 +169,24 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__mappers_menu = gtk.Menu()
         config_files = DotConfig(USER_CONFIG_DIR, CONFIG_SKEL)
 
-        item = gtk.ImageMenuItem(gtk.STOCK_DISCONNECT)
-        item.connect('activate', self.__discover_cb, -1)
-        self.__mappers_menu.append(item)
-        self.__disconnect_item = item
+        disconnect_item = gtk.ImageMenuItem(gtk.STOCK_DISCONNECT)
+        disconnect_item.connect('activate', self.__discover_cb, -1)
+        disconnect_item.show()
+        disconnect_item.set_sensitive(False)
+        self.__mappers_menu.append(disconnect_item)
+        self.__disconnect_item = disconnect_item
 
+        sep_item = gtk.SeparatorMenuItem()
+        sep_item.show()
+        self.__mappers_menu.append(sep_item)
+
+        # Add every wminput config file as menu item
         for file in config_files.get_files('*.wminput'):
             meta = get_mapping_file_metadata(file)
             icon = gtk.gdk.pixbuf_new_from_file_at_size(meta['icon'], 16, 16)
             item = gtk.ImageMenuItem(meta['name'])
+            if meta['description']:
+                item.set_tooltip_text(meta['description'])
             item.set_image(gtk.image_new_from_pixbuf(icon))
             item.connect('activate', self.__discover_cb, file)
             item.show()
@@ -210,12 +219,15 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             self.__wminput.stop()
         
         if config and config != -1:
+            self.__animation = PngAnimation(
+                    [ICON_CONN1, ICON_CONN2, ICON_CONN3, ICON_ON],
+                    discover_item.get_image().get_pixbuf())
             self.__wminput = WMInputLauncher(config, self.__wminput_retcode)
             self.__wminput.start()
-
+            
     def __wminput_retcode(self, retcode):
         if not retcode in [-15, 0]:
-            print "FALLLO!!!!!!!!!!!!!"
+            print "Fail!"
             if retcode == 255:
                 self.__notificator.show_notification("Error while discovering Wiimote", "Maybe uinput it's not loaded?")
             else:

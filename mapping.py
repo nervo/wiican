@@ -16,8 +16,7 @@ class WiiMappingDialog:
         for file in self.__config_files.get_files('*.wminput'):
             meta = get_mapping_file_metadata(file)
             icon = gtk.gdk.pixbuf_new_from_file_at_size(meta['icon'], 16, 16)
-            model.append([icon, meta['name'].capitalize(), 
-                    meta['description'], file])
+            model.append([icon, meta['name'], meta['description'], file])
             
         self.__mapping_list.set_model(model)
 
@@ -69,23 +68,18 @@ class WiiMappingDialog:
 
     def __new_cb(self, widget):
         print 'new'
-        pass
 
     def __edit_cb(self, widget):
         print 'edit'
-        pass
     
     def __delete_cb(self, widget):
         print 'delete'
-        pass
 
     def __up_cb(self, widget):
         print 'up'
-        pass
 
     def __down_cb(self, widget):
         print 'down'
-        pass
 
 if __name__ == '__main__':
     import gobject
