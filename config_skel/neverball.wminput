@@ -1,7 +1,9 @@
-# Wiizard Config file for wminput
-# Name: Neverball
-# Description: Use wiimote with neverball game 
-# Icon: /usr/share/pixmaps/neverball-32.xpm
+## Wiizard Config file for wminput
+# name: Neverball
+# description: Use wiimote with neverball game 
+# icon: /usr/share/pixmaps/neverball-32.xpm
+# position: 0
+# visible: True
 
 Plugin.acc.Roll = ABS_X
 Plugin.acc.Roll_Scale = 2.0

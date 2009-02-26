@@ -1,24 +1,25 @@
 import os
 import shutil
 import fnmatch
+import re
 import exceptions
+
+import yaml
 
 DEFAULT_ICON = 'img/wiitrayon.png'
 
 def get_mapping_file_metadata(file_path):
-    metadata = {'icon': DEFAULT_ICON, 'name': 'no name', 'description': ''}
-    fp = open(file_path, 'r')
+    metadata_block = ''
 
+    fp = open(file_path, 'r')
     line = fp.readline().strip()
     while line:
-        if line.startswith('#') and ':' in line:
-            (metakey, metavalue) = line[1:].split(':')
-            if metadata.has_key(metakey.strip().lower()):
-                metadata[metakey.strip().lower()] = metavalue.strip()
+        if line.startswith('#'):
+            metadata_block += line[1:]+'\n'
         line = fp.readline().strip()
-
     fp.close()
-    return metadata
+
+    return yaml.load(metadata_block)
 
 #TODO: Maybe a Singleton or Borg pattern?
 class DotConfig:
