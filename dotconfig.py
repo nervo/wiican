@@ -3,10 +3,7 @@ import shutil
 import fnmatch
 import re
 import exceptions
-
 import yaml
-
-DEFAULT_ICON = 'img/wiitrayon.png'
 
 def get_mapping_file_metadata(file_path):
     metadata_block = ''
@@ -20,6 +17,25 @@ def get_mapping_file_metadata(file_path):
     fp.close()
 
     return yaml.load(metadata_block)
+
+
+def set_mapping_file_metadata(file_path, **kwargs):
+    mapping = ''
+    fp = open(file_path, 'r')
+    line = fp.readline()
+    while line:
+        if not line.startswith('#'):
+            mapping += line
+        line = fp.readline()
+    fp.close()
+
+    fp = open(file_path, 'w')
+    fp.write('## Wiizard Config file for wminput\n')
+    for meta in yaml.dump(kwargs, default_flow_style=False).split('\n')[:-1]:
+        fp.write('# ' + meta + '\n')
+    fp.write(mapping)
+    fp.close()
+
 
 #TODO: Maybe a Singleton or Borg pattern?
 class DotConfig:

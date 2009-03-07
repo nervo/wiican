@@ -183,6 +183,8 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         # Add every wminput config file as menu item
         for file in config_files.get_files('*.wminput'):
             meta = get_mapping_file_metadata(file)
+            if not meta['visible']:
+                continue
             icon = gtk.gdk.pixbuf_new_from_file_at_size(meta['icon'], 16, 16)
             item = gtk.ImageMenuItem(meta['name'])
             if meta['description']:
