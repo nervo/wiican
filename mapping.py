@@ -7,6 +7,71 @@ import defs
 import dotconfig
 
 MAPPING_GLADE = 'mapping.glade'
+ENTRY_GLADE = 'entry.glade'
+
+class EntryDialog:
+    def __init__(self, name='', description='', file_path=None, icon_path=None):
+        xml = glade.XML(ENTRY_GLADE, None, None)
+        self.__entry_dlg = xml.get_widget('entry_dlg')
+        self.__name_entry = xml.get_widget('name_entry')
+        self.__desc_entry = xml.get_widget('desc_entry')
+        self.__file_buffer = xml.get_widget('file_textview').get_buffer()
+
+        # Get buttons
+        ok_btn = xml.get_widget('ok_btn')
+        cancel_btn = xml.get_widget('cancel_btn')
+        icon_btn = xml.get_widget('icon_btn')
+
+        # Connect buttons to methods
+        ok_btn.connect('clicked', self.__ok_cb)
+        cancel_btn.connect('clicked', self.__cancel_cb)
+        icon_btn.connect('clicked', self.__icon_cb)
+
+        # Set initial values
+        self.__name_entry.set_text(name)
+        self.__desc_entry.set_text(description)
+        if file_path:
+            self.__file_buffer.set_text(dotconfig.get_mapping_file(file_path))
+        if icon_path:
+            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 48,48)
+            image = gtk.Image()
+            image.set_from_pixbuf(pixbuf)
+            icon_btn.set_image(image)
+
+        self.show()
+
+    def show(self):
+        self.__entry_dlg.show()
+
+    def __ok_cb(self, widget):
+        pass
+
+    def __cancel_cb(self, widget):
+        self.__entry_dlg.destroy()
+
+    def __icon_cb(self, widget):
+        dialog = gtk.FileChooserDialog("Open..", self.__entry_dlg,
+                            gtk.FILE_CHOOSER_ACTION_OPEN,
+                            (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+                            gtk.STOCK_OPEN, gtk.RESPONSE_OK))
+        dialog.set_default_response(gtk.RESPONSE_OK)
+
+        filter = gtk.FileFilter()
+        filter.set_name("Pixmap files")
+        #TODO: Add good pixmap pattern
+        filter.add_pattern("*.png") 
+        dialog.add_filter(filter)
+
+        dialog.hide()
+
+        if dialog.run() == gtk.RESPONSE_OK:
+            filename = dialog.get_filename()
+            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 48,48)
+            image = gtk.Image()
+            image.set_from_pixbuf(pixbuf)
+            widget.set_image(image)
+
+        dialog.destroy()        
 
 class WiiMappingDialog:
     def __init__(self):
@@ -53,13 +118,12 @@ class WiiMappingDialog:
                 positions[meta['position']]=row_index # map items and positions
                 row_index += 1
 
-            model.reorder(positions.values()) # dict type applies meta order
+            model.reorder(positions.values()) # python dict applies meta order
             return model
 
         def load_treeview(mapping_list):
             # Set the cells
             icon_cell = gtk.CellRendererPixbuf()
-
             name_cell = gtk.CellRendererText()
 
             def visible_toggled_cb(cell, path, model):
@@ -115,11 +179,22 @@ class WiiMappingDialog:
         self.__mapping_dlg.destroy()
 
     def __new_cb(self, widget, mapping_list):
-        print 'new'
+        entry_dlg = EntryDialog()
+        entry_dlg.show()
 
     def __edit_cb(self, widget, mapping_list):
-        print 'edit'
-    
+        selection = mapping_list.get_selection()
+        model, selected = selection.get_selected()
+        row_data = model[selected]
+
+        entry_dlg = EntryDialog(
+                name = row_data[1],
+                description = row_data[4],
+                file_path = row_data[5],
+                icon_path = row_data[6])
+
+        entry_dlg.show()
+
     def __delete_cb(self, widget, mapping_list):
         print 'delete'
 

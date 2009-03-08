@@ -18,6 +18,17 @@ def get_mapping_file_metadata(file_path):
 
     return yaml.load(metadata_block)
 
+def get_mapping_file(file_path):
+    mapping_block = ''
+    fp = open(file_path, 'r')
+    line = fp.readline()
+    while line:
+        if not line.strip().startswith('#'):
+            mapping_block += line
+        line = fp.readline()
+    fp.close()
+
+    return mapping_block
 
 def set_mapping_file_metadata(file_path, **kwargs):
     mapping = ''
