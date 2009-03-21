@@ -4,7 +4,6 @@
 <glade-interface>
   <widget class="GtkDialog" id="entry_dlg">
     <property name="title" translatable="yes" context="yes">New entry</property>
-    <property name="modal">True</property>
     <property name="window_position">GTK_WIN_POS_CENTER</property>
     <property name="default_width">320</property>
     <property name="default_height">400</property>

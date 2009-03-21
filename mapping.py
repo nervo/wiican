@@ -53,18 +53,37 @@ class EntryDialog:
                 self.__icon_path
 
     def __icon_cb(self, widget):
-        dialog = gtk.FileChooserDialog("Open..", self.__entry_dlg,
+        def update_preview_cb(file_chooser, preview):
+            filename = file_chooser.get_preview_filename()
+            try:
+                pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 64, 64)
+                preview.set_from_pixbuf(pixbuf)
+                have_preview = True
+            except:
+                have_preview = False
+            file_chooser.set_preview_widget_active(have_preview)
+            return
+
+        dialog = gtk.FileChooserDialog("Select image icon..", self.__entry_dlg,
                             gtk.FILE_CHOOSER_ACTION_OPEN,
                             (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
                             gtk.STOCK_OPEN, gtk.RESPONSE_OK))
         dialog.set_default_response(gtk.RESPONSE_OK)
 
         filter = gtk.FileFilter()
-        filter.set_name("Pixmap files")
-        #FIXME: Add good pixmap pattern
-        filter.add_pattern("*.png") 
-        dialog.add_filter(filter)
+        filter.set_name("Images")
+        filter.add_mime_type("image/png")
+        filter.add_mime_type("image/jpeg")
+        filter.add_mime_type("image/gif")
+        filter.add_pattern("*.png")
+        filter.add_pattern("*.jpg")
+        filter.add_pattern("*.gif")
 
+        preview = gtk.Image()
+        dialog.set_preview_widget(preview)
+        dialog.connect("update-preview", update_preview_cb, preview)
+
+        dialog.add_filter(filter)
         dialog.hide()
 
         if dialog.run() == gtk.RESPONSE_OK:

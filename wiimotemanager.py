@@ -65,7 +65,8 @@ class WiimoteManager:
             if "Nintendo Wiimote" in properties["input.product"]:
                 self.__wiimote_udi = udi
                 print "Connected"
-                self.__notificator.show_notification("Connected", "Put Wiimote in discoverable mode now (press 1+2)")
+                self.__notificator.show_notification("Connected", 
+                        "Put Wiimote in discoverable mode now (press 1+2)")
                 self.__icon.set_state("discovering")
         except:
             pass
@@ -86,6 +87,8 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__notificator.set_status_icon(self)
         #self.__animation = PngAnimation([ICON_CONN1, 
         #        ICON_CONN2, ICON_CONN3, ICON_ON])
+
+        #TODO: Maybe a custom gobject type makes this smarter
         self.__states = {"nobluetooth": self.__no_bluetooth_st,
             "idle": self.__idle_st,
             "discovering": self.__discovering_st,

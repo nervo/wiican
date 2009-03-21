@@ -79,7 +79,7 @@ class DotConfig:
             if not os.path.exists(self.dotdir + os.sep + filename):
                 break
 
-        return os.environ["HOME"] + os.sep + self.dotdir + os.sep + filename 
+        return os.environ["HOME"]+os.sep+self.dotdir+os.sep+filename.lower()
 
     def __create_dotdir(self):
         dotdir_path = os.path.join(os.environ["HOME"], self.dotdir)
