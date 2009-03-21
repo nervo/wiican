@@ -8,46 +8,49 @@ import dotconfig
 
 MAPPING_GLADE = 'mapping.glade'
 ENTRY_GLADE = 'entry.glade'
+DEFAULT_ICON = 'img/wiitrayon.png'
 
 class EntryDialog:
-    def __init__(self, name='', description='', file_path=None, icon_path=None):
-        xml = glade.XML(ENTRY_GLADE, None, None)
-        self.__entry_dlg = xml.get_widget('entry_dlg')
-        self.__name_entry = xml.get_widget('name_entry')
-        self.__desc_entry = xml.get_widget('desc_entry')
-        self.__file_buffer = xml.get_widget('file_textview').get_buffer()
+    def __init__(self, name='', description='', mapping='', 
+            icon_path=DEFAULT_ICON):
+        wTree = glade.XML(ENTRY_GLADE, None, None)
+        self.__entry_dlg = wTree.get_widget('entry_dlg')
+        self.__name_entry = wTree.get_widget('name_entry')
+        self.__desc_entry = wTree.get_widget('desc_entry')
+        self.__file_buffer = wTree.get_widget('file_textview').get_buffer()
+        self.__icon_path = icon_path
 
         # Get buttons
-        ok_btn = xml.get_widget('ok_btn')
-        cancel_btn = xml.get_widget('cancel_btn')
-        icon_btn = xml.get_widget('icon_btn')
-
-        # Connect buttons to methods
-        ok_btn.connect('clicked', self.__ok_cb)
-        cancel_btn.connect('clicked', self.__cancel_cb)
+        icon_btn = wTree.get_widget('icon_btn')
         icon_btn.connect('clicked', self.__icon_cb)
 
         # Set initial values
         self.__name_entry.set_text(name)
         self.__desc_entry.set_text(description)
-        if file_path:
-            self.__file_buffer.set_text(dotconfig.get_mapping_file(file_path))
-        if icon_path:
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 48,48)
+        self.__file_buffer.set_text(mapping)
+        if self.__icon_path:
+            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 48, 48)
             image = gtk.Image()
             image.set_from_pixbuf(pixbuf)
             icon_btn.set_image(image)
 
-        self.show()
+    #FIXME: What a lot of proxies. I wonder if i can subclass ...
+    def set_title(self, title=''):
+        self.__entry_dlg.set_title(title)
 
-    def show(self):
-        self.__entry_dlg.show()
+    def run(self):
+        return self.__entry_dlg.run()
 
-    def __ok_cb(self, widget):
-        pass
-
-    def __cancel_cb(self, widget):
+    def destroy(self):
         self.__entry_dlg.destroy()
+
+    def get_values(self):
+        start, end = self.__file_buffer.get_bounds()
+
+        return self.__name_entry.get_text(), \
+                self.__desc_entry.get_text(), \
+                self.__file_buffer.get_text(start, end), \
+                self.__icon_path
 
     def __icon_cb(self, widget):
         dialog = gtk.FileChooserDialog("Open..", self.__entry_dlg,
@@ -58,7 +61,7 @@ class EntryDialog:
 
         filter = gtk.FileFilter()
         filter.set_name("Pixmap files")
-        #TODO: Add good pixmap pattern
+        #FIXME: Add good pixmap pattern
         filter.add_pattern("*.png") 
         dialog.add_filter(filter)
 
@@ -70,30 +73,34 @@ class EntryDialog:
             image = gtk.Image()
             image.set_from_pixbuf(pixbuf)
             widget.set_image(image)
+            self.__icon_path = filename
 
-        dialog.destroy()        
+        dialog.destroy()
 
 class WiiMappingDialog:
     def __init__(self):
-        def load_widgets(xml):
-            mapping_dlg = xml.get_widget('mapping_dlg')
-            mapping_list = xml.get_widget('mapping_list')
+        def load_widgets(wTree):
+            mapping_dlg = wTree.get_widget('mapping_dlg')
+            mapping_list = wTree.get_widget('mapping_list')
 
             # Get buttons      
-            ok_btn = xml.get_widget('ok_btn')
-            new_btn = xml.get_widget('new_btn')
-            edit_btn = xml.get_widget('edit_btn')
-            delete_btn = xml.get_widget('delete_btn')
-            up_btn = xml.get_widget('up_btn')
-            down_btn = xml.get_widget('down_btn')
+            save_btn = wTree.get_widget('save_btn')
+            close_btn = wTree.get_widget('close_btn')
+            new_btn = wTree.get_widget('new_btn')
+            edit_btn = wTree.get_widget('edit_btn')
+            delete_btn = wTree.get_widget('delete_btn')
+            up_btn = wTree.get_widget('up_btn')
+            down_btn = wTree.get_widget('down_btn')
 
             # Connect buttons to methods
-            ok_btn.connect('clicked', self.__close_cb, mapping_list)
+            save_btn.connect('clicked', self.__save_cb, mapping_list)
+            close_btn.connect('clicked', self.__close_cb)
             new_btn.connect('clicked', self.__new_cb, mapping_list)
             edit_btn.connect('clicked', self.__edit_cb, mapping_list)
             delete_btn.connect('clicked', self.__delete_cb, mapping_list)
             up_btn.connect('clicked', self.__up_cb, mapping_list)
             down_btn.connect('clicked', self.__down_cb, mapping_list)
+            mapping_list.connect('row-activated', self.__row_cb)
 
             return mapping_dlg, mapping_list
 
@@ -104,17 +111,20 @@ class WiiMappingDialog:
                         gobject.TYPE_INT,    # Position
                         gobject.TYPE_STRING, # Description
                         gobject.TYPE_STRING, # File_path
-                        gobject.TYPE_STRING) # Icon_path
+                        gobject.TYPE_STRING, # Icon_path
+                        gobject.TYPE_STRING) # Mapping
 
             # Set the model items from files metadata and order
             positions = {}
             row_index = 0
             for file in files :
-                meta = dotconfig.get_mapping_file_metadata(file)
+                meta = dotconfig.read_metadata(file)
+                mapping = dotconfig.read_mapping(file)
                 icon = gtk.gdk.pixbuf_new_from_file_at_size(meta['icon'], 
                         16, 16)
                 model.append([icon, meta['name'], meta['visible'], 
-                    meta['position'], meta['description'], file, meta['icon']])
+                    meta['position'], meta['description'], file, meta['icon'],
+                    mapping])
                 positions[meta['position']]=row_index # map items and positions
                 row_index += 1
 
@@ -146,13 +156,13 @@ class WiiMappingDialog:
             mapping_list.set_search_column(1)
 
         # Get the widgets
-        xml = glade.XML(MAPPING_GLADE, None, None)
-        self.__mapping_dlg, self.__mapping_list = load_widgets(xml)
+        wTree = glade.XML(MAPPING_GLADE, None, None)
+        self.__mapping_dlg, self.__mapping_list = load_widgets(wTree)
 
         # Setup mapping_list
-        config_files = dotconfig.DotConfig(defs.USER_CONFIG_DIR, 
+        self.__config_files = dotconfig.DotConfig(defs.USER_CONFIG_DIR, 
             defs.CONFIG_SKEL)
-        files = config_files.get_files('*.wminput')
+        files = self.__config_files.get_files('*.wminput')
         self.__mapping_list.set_model(load_model(files))
 
         # Setup the treeview
@@ -163,37 +173,65 @@ class WiiMappingDialog:
     def show(self):
         self.__mapping_dlg.show()
 
-    def __close_cb(self, widget, mapping_list):
+    def __close_cb(self, widget):
+        self.__mapping_dlg.destroy()
+
+    def __save_cb(self, widget, mapping_list):
         model = mapping_list.get_model()
         row_index = 0
+
+        #TODO: A best approx. it's to save only the changes
         for row in model:
-            dotconfig.set_mapping_file_metadata(
+            if not row[5]:
+                row[5] = self.__config_files.new_filename(row[1] + '_', 
+                        '.wminput')
+            dotconfig.write_mapping(
                     name=row[1],        # Name
                     visible=row[2],     # Visible
                     position=row_index, # Position
                     description=row[4], # Description
                     file_path=row[5],   # File_path
-                    icon=row[6])        # Icon_path
+                    icon=row[6],        # Icon_path
+                    mapping=row[7])     # Mapping
             row_index += 1
 
         self.__mapping_dlg.destroy()
 
     def __new_cb(self, widget, mapping_list):
         entry_dlg = EntryDialog()
-        entry_dlg.show()
+        if entry_dlg.run() == gtk.RESPONSE_OK:
+            name, desc, mapping, icon_path = entry_dlg.get_values()
+            icon = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 16, 16)
+            model = mapping_list.get_model()
+            model.append([icon, name, True, 0, desc, None, icon_path, mapping])
+
+        entry_dlg.destroy()
 
     def __edit_cb(self, widget, mapping_list):
         selection = mapping_list.get_selection()
         model, selected = selection.get_selected()
-        row_data = model[selected]
+        if selected is not None:
+            row_data = model[selected]
 
-        entry_dlg = EntryDialog(
-                name = row_data[1],
-                description = row_data[4],
-                file_path = row_data[5],
-                icon_path = row_data[6])
+            entry_dlg = EntryDialog(
+                    name = row_data[1],
+                    description = row_data[4],
+                    mapping = row_data[7],
+                    icon_path = row_data[6])
 
-        entry_dlg.show()
+            entry_dlg.set_title("Editing %s" % row_data[1])
+
+            if entry_dlg.run() == gtk.RESPONSE_OK:
+                name, desc, mapping, icon_path = entry_dlg.get_values()
+                icon = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 16, 16)
+                row_data[0], row_data[1] = icon, name
+                row_data[4], row_data[6] = desc, icon_path
+                row_data[7] = mapping
+
+            entry_dlg.destroy()
+
+    def __row_cb(self, widget, path, view_column):
+        self.__edit_cb(None, widget)
 
     def __delete_cb(self, widget, mapping_list):
         print 'delete'

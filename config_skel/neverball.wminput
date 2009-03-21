@@ -2,7 +2,7 @@
 # name: Neverball
 # description: Use wiimote with neverball game 
 # icon: /usr/share/pixmaps/neverball-32.xpm
-# position: 0
+# position: 1
 # visible: True
 
 Plugin.acc.Roll = ABS_X

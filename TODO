@@ -1,3 +1,4 @@
 "using-wiimote" state
 gettext localisation
-preferences dialog
+button definition
+drag'n'drop on mapping dialog

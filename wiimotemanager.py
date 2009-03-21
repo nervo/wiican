@@ -95,8 +95,8 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__wminput = None
         self.__mapping_dlg = None
 
-        about_xml = glade.XML(ABOUT_DLG, None, None)
-        self.__aboutdlg = about_xml.get_widget('WiiAboutDialog')
+        about_wTree = glade.XML(ABOUT_DLG, None, None)
+        self.__aboutdlg = about_wTree.get_widget('WiiAboutDialog')
         self.__aboutdlg.connect("response", lambda d, r: d.hide())
         self.connect("popup-menu", self.__icon_popupmenu_cb, None)
         self.connect("activate", self.__activate_cb)
@@ -182,7 +182,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
 
         # Add every wminput config file as menu item
         for file in config_files.get_files('*.wminput'):
-            meta = get_mapping_file_metadata(file)
+            meta = read_metadata(file)
             if not meta['visible']:
                 continue
             icon = gtk.gdk.pixbuf_new_from_file_at_size(meta['icon'], 16, 16)

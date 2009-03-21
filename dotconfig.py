@@ -2,10 +2,11 @@ import os
 import shutil
 import fnmatch
 import re
+import random
 import exceptions
 import yaml
 
-def get_mapping_file_metadata(file_path):
+def read_metadata(file_path):
     metadata_block = ''
 
     fp = open(file_path, 'r')
@@ -18,7 +19,7 @@ def get_mapping_file_metadata(file_path):
 
     return yaml.load(metadata_block)
 
-def get_mapping_file(file_path):
+def read_mapping(file_path):
     mapping_block = ''
     fp = open(file_path, 'r')
     line = fp.readline()
@@ -30,26 +31,24 @@ def get_mapping_file(file_path):
 
     return mapping_block
 
-def set_mapping_file_metadata(file_path, **kwargs):
-    mapping = ''
-    fp = open(file_path, 'r')
-    line = fp.readline()
-    while line:
-        if not line.startswith('#'):
-            mapping += line
-        line = fp.readline()
-    fp.close()
-
+def write_mapping(file_path, mapping=None, **kwargs):
     fp = open(file_path, 'w')
     fp.write('## Wiizard Config file for wminput\n')
+
     for meta in yaml.dump(kwargs, default_flow_style=False).split('\n')[:-1]:
         fp.write('# ' + meta + '\n')
-    fp.write(mapping)
-    fp.close()
 
+    if mapping:
+        fp.write(re.sub(r'##*','##', mapping))
+
+    fp.close()
 
 #TODO: Maybe a Singleton or Borg pattern?
 class DotConfig:
+    #TODO: mark as static 
+    seed = 'abcdef0123456789'
+    long = 4
+
     def __init__(self, dotdir, skeldir=None):
         self.dotdir = dotdir
         self.skeldir = skeldir
@@ -63,6 +62,24 @@ class DotConfig:
             dotfiles += [os.path.join(root, file) for file in match_files]
 
         return dotfiles
+
+    def new_filename(self, prefix=None, suffix=None):
+        def rand_filename(prefix, suffix):
+            filename = ''.join(
+                    [random.choice(self.seed) for x in xrange(self.long)])
+
+            if prefix:
+                filename = prefix + filename
+            if suffix:
+                filename += suffix
+            return filename
+
+        while True:
+            filename = rand_filename(prefix, suffix)
+            if not os.path.exists(self.dotdir + os.sep + filename):
+                break
+
+        return os.environ["HOME"] + os.sep + self.dotdir + os.sep + filename 
 
     def __create_dotdir(self):
         dotdir_path = os.path.join(os.environ["HOME"], self.dotdir)
