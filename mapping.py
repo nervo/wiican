@@ -104,7 +104,6 @@ class WiiMappingDialog:
 
             # Get buttons      
             save_btn = wTree.get_widget('save_btn')
-            close_btn = wTree.get_widget('close_btn')
             new_btn = wTree.get_widget('new_btn')
             edit_btn = wTree.get_widget('edit_btn')
             delete_btn = wTree.get_widget('delete_btn')
@@ -113,7 +112,6 @@ class WiiMappingDialog:
 
             # Connect buttons to methods
             save_btn.connect('clicked', self.__save_cb, mapping_list)
-            close_btn.connect('clicked', self.__close_cb)
             new_btn.connect('clicked', self.__new_cb, mapping_list)
             edit_btn.connect('clicked', self.__edit_cb, mapping_list)
             delete_btn.connect('clicked', self.__delete_cb, mapping_list)
@@ -144,6 +142,7 @@ class WiiMappingDialog:
                 model.append([icon, meta['name'], meta['visible'], 
                     meta['position'], meta['description'], file, meta['icon'],
                     mapping])
+                
                 positions[meta['position']]=row_index # map items and positions
                 row_index += 1
 
@@ -187,13 +186,11 @@ class WiiMappingDialog:
         # Setup the treeview
         load_treeview(self.__mapping_list)
 
-        self.show()
+    def run(self):
+        return self.__mapping_dlg.run()
 
-    def show(self):
-        self.__mapping_dlg.show()
-
-    def __close_cb(self, widget):
-        self.__mapping_dlg.destroy()
+    def destroy(self):
+        return self.__mapping_dlg.destroy()
 
     def __save_cb(self, widget, mapping_list):
         model = mapping_list.get_model()
@@ -213,8 +210,6 @@ class WiiMappingDialog:
                     icon=row[6],        # Icon_path
                     mapping=row[7])     # Mapping
             row_index += 1
-
-        self.__mapping_dlg.destroy()
 
     def __new_cb(self, widget, mapping_list):
         entry_dlg = EntryDialog()
@@ -246,7 +241,7 @@ class WiiMappingDialog:
                 row_data[0], row_data[1] = icon, name
                 row_data[4], row_data[6] = desc, icon_path
                 row_data[7] = mapping
-
+                
             entry_dlg.destroy()
 
     def __row_cb(self, widget, path, view_column):
@@ -289,5 +284,6 @@ if __name__ == '__main__':
     import gobject
 
     mapping_dlg = WiiMappingDialog()
-    mapping_dlg.show()
+    mapping_dlg.run()
+    mapping_dlg.destroy()
     gobject.MainLoop().run()

@@ -85,8 +85,6 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__load_mappers_menu()
         self.__notificator = Notificator()
         self.__notificator.set_status_icon(self)
-        #self.__animation = PngAnimation([ICON_CONN1, 
-        #        ICON_CONN2, ICON_CONN3, ICON_ON])
 
         #TODO: Maybe a custom gobject type makes this smarter
         self.__states = {"nobluetooth": self.__no_bluetooth_st,
@@ -96,7 +94,6 @@ class WiimoteStatusIcon(gtk.StatusIcon):
 	
         self.__current_state = "idle"
         self.__wminput = None
-        self.__mapping_dlg = None
 
         about_wTree = glade.XML(ABOUT_DLG, None, None)
         self.__aboutdlg = about_wTree.get_widget('WiiAboutDialog')
@@ -116,6 +113,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
     def __no_bluetooth_st(self):
         self.set_from_file(ICON_OFF)
         self.set_tooltip('Plug a bluetooth adapter')
+        self.__disconnect_item.set_sensitive(False)
 
     def __idle_st(self):
         self.__disconnect_item.set_sensitive(False)
@@ -139,7 +137,8 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__disconnect_item.show()
         self.set_from_file(ICON_ON)
         self.set_tooltip('Use your wiimote')
-       
+        self.__disconnect_item.set_sensitive(True)
+      
     def __load_menu(self):
         self.__menu = gtk.Menu()
 
@@ -207,8 +206,10 @@ class WiimoteStatusIcon(gtk.StatusIcon):
                     gtk.status_icon_position_menu, 0, 0, status_icon)
 
     def __show_preferences_cb(self, widget):
-        self.__mapping_dlg = WiiMappingDialog()
-        self.__mapping_dlg.show()
+        mapping_dlg = WiiMappingDialog()
+        if mapping_dlg.run() == gtk.RESPONSE_OK:
+            self.__load_mappers_menu()
+            mapping_dlg.destroy()
 
     def __about_cb(self, widget):
         self.__aboutdlg.show()
