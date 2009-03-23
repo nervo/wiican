@@ -1,5 +1,6 @@
 import gtk
 import gobject
+import webbrowser
 
 from gtk import glade
 
@@ -9,6 +10,45 @@ import dotconfig
 MAPPING_GLADE = 'mapping.glade'
 ENTRY_GLADE = 'entry.glade'
 DEFAULT_ICON = 'img/wiitrayon.png'
+
+class IconChooserDialog(gtk.FileChooserDialog):
+    def __init__(self, parent, title="Select image icon..", icon_size=64):
+
+        # Do the icon preview
+        def update_preview_cb(file_chooser, preview, icon_size):
+            filename = file_chooser.get_preview_filename()
+            try:
+                pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 
+                        icon_size, icon_size)
+                preview.set_from_pixbuf(pixbuf)
+                have_preview = True
+            except:
+                have_preview = False
+            file_chooser.set_preview_widget_active(have_preview)
+            return
+
+        gtk.FileChooserDialog.__init__(self, title, parent,
+                                gtk.FILE_CHOOSER_ACTION_OPEN,
+                                (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+                                gtk.STOCK_OPEN, gtk.RESPONSE_OK))
+
+        self.set_default_response(gtk.RESPONSE_OK)
+
+        #TODO: Maybe a better filter it's requiered
+        filter = gtk.FileFilter()
+        filter.set_name("Images")
+        filter.add_mime_type("image/png")
+        filter.add_mime_type("image/jpeg")
+        filter.add_mime_type("image/gif")
+        filter.add_pattern("*.png")
+        filter.add_pattern("*.jpg")
+        filter.add_pattern("*.gif")
+        self.add_filter(filter)
+
+        # Set a preview widget 
+        preview = gtk.Image()
+        self.set_preview_widget(preview)
+        self.connect("update-preview", update_preview_cb, preview, icon_size)
 
 class EntryDialog:
     def __init__(self, name='', description='', mapping='', 
@@ -23,6 +63,8 @@ class EntryDialog:
         # Get buttons
         icon_btn = wTree.get_widget('icon_btn')
         icon_btn.connect('clicked', self.__icon_cb)
+        link_btn = wTree.get_widget('link_btn')
+        link_btn.connect('clicked', self.__link_cb)
 
         # Set initial values
         self.__name_entry.set_text(name)
@@ -52,49 +94,21 @@ class EntryDialog:
                 self.__file_buffer.get_text(start, end), \
                 self.__icon_path
 
+    def __link_cb(self, widget):
+        webbrowser.open(widget.get_uri())
+
     def __icon_cb(self, widget):
-        def update_preview_cb(file_chooser, preview):
-            filename = file_chooser.get_preview_filename()
-            try:
-                pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 64, 64)
-                preview.set_from_pixbuf(pixbuf)
-                have_preview = True
-            except:
-                have_preview = False
-            file_chooser.set_preview_widget_active(have_preview)
-            return
+        icon_dlg = IconChooserDialog(parent=self.__entry_dlg)
 
-        dialog = gtk.FileChooserDialog("Select image icon..", self.__entry_dlg,
-                            gtk.FILE_CHOOSER_ACTION_OPEN,
-                            (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-                            gtk.STOCK_OPEN, gtk.RESPONSE_OK))
-        dialog.set_default_response(gtk.RESPONSE_OK)
-
-        filter = gtk.FileFilter()
-        filter.set_name("Images")
-        filter.add_mime_type("image/png")
-        filter.add_mime_type("image/jpeg")
-        filter.add_mime_type("image/gif")
-        filter.add_pattern("*.png")
-        filter.add_pattern("*.jpg")
-        filter.add_pattern("*.gif")
-
-        preview = gtk.Image()
-        dialog.set_preview_widget(preview)
-        dialog.connect("update-preview", update_preview_cb, preview)
-
-        dialog.add_filter(filter)
-        dialog.hide()
-
-        if dialog.run() == gtk.RESPONSE_OK:
-            filename = dialog.get_filename()
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 48,48)
+        if icon_dlg.run() == gtk.RESPONSE_OK:
+            filename = icon_dlg.get_filename()
+            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 48, 48)
             image = gtk.Image()
             image.set_from_pixbuf(pixbuf)
             widget.set_image(image)
             self.__icon_path = filename
 
-        dialog.destroy()
+        icon_dlg.destroy()
 
 class WiiMappingDialog:
     def __init__(self):
@@ -164,10 +178,12 @@ class WiiMappingDialog:
             # Set the columns
             mapping_list.append_column(gtk.TreeViewColumn('', 
                         icon_cell, pixbuf=0))
-            mapping_list.append_column(gtk.TreeViewColumn('Name', 
-                        name_cell, text=1))
 
-            visible_column = gtk.TreeViewColumn('Visble', visible_cell, 
+            name_column = gtk.TreeViewColumn('Name', name_cell, text=1)
+            name_column.set_expand(True)
+            mapping_list.append_column(name_column)
+
+            visible_column = gtk.TreeViewColumn('Visible', visible_cell, 
                     active=2)
             mapping_list.append_column(visible_column)
 

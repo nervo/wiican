@@ -162,6 +162,17 @@
             <property name="visible">True</property>
             <property name="layout_style">GTK_BUTTONBOX_END</property>
             <child>
+              <widget class="GtkButton" id="close_btn">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="has_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes" context="yes">gtk-cancel</property>
+                <property name="use_stock">True</property>
+                <property name="response_id">-6</property>
+              </widget>
+            </child>
+            <child>
               <widget class="GtkButton" id="save_btn">
                 <property name="visible">True</property>
                 <property name="can_default">True</property>
@@ -169,17 +180,6 @@
                 <property name="use_stock">True</property>
                 <property name="response_id">-5</property>
                 <signal name="clicked" handler="close_cb"/>
-              </widget>
-            </child>
-            <child>
-              <widget class="GtkButton" id="close_btn">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="has_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="label" translatable="yes" context="yes">gtk-close</property>
-                <property name="use_stock">True</property>
-                <property name="response_id">-6</property>
               </widget>
               <packing>
                 <property name="position">1</property>
