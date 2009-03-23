@@ -203,7 +203,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
     def __activate_cb(self, status_icon):
         if self.__current_state not in ["nobluetooth"]:
             self.__mappers_menu.popup(None, None, 
-                    gtk.status_icon_position_menu, 0, 0, status_icon)
+                    gtk.status_icon_position_menu, 1, gtk.get_current_event_time(), status_icon)
 
     def __show_preferences_cb(self, widget):
         mapping_dlg = WiiMappingDialog()
