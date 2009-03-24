@@ -45,7 +45,7 @@ def write_mapping(file_path, mapping=None, **kwargs):
 
 #TODO: Maybe a Singleton or Borg pattern?
 class DotConfig:
-    #TODO: mark as static 
+    #TODO: mark as static? 
     seed = 'abcdef0123456789'
     long = 4
 

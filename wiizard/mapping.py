@@ -7,10 +7,6 @@ from gtk import glade
 import defs
 import dotconfig
 
-MAPPING_GLADE = 'mapping.glade'
-ENTRY_GLADE = 'entry.glade'
-DEFAULT_ICON = 'img/wiitrayon.png'
-
 class IconChooserDialog(gtk.FileChooserDialog):
     def __init__(self, parent, title="Select image icon..", icon_size=64):
 
@@ -52,8 +48,8 @@ class IconChooserDialog(gtk.FileChooserDialog):
 
 class EntryDialog:
     def __init__(self, name='', description='', mapping='', 
-            icon_path=DEFAULT_ICON):
-        wTree = glade.XML(ENTRY_GLADE, None, None)
+            icon_path=defs.ICON_DEFAULT):
+        wTree = glade.XML(defs.ENTRY_GLADE, None, None)
         self.__entry_dlg = wTree.get_widget('entry_dlg')
         self.__name_entry = wTree.get_widget('name_entry')
         self.__desc_entry = wTree.get_widget('desc_entry')
@@ -190,7 +186,7 @@ class WiiMappingDialog:
             mapping_list.set_search_column(1)
 
         # Get the widgets
-        wTree = glade.XML(MAPPING_GLADE, None, None)
+        wTree = glade.XML(defs.MAPPING_GLADE, None, None)
         self.__mapping_dlg, self.__mapping_list = load_widgets(wTree)
 
         # Setup mapping_list

@@ -17,6 +17,13 @@ from notificator import Notificator
 from pnganimation import PngAnimation
 from mapping import WiiMappingDialog
 
+BLUEZ_PATH = '/'
+BLUEZ_URI = 'org.bluez'
+BLUEZMANAGER_IFACE = 'org.bluez.Manager'
+
+HAL_URI = "org.freedesktop.Hal"
+HAL_DEVICE_IFACE = "org.freedesktop.Hal.Device"
+
 gtk.gdk.threads_init()
 
 class BlueDiscover:

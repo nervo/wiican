@@ -5,16 +5,24 @@ import dbus
 import gobject
 import pynotify
 
-import wiimotemanager
-
-from defs import * 
 from dbus.mainloop.glib import DBusGMainLoop
+
+from wiizard import wiimotemanager
+
+BLUEZ_PATH = '/'
+BLUEZ_URI = 'org.bluez'
+BLUEZMANAGER_IFACE = 'org.bluez.Manager'
+
+HAL_URI = "org.freedesktop.Hal"
+HAL_DEVICE_IFACE = "org.freedesktop.Hal.Device"
+HAL_MANAGER_URI = "org.freedesktop.Hal.Manager"
+HAL_MANAGER_PATH = "/org/freedesktop/Hal/Manager"
+
 dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 
 wiimanager = wiimotemanager.WiimoteManager()
 
 bus = dbus.SystemBus()
-
 bus.add_signal_receiver(wiimanager.enable, dbus_interface=BLUEZMANAGER_IFACE, 
                 signal_name="AdapterAdded")
 bus.add_signal_receiver(wiimanager.disable, dbus_interface=BLUEZMANAGER_IFACE,
