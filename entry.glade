@@ -10,6 +10,7 @@
     <property name="destroy_with_parent">True</property>
     <property name="icon_name">gtk-new</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
+    <signal name="close" handler="gtk_widget_destroy"/>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>

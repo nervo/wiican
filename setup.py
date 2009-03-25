@@ -16,11 +16,14 @@ setup(
             'Development Status :: 0.1.0 - Alpha',
             'Environment :: Desktop Environment',
             'Intended Audience :: End Users/Desktop',
-            'License :: OSI Approved :: ',
+            'License :: OSI Approved :: GNU General Public License (GPL)',
             'Operating System :: POSIX',
-            'Programming Language :: Python'],
+            'Programming Language :: Python',
+	    'Topic :: Desktop Environment :: Gnome',
+	    'Topic :: Utilities'],
+        keywords = ['wii', 'wiimote', 'joystick', 'gamepad', 'cwiid', 'wminput'],
+        requires = ['PyGTK', 'pyinotify', 'dbuspython', 'PyYAML'],
 
-        requires = ['gtk', 'pynotify', 'dbus'],
         packages = ['wiizard'],
         scripts = ['bin/wiizard'],
         data_files = [('share/wiizard/config_skel', 
@@ -31,5 +34,7 @@ setup(
                           'img/wiitrayon1.png', 'img/wiitrayon2.png', 
                           'img/wiitrayon3.png']),
                       ('share/wiizard', 
-                          ['about.glade','mapping.glade','entry.glade'])]
+                          ['about.glade','mapping.glade','entry.glade']),
+                      ('share/applications', ['wiizard.desktop']),
+                      ('share/pixmaps', ['wiizard.png'])]
 )
