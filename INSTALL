@@ -7,6 +7,13 @@ Install wminput: You can 'apt-getit' on Debian/Ubunty systems
     - Your wminput executable must be on /usr/bin. 
       Otherwise check wiizard/defs.py and set the correct wminput path.
 
+Other dependencies:
+    - Python >= 2.5
+    - dbus-python
+    - PyGTK
+    - PyYAML
+    - PyINotify
+
 Sets the udev rules: For be able to use uinput driver as non-privileged user
     - Copy udev-rules/* to your udev rules directory (i.e.: /etc/udev/rules.d)
     - Reload udev. (i.e.: On Ubuntu and Debian run /etc/init.d/udev reload
