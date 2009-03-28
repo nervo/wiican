@@ -43,6 +43,14 @@ def write_mapping(file_path, mapping=None, **kwargs):
 
     fp.close()
 
+def remove_mapping(file_path, remove_icon=False):
+    #TODO: Try-except block required here
+    if remove_icon:
+        icon_path = read_metadata(file_path)['icon']
+        os.unlink(icon_path)
+
+    os.unlink(file_path)
+
 #TODO: Maybe a Singleton or Borg pattern?
 class DotConfig:
     #TODO: mark as static? 

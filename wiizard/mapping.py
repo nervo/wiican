@@ -156,7 +156,10 @@ class WiiMappingDialog:
                 positions[meta['position']]=row_index # map items and positions
                 row_index += 1
 
-            model.reorder(positions.values()) # python dict applies meta order
+            if positions:
+                # python dict applies meta order
+                model.reorder(positions.values())
+            
             return model
 
         def load_treeview(mapping_list):
@@ -195,6 +198,9 @@ class WiiMappingDialog:
         files = self.__config_files.get_files('*.wminput')
         self.__mapping_list.set_model(load_model(files))
 
+        # Mappings marked for delete
+        self.__deleted = {}
+
         # Setup the treeview
         load_treeview(self.__mapping_list)
 
@@ -208,7 +214,28 @@ class WiiMappingDialog:
         model = mapping_list.get_model()
         row_index = 0
 
-        #TODO: A best approx. it's to save only the changes
+        # If any mapping was marked for delete, now it's time to remove files
+        if self.__deleted:
+            delete_message = 'Are you sure you want to completely remove ' \
+                    'this mappings?:\n\n' + '\n'.join(self.__deleted.keys())
+
+            delete_dlg = gtk.MessageDialog(parent = self.__mapping_dlg, 
+                    flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+                    type = gtk.MESSAGE_QUESTION,
+                    buttons = gtk.BUTTONS_YES_NO,
+                    message_format = delete_message)
+            delete_dlg.set_title('Deleting mappings')
+
+            if delete_dlg.run() == gtk.RESPONSE_YES:
+                for file_path in self.__deleted.values():
+                    # TODO: try-except block it's required
+                    dotconfig.remove_mapping(file_path)
+
+            delete_dlg.destroy()
+            self.__deleted = {}
+
+        # Make the changes effective by writing on wminput config files
+        # TODO: A best approx. it's to save only the changes
         for row in model:
             if not row[5]:
                 row[5] = self.__config_files.new_filename(row[1] + '_', 
@@ -260,7 +287,12 @@ class WiiMappingDialog:
         self.__edit_cb(None, widget)
 
     def __delete_cb(self, widget, mapping_list):
-        print 'delete'
+        selection = mapping_list.get_selection()
+        model, selected = selection.get_selected()
+        if selected is not None:
+            row = model[selected]
+            self.__deleted[row[1]] = row[5]
+            model.remove(selected)
 
     def __up_cb(self, widget, mapping_list):
         # From PyGTK FAQ Entry 13.51
