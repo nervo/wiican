@@ -22,7 +22,7 @@ setup(
 	    'Topic :: Desktop Environment :: Gnome',
 	    'Topic :: Utilities'],
         keywords = ['wii', 'wiimote', 'joystick', 'gamepad', 'cwiid', 'wminput'],
-        requires = ['PyGTK', 'pyinotify', 'dbuspython', 'PyYAML'],
+        requires = ['PyGTK', 'dbuspython', 'PyYAML'],
 
         packages = ['wiizard'],
         scripts = ['bin/wiizard'],
