@@ -87,31 +87,62 @@ class WiimoteManager:
 
 class WiimoteStatusIcon(gtk.StatusIcon):
     def __init__(self):
+        def load_menu():
+            menu = gtk.Menu()
+
+            nobluez_item = gtk.MenuItem("No bluetooth adapters")
+            menu.append(nobluez_item)
+
+            prefs_item = gtk.ImageMenuItem(gtk.STOCK_PREFERENCES)
+            prefs_item.connect("activate", self.__show_preferences_cb)
+            prefs_item.show()
+            menu.append(prefs_item)
+
+            sep_item = gtk.SeparatorMenuItem()
+            sep_item.show()
+            menu.append(sep_item)
+
+            about_item = gtk.ImageMenuItem(gtk.STOCK_ABOUT)
+            about_item.connect('activate', self.__about_cb)
+            about_item.show()
+            menu.append(about_item)
+
+            quit_item = gtk.ImageMenuItem(gtk.STOCK_QUIT)
+            quit_item.connect("activate", self.__quit_cb)
+            quit_item.show()
+            menu.append(quit_item)
+
+            return menu
+
         gtk.StatusIcon.__init__(self)
-        self.__load_menu()
+
+        self.__menu = load_menu()
         self.__load_mappers_menu()
+        self.__wminput = None
         self.__notificator = Notificator()
         self.__notificator.set_status_icon(self)
 
-        #TODO: Maybe a custom gobject type makes this smarter
+        # Python dict as state machine
+        # TODO: Maybe a custom gobject type makes this smarter
+        self.__current_state = "idle"
         self.__states = {"nobluetooth": self.__no_bluetooth_st,
             "idle": self.__idle_st,
             "discovering": self.__discovering_st,
             "discovered": self.__discovered_st}
-	
-        self.__current_state = "idle"
-        self.__wminput = None
 
+        # Load about dialog
         about_wTree = glade.XML(ABOUT_DLG, None, None)
         self.__aboutdlg = about_wTree.get_widget('WiiAboutDialog')
         self.__aboutdlg.connect("response", lambda d, r: d.hide())
+
+        # Connect left and right click
         self.connect("popup-menu", self.__icon_popupmenu_cb, None)
         self.connect("activate", self.__activate_cb)
 
         self.set_visible(True)
 
     def set_state(self, state):
-        #TODO: Maybe raise exception here
+        # TODO: Maybe raise exception here
         if not self.__states.has_key(state):
             return
         self.__states[state]()
@@ -125,7 +156,8 @@ class WiimoteStatusIcon(gtk.StatusIcon):
     def __idle_st(self):
         self.__disconnect_item.set_sensitive(False)
         self.set_from_file(ICON_ON)
-        self.set_tooltip('Hold left button for use wiimote\nRight button for menu')
+        self.set_tooltip('Hold left button for use wiimote\n' \
+                'Right button for menu')
 
     def __discovering_st(self):
         def animate():
@@ -146,34 +178,6 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.set_tooltip('Use your wiimote')
         self.__disconnect_item.set_sensitive(True)
       
-    def __load_menu(self):
-        self.__menu = gtk.Menu()
-
-        nobluez_item = gtk.MenuItem("No bluetooth adapters")
-        self.__menu.append(nobluez_item)
-
-        prefs_item = gtk.ImageMenuItem(gtk.STOCK_PREFERENCES)
-        prefs_item.connect("activate", self.__show_preferences_cb)
-        prefs_item.show()
-        self.__menu.append(prefs_item)
-
-        sep_item = gtk.SeparatorMenuItem()
-        sep_item.show()
-        self.__menu.append(sep_item)
-
-        about_item = gtk.ImageMenuItem(gtk.STOCK_ABOUT)
-        about_item.connect('activate', self.__about_cb)
-        about_item.show()
-        self.__menu.append(about_item)
-
-        quit_item = gtk.ImageMenuItem(gtk.STOCK_QUIT)
-        quit_item.connect("activate", self.__quit_cb)
-        quit_item.show()
-        self.__menu.append(quit_item)
-
-        # Init Icon Factory
-        self.icon_theme = gtk.icon_theme_get_default()
-
     def __load_mappers_menu(self):
         self.__mappers_menu = gtk.Menu()
         config_files = DotConfig(USER_CONFIG_DIR, CONFIG_SKEL)
@@ -210,7 +214,8 @@ class WiimoteStatusIcon(gtk.StatusIcon):
     def __activate_cb(self, status_icon):
         if self.__current_state not in ["nobluetooth"]:
             self.__mappers_menu.popup(None, None, 
-                    gtk.status_icon_position_menu, 1, gtk.get_current_event_time(), status_icon)
+                    gtk.status_icon_position_menu, 1, 
+                    gtk.get_current_event_time(), status_icon)
 
     def __show_preferences_cb(self, widget):
         mapping_dlg = WiiMappingDialog()
@@ -222,7 +227,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__aboutdlg.show()
 
     def __quit_cb(self, widget):
-        if self.__wminput:
+        if self.__wminput and self.__wminput.running():
             self.__wminput.stop()
 
         sys.exit(0)
@@ -232,9 +237,13 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             self.__wminput.stop()
         
         if config and config != -1:
+            # FIXME: This way of compare pixbufs it's awful
+            overlap_icon = discover_item.get_image().get_pixbuf()
+            if overlap_icon.get_pixels() == gtk.gdk.pixbuf_new_from_file_at_size(ICON_DEFAULT, 16, 16).get_pixels():
+                overlap_icon = None
             self.__animation = PngAnimation(
                     [ICON_CONN1, ICON_CONN2, ICON_CONN3, ICON_ON],
-                    discover_item.get_image().get_pixbuf())
+                    overlap_icon)
             self.__wminput = WMInputLauncher(config, self.__wminput_retcode)
             self.__wminput.start()
             
@@ -242,9 +251,11 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         if not retcode in [-15, 0]:
             print "Fail!"
             if retcode == 255:
-                self.__notificator.show_notification("Error while discovering Wiimote", "Maybe uinput it's not loaded?")
+                self.__notificator.show_notification("Error while discovering" \
+                        "Wiimote", "Maybe uinput it's not loaded?")
             else:
-                self.__notificator.show_notification("Unknown error", "Can't discover or use wiimote")
+                self.__notificator.show_notification("Unknown error", 
+                        "Can't discover or use wiimote")
         self.set_state("idle")
 
 
