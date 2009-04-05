@@ -17,7 +17,7 @@ def read_metadata(file_path):
         line = fp.readline().strip()
     fp.close()
 
-    return yaml.load(metadata_block)
+    return yaml.load(metadata_block) or {}
 
 def read_mapping(file_path):
     mapping_block = ''

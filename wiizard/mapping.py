@@ -144,11 +144,15 @@ class WiiMappingDialog:
             # Set the model items from files metadata and order
             positions = {}
             row_index = 0
-            for file in files :
-                meta = dotconfig.read_metadata(file)
+
+            for file in files:
+                meta = defs.MAPPING_DEFAULT_VALUES.copy()
+                meta.update(dotconfig.read_metadata(file))
                 mapping = dotconfig.read_mapping(file)
                 icon = gtk.gdk.pixbuf_new_from_file_at_size(meta['icon'], 
                         16, 16)
+                while positions.has_key(meta['position']):
+                    meta['position'] += 1
                 model.append([icon, meta['name'], meta['visible'], 
                     meta['position'], meta['description'], file, meta['icon'],
                     mapping])

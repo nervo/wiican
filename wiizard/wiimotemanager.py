@@ -117,7 +117,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         gtk.StatusIcon.__init__(self)
 
         self.__menu = load_menu()
-        self.__load_mappers_menu()
+        self.__load_mappings_menu()
         self.__wminput = None
         self.__notificator = Notificator()
         self.__notificator.set_status_icon(self)
@@ -178,34 +178,33 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.set_tooltip('Use your wiimote')
         self.__disconnect_item.set_sensitive(True)
       
-    def __load_mappers_menu(self):
-        self.__mappers_menu = gtk.Menu()
+    def __load_mappings_menu(self):
+        self.__mappings_menu = gtk.Menu()
         config_files = DotConfig(USER_CONFIG_DIR, CONFIG_SKEL)
 
         disconnect_item = gtk.ImageMenuItem(gtk.STOCK_DISCONNECT)
         disconnect_item.connect('activate', self.__discover_cb, -1)
         disconnect_item.show()
-        disconnect_item.set_sensitive(False)
-        self.__mappers_menu.append(disconnect_item)
+        self.__mappings_menu.append(disconnect_item)
         self.__disconnect_item = disconnect_item
 
         sep_item = gtk.SeparatorMenuItem()
         sep_item.show()
-        self.__mappers_menu.append(sep_item)
+        self.__mappings_menu.append(sep_item)
 
         # Add every wminput config file as menu item
         for file in config_files.get_files('*.wminput'):
-            meta = read_metadata(file)
+            meta = MAPPING_DEFAULT_VALUES.copy()
+            meta.update(read_metadata(file))
             if not meta['visible']:
                 continue
             icon = gtk.gdk.pixbuf_new_from_file_at_size(meta['icon'], 16, 16)
             item = gtk.ImageMenuItem(meta['name'])
-            if meta['description']:
-                item.set_tooltip_text(meta['description'])
+            item.set_tooltip_text(meta['description'])
             item.set_image(gtk.image_new_from_pixbuf(icon))
             item.connect('activate', self.__discover_cb, file)
             item.show()
-            self.__mappers_menu.append(item)
+            self.__mappings_menu.append(item)
     
     def __icon_popupmenu_cb(self, status_icon, button, activate_time, data):
         self.__menu.popup(None, None, gtk.status_icon_position_menu, button, 
@@ -213,15 +212,15 @@ class WiimoteStatusIcon(gtk.StatusIcon):
 
     def __activate_cb(self, status_icon):
         if self.__current_state not in ["nobluetooth"]:
-            self.__mappers_menu.popup(None, None, 
+            self.__mappings_menu.popup(None, None, 
                     gtk.status_icon_position_menu, 1, 
                     gtk.get_current_event_time(), status_icon)
 
     def __show_preferences_cb(self, widget):
         mapping_dlg = WiiMappingDialog()
         if mapping_dlg.run() == gtk.RESPONSE_OK:
-            self.__load_mappers_menu()
-            mapping_dlg.destroy()
+            self.__load_mappings_menu()
+        mapping_dlg.destroy()
 
     def __about_cb(self, widget):
         self.__aboutdlg.show()
@@ -248,11 +247,20 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             self.__wminput.start()
             
     def __wminput_retcode(self, retcode):
+        def is_uinput_loaded():
+            modules = open('/proc/modules').read()
+            return 'uinput' in modules
+
         if not retcode in [-15, 0]:
             print "Fail!"
             if retcode == 255:
-                self.__notificator.show_notification("Error while discovering" \
-                        "Wiimote", "Maybe uinput it's not loaded?")
+                error_title = "Error discovering Wiimote"
+                if not is_uinput_loaded():
+                    self.__notificator.show_notification(error_title, 
+                        "uinput module it's not loaded")
+                else:
+                    self.__notificator.show_notification(error_title, 
+                        "check wminput config file syntax")
             else:
                 self.__notificator.show_notification("Unknown error", 
                         "Can't discover or use wiimote")

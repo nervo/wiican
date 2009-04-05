@@ -7,7 +7,7 @@
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
     <property name="program_name">Wiizard</property>
-    <property name="version">0.1.0</property>
+    <property name="version">0.1.1</property>
     <property name="copyright" translatable="yes">2009 J. Félix Ontañón &lt;felixonta@gmail.com&gt;</property>
     <property name="comments" translatable="yes">Wiimote usage assistant and mapping manager</property>
     <property name="website">http://dev.emergya.info/projects/show/wiizard</property>
