@@ -178,7 +178,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.set_tooltip('Use your wiimote')
         self.__disconnect_item.set_sensitive(True)
       
-    def __load_mappings_menu(self):
+    def __load_mappings_menu(self, ):
         self.__mappings_menu = gtk.Menu()
         config_files = DotConfig(USER_CONFIG_DIR, CONFIG_SKEL)
 
@@ -193,17 +193,28 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__mappings_menu.append(sep_item)
 
         # Add every wminput config file as menu item
+        mapping_order = {}
         for file in config_files.get_files('*.wminput'):
             meta = MAPPING_DEFAULT_VALUES.copy()
             meta.update(read_metadata(file))
+
             if not meta['visible']:
                 continue
+
             icon = gtk.gdk.pixbuf_new_from_file_at_size(meta['icon'], 16, 16)
             item = gtk.ImageMenuItem(meta['name'])
             item.set_tooltip_text(meta['description'])
             item.set_image(gtk.image_new_from_pixbuf(icon))
             item.connect('activate', self.__discover_cb, file)
             item.show()
+
+            # Calculate the order of mappings
+            while mapping_order.has_key(meta['position']):
+                meta['position'] += 1
+            mapping_order[meta['position']] = item
+       
+        # python dict applies meta order
+        for item in mapping_order.values():
             self.__mappings_menu.append(item)
     
     def __icon_popupmenu_cb(self, status_icon, button, activate_time, data):
