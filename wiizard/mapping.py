@@ -3,6 +3,7 @@ import gobject
 import webbrowser
 
 from gtk import glade
+from exceptions import Exception
 
 import defs
 import dotconfig
@@ -106,7 +107,7 @@ class EntryDialog:
 
         icon_dlg.destroy()
 
-class WiiMappingDialog:
+class MappingDialog:
     def __init__(self):
         def load_widgets(wTree):
             mapping_dlg = wTree.get_widget('mapping_dlg')
@@ -146,9 +147,12 @@ class WiiMappingDialog:
             row_index = 0
 
             for file in files:
-                meta = defs.MAPPING_DEFAULT_VALUES.copy()
-                meta.update(dotconfig.read_metadata(file))
+                file_meta = dotconfig.read_metadata(file)
                 mapping = dotconfig.read_mapping(file)
+
+                meta = defs.MAPPING_DEFAULT_VALUES.copy()
+                meta.update(file_meta)
+
                 icon = gtk.gdk.pixbuf_new_from_file_at_size(meta['icon'], 
                         16, 16)
                 while positions.has_key(meta['position']):
@@ -199,7 +203,7 @@ class WiiMappingDialog:
         # Setup mapping_list
         self.__config_files = dotconfig.DotConfig(defs.USER_CONFIG_DIR, 
             defs.CONFIG_SKEL)
-        files = self.__config_files.get_files('*.wminput')
+        files = self.__config_files.get_files('*.wminput', True)
         self.__mapping_list.set_model(load_model(files))
 
         # Mappings marked for delete
@@ -218,7 +222,7 @@ class WiiMappingDialog:
         model = mapping_list.get_model()
         row_index = 0
 
-        # If any mapping was marked for delete, now it's time to remove files
+        # If any mapping was deleted, now it's time to remove files
         if self.__deleted:
             delete_message = 'Are you sure you want to completely remove ' \
                     'this mappings?:\n\n' + '\n'.join(self.__deleted.keys())
@@ -239,7 +243,7 @@ class WiiMappingDialog:
             self.__deleted = {}
 
         # Make the changes effective by writing on wminput config files
-        # TODO: A best approx. it's to save only the changes
+        # TODO: A better approx. it's to save only the changes
         for row in model:
             if not row[5]:
                 row[5] = self.__config_files.new_filename(row[1] + '_', 
@@ -331,7 +335,7 @@ class WiiMappingDialog:
 if __name__ == '__main__':
     import gobject
 
-    mapping_dlg = WiiMappingDialog()
+    mapping_dlg = MappingDialog()
     mapping_dlg.run()
     mapping_dlg.destroy()
     gobject.MainLoop().run()

@@ -15,7 +15,7 @@ from defs import *
 from dotconfig import *
 from notificator import Notificator
 from pnganimation import PngAnimation
-from mapping import WiiMappingDialog
+from mapping import MappingDialog
 
 BLUEZ_PATH = '/'
 BLUEZ_URI = 'org.bluez'
@@ -194,7 +194,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
 
         # Add every wminput config file as menu item
         mapping_order = {}
-        for file in config_files.get_files('*.wminput'):
+        for file in config_files.get_files('*.wminput', True):
             meta = MAPPING_DEFAULT_VALUES.copy()
             meta.update(read_metadata(file))
 
@@ -228,7 +228,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
                     gtk.get_current_event_time(), status_icon)
 
     def __show_preferences_cb(self, widget):
-        mapping_dlg = WiiMappingDialog()
+        mapping_dlg = MappingDialog()
         if mapping_dlg.run() == gtk.RESPONSE_OK:
             self.__load_mappings_menu()
         mapping_dlg.destroy()
