@@ -4,13 +4,13 @@
 from distutils.core import setup
 
 setup(
-        name='wiizard',
+        name='wiican',
         version='0.1',
         description='Wiimote manager',
-        long_description='Wiizard its a systray that wrappers wminput',
+        long_description='Wiican its a systray that wrappers wminput',
         author='J. Félix Ontañón',
         author_email='felixonta@gmail.com',
-        url='http://dev.emergya.info/projects/show/wiizard',
+        url='http://dev.emergya.info/projects/show/wiican',
 
         classifiers=[
             'Development Status :: 0.1.0 - Alpha',
@@ -24,17 +24,17 @@ setup(
         keywords = ['wii', 'wiimote', 'joystick', 'gamepad', 'cwiid', 'wminput'],
         requires = ['PyGTK', 'dbuspython', 'PyYAML'],
 
-        packages = ['wiizard'],
-        scripts = ['bin/wiizard'],
-        data_files = [('share/wiizard/config_skel', 
+        packages = ['wiican'],
+        scripts = ['bin/wiican'],
+        data_files = [('share/wiican/config_skel', 
                         ['config_skel/mouse.wminput', 
                         'config_skel/neverball.wminput']),
-                      ('share/wiizard/img', 
+                      ('share/wiican/img', 
                           ['img/wiitrayoff.png', 'img/wiitrayon.png', 
                           'img/wiitrayon1.png', 'img/wiitrayon2.png', 
                           'img/wiitrayon3.png']),
-                      ('share/wiizard', 
+                      ('share/wiican', 
                           ['about.glade','mapping.glade','entry.glade']),
-                      ('share/applications', ['wiizard.desktop']),
-                      ('share/pixmaps', ['wiizard.png'])]
+                      ('share/applications', ['wiican.desktop']),
+                      ('share/pixmaps', ['wiican.png'])]
 )

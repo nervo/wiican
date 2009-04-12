@@ -1,11 +1,11 @@
-Installing wiizard:
+Installing wiican:
 ===================
 
 Install wminput: You can 'apt-getit' on Debian/Ubunty systems 
     - Download and install cwiid [1]
     - Download and install wminput [2]
     - Your wminput executable must be on /usr/bin. 
-      Otherwise check wiizard/defs.py and set the correct wminput path.
+      Otherwise check wiican/defs.py and set the correct wminput path.
 
 Other dependencies:
     - Python >= 2.5
@@ -19,11 +19,11 @@ Sets the udev rules: For be able to use uinput driver as non-privileged user
     - Reload udev. (i.e.: On Ubuntu and Debian run /etc/init.d/udev reload
     - Maybe you want to autoload uinput module by adding it on /etc/modules
 
-Install wiizard:
+Install wiican:
     - Run as root: python setup.py install
 
-Running wiizard:
-    - Type wiizard
+Running wiican:
+    - Type wiican
 
 [1] http://abstrakraft.org/cwiid/
 [2] http://abstrakraft.org/cwiid/wiki/wminput

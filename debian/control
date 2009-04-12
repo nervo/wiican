@@ -1,19 +1,19 @@
-Source: wiizard
+Source: wiican
 Section: utils
 Priority: extra
 Maintainer: J. Félix Ontañón <felixonta@gmail.com>
 Build-Depends: cdbs (>= 0.4.49), debhelper (>= 7), python-support (>= 0.5.3),
  python-all-dev (>= 2.3.5-11)
 Standards-Version: 3.8.0
-Homepage: http://dev.emergya.info/projects/show/wiizard
+Homepage: http://dev.emergya.info/projects/show/wiican
 
-Package: wiizard
+Package: wiican
 Architecture: any
 Depends: ${misc:Depends}, ${python:Depends}, bluez-gnome, wminput, python-gtk2,
  python-yaml, python-dbus
 XB-Python-Version: ${python:Versions}
 Description: Simple wiimote usage assistant and mapping manager
- Wiizard it's an user-friendly systray application for use 
+ Wiican it's an user-friendly systray application for use 
  and configure wiimote (or Wii remote controller).
  On backend it's wminput , the cwiid event driver for wiimote. 
  .

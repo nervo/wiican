@@ -33,7 +33,7 @@ def read_mapping(file_path):
 
 def write_mapping(file_path, mapping=None, **kwargs):
     fp = open(file_path, 'w')
-    fp.write('## Wiizard Config file for wminput\n')
+    fp.write('## Wiican Config file for wminput\n')
 
     for meta in yaml.dump(kwargs, default_flow_style=False).split('\n')[:-1]:
         fp.write('# ' + meta + '\n')

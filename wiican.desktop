@@ -1,9 +1,9 @@
 [Desktop Entry]
-Name=Wiizard
+Name=Wiican
 GenericName=Wiimote usage assistant and mapping manager
 Comment[es]=Asistente de uso de wiimote y gestor de perfiles de asignacion de teclas
-Exec=wiizard
-Icon=wiizard.png
+Exec=wiican
+Icon=wiican.png
 Terminal=false
 Type=Application
 Categories=Utility;HardwareSettings

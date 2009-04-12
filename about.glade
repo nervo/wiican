@@ -6,12 +6,13 @@
     <property name="border_width">5</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
-    <property name="program_name">Wiizard</property>
+    <property name="program_name">WiiCan</property>
     <property name="version">0.1.1</property>
     <property name="copyright" translatable="yes">2009 J. Félix Ontañón &lt;felixonta@gmail.com&gt;</property>
-    <property name="comments" translatable="yes">Wiimote usage assistant and mapping manager</property>
-    <property name="website">http://dev.emergya.info/projects/show/wiizard</property>
-    <property name="website_label" translatable="yes">http://dev.emergya.info/projects/show/wiizard</property>
+    <property name="comments" translatable="yes">Yes wii can
+Wiimote usage assistant and mapping manager</property>
+    <property name="website">http://dev.emergya.info/projects/show/wiican</property>
+    <property name="website_label" translatable="yes">http://dev.emergya.info/projects/show/wiican</property>
     <property name="license" translatable="yes">
 		    GNU GENERAL PUBLIC LICENSE
 		       Version 3, 29 June 2007
@@ -692,7 +693,7 @@ Public License instead of this License.  But first, please read
     <property name="translator_credits" translatable="yes" comments="TRANSLATORS: Replace this string with your names, one name per line.">translator-credits</property>
     <property name="artists">J. Félix Ontañon &lt;felixonta@gmail.com&gt;
 Yann Papouin &lt;yann.papouin@gmail.com&gt;</property>
-    <property name="logo_icon_name">wiizard</property>
+    <property name="logo_icon_name">wiican</property>
     <property name="wrap_license">True</property>
     <signal name="close" handler="gtk_widget_destroy"/>
     <child internal-child="vbox">

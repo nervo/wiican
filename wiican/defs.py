@@ -1,9 +1,9 @@
 import os.path
 
-BASE_DATA_DIR = '/usr/share/wiizard/'
+BASE_DATA_DIR = '/usr/share/wiican/'
 WMINPUT_CMD = ['/usr/bin/wminput', '-w']
 
-USER_CONFIG_DIR = '.wiizard'
+USER_CONFIG_DIR = '.wiican'
 CONFIG_SKEL = os.path.join(BASE_DATA_DIR, 'config_skel')
 
 ICON_ON = os.path.join(BASE_DATA_DIR, 'img/wiitrayon.png')
