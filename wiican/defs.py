@@ -1,6 +1,7 @@
 import os.path
 
-BASE_DATA_DIR = '/usr/share/wiican/'
+#BASE_DATA_DIR = '/usr/share/wiican/'
+BASE_DATA_DIR='.'
 WMINPUT_CMD = ['/usr/bin/wminput', '-w']
 
 USER_CONFIG_DIR = '.wiican'

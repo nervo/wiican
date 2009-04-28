@@ -9,7 +9,7 @@ import defs
 import dotconfig
 
 class IconChooserDialog(gtk.FileChooserDialog):
-    def __init__(self, parent, title="Select image icon..", icon_size=64):
+    def __init__(self, parent, title=_('Select image icon..'), icon_size=64):
 
         # Do the icon preview
         def update_preview_cb(file_chooser, preview, icon_size):
@@ -33,19 +33,19 @@ class IconChooserDialog(gtk.FileChooserDialog):
 
         #TODO: Maybe a better filter it's requiered
         filter = gtk.FileFilter()
-        filter.set_name("Images")
-        filter.add_mime_type("image/png")
-        filter.add_mime_type("image/jpeg")
-        filter.add_mime_type("image/gif")
-        filter.add_pattern("*.png")
-        filter.add_pattern("*.jpg")
-        filter.add_pattern("*.gif")
+        filter.set_name(_('Images'))
+        filter.add_mime_type('image/png')
+        filter.add_mime_type('image/jpeg')
+        filter.add_mime_type('image/gif')
+        filter.add_pattern('*.png')
+        filter.add_pattern('*.jpg')
+        filter.add_pattern('*.gif')
         self.add_filter(filter)
 
         # Set a preview widget 
         preview = gtk.Image()
         self.set_preview_widget(preview)
-        self.connect("update-preview", update_preview_cb, preview, icon_size)
+        self.connect('update-preview', update_preview_cb, preview, icon_size)
 
 class EntryDialog:
     def __init__(self, name='', description='', mapping='', 
@@ -186,11 +186,11 @@ class MappingDialog:
             mapping_list.append_column(gtk.TreeViewColumn('', 
                         icon_cell, pixbuf=0))
 
-            name_column = gtk.TreeViewColumn('Name', name_cell, text=1)
+            name_column = gtk.TreeViewColumn(_('Name'), name_cell, text=1)
             name_column.set_expand(True)
             mapping_list.append_column(name_column)
 
-            visible_column = gtk.TreeViewColumn('Visible', visible_cell, 
+            visible_column = gtk.TreeViewColumn(_('Visible'), visible_cell, 
                     active=2)
             mapping_list.append_column(visible_column)
 
@@ -224,15 +224,15 @@ class MappingDialog:
 
         # If any mapping was deleted, now it's time to remove files
         if self.__deleted:
-            delete_message = 'Are you sure you want to completely remove ' \
-                    'this mappings?:\n\n' + '\n'.join(self.__deleted.keys())
+            delete_message = _('Are you sure you want to completely remove ') \
+                    _('this mappings?:\n\n') + '\n'.join(self.__deleted.keys())
 
             delete_dlg = gtk.MessageDialog(parent = self.__mapping_dlg, 
                     flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
                     type = gtk.MESSAGE_QUESTION,
                     buttons = gtk.BUTTONS_YES_NO,
                     message_format = delete_message)
-            delete_dlg.set_title('Deleting mappings')
+            delete_dlg.set_title(_('Deleting mappings'))
 
             if delete_dlg.run() == gtk.RESPONSE_YES:
                 for file_path in self.__deleted.values():
@@ -245,7 +245,7 @@ class MappingDialog:
                             flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
                             type = gtk.MESSAGE_ERROR,
                             buttons = gtk.BUTTONS_CLOSE,
-                            message_format = 'Can\'t remove mapping %s' % file_path)
+                            message_format = _('Can\'t remove mapping ') + file_path)
                         error_dlg.run()
                         continue
 
@@ -290,7 +290,7 @@ class MappingDialog:
                     mapping = row_data[7],
                     icon_path = row_data[6])
 
-            entry_dlg.set_title("Editing %s" % row_data[1])
+            entry_dlg.set_title(_('Editing ') + row_data[1])
 
             if entry_dlg.run() == gtk.RESPONSE_OK:
                 name, desc, mapping, icon_path = entry_dlg.get_values()

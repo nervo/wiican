@@ -97,13 +97,13 @@ class DotConfig:
 
         if not os.path.exists(dotdir_path) and self.skeldir:
             if not os.path.exists(self.skeldir):
-                raise DotConfigError, "Skel config dir doesn't exists"
+                raise DotConfigError, _("Skel config dir doesn't exists")
                 return None
             else:
                 shutil.copytree(self.skeldir, dotdir_path)
         elif not os.access(dotdir_path, os.X_OK) \
           or not os.access(dotdir_path, os.R_OK):
-            raise DotConfigError, "Wrong perms on user config dir"
+            raise DotConfigError, _("Wrong perms on user config dir")
             return None
 
         return dotdir_path
