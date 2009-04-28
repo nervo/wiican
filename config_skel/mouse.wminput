@@ -1,7 +1,6 @@
 ## Wiican Config file for wminput
 # name: Mouse
 # description: Wiimoted maped as mouse. 
-# icon: /usr/share/wiican/img/wiitrayon.png
 # position: 0
 # visible: True
 Wiimote.A		= BTN_LEFT

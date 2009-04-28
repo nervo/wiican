@@ -259,6 +259,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             
     def __wminput_retcode(self, retcode):
         def is_uinput_loaded():
+            # FIXME: There must be a better way to check if uinput is loaded
             modules = open('/proc/modules').read()
             return 'uinput' in modules
 
@@ -271,7 +272,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
                         "uinput module it's not loaded")
                 else:
                     self.__notificator.show_notification(error_title, 
-                        "check wminput config file syntax")
+                        "check mapping syntax")
             else:
                 self.__notificator.show_notification("Unknown error", 
                         "Can't discover or use wiimote")

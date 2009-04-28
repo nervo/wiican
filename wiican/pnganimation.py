@@ -17,6 +17,7 @@ class PngAnimation:
         self.__frames.append(frame)
 
     #TODO: Maybe a not-to-cycle arg?
+    #TODO: Use yield for generator
     def next(self):
         self.__current_frame = (self.__current_frame + 1) % len(self.__frames)
         return self.__frames[self.__current_frame]

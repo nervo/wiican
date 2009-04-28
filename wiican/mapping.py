@@ -237,7 +237,17 @@ class MappingDialog:
             if delete_dlg.run() == gtk.RESPONSE_YES:
                 for file_path in self.__deleted.values():
                     # TODO: try-except block it's required
-                    dotconfig.remove_mapping(file_path)
+                    try:
+                        dotconfig.remove_mapping(file_path)
+                    except:
+                        error_dlg = gtk.MessageDialog(
+                            parent = self.__mapping_dlg,
+                            flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+                            type = gtk.MESSAGE_ERROR,
+                            buttons = gtk.BUTTONS_CLOSE,
+                            message_format = 'Can\'t remove mapping %s' % file_path)
+                        error_dlg.run()
+                        continue
 
             delete_dlg.destroy()
             self.__deleted = {}
