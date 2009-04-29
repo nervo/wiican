@@ -157,8 +157,8 @@ class WiimoteStatusIcon(gtk.StatusIcon):
     def __idle_st(self):
         self.__disconnect_item.set_sensitive(False)
         self.set_from_file(ICON_ON)
-        self.set_tooltip(_('Hold left button for use wiimote\n') \
-                _('Right button for menu'))
+        self.set_tooltip(_('Hold left button for use wiimote\n' \
+                'Right button for menu'))
 
     def __discovering_st(self):
         def animate():

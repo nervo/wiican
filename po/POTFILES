@@ -1,0 +1,6 @@
+../wiican/wiimotemanager.py
+../wiican/mapping.py
+../wiican/dotconfig.py
+../entry.glade
+../mapping.glade
+../about.glade

@@ -224,7 +224,7 @@ class MappingDialog:
 
         # If any mapping was deleted, now it's time to remove files
         if self.__deleted:
-            delete_message = _('Are you sure you want to completely remove ') \
+            delete_message = _('Are you sure you want to completely remove ') +\
                     _('this mappings?:\n\n') + '\n'.join(self.__deleted.keys())
 
             delete_dlg = gtk.MessageDialog(parent = self.__mapping_dlg, 

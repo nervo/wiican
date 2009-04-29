@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-28 23:16+0200\n"
+"POT-Creation-Date: 2009-04-30 00:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,131 +16,173 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: wiican/dotconfig.py:100
-msgid "Skel config dir doesn't exists"
+#: ../wiican/wiimotemanager.py:74 ../wiican/wiimotemanager.py:75
+msgid "Connected"
 msgstr ""
 
-#: wiican/dotconfig.py:106
-msgid "Wrong perms on user config dir"
+#: ../wiican/wiimotemanager.py:76
+msgid "Put Wiimote in discoverable mode now (press 1+2)"
 msgstr ""
 
-#: wiican/mapping.py:12
+#: ../wiican/wiimotemanager.py:83 ../wiican/wiimotemanager.py:84
+msgid "Disconnected"
+msgstr ""
+
+#: ../wiican/wiimotemanager.py:85
+msgid "Wiimote off"
+msgstr ""
+
+#: ../wiican/wiimotemanager.py:94
+msgid "No bluetooth adapters"
+msgstr ""
+
+#: ../wiican/wiimotemanager.py:154
+msgid "Plug a bluetooth adapter"
+msgstr ""
+
+#: ../wiican/wiimotemanager.py:160
+msgid ""
+"Hold left button for use wiimote\n"
+"Right button for menu"
+msgstr ""
+
+#: ../wiican/wiimotemanager.py:172
+msgid "Discovering Wiimote"
+msgstr ""
+
+#: ../wiican/wiimotemanager.py:179
+msgid "Use your wiimote"
+msgstr ""
+
+#: ../wiican/wiimotemanager.py:268
+msgid "Fail!"
+msgstr ""
+
+#: ../wiican/wiimotemanager.py:270
+msgid "Error discovering Wiimote"
+msgstr ""
+
+#: ../wiican/wiimotemanager.py:273
+msgid "uinput module it's not loaded"
+msgstr ""
+
+#: ../wiican/wiimotemanager.py:276
+msgid "check mapping syntax"
+msgstr ""
+
+#: ../wiican/wiimotemanager.py:278
+msgid "Unknown error"
+msgstr ""
+
+#: ../wiican/wiimotemanager.py:279
+msgid "Can't discover or use wiimote"
+msgstr ""
+
+#: ../wiican/mapping.py:12
 msgid "Select image icon.."
 msgstr ""
 
-#: wiican/mapping.py:36
+#: ../wiican/mapping.py:36
 msgid "Images"
 msgstr ""
 
-#: wiican/mapping.py:189
+#: ../wiican/mapping.py:189
 msgid "Name"
 msgstr ""
 
-#: wiican/mapping.py:193
+#: ../wiican/mapping.py:193
 msgid "Visible"
 msgstr ""
 
-#: wiican/mapping.py:227
+#: ../wiican/mapping.py:227
 msgid "Are you sure you want to completely remove "
 msgstr ""
 
-#: wiican/mapping.py:228
+#: ../wiican/mapping.py:228
 msgid ""
 "this mappings?:\n"
 "\n"
 msgstr ""
 
-#: wiican/mapping.py:235
+#: ../wiican/mapping.py:235
 msgid "Deleting mappings"
 msgstr ""
 
-#: wiican/mapping.py:248
+#: ../wiican/mapping.py:248
 msgid "Can't remove mapping "
 msgstr ""
 
-#: wiican/mapping.py:293
+#: ../wiican/mapping.py:293
 msgid "Editing "
 msgstr ""
 
-#: wiican/wiimotemanager.py:74 wiican/wiimotemanager.py:75
-msgid "Connected"
+#: ../wiican/dotconfig.py:100
+msgid "Skel config dir doesn't exists"
 msgstr ""
 
-#: wiican/wiimotemanager.py:76
-msgid "Put Wiimote in discoverable mode now (press 1+2)"
+#: ../wiican/dotconfig.py:106
+msgid "Wrong perms on user config dir"
 msgstr ""
 
-#: wiican/wiimotemanager.py:83 wiican/wiimotemanager.py:84
-msgid "Disconnected"
+#: ../entry.glade:6
+msgid "New entry"
 msgstr ""
 
-#: wiican/wiimotemanager.py:85
-msgid "Wiimote off"
+#: ../entry.glade:49
+msgid "Name:"
 msgstr ""
 
-#: wiican/wiimotemanager.py:94
-msgid "No bluetooth adapters"
+#: ../entry.glade:61
+msgid "Short name for the mapping"
 msgstr ""
 
-#: wiican/wiimotemanager.py:154
-msgid "Plug a bluetooth adapter"
+#: ../entry.glade:73
+msgid "Description:"
 msgstr ""
 
-#: wiican/wiimotemanager.py:160
-msgid "Hold left button for use wiimote\n"
+#: ../entry.glade:85
+msgid "Comment the use for this mapping"
 msgstr ""
 
-#: wiican/wiimotemanager.py:161
-msgid "Right button for menu"
+#: ../entry.glade:112
+msgid "Mapping:"
 msgstr ""
 
-#: wiican/wiimotemanager.py:172
-msgid "Discovering Wiimote"
+#: ../entry.glade:121
+msgid "wminput help"
 msgstr ""
 
-#: wiican/wiimotemanager.py:179
-msgid "Use your wiimote"
+#: ../entry.glade:147
+msgid "Define buttons on wminput config file format"
 msgstr ""
 
-#: wiican/wiimotemanager.py:268
-msgid "Fail!"
+#: ../mapping.glade:7
+msgid "Wiimote mappings"
 msgstr ""
 
-#: wiican/wiimotemanager.py:270
-msgid "Error discovering Wiimote"
+#: ../mapping.glade:104
+msgid "Mappings"
 msgstr ""
 
-#: wiican/wiimotemanager.py:273
-msgid "uinput module it's not loaded"
+#: ../mapping.glade:170
+msgid "gtk-cancel"
 msgstr ""
 
-#: wiican/wiimotemanager.py:276
-msgid "check mapping syntax"
-msgstr ""
-
-#: wiican/wiimotemanager.py:278
-msgid "Unknown error"
-msgstr ""
-
-#: wiican/wiimotemanager.py:279
-msgid "Can't discover or use wiimote"
-msgstr ""
-
-#: about.glade:11
+#: ../about.glade:11
 msgid "2009 J. Félix Ontañón <felixonta@gmail.com>"
 msgstr ""
 
-#: about.glade:12
+#: ../about.glade:12
 msgid ""
 "Yes wii can\n"
 "Wiimote usage assistant and mapping manager"
 msgstr ""
 
-#: about.glade:15
+#: ../about.glade:15
 msgid "http://dev.emergya.info/projects/show/wiican"
 msgstr ""
 
-#: about.glade:16
+#: ../about.glade:16
 msgid ""
 "\n"
 "\t\t    GNU GENERAL PUBLIC LICENSE\n"
@@ -821,50 +863,6 @@ msgid ""
 "<http://www.gnu.org/philosophy/why-not-lgpl.html>.\n"
 msgstr ""
 
-#: about.glade:693
+#: ../about.glade:693
 msgid "translator-credits"
-msgstr ""
-
-#: entry.glade:6
-msgid "New entry"
-msgstr ""
-
-#: entry.glade:49
-msgid "Name:"
-msgstr ""
-
-#: entry.glade:61
-msgid "Short name for the mapping"
-msgstr ""
-
-#: entry.glade:73
-msgid "Description:"
-msgstr ""
-
-#: entry.glade:85
-msgid "Comment the use for this mapping"
-msgstr ""
-
-#: entry.glade:112
-msgid "Mapping:"
-msgstr ""
-
-#: entry.glade:121
-msgid "wminput help"
-msgstr ""
-
-#: entry.glade:147
-msgid "Define buttons on wminput config file format"
-msgstr ""
-
-#: mapping.glade:7
-msgid "Wiimote mappings"
-msgstr ""
-
-#: mapping.glade:104
-msgid "Mappings"
-msgstr ""
-
-#: mapping.glade:170
-msgid "gtk-cancel"
 msgstr ""

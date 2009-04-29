@@ -3,7 +3,7 @@ Section: utils
 Priority: extra
 Maintainer: J. Félix Ontañón <felixonta@gmail.com>
 Build-Depends: cdbs (>= 0.4.49), debhelper (>= 7), python-support (>= 0.5.3),
- python-all-dev (>= 2.3.5-11)
+ python-all-dev (>= 2.3.5-11), gettext
 Standards-Version: 3.8.0
 Homepage: http://dev.emergya.info/projects/show/wiican
 
