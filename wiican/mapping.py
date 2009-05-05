@@ -86,10 +86,10 @@ class EntryDialog:
     def get_values(self):
         start, end = self.__file_buffer.get_bounds()
 
-        return self.__name_entry.get_text(), \
+        return self.__name_entry.get_text() or _('No Name'),\
                 self.__desc_entry.get_text(), \
                 self.__file_buffer.get_text(start, end), \
-                self.__icon_path
+                self.__icon_path or defs.ICON_DEFAULT
 
     def __link_cb(self, widget):
         webbrowser.open(widget.get_uri())
@@ -235,8 +235,10 @@ class MappingDialog:
             delete_dlg.set_title(_('Deleting mappings'))
 
             if delete_dlg.run() == gtk.RESPONSE_YES:
-                for file_path in self.__deleted.values():
-                    # TODO: try-except block it's required
+                # There is no need to delete any file of new unregistered
+                # mappings
+                todelete = [x for x in self.__deleted.values() if not x is None]
+                for file_path in todelete:
                     try:
                         dotconfig.remove_mapping(file_path)
                     except:

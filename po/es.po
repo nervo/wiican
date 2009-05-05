@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-30 00:15+0200\n"
+"POT-Creation-Date: 2009-05-06 00:38+0200\n"
 "PO-Revision-Date: 2009-04-30 00:09+0200\n"
 "Last-Translator: J. Félix Ontañón <felixonta@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -54,27 +54,27 @@ msgstr "Descubriendo Wiimote"
 msgid "Use your wiimote"
 msgstr "Usa tu wiimote"
 
-#: ../wiican/wiimotemanager.py:268
+#: ../wiican/wiimotemanager.py:269
 msgid "Fail!"
 msgstr "¡Fallo!"
 
-#: ../wiican/wiimotemanager.py:270
+#: ../wiican/wiimotemanager.py:271
 msgid "Error discovering Wiimote"
 msgstr "Error descubriendo Wiimote"
 
-#: ../wiican/wiimotemanager.py:273
+#: ../wiican/wiimotemanager.py:274
 msgid "uinput module it's not loaded"
 msgstr "el módulo uinput no está cargado"
 
-#: ../wiican/wiimotemanager.py:276
+#: ../wiican/wiimotemanager.py:277
 msgid "check mapping syntax"
 msgstr "revisa la sintaxis de tu mapeo"
 
-#: ../wiican/wiimotemanager.py:278
+#: ../wiican/wiimotemanager.py:279
 msgid "Unknown error"
 msgstr "Error desconocido"
 
-#: ../wiican/wiimotemanager.py:279
+#: ../wiican/wiimotemanager.py:280
 msgid "Can't discover or use wiimote"
 msgstr "No se puede descubrir o usar wiimote"
 
@@ -85,6 +85,10 @@ msgstr "Elige icono.."
 #: ../wiican/mapping.py:36
 msgid "Images"
 msgstr "Imágenes"
+
+#: ../wiican/mapping.py:89
+msgid "No Name"
+msgstr "Sin Nombre"
 
 #: ../wiican/mapping.py:189
 msgid "Name"
@@ -103,20 +107,20 @@ msgid ""
 "this mappings?:\n"
 "\n"
 msgstr ""
-"los siguientes mapeos:\n"
+"los siguientes mapeos?:\n"
 "\n"
 
 #: ../wiican/mapping.py:235
 msgid "Deleting mappings"
 msgstr "Borrando mapeos"
 
-#: ../wiican/mapping.py:248
+#: ../wiican/mapping.py:250
 msgid "Can't remove mapping "
 msgstr "No se puede eliminar mapeo "
 
-#: ../wiican/mapping.py:293
+#: ../wiican/mapping.py:295
 msgid "Editing "
-msgstr "Editando"
+msgstr "Editando "
 
 #: ../wiican/dotconfig.py:100
 msgid "Skel config dir doesn't exists"

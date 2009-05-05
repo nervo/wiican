@@ -1,6 +1,5 @@
 ## Wiican Config file for wminput
 # name: Neverball
-# description: Use wiimote with neverball game 
 # position: 1
 # visible: True
 Plugin.acc.Roll = ABS_X

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-30 00:24+0200\n"
+"POT-Creation-Date: 2009-05-06 00:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,27 +54,27 @@ msgstr ""
 msgid "Use your wiimote"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:268
+#: ../wiican/wiimotemanager.py:269
 msgid "Fail!"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:270
+#: ../wiican/wiimotemanager.py:271
 msgid "Error discovering Wiimote"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:273
+#: ../wiican/wiimotemanager.py:274
 msgid "uinput module it's not loaded"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:276
+#: ../wiican/wiimotemanager.py:277
 msgid "check mapping syntax"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:278
+#: ../wiican/wiimotemanager.py:279
 msgid "Unknown error"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:279
+#: ../wiican/wiimotemanager.py:280
 msgid "Can't discover or use wiimote"
 msgstr ""
 
@@ -84,6 +84,10 @@ msgstr ""
 
 #: ../wiican/mapping.py:36
 msgid "Images"
+msgstr ""
+
+#: ../wiican/mapping.py:89
+msgid "No Name"
 msgstr ""
 
 #: ../wiican/mapping.py:189
@@ -108,11 +112,11 @@ msgstr ""
 msgid "Deleting mappings"
 msgstr ""
 
-#: ../wiican/mapping.py:248
+#: ../wiican/mapping.py:250
 msgid "Can't remove mapping "
 msgstr ""
 
-#: ../wiican/mapping.py:293
+#: ../wiican/mapping.py:295
 msgid "Editing "
 msgstr ""
 

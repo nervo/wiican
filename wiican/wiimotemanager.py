@@ -232,6 +232,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         mapping_dlg = MappingDialog()
         if mapping_dlg.run() == gtk.RESPONSE_OK:
             self.__load_mappings_menu()
+            self.set_state(self.__current_state)
         mapping_dlg.destroy()
 
     def __about_cb(self, widget):

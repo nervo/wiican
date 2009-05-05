@@ -1,6 +1,5 @@
 ## Wiican Config file for wminput
 # name: Mouse
-# description: Wiimoted maped as mouse. 
 # position: 0
 # visible: True
 Wiimote.A		= BTN_LEFT
