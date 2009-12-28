@@ -7,7 +7,7 @@
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">normal</property>
     <property name="program_name">WiiCan</property>
-    <property name="version">0.1.1</property>
+    <property name="version">0.2</property>
     <property name="copyright" translatable="yes">2009 J. F&#xE9;lix Onta&#xF1;&#xF3;n &lt;felixonta@gmail.com&gt;</property>
     <property name="comments" translatable="yes">Yes wii can
 Wiimote usage assistant and mapping manager</property>
