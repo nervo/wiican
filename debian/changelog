@@ -1,3 +1,9 @@
+wiican (0.2-2) karmic; urgency=low
+
+  * Bugfix on upstart job config file
+
+ -- J. Félix Ontañón <felixonta@gmail.com>  Mon, 28 Dec 2009 23:46:52 +0100
+
 wiican (0.2-1) karmic; urgency=low
 
   * Packaged new version
