@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--*- mode: xml -*-->
+<?xml version="1.0"?>
 <glade-interface>
+  <!-- interface-requires gtk+ 2.12 -->
+  <!-- interface-naming-policy toplevel-contextual -->
   <widget class="GtkAboutDialog" id="WiiAboutDialog">
     <property name="border_width">5</property>
     <property name="destroy_with_parent">True</property>
-    <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
+    <property name="type_hint">normal</property>
     <property name="program_name">WiiCan</property>
-    <property name="version">0.1.1</property>
-    <property name="copyright" translatable="yes">2009 J. Félix Ontañón &lt;felixonta@gmail.com&gt;</property>
+    <property name="version">0.2</property>
+    <property name="copyright" translatable="yes">2009 J. F&#xE9;lix Onta&#xF1;&#xF3;n &lt;felixonta@gmail.com&gt;</property>
     <property name="comments" translatable="yes">Yes wii can
 Wiimote usage assistant and mapping manager</property>
-    <property name="website">http://dev.emergya.info/projects/show/wiican</property>
-    <property name="website_label" translatable="yes">http://dev.emergya.info/projects/show/wiican</property>
+    <property name="website">http://launchpad.net/wiican</property>
+    <property name="website_label" translatable="yes">http://launchpad.net/wiican</property>
     <property name="license" translatable="yes">
 		    GNU GENERAL PUBLIC LICENSE
 		       Version 3, 29 June 2007
@@ -689,9 +689,9 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 &lt;http://www.gnu.org/philosophy/why-not-lgpl.html&gt;.
 </property>
-    <property name="authors">J. Félix Ontañón &lt;felixonta@gmail.com&gt;</property>
+    <property name="authors">J. F&#xE9;lix Onta&#xF1;&#xF3;n &lt;felixonta@gmail.com&gt;</property>
     <property name="translator_credits" translatable="yes" comments="TRANSLATORS: Replace this string with your names, one name per line.">translator-credits</property>
-    <property name="artists">J. Félix Ontañon &lt;felixonta@gmail.com&gt;
+    <property name="artists">J. F&#xE9;lix Onta&#xF1;on &lt;felixonta@gmail.com&gt;
 Yann Papouin &lt;yann.papouin@gmail.com&gt;</property>
     <property name="logo_icon_name">wiican</property>
     <property name="wrap_license">True</property>
@@ -699,11 +699,11 @@ Yann Papouin &lt;yann.papouin@gmail.com&gt;</property>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox1">
         <child internal-child="action_area">
-          <widget class="GtkHButtonBox" id="dialog-action_area1">
-          </widget>
+          <widget class="GtkHButtonBox" id="dialog-action_area1"/>
           <packing>
             <property name="expand">False</property>
-            <property name="pack_type">GTK_PACK_END</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
           </packing>
         </child>
       </widget>

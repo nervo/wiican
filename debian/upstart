@@ -1,0 +1,12 @@
+# dmesg - save kernel messages
+#
+# This task saves the initial kernel message log.
+
+description	"loads uinput with read/write for all"
+
+start on started udev
+
+script
+    modprobe uinput
+    chmod 0666 /dev/uinput
+end script

@@ -1,3 +1,22 @@
+wiican (0.2-2) karmic; urgency=low
+
+  * Bugfix on upstart job config file
+
+ -- J. Félix Ontañón <felixonta@gmail.com>  Mon, 28 Dec 2009 23:46:52 +0100
+
+wiican (0.2-1) karmic; urgency=low
+
+  * Packaged new version
+
+ -- J. Félix Ontañón <felixonta@gmail.com>  Mon, 28 Dec 2009 22:52:34 +0100
+
+wiican (0.1.1-2) karmic; urgency=low
+
+  * Ported to karmic
+  * Added upstart job for loading uinput with right perms
+
+ -- J. Félix Ontañón <felixonta@gmail.com>  Mon, 28 Dec 2009 13:01:11 +0100
+
 wiican (0.1.1-1) unstable; urgency=low
 
   * Initial release (Closes: #5)
