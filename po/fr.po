@@ -1,16 +1,16 @@
-# Spanish translation of WiiCan.
-# Copyright (C) 2009 J. Félix Ontañón
-# This file is distributed under the same license as the WiiCan package.
-# J. Félix Ontañón <felixonta@gmail.com>, 2009.
+# French translation for wiican
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the wiican package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.2\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: wiican\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-05-06 00:42+0200\n"
-"PO-Revision-Date: 2009-12-29 05:45+0000\n"
-"Last-Translator: J. Félix Ontañón <Unknown>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-12-29 18:50+0000\n"
+"Last-Translator: feuloren <feuloren@free.fr>\n"
+"Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,179 +19,173 @@ msgstr ""
 
 #: ../wiican/wiimotemanager.py:74 ../wiican/wiimotemanager.py:75
 msgid "Connected"
-msgstr "Conectado"
+msgstr "Connecté"
 
 #: ../wiican/wiimotemanager.py:76
 msgid "Put Wiimote in discoverable mode now (press 1+2)"
-msgstr "Ajusta tu Wiimote en modo descubrible ahora (pulsa 1+2)"
+msgstr "Mettez la wiimote en mode visible (appuyez sur 1 et 2)"
 
 #: ../wiican/wiimotemanager.py:83 ../wiican/wiimotemanager.py:84
 msgid "Disconnected"
-msgstr "Desconectado"
+msgstr "Déconnecté"
 
 #: ../wiican/wiimotemanager.py:85
 msgid "Wiimote off"
-msgstr "Wiimote apagado"
+msgstr ""
 
 #: ../wiican/wiimotemanager.py:94
 msgid "No bluetooth adapters"
-msgstr "No hay adaptador bluetooth disponible"
+msgstr "Pas d'adaptateur"
 
 #: ../wiican/wiimotemanager.py:154
 msgid "Plug a bluetooth adapter"
-msgstr "Enchufa un adaptador bluetooth"
+msgstr "Branchez un adaptateur bluetooth"
 
 #: ../wiican/wiimotemanager.py:160
 msgid ""
 "Hold left button for use wiimote\n"
 "Right button for menu"
 msgstr ""
-"Haz clic izquierdo para uso de wiimote\n"
-"Clic derecho para menú"
 
 #: ../wiican/wiimotemanager.py:172
 msgid "Discovering Wiimote"
-msgstr "Descubriendo Wiimote"
+msgstr "Recherche de wiimotes"
 
 #: ../wiican/wiimotemanager.py:179
 msgid "Use your wiimote"
-msgstr "Usa tu wiimote"
+msgstr "Utilisez votre wiimote"
 
 #: ../wiican/wiimotemanager.py:269
 msgid "Fail!"
-msgstr "¡Fallo!"
+msgstr "Échec!"
 
 #: ../wiican/wiimotemanager.py:271
 msgid "Error discovering Wiimote"
-msgstr "Error descubriendo Wiimote"
+msgstr "Erreur lors de la recherche de wiimotes"
 
 #: ../wiican/wiimotemanager.py:274
 msgid "uinput module it's not loaded"
-msgstr "el módulo uinput no está cargado"
+msgstr "Le module uinput n'est pas chargé"
 
 #: ../wiican/wiimotemanager.py:277
 msgid "check mapping syntax"
-msgstr "revisa la sintaxis de tu mapeo"
+msgstr ""
 
 #: ../wiican/wiimotemanager.py:279
 msgid "Unknown error"
-msgstr "Error desconocido"
+msgstr "Erreur inconnue"
 
 #: ../wiican/wiimotemanager.py:280
 msgid "Can't discover or use wiimote"
-msgstr "No se puede descubrir o usar wiimote"
+msgstr ""
 
 #: ../wiican/mapping.py:12
 msgid "Select image icon.."
-msgstr "Elige icono.."
+msgstr ""
 
 #: ../wiican/mapping.py:36
 msgid "Images"
-msgstr "Imágenes"
+msgstr ""
 
 #: ../wiican/mapping.py:89
 msgid "No Name"
-msgstr "Sin Nombre"
+msgstr ""
 
 #: ../wiican/mapping.py:189
 msgid "Name"
-msgstr "Nombre"
+msgstr "Nom"
 
 #: ../wiican/mapping.py:193
 msgid "Visible"
-msgstr "Visible"
+msgstr ""
 
 #: ../wiican/mapping.py:227
 msgid "Are you sure you want to completely remove "
-msgstr "¿Seguro que quiere eliminar definitivamente "
+msgstr ""
 
 #: ../wiican/mapping.py:228
 msgid ""
 "this mappings?:\n"
 "\n"
 msgstr ""
-"los siguientes mapeos?:\n"
-"\n"
 
 #: ../wiican/mapping.py:235
 msgid "Deleting mappings"
-msgstr "Borrando mapeos"
+msgstr ""
 
 #: ../wiican/mapping.py:250
 msgid "Can't remove mapping "
-msgstr "No se puede eliminar mapeo "
+msgstr ""
 
 #: ../wiican/mapping.py:295
 msgid "Editing "
-msgstr "Editando "
+msgstr ""
 
 #: ../wiican/dotconfig.py:100
 msgid "Skel config dir doesn't exists"
-msgstr "No existe directorio skel de configuración"
+msgstr ""
 
 #: ../wiican/dotconfig.py:106
 msgid "Wrong perms on user config dir"
-msgstr "Permisos incorrectos en directorio de configuración del usuario"
+msgstr ""
 
 #: ../entry.glade:6
 msgid "New entry"
-msgstr "Nueva entrada"
+msgstr ""
 
 #: ../entry.glade:49
 msgid "Name:"
-msgstr "Nombre:"
+msgstr "Nom:"
 
 #: ../entry.glade:61
 msgid "Short name for the mapping"
-msgstr "Nombre corto para el mapeo"
+msgstr ""
 
 #: ../entry.glade:73
 msgid "Description:"
-msgstr "Descripción:"
+msgstr ""
 
 #: ../entry.glade:85
 msgid "Comment the use for this mapping"
-msgstr "Comentario sobre el uso de este mapeo"
+msgstr ""
 
 #: ../entry.glade:112
 msgid "Mapping:"
-msgstr "Mapeo:"
+msgstr ""
 
 #: ../entry.glade:121
 msgid "wminput help"
-msgstr "ayuda de wminput"
+msgstr ""
 
 #: ../entry.glade:147
 msgid "Define buttons on wminput config file format"
-msgstr "Define los botones en formato de fichero de configuración wminput"
+msgstr ""
 
 #: ../mapping.glade:7
 msgid "Wiimote mappings"
-msgstr "Mapeos de wiimote"
+msgstr ""
 
 #: ../mapping.glade:104
 msgid "Mappings"
-msgstr "Mapeos"
+msgstr ""
 
 #: ../mapping.glade:170
 msgid "gtk-cancel"
-msgstr "gtk-cancel"
+msgstr ""
 
 #: ../about.glade:11
 msgid "2009 J. Félix Ontañón <felixonta@gmail.com>"
-msgstr "2009 J. Félix Ontañón <felixonta@gmail.com>"
+msgstr ""
 
 #: ../about.glade:12
 msgid ""
 "Yes wii can\n"
 "Wiimote usage assistant and mapping manager"
 msgstr ""
-"Yes wii can\n"
-"Asistente de uso de Wiimote y gestor de mapeos"
 
 #: ../about.glade:15
 msgid "http://dev.emergya.info/projects/show/wiican"
-msgstr "http://dev.emergya.info/projects/show/wiican"
+msgstr ""
 
 #: ../about.glade:16
 msgid ""
@@ -877,10 +871,6 @@ msgstr ""
 #: ../about.glade:693
 msgid "translator-credits"
 msgstr ""
-"J. Félix Ontañón\n"
-"\n"
 "Launchpad Contributions:\n"
-"  J. Félix Ontañón https://launchpad.net/~fontanon"
-
-#~ msgid "Right button for menu"
-#~ msgstr "Clic derecho para menú"
+"  Chris Murphy https://launchpad.net/~chrismurf\n"
+"  feuloren https://launchpad.net/~florent-thevenet"
