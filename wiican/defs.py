@@ -20,9 +20,12 @@
 #
 ###
 
-import os.path
+import os
 
-BASE_DATA_DIR = '/usr/share/wiican/'
+BASE_DATA_DIR = os.getcwd()
+if os.path.exists('/usr/share/wiican/'):
+    BASE_DATA_DIR = '/usr/share/wiican/'
+
 WMINPUT_CMD = ['/usr/bin/wminput', '-w']
 
 USER_CONFIG_DIR = '.wiican'

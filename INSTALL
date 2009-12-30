@@ -27,11 +27,12 @@ Load uinput module with perms for non-root users:
       - Reload udev. (i.e.: On Ubuntu and Debian run /etc/init.d/udev reload
       - Maybe you want to autoload uinput module by adding it on /etc/modules
 
+Running wiican:
+    - Type ./run-unintalled.sh if not installed
+    - Type wiican if installed
+
 Install wiican:
     - Run as root: python setup.py install
-
-Running wiican:
-    - Type wiican if installed
 
 [1] http://abstrakraft.org/cwiid/
 [2] http://abstrakraft.org/cwiid/wiki/wminput
