@@ -13,17 +13,25 @@ Other dependencies:
     - PyGTK
     - PyYAML
     - PyINotify
+    - gnome-bluetooth (bluez-gnome in older versions)
 
-Sets the udev rules: For be able to use uinput driver as non-privileged user
-    - Copy udev-rules/* to your udev rules directory (i.e.: /etc/udev/rules.d)
-    - Reload udev. (i.e.: On Ubuntu and Debian run /etc/init.d/udev reload
-    - Maybe you want to autoload uinput module by adding it on /etc/modules
+Load uinput module with perms for non-root users:
+    For new versions of udev:
+      - sudo modprobe uinput
+      - sudo chmod 0666 /dev/uinput
+      - Maybe you want to autoload uinput module by adding it on /etc/modules 
+        but you still need to chmod 0666 /dev/uinput or launch wiican as root
+
+    For old versions of udev:
+      - Copy udev-rules/* to your udev rules directory (i.e.: /etc/udev/rules.d)
+      - Reload udev. (i.e.: On Ubuntu and Debian run /etc/init.d/udev reload
+      - Maybe you want to autoload uinput module by adding it on /etc/modules
 
 Install wiican:
     - Run as root: python setup.py install
 
 Running wiican:
-    - Type wiican
+    - Type wiican if installed
 
 [1] http://abstrakraft.org/cwiid/
 [2] http://abstrakraft.org/cwiid/wiki/wminput
