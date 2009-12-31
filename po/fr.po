@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-05-06 00:42+0200\n"
-"PO-Revision-Date: 2009-12-29 18:50+0000\n"
-"Last-Translator: feuloren <feuloren@free.fr>\n"
+"PO-Revision-Date: 2009-12-30 21:35+0000\n"
+"Last-Translator: Fabien Boutantin <fabien.boutantin@laposte.net>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-30 04:49+0000\n"
+"X-Launchpad-Export-Date: 2009-12-31 04:59+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../wiican/wiimotemanager.py:74 ../wiican/wiimotemanager.py:75
@@ -31,11 +31,11 @@ msgstr "Déconnecté"
 
 #: ../wiican/wiimotemanager.py:85
 msgid "Wiimote off"
-msgstr ""
+msgstr "Wiimote éteinte"
 
 #: ../wiican/wiimotemanager.py:94
 msgid "No bluetooth adapters"
-msgstr "Pas d'adaptateur"
+msgstr "Pas d'adaptateur bluetooth"
 
 #: ../wiican/wiimotemanager.py:154
 msgid "Plug a bluetooth adapter"
@@ -77,7 +77,7 @@ msgstr "Erreur inconnue"
 
 #: ../wiican/wiimotemanager.py:280
 msgid "Can't discover or use wiimote"
-msgstr ""
+msgstr "Impossible de découvrir ou d'utiliser une wiimote"
 
 #: ../wiican/mapping.py:12
 msgid "Select image icon.."
@@ -85,11 +85,11 @@ msgstr ""
 
 #: ../wiican/mapping.py:36
 msgid "Images"
-msgstr ""
+msgstr "Images"
 
 #: ../wiican/mapping.py:89
 msgid "No Name"
-msgstr ""
+msgstr "Sans nom"
 
 #: ../wiican/mapping.py:189
 msgid "Name"
@@ -97,7 +97,7 @@ msgstr "Nom"
 
 #: ../wiican/mapping.py:193
 msgid "Visible"
-msgstr ""
+msgstr "Visible"
 
 #: ../wiican/mapping.py:227
 msgid "Are you sure you want to completely remove "
@@ -128,6 +128,7 @@ msgstr ""
 #: ../wiican/dotconfig.py:106
 msgid "Wrong perms on user config dir"
 msgstr ""
+"Mauvaises permissions sur le répertoire de configuration de l'utilisateur"
 
 #: ../entry.glade:6
 msgid "New entry"
@@ -143,11 +144,11 @@ msgstr ""
 
 #: ../entry.glade:73
 msgid "Description:"
-msgstr ""
+msgstr "Description :"
 
 #: ../entry.glade:85
 msgid "Comment the use for this mapping"
-msgstr ""
+msgstr "Commentez l'utilisation de ce mapping"
 
 #: ../entry.glade:112
 msgid "Mapping:"
@@ -155,7 +156,7 @@ msgstr ""
 
 #: ../entry.glade:121
 msgid "wminput help"
-msgstr ""
+msgstr "aide de wminput"
 
 #: ../entry.glade:147
 msgid "Define buttons on wminput config file format"
@@ -163,7 +164,7 @@ msgstr ""
 
 #: ../mapping.glade:7
 msgid "Wiimote mappings"
-msgstr ""
+msgstr "Mappings de Wiimote"
 
 #: ../mapping.glade:104
 msgid "Mappings"
@@ -171,11 +172,11 @@ msgstr ""
 
 #: ../mapping.glade:170
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-cancel"
 
 #: ../about.glade:11
 msgid "2009 J. Félix Ontañón <felixonta@gmail.com>"
-msgstr ""
+msgstr "2009 J. Félix Ontañón <felixonta@gmail.com>"
 
 #: ../about.glade:12
 msgid ""
@@ -185,7 +186,7 @@ msgstr ""
 
 #: ../about.glade:15
 msgid "http://dev.emergya.info/projects/show/wiican"
-msgstr ""
+msgstr "http://dev.emergya.info/projects/show/wiican"
 
 #: ../about.glade:16
 msgid ""
@@ -873,4 +874,6 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Chris Murphy https://launchpad.net/~chrismurf\n"
+"  Fabien Boutantin https://launchpad.net/~fabien-boutantin-laposte\n"
+"  Pierre Slamich https://launchpad.net/~pierre-slamich\n"
 "  feuloren https://launchpad.net/~florent-thevenet"
