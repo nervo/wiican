@@ -691,8 +691,9 @@ Public License instead of this License.  But first, please read
 </property>
     <property name="authors">J. F&#xE9;lix Onta&#xF1;&#xF3;n &lt;felixonta@gmail.com&gt;</property>
     <property name="translator_credits" translatable="yes" comments="TRANSLATORS: Replace this string with your names, one name per line.">translator-credits</property>
-    <property name="artists">J. F&#xE9;lix Onta&#xF1;on &lt;felixonta@gmail.com&gt;
-Yann Papouin &lt;yann.papouin@gmail.com&gt;</property>
+    <property name="artists">Dani Planas &lt;daniplanas.a@gmail.com&gt;
+Ulisse &lt;ulisail@yahoo.it&gt;</property>
+    <property name="logo">wiican.svg</property>
     <property name="logo_icon_name">wiican</property>
     <property name="wrap_license">True</property>
     <signal name="close" handler="gtk_widget_destroy"/>

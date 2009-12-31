@@ -30,11 +30,11 @@ setup(
                         ['config_skel/mouse.wminput', 
                         'config_skel/neverball.wminput']),
                       ('share/wiican/img', 
-                          ['img/wiitrayoff.png', 'img/wiitrayon.png', 
-                          'img/wiitrayon1.png', 'img/wiitrayon2.png', 
-                          'img/wiitrayon3.png']),
+                          ['img/wiitrayoff.svg', 'img/wiitrayon.svg',
+                          'img/wiitrayon1.svg', 'img/wiitrayon2.svg', 
+                          'img/wiitrayon3.svg']),
                       ('share/wiican', 
                           ['about.glade','mapping.glade','entry.glade']),
                       ('share/applications', ['wiican.desktop']),
-                      ('share/pixmaps', ['wiican.png'])]
+                      ('share/pixmaps', ['wiican.svg'])]
 )
