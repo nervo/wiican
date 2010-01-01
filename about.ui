@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<glade-interface>
+<interface>
   <!-- interface-requires gtk+ 2.12 -->
   <!-- interface-naming-policy toplevel-contextual -->
-  <widget class="GtkAboutDialog" id="WiiAboutDialog">
+  <object class="GtkAboutDialog" id="WiiAboutDialog">
     <property name="border_width">5</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">normal</property>
@@ -698,16 +698,17 @@ Ulisse &lt;ulisail@yahoo.it&gt;</property>
     <property name="wrap_license">True</property>
     <signal name="close" handler="gtk_widget_destroy"/>
     <child internal-child="vbox">
-      <widget class="GtkVBox" id="dialog-vbox1">
+      <object class="GtkVBox" id="dialog-vbox1">
+        <property name="orientation">vertical</property>
         <child internal-child="action_area">
-          <widget class="GtkHButtonBox" id="dialog-action_area1"/>
+          <object class="GtkHButtonBox" id="dialog-action_area1"/>
           <packing>
             <property name="expand">False</property>
             <property name="pack_type">end</property>
             <property name="position">0</property>
           </packing>
         </child>
-      </widget>
+      </object>
     </child>
-  </widget>
-</glade-interface>
+  </object>
+</interface>

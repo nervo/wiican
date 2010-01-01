@@ -34,7 +34,7 @@ setup(
                           'img/wiitrayon1.svg', 'img/wiitrayon2.svg', 
                           'img/wiitrayon3.svg']),
                       ('share/wiican', 
-                          ['about.glade','mapping.glade','entry.glade']),
+                          ['about.ui','mapping.ui','entry.ui']),
                       ('share/applications', ['wiican.desktop']),
                       ('share/pixmaps', ['wiican.svg'])]
 )

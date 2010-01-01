@@ -39,9 +39,9 @@ ICON_CONN1 = os.path.join(BASE_DATA_DIR, 'img/wiitrayon1.svg')
 ICON_CONN2 = os.path.join(BASE_DATA_DIR, 'img/wiitrayon2.svg')
 ICON_CONN3 = os.path.join(BASE_DATA_DIR, 'img/wiitrayon3.svg')
 
-ABOUT_DLG = os.path.join(BASE_DATA_DIR, 'about.glade')
-MAPPING_GLADE = os.path.join(BASE_DATA_DIR, 'mapping.glade')
-ENTRY_GLADE = os.path.join(BASE_DATA_DIR, 'entry.glade')
+ABOUT_DLG = os.path.join(BASE_DATA_DIR, 'about.ui')
+MAPPING_UI = os.path.join(BASE_DATA_DIR, 'mapping.ui')
+ENTRY_UI = os.path.join(BASE_DATA_DIR, 'entry.ui')
 
 MAPPING_DEFAULT_VALUES = {
         'name': 'No name', 

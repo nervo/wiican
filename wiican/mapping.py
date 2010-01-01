@@ -72,17 +72,21 @@ class IconChooserDialog(gtk.FileChooserDialog):
 class EntryDialog:
     def __init__(self, name='', description='', mapping='', 
             icon_path=defs.ICON_DEFAULT):
-        wTree = glade.XML(defs.ENTRY_GLADE, None, None)
-        self.__entry_dlg = wTree.get_widget('entry_dlg')
-        self.__name_entry = wTree.get_widget('name_entry')
-        self.__desc_entry = wTree.get_widget('desc_entry')
-        self.__file_buffer = wTree.get_widget('file_textview').get_buffer()
+            
+        builder = gtk.Builder()
+        if not builder.add_from_file(defs.ENTRY_UI):
+            raise 'Cant load %s' % defs.ENTRY_UI
+            
+        self.__entry_dlg = builder.get_object('entry_dlg')
+        self.__name_entry = builder.get_object('name_entry')
+        self.__desc_entry = builder.get_object('desc_entry')
+        self.__file_buffer = builder.get_object('file_textview').get_buffer()
         self.__icon_path = icon_path
 
         # Get buttons
-        icon_btn = wTree.get_widget('icon_btn')
+        icon_btn = builder.get_object('icon_btn')
         icon_btn.connect('clicked', self.__icon_cb)
-        link_btn = wTree.get_widget('link_btn')
+        link_btn = builder.get_object('link_btn')
         link_btn.connect('clicked', self.__link_cb)
 
         # Set initial values
@@ -132,16 +136,16 @@ class EntryDialog:
 class MappingDialog:
     def __init__(self):
         def load_widgets(wTree):
-            mapping_dlg = wTree.get_widget('mapping_dlg')
-            mapping_list = wTree.get_widget('mapping_list')
+            mapping_dlg = wTree.get_object('mapping_dlg')
+            mapping_list = wTree.get_object('mapping_list')
 
             # Get buttons      
-            save_btn = wTree.get_widget('save_btn')
-            new_btn = wTree.get_widget('new_btn')
-            edit_btn = wTree.get_widget('edit_btn')
-            delete_btn = wTree.get_widget('delete_btn')
-            up_btn = wTree.get_widget('up_btn')
-            down_btn = wTree.get_widget('down_btn')
+            save_btn = wTree.get_object('save_btn')
+            new_btn = wTree.get_object('new_btn')
+            edit_btn = wTree.get_object('edit_btn')
+            delete_btn = wTree.get_object('delete_btn')
+            up_btn = wTree.get_object('up_btn')
+            down_btn = wTree.get_object('down_btn')
 
             # Connect buttons to methods
             save_btn.connect('clicked', self.__save_cb, mapping_list)
@@ -219,8 +223,11 @@ class MappingDialog:
             mapping_list.set_search_column(1)
 
         # Get the widgets
-        wTree = glade.XML(defs.MAPPING_GLADE, None, None)
-        self.__mapping_dlg, self.__mapping_list = load_widgets(wTree)
+        builder = gtk.Builder()
+        if not builder.add_from_file(defs.MAPPING_UI):
+            raise 'Cant load %s' % defs.MAPPING_UI
+
+        self.__mapping_dlg, self.__mapping_list = load_widgets(builder)
 
         # Setup mapping_list
         self.__config_files = dotconfig.DotConfig(defs.USER_CONFIG_DIR, 

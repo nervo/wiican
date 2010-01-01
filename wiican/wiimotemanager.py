@@ -154,8 +154,11 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             'discovered': self.__discovered_st}
 
         # Load about dialog
-        about_wTree = glade.XML(ABOUT_DLG, None, None)
-        self.__aboutdlg = about_wTree.get_widget('WiiAboutDialog')
+        about_builder = gtk.Builder()
+        if not about_builder.add_from_file(ABOUT_DLG):
+            raise 'Cant load %s' % ABOUT_DLG
+        
+        self.__aboutdlg = about_builder.get_object('WiiAboutDialog')
         self.__aboutdlg.connect('response', lambda d, r: d.hide())
 
         # Connect left and right click
