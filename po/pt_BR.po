@@ -1,4 +1,4 @@
-# French translation for wiican
+# Brazilian Portuguese translation for wiican
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the wiican package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-05-06 00:42+0200\n"
-"PO-Revision-Date: 2009-12-31 15:19+0000\n"
-"Last-Translator: Pierre Slamich <pierre.slamich@gmail.com>\n"
-"Language-Team: French <fr@li.org>\n"
+"PO-Revision-Date: 2009-12-31 12:54+0000\n"
+"Last-Translator: Jean Roberto Souza <Unknown>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,158 +19,159 @@ msgstr ""
 
 #: ../wiican/wiimotemanager.py:74 ../wiican/wiimotemanager.py:75
 msgid "Connected"
-msgstr "Connecté"
+msgstr "Conectado"
 
 #: ../wiican/wiimotemanager.py:76
 msgid "Put Wiimote in discoverable mode now (press 1+2)"
-msgstr "Mettez la wiimote en mode visible (appuyez sur 1 et 2)"
+msgstr "Coloque o Wii Remote em modo de descoberta agora (pressione 1+2)"
 
 #: ../wiican/wiimotemanager.py:83 ../wiican/wiimotemanager.py:84
 msgid "Disconnected"
-msgstr "Déconnecté"
+msgstr "Desconectado"
 
 #: ../wiican/wiimotemanager.py:85
 msgid "Wiimote off"
-msgstr "Wiimote éteinte"
+msgstr "Wii Remote está desligado"
 
 #: ../wiican/wiimotemanager.py:94
 msgid "No bluetooth adapters"
-msgstr "Pas d'adaptateur bluetooth"
+msgstr "Nenhum adaptador bluetooth encontrado"
 
 #: ../wiican/wiimotemanager.py:154
 msgid "Plug a bluetooth adapter"
-msgstr "Branchez un adaptateur bluetooth"
+msgstr "Ative um adaptador bluetooth"
 
 #: ../wiican/wiimotemanager.py:160
 msgid ""
 "Hold left button for use wiimote\n"
 "Right button for menu"
 msgstr ""
-"Maintenez le bouton de gauche enfoncé pour utiliser la wiimote\n"
-"Maintenez le bouton de droite enfoncé pour le menu"
+"Pressione e segure o botão esquerdo para usar o Wii Remote\n"
+"Botão direito para acessar opções"
 
 #: ../wiican/wiimotemanager.py:172
 msgid "Discovering Wiimote"
-msgstr "Recherche de wiimotes"
+msgstr "Procurando o Wii Remote"
 
 #: ../wiican/wiimotemanager.py:179
 msgid "Use your wiimote"
-msgstr "Utilisez votre wiimote"
+msgstr "Use o seu Wii Remote"
 
 #: ../wiican/wiimotemanager.py:269
 msgid "Fail!"
-msgstr "Échec!"
+msgstr "Falhou!"
 
 #: ../wiican/wiimotemanager.py:271
 msgid "Error discovering Wiimote"
-msgstr "Erreur lors de la recherche de wiimotes"
+msgstr "Erro ao procurar pelo Wii Remote"
 
 #: ../wiican/wiimotemanager.py:274
 msgid "uinput module it's not loaded"
-msgstr "Le module uinput n'est pas chargé"
+msgstr "módulo uinput não está carregado"
 
 #: ../wiican/wiimotemanager.py:277
 msgid "check mapping syntax"
-msgstr ""
+msgstr "verifique o mapeamento dos botões do Wii Remote"
 
 #: ../wiican/wiimotemanager.py:279
 msgid "Unknown error"
-msgstr "Erreur inconnue"
+msgstr "Erro Desconhecido"
 
 #: ../wiican/wiimotemanager.py:280
 msgid "Can't discover or use wiimote"
-msgstr "Impossible de découvrir ou d'utiliser une wiimote"
+msgstr "Não foi possível encontrar ou usar o Wii Remote"
 
 #: ../wiican/mapping.py:12
 msgid "Select image icon.."
-msgstr ""
+msgstr "Selecione uma imagem para ícone"
 
 #: ../wiican/mapping.py:36
 msgid "Images"
-msgstr "Images"
+msgstr "Imagens"
 
 #: ../wiican/mapping.py:89
 msgid "No Name"
-msgstr "Sans nom"
+msgstr "Nenhum Nome"
 
 #: ../wiican/mapping.py:189
 msgid "Name"
-msgstr "Nom"
+msgstr "Nome"
 
 #: ../wiican/mapping.py:193
 msgid "Visible"
-msgstr "Visible"
+msgstr "Visível"
 
 #: ../wiican/mapping.py:227
 msgid "Are you sure you want to completely remove "
-msgstr "Souhaitez-vous bien complètement retirer "
+msgstr "Você tem certeza de que deseja permanentemente remover "
 
 #: ../wiican/mapping.py:228
 msgid ""
 "this mappings?:\n"
 "\n"
 msgstr ""
+"este mapeamento?:\n"
+"\n"
 
 #: ../wiican/mapping.py:235
 msgid "Deleting mappings"
-msgstr ""
+msgstr "Deletando mapeamentos"
 
 #: ../wiican/mapping.py:250
 msgid "Can't remove mapping "
-msgstr ""
+msgstr "Não foi possível remover o mapeamento "
 
 #: ../wiican/mapping.py:295
 msgid "Editing "
-msgstr ""
+msgstr "Editando "
 
 #: ../wiican/dotconfig.py:100
 msgid "Skel config dir doesn't exists"
-msgstr ""
+msgstr "O diretório configuração Skel não existe"
 
 #: ../wiican/dotconfig.py:106
 msgid "Wrong perms on user config dir"
-msgstr ""
-"Mauvaises permissions sur le répertoire de configuration de l'utilisateur"
+msgstr "Permições incorretas no diretório de configurações do usuário"
 
 #: ../entry.glade:6
 msgid "New entry"
-msgstr ""
+msgstr "Nova entrada"
 
 #: ../entry.glade:49
 msgid "Name:"
-msgstr "Nom:"
+msgstr "Nome:"
 
 #: ../entry.glade:61
 msgid "Short name for the mapping"
-msgstr ""
+msgstr "Curto nome para o mapeamento"
 
 #: ../entry.glade:73
 msgid "Description:"
-msgstr "Description :"
+msgstr "Descrição:"
 
 #: ../entry.glade:85
 msgid "Comment the use for this mapping"
-msgstr "Commentez l'utilisation de ce mapping"
+msgstr "Comente o uso deste mapeamento"
 
 #: ../entry.glade:112
 msgid "Mapping:"
-msgstr ""
+msgstr "Mapeamento:"
 
 #: ../entry.glade:121
 msgid "wminput help"
-msgstr "aide de wminput"
+msgstr "ajuda wminput"
 
 #: ../entry.glade:147
 msgid "Define buttons on wminput config file format"
-msgstr ""
+msgstr "Defina botões nas configurações do arquivo wminput"
 
 #: ../mapping.glade:7
 msgid "Wiimote mappings"
-msgstr "Mappings de Wiimote"
+msgstr "Mapeamentos para o Wii Remote"
 
 #: ../mapping.glade:104
 msgid "Mappings"
-msgstr ""
+msgstr "Mapeamentos"
 
 #: ../mapping.glade:170
 msgid "gtk-cancel"
@@ -185,6 +186,8 @@ msgid ""
 "Yes wii can\n"
 "Wiimote usage assistant and mapping manager"
 msgstr ""
+"Yes wii can\n"
+"Assistente de configuração e utilização do Wii Remote"
 
 #: ../about.glade:15
 msgid "http://dev.emergya.info/projects/show/wiican"
@@ -870,12 +873,94 @@ msgid ""
 "Public License instead of this License.  But first, please read\n"
 "<http://www.gnu.org/philosophy/why-not-lgpl.html>.\n"
 msgstr ""
+"\n"
+"\t\t    GNU GENERAL PUBLIC LICENSE\n"
+"\t\t       Version 3, 29 June 2007\n"
+"\n"
+" Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>\n"
+" Everyone is permitted to copy and distribute verbatim copies\n"
+" of this license document, but changing it is not allowed.\n"
+"\n"
+"\t\t\t    Preamble\n"
+"\n"
+"  The GNU General Public License is a free, copyleft license for\n"
+"software and other kinds of works.\n"
+"\n"
+"  The licenses for most software and other practical works are designed\n"
+"to take away your freedom to share and change the works.  By contrast,\n"
+"the GNU General Public License is intended to guarantee your freedom to\n"
+"share and change all versions of a program--to make sure it remains free\n"
+"software for all its users.  We, the Free Software Foundation, use the\n"
+"GNU General Public License for most of our software; it applies also to\n"
+"any other work released this way by its authors.  You can apply it to\n"
+"your programs, too.\n"
+"\n"
+"  When we speak of free software, we are referring to freedom, not\n"
+"price.  Our General Public Licenses are designed to make sure that you\n"
+"have the freedom to distribute copies of free software (and charge for\n"
+"them if you wish), that you receive source code or can get it if you\n"
+"want it, that you can change the software or use pieces of it in new\n"
+"free programs, and that you know you can do these things.\n"
+"\n"
+"  To protect your rights, we need to prevent others from denying you\n"
+"these rights or asking you to surrender the rights.  Therefore, you have\n"
+"certain responsibilities if you distribute copies of the software, or if\n"
+"you modify it: responsibilities to respect the freedom of others.\n"
+"\n"
+"  For example, if you distribute copies of such a program, whether\n"
+"gratis or for a fee, you must pass on to the recipients the same\n"
+"freedoms that you received.  You must make sure that they, too, receive\n"
+"or can get the source code.  And you must show them these terms so they\n"
+"know their rights.\n"
+"\n"
+"  Developers that use the GNU GPL protect your rights with two steps:\n"
+"(1) assert copyright on the software, and (2) offer you this License\n"
+"giving you legal permission to copy, distribute and/or modify it.\n"
+"\n"
+"  For the developers' and authors' protection, the GPL clearly explains\n"
+"that there is no warranty for this free software.  For both users' and\n"
+"authors' sake, the GPL requires that modified versions be marked as\n"
+"changed, so that their problems will not be attributed erroneously to\n"
+"authors of previous versions.\n"
+"\n"
+"  Some devices are designed to deny users access to install or run\n"
+"modified versions of the software inside them, although the manufacturer\n"
+"can do so.  This is fundamentally incompatible with the aim of\n"
+"protecting users' freedom to change the software.  The systematic\n"
+"pattern of such abuse occurs in the area of products for individuals to\n"
+"use, which is precisely where it is most unacceptable.  Therefore, we\n"
+"have designed this version of the GPL to prohibit the practice for those\n"
+"products.  If such problems arise substantially in other domains, we\n"
+"stand ready to extend this provision to those domains in future versions\n"
+"of the GPL, as needed to protect the freedom of users.\n"
+"\n"
+"  Finally, every program is threatened constantly by software patents.\n"
+"States should not allow patents to restrict development and use of\n"
+"software on general-purpose computers, but in those that do, we wish to\n"
+"avoid the special danger that patents applied to a free program could\n"
+"make it effectively proprietary.  To prevent this, the GPL assures that\n"
+"patents cannot be used to render the program non-free.\n"
+"\n"
+"  The precise terms and conditions for copying, distribution and\n"
+"modification follow.\n"
+"\n"
+"\t\t       TERMS AND CONDITIONS\n"
+"\n"
+"  0. Definitions.\n"
+"\n"
+"  \"This License\" refers to version 3 of the GNU General Public License.\n"
+"\n"
+"  \"Copyright\" also means copyright-like laws that apply to other kinds of\n"
+"works, such as semiconductor masks.\n"
+" \n"
+"  \"The Program\" refers to any copyrightable work licensed under this\n"
+"License.  Each licensee is addressed as \"you\".  \"Licensees\" and\n"
+"\"recipients\" may be individuals or organizations.\n"
+"\n"
+"  To \"modify\" a work means to copy from or adapt all or part of\n"
 
 #: ../about.glade:693
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Chris Murphy https://launchpad.net/~chrismurf\n"
-"  Fabien Boutantin https://launchpad.net/~fabien-boutantin-laposte\n"
-"  Pierre Slamich https://launchpad.net/~pierre-slamich\n"
-"  feuloren https://launchpad.net/~florent-thevenet"
+"  Jean Roberto Souza https://launchpad.net/~sjeanr"
