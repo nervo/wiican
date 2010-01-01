@@ -39,6 +39,9 @@ from notificator import Notificator
 from pnganimation import PngAnimation
 from mapping import MappingDialog
 
+DBUS_URI = 'org.freedesktop.DBus'
+DBUS_PATH = '/org/freedesktop/DBus'
+
 BLUEZ_PATH = '/'
 BLUEZ_URI = 'org.bluez'
 BLUEZMANAGER_IFACE = 'org.bluez.Manager'
@@ -50,14 +53,18 @@ gtk.gdk.threads_init()
 
 class BlueDiscover:
     def __init__(self):
-        bus = dbus.SystemBus()
-        bluezmanager = bus.get_object(BLUEZ_URI, BLUEZ_PATH) 
-        self.__list_adapters = dbus.Interface(bluezmanager, 
-                dbus_interface=BLUEZMANAGER_IFACE).ListAdapters
+        self.__bus = dbus.SystemBus()
+        obj = self.__bus.get_object (DBUS_URI, DBUS_PATH)
+        self.__dbus_iface = dbus.Interface(obj, DBUS_URI)
 
     def any_adapter(self):
-        if self.__list_adapters():
-            return True
+        if BLUEZ_URI in self.__dbus_iface.ListNames():
+            obj = self.__bus.get_object(BLUEZ_URI, BLUEZ_PATH) 
+            bluez_manager = dbus.Interface(obj, 
+                dbus_interface=BLUEZMANAGER_IFACE)
+    
+            if bluez_manager.ListAdapters():
+                return True
         
         return False
 
