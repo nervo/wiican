@@ -5,15 +5,15 @@ from distutils.core import setup
 
 setup(
         name='wiican',
-        version='0.1',
+        version='0.2.1',
         description='Wiimote manager',
         long_description='Wiican its a systray that wrappers wminput',
         author='J. Félix Ontañón',
         author_email='felixonta@gmail.com',
-        url='http://dev.emergya.info/projects/show/wiican',
+        url='http://launchpad.net/wiican',
 
         classifiers=[
-            'Development Status :: 0.1.0 - Alpha',
+            'Development Status :: 0.2.1 - Alpha',
             'Environment :: Desktop Environment',
             'Intended Audience :: End Users/Desktop',
             'License :: OSI Approved :: GNU General Public License (GPL)',
