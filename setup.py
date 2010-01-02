@@ -34,7 +34,7 @@ setup(
                           'img/wiitrayon1.svg', 'img/wiitrayon2.svg', 
                           'img/wiitrayon3.svg']),
                       ('share/wiican', 
-                          ['about.ui','mapping.ui','entry.ui']),
+                          ['about.ui','mapping.ui','entry.ui', 'wiican.svg']),
                       ('share/applications', ['wiican.desktop']),
                       ('share/pixmaps', ['wiican.svg'])]
 )
