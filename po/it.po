@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-01-02 01:16+0100\n"
-"PO-Revision-Date: 2010-01-01 06:47+0000\n"
-"Last-Translator: J. Félix Ontañón <Unknown>\n"
+"PO-Revision-Date: 2010-01-02 22:31+0000\n"
+"Last-Translator: Emanuele FANTON <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-02 04:36+0000\n"
+"X-Launchpad-Export-Date: 2010-01-03 04:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../wiican/wiimotemanager.py:103 ../wiican/wiimotemanager.py:104
@@ -59,7 +59,7 @@ msgstr "Usa il wiimote"
 
 #: ../wiican/wiimotemanager.py:301
 msgid "Fail!"
-msgstr ""
+msgstr "Fallito!"
 
 #: ../wiican/wiimotemanager.py:303
 msgid "Error discovering Wiimote"
@@ -110,14 +110,16 @@ msgid ""
 "this mappings?:\n"
 "\n"
 msgstr ""
+"queste impostazioni?\n"
+"\n"
 
 #: ../wiican/mapping.py:264
 msgid "Deleting mappings"
-msgstr ""
+msgstr "Eliminazione impostazioni"
 
 #: ../wiican/mapping.py:279
 msgid "Can't remove mapping "
-msgstr ""
+msgstr "Impossibile rimuovere le impostazioni "
 
 #: ../wiican/mapping.py:324
 msgid "Editing "
