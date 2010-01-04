@@ -690,7 +690,16 @@ Public License instead of this License.  But first, please read
 &lt;http://www.gnu.org/philosophy/why-not-lgpl.html&gt;.
 </property>
     <property name="authors">J. F&#xE9;lix Onta&#xF1;&#xF3;n &lt;felixonta@gmail.com&gt;</property>
-    <property name="translator_credits" translatable="yes" comments="TRANSLATORS: Replace this string with your names, one name per line.">translator-credits</property>
+    <property name="translator_credits" translatable="yes" comments="TRANSLATORS: Replace this string with your names, one name per line.">J. F&#xE9;lix Onta&#xF1;&#xF3;n &lt;felixonta@gmail.com&gt;
+Pierre Slamich &lt;pierre.slamich@gmail.com&gt;
+Siegfried Gevatter &lt;rainct@ubuntu.com&gt;
+Christian Widell &lt;christian.widell@gmail.com&gt;
+Zpon &lt;zpon.dk@gmail.com&gt;
+Ceelight
+Metin Akdere
+Nielsek
+Jean Roberto Souza
+Emanuele Toscano</property>
     <property name="artists">Dani Planas &lt;daniplanas.a@gmail.com&gt;
 Ulisse &lt;ulisail@yahoo.it&gt;</property>
     <property name="logo">wiican.svg</property>

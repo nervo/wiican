@@ -2,7 +2,6 @@
 # vim: ts=4 
 ###
 #
-# Wiican is the legal property of J. Félix Ontañón <felixonta@gmail.com>
 # Copyright (c) 2009 J. Félix Ontañón
 #
 # This program is free software; you can redistribute it and/or modify
@@ -17,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+# Authors : J. Félix Ontañón <felixonta@gmail.com>
+# 
 ###
 
 import gtk.gdk
