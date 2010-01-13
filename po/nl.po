@@ -1,0 +1,134 @@
+# Dutch translation for wiican
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the wiican package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: wiican\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-01-02 01:16+0100\n"
+"PO-Revision-Date: 2010-01-12 11:00+0000\n"
+"Last-Translator: cumulus007 <cumulus0007@gmail.com>\n"
+"Language-Team: Dutch <nl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-01-13 04:52+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../wiican/wiimotemanager.py:103 ../wiican/wiimotemanager.py:104
+msgid "Connected"
+msgstr "Verbonden"
+
+#: ../wiican/wiimotemanager.py:105
+msgid "Put Wiimote in discoverable mode now (press 1+2)"
+msgstr "Zet de Wiimote nu in de ontdekbare modus (druk op 1+2)"
+
+#: ../wiican/wiimotemanager.py:112 ../wiican/wiimotemanager.py:113
+msgid "Disconnected"
+msgstr "Niet verbonden"
+
+#: ../wiican/wiimotemanager.py:114
+msgid "Wiimote off"
+msgstr "Wiimote uitgeschakeld"
+
+#: ../wiican/wiimotemanager.py:123
+msgid "No bluetooth adapters"
+msgstr "Geen bluetooth-adapters"
+
+#: ../wiican/wiimotemanager.py:186
+msgid "Plug a bluetooth adapter"
+msgstr "Sluit een bluetooth-adapter aan"
+
+#: ../wiican/wiimotemanager.py:192
+msgid ""
+"Hold left button for use wiimote\n"
+"Right button for menu"
+msgstr ""
+"Houd de linker muisknop ingedrukt om de wiimote te gebruiken\n"
+"Rechter muisknop voor menu"
+
+#: ../wiican/wiimotemanager.py:204
+msgid "Discovering Wiimote"
+msgstr "Wiimote detecteren"
+
+#: ../wiican/wiimotemanager.py:211
+msgid "Use your wiimote"
+msgstr "Gebruik uw wiimote"
+
+#: ../wiican/wiimotemanager.py:301
+msgid "Fail!"
+msgstr "Mislukt!"
+
+#: ../wiican/wiimotemanager.py:303
+msgid "Error discovering Wiimote"
+msgstr "Fout bij detecteren van Wiimote"
+
+#: ../wiican/wiimotemanager.py:306
+msgid "uinput module it's not loaded"
+msgstr "uinput-module is niet geladen"
+
+#: ../wiican/wiimotemanager.py:309
+msgid "check mapping syntax"
+msgstr "controleer mapping syntaxis"
+
+#: ../wiican/wiimotemanager.py:311
+msgid "Unknown error"
+msgstr "Onbekende fout"
+
+#: ../wiican/wiimotemanager.py:312
+msgid "Can't discover or use wiimote"
+msgstr "Kan wiimote niet detecteren of gebruiken"
+
+#: ../wiican/mapping.py:34
+msgid "Select image icon.."
+msgstr "Kies een pictogram.."
+
+#: ../wiican/mapping.py:58
+msgid "Images"
+msgstr "Afbeeldingen"
+
+#: ../wiican/mapping.py:115
+msgid "No Name"
+msgstr "Geen naam"
+
+#: ../wiican/mapping.py:215
+msgid "Name"
+msgstr "Naam"
+
+#: ../wiican/mapping.py:219
+msgid "Visible"
+msgstr "Zichtbaar"
+
+#: ../wiican/mapping.py:256
+msgid "Are you sure you want to completely remove "
+msgstr "Weet u zeker dat u volledig wilt verwijderen: "
+
+#: ../wiican/mapping.py:257
+msgid ""
+"this mappings?:\n"
+"\n"
+msgstr ""
+"deze mappings?:\n"
+"\n"
+
+#: ../wiican/mapping.py:264
+msgid "Deleting mappings"
+msgstr "Mappings verwijderen"
+
+#: ../wiican/mapping.py:279
+msgid "Can't remove mapping "
+msgstr "Kan deze mapping niet verwijderen: "
+
+#: ../wiican/mapping.py:324
+msgid "Editing "
+msgstr "Bewerken van "
+
+#: ../wiican/dotconfig.py:122
+msgid "Skel config dir doesn't exists"
+msgstr "Configuratiemap voor Skel bestaat niet"
+
+#: ../wiican/dotconfig.py:128
+msgid "Wrong perms on user config dir"
+msgstr "Onjuiste permissies voor configuratiemap"
