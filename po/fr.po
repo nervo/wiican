@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-01-02 01:16+0100\n"
-"PO-Revision-Date: 2010-01-01 06:47+0000\n"
-"Last-Translator: Pierre Slamich <pierre.slamich@gmail.com>\n"
+"PO-Revision-Date: 2010-01-13 08:09+0000\n"
+"Last-Translator: Fabien Boutantin <fabien.boutantin@laposte.net>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-02 04:36+0000\n"
+"X-Launchpad-Export-Date: 2010-01-14 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../wiican/wiimotemanager.py:103 ../wiican/wiimotemanager.py:104
@@ -71,7 +71,7 @@ msgstr "Le module uinput n'est pas chargé"
 
 #: ../wiican/wiimotemanager.py:309
 msgid "check mapping syntax"
-msgstr ""
+msgstr "Vérifiez la synthaxe du mapping"
 
 #: ../wiican/wiimotemanager.py:311
 msgid "Unknown error"
@@ -83,7 +83,7 @@ msgstr "Impossible de découvrir ou d'utiliser une wiimote"
 
 #: ../wiican/mapping.py:34
 msgid "Select image icon.."
-msgstr ""
+msgstr "Sélectionnez l'icône de l'image.."
 
 #: ../wiican/mapping.py:58
 msgid "Images"
@@ -110,22 +110,24 @@ msgid ""
 "this mappings?:\n"
 "\n"
 msgstr ""
+"ce mapping?\n"
+"\n"
 
 #: ../wiican/mapping.py:264
 msgid "Deleting mappings"
-msgstr ""
+msgstr "Suppression des mappings"
 
 #: ../wiican/mapping.py:279
 msgid "Can't remove mapping "
-msgstr ""
+msgstr "Impossible de supprimer le mapping "
 
 #: ../wiican/mapping.py:324
 msgid "Editing "
-msgstr ""
+msgstr "Édition "
 
 #: ../wiican/dotconfig.py:122
 msgid "Skel config dir doesn't exists"
-msgstr ""
+msgstr "Le fichier de configuration de base n'existe pas"
 
 #: ../wiican/dotconfig.py:128
 msgid "Wrong perms on user config dir"
