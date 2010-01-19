@@ -1,4 +1,4 @@
-# Russian translation for wiican
+# Basque translation for wiican
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the wiican package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,66 +8,64 @@ msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-01-02 01:16+0100\n"
-"PO-Revision-Date: 2010-01-19 02:08+0000\n"
-"Last-Translator: Anton Lashkov <Unknown>\n"
-"Language-Team: Russian <ru@li.org>\n"
+"PO-Revision-Date: 2010-01-18 16:35+0000\n"
+"Last-Translator: Abel Camacho <didaktika@santurtzieus.com>\n"
+"Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-19 04:43+0000\n"
+"X-Launchpad-Export-Date: 2010-01-19 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../wiican/wiimotemanager.py:103 ../wiican/wiimotemanager.py:104
 msgid "Connected"
-msgstr "Подключено"
+msgstr "Konektatuta"
 
 #: ../wiican/wiimotemanager.py:105
 msgid "Put Wiimote in discoverable mode now (press 1+2)"
-msgstr "Переключите Wiimote в режим обнаружения (нажмите 1+2)"
+msgstr ""
 
 #: ../wiican/wiimotemanager.py:112 ../wiican/wiimotemanager.py:113
 msgid "Disconnected"
-msgstr "Отключено"
+msgstr "Deskonektatuta"
 
 #: ../wiican/wiimotemanager.py:114
 msgid "Wiimote off"
-msgstr "Wiimote выключен"
+msgstr ""
 
 #: ../wiican/wiimotemanager.py:123
 msgid "No bluetooth adapters"
-msgstr "Не найдены bluetooth адаптеры"
+msgstr ""
 
 #: ../wiican/wiimotemanager.py:186
 msgid "Plug a bluetooth adapter"
-msgstr "Подключите bluetooth адаптер"
+msgstr ""
 
 #: ../wiican/wiimotemanager.py:192
 msgid ""
 "Hold left button for use wiimote\n"
 "Right button for menu"
 msgstr ""
-"Удерживайте левую кнопку для использования wiimote\n"
-"Правую кнопку для вызова меню"
 
 #: ../wiican/wiimotemanager.py:204
 msgid "Discovering Wiimote"
-msgstr "Поиск wiimote"
+msgstr ""
 
 #: ../wiican/wiimotemanager.py:211
 msgid "Use your wiimote"
-msgstr "Используйте ваш wiimote"
+msgstr ""
 
 #: ../wiican/wiimotemanager.py:301
 msgid "Fail!"
-msgstr "Ошибка!"
+msgstr ""
 
 #: ../wiican/wiimotemanager.py:303
 msgid "Error discovering Wiimote"
-msgstr "Ошибка обнаружения wiimote"
+msgstr ""
 
 #: ../wiican/wiimotemanager.py:306
 msgid "uinput module it's not loaded"
-msgstr "модуль uinput не загружен"
+msgstr ""
 
 #: ../wiican/wiimotemanager.py:309
 msgid "check mapping syntax"
@@ -75,11 +73,11 @@ msgstr ""
 
 #: ../wiican/wiimotemanager.py:311
 msgid "Unknown error"
-msgstr "Неизвестная ошибка"
+msgstr "Errore ezezaguna"
 
 #: ../wiican/wiimotemanager.py:312
 msgid "Can't discover or use wiimote"
-msgstr "Невозможно обнаружить или использовать wiimote"
+msgstr ""
 
 #: ../wiican/mapping.py:34
 msgid "Select image icon.."
@@ -87,23 +85,23 @@ msgstr ""
 
 #: ../wiican/mapping.py:58
 msgid "Images"
-msgstr "Изображения"
+msgstr "Irudiak"
 
 #: ../wiican/mapping.py:115
 msgid "No Name"
-msgstr "Нет имени"
+msgstr "Izenik ez"
 
 #: ../wiican/mapping.py:215
 msgid "Name"
-msgstr "Имя"
+msgstr "Izena"
 
 #: ../wiican/mapping.py:219
 msgid "Visible"
-msgstr "Видимый"
+msgstr "Agerian"
 
 #: ../wiican/mapping.py:256
 msgid "Are you sure you want to completely remove "
-msgstr "Вы уверены, что хотите полностью удалить "
+msgstr ""
 
 #: ../wiican/mapping.py:257
 msgid ""
@@ -121,7 +119,7 @@ msgstr ""
 
 #: ../wiican/mapping.py:324
 msgid "Editing "
-msgstr "Редактирование "
+msgstr "Editatzen "
 
 #: ../wiican/dotconfig.py:122
 msgid "Skel config dir doesn't exists"
@@ -129,4 +127,4 @@ msgstr ""
 
 #: ../wiican/dotconfig.py:128
 msgid "Wrong perms on user config dir"
-msgstr "Неверные праметры доступа на директорию с конфигурацией пользователя"
+msgstr ""
