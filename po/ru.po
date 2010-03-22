@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-01-02 01:16+0100\n"
-"PO-Revision-Date: 2010-01-19 06:12+0000\n"
-"Last-Translator: Wiican Team <Unknown>\n"
+"PO-Revision-Date: 2010-03-21 11:59+0000\n"
+"Last-Translator: Darth Raven <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-20 04:37+0000\n"
+"X-Launchpad-Export-Date: 2010-03-22 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../wiican/wiimotemanager.py:103 ../wiican/wiimotemanager.py:104
@@ -83,7 +83,7 @@ msgstr "Невозможно обнаружить или использоват�
 
 #: ../wiican/mapping.py:34
 msgid "Select image icon.."
-msgstr ""
+msgstr "Выберите иконку изображения"
 
 #: ../wiican/mapping.py:58
 msgid "Images"
