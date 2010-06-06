@@ -114,8 +114,8 @@ class Wiican(dbus.service.Object):
     def GetStatus(self):
         return self.status
 
-    @dbus.service.method(WIICAN_URI, in_signature='s')
-    def ConnectWiimote(self, config_file):
+    @dbus.service.method(WIICAN_URI, in_signature='sb')
+    def ConnectWiimote(self, config_file, daemon):
         self.__check_uinput_present()
         if not self.status & WC_UINPUT_PRESENT:
             raise dbus.exceptions.DBusException('Not uinput module present')
@@ -124,7 +124,7 @@ class Wiican(dbus.service.Object):
         elif self.status & WC_WIIMOTE_DISCOVERING:
             raise dbus.exceptions.DBusException('Disconnect wiimote first')
         else:
-            self.__wminput = WMInputLauncher(config_file)
+            self.__wminput = WMInputLauncher(config_file, daemon)
             self.__wminput.start()
 
     @dbus.service.method(WIICAN_URI)

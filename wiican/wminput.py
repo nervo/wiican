@@ -21,15 +21,16 @@ class WMInputLauncher(gobject.GObject):
                                       (gobject.TYPE_PYOBJECT,))
      }
 
-    wminput_cmd = ['/usr/bin/wminput', '-d']
+    wminput_cmd = ['wminput']
 
-    def __init__(self, config_file = None):
+    def __init__(self, config_file=None, daemon=False):
         super(WMInputLauncher, self).__init__()
 
         if config_file and not os.path.exists(config_file):
             raise 'Not config file found:', self.config_file
 
         self.config_file = config_file
+        self.daemon = daemon
         self.__pid = None
 
     @threaded
@@ -37,6 +38,8 @@ class WMInputLauncher(gobject.GObject):
         cmd = self.wminput_cmd
         if self.config_file:
             cmd += ['-c', self.config_file]
+        if self.daemon:
+            cmd += ['-d']
 
         #TODO: Maybe exception tracking it's required here
         proc = subprocess.Popen(cmd, stdout = subprocess.PIPE)
@@ -72,9 +75,9 @@ if __name__ == '__main__':
             print 'Still running'
             x.stop()
 
-    x = WMInputLauncher()
+    x = WMInputLauncher(daemon=True)
     x.connect('wminput_launched', loaded)
     x.connect('wminput_stopped', stopped)
     x.start()
-    gobject.timeout_add(5000, stopit, x)
+    #gobject.timeout_add(5000, stopit, x)
     gobject.MainLoop().run()
