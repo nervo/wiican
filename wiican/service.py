@@ -24,7 +24,7 @@ WC_BLUEZ_PRESENT = 1
 WC_UINPUT_PRESENT = 2
 WC_WIIMOTE_DISCOVERING = 4
 
-class Wiican(dbus.service.Object):
+class WiicanDBus(dbus.service.Object):
     __dbus_object_path__ = WIICAN_PATH
 
     def __init__(self, loop):
@@ -149,7 +149,7 @@ if __name__ == '__main__':
     DBusGMainLoop(set_as_default=True)
     loop = gobject.MainLoop()
 
-    wiican = Wiican(loop)
+    wiican = WiicanDBus(loop)
  
     bus = dbus.SessionBus()
     bus.add_signal_receiver(status_cb, dbus_interface='org.gnome.Wiican', 

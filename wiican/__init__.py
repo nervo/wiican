@@ -25,6 +25,8 @@ import locale
 import __builtin__
 __builtin__._ = gettext.gettext
 
+__all__ = ['service', 'wiimotemanager']
+
 # i18n
 gettext.install('wiican', '/usr/share/locale', unicode=1)
 
