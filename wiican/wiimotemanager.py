@@ -72,8 +72,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         
         self.__menu = load_menu()
         self.__load_mappings_menu()
-        self.__notificator = Notificator()
-        self.__notificator.set_status_icon(self)
+        self.__notificator = Notificator('wiican')
 
         bus = dbus.SessionBus()  
         self.__wiican_iface = dbus.Interface(bus.get_object ('org.gnome.Wiican', 
@@ -219,3 +218,6 @@ class WiimoteStatusIcon(gtk.StatusIcon):
                     [ICON_CONN1, ICON_CONN2, ICON_CONN3, ICON_ON],
                     overlap_icon)
             self.__wiican_iface.ConnectWiimote(config, False)
+            self.__notificator.display_notification(title=_('Press 1+2'), 
+                text=_('To put you Wiimote in discoverable mode now'),
+                icon='wiican')
