@@ -22,9 +22,9 @@
 
 import os
 
-BASE_DATA_DIR = os.getcwd()
-if os.path.exists('/usr/share/wiican/'):
-    BASE_DATA_DIR = '/usr/share/wiican/'
+BASE_DATA_DIR = '@PREFIX@/share/wiican/'
+if not os.path.exists(BASE_DATA_DIR):
+    BASE_DATA_DIR='.'
 
 WMINPUT_CMD = ['/usr/bin/wminput', '-w']
 
