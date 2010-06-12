@@ -81,7 +81,8 @@ class WiicanDBus(dbus.service.Object):
             self.StatusChanged(self.status | WC_BLUEZ_PRESENT)
             return True
 
-        self.StatusChanged(self.status ^ WC_BLUEZ_PRESENT)    
+        if self.status: 
+            self.StatusChanged(self.status ^ WC_BLUEZ_PRESENT)
         return False
 
     def __check_uinput_present(self):
@@ -93,7 +94,8 @@ class WiicanDBus(dbus.service.Object):
             self.StatusChanged(self.status | WC_UINPUT_PRESENT)
             return True
         else:
-            self.StatusChanged(self.status ^ WC_UINPUT_PRESENT)
+            if self.status: 
+                self.StatusChanged(self.status ^ WC_UINPUT_PRESENT)
             return False
 
     def __plug_cb(self, udi):
@@ -107,11 +109,12 @@ class WiicanDBus(dbus.service.Object):
             self.StatusChanged(self.status | WC_WIIMOTE_DISCOVERING)
 
     def __unplug_cb(self, udi):
-        if self.wiimote_udi == udi:
+        if self.wiimote_udi == udi and self.status:
             self.StatusChanged(self.status ^ WC_WIIMOTE_DISCOVERING)
 
     @dbus.service.method(WIICAN_URI, out_signature='i')
     def GetStatus(self):
+        self.__check_uinput_present()
         return self.status
 
     @dbus.service.method(WIICAN_URI, in_signature='sb')
@@ -150,9 +153,9 @@ if __name__ == '__main__':
     loop = gobject.MainLoop()
 
     wiican = WiicanDBus(loop)
- 
+
     bus = dbus.SessionBus()
     bus.add_signal_receiver(status_cb, dbus_interface='org.gnome.Wiican', 
             signal_name='StatusChanged')
-    
+
     loop.run()

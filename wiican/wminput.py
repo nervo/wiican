@@ -59,7 +59,7 @@ class WMInputLauncher(gobject.GObject):
                 os.kill(self.__pid, signal.SIGTERM)
             except:
                 pass
-                
+
             self.__pid = None
 
 if __name__ == '__main__':

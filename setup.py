@@ -29,7 +29,7 @@ for arg in sys.argv:
         prefix = os.path.expandvars(prefix)
 
 # Gen .in files with @PREFIX@ replaced
-for filename in ['org.gnome.wiican.service']:
+for filename in ['org.gnome.wiican.service', 'wiican/defs.py']:
     infile = open(filename + '.in', 'r')
     data = infile.read().replace('@PREFIX@', prefix)
     infile.close()
