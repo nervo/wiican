@@ -22,56 +22,13 @@
 # 
 ###
 
-import sys
-import dbus
 import gobject
-import pynotify
-
+import dbus
 from dbus.mainloop.glib import DBusGMainLoop
-
 from wiican import wiimotemanager
 
-DBUS_URI = 'org.freedesktop.DBus'
-DBUS_PATH = '/org/freedesktop/DBus'
+DBusGMainLoop(set_as_default=True)
 
-BLUEZ_PATH = '/'
-BLUEZ_URI = 'org.bluez'
-BLUEZMANAGER_IFACE = 'org.bluez.Manager'
+wiican = wiimotemanager.WiimoteStatusIcon()
 
-HAL_URI = "org.freedesktop.Hal"
-HAL_DEVICE_IFACE = "org.freedesktop.Hal.Device"
-HAL_MANAGER_URI = "org.freedesktop.Hal.Manager"
-HAL_MANAGER_PATH = "/org/freedesktop/Hal/Manager"
-
-def name_owner_changed_cb(names, old_owner, new_owner):
-    if BLUEZ_URI in names:
-        connect_bluez_signals()
-        
-def connect_bluez_signals():
-    bus.add_signal_receiver(wiimanager.enable,
-            dbus_interface=BLUEZMANAGER_IFACE, signal_name="AdapterAdded")
-    bus.add_signal_receiver(wiimanager.disable, 
-            dbus_interface=BLUEZMANAGER_IFACE, signal_name="AdapterRemoved")
-
-if __name__ == '__main__':   
-    dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
-
-    wiimanager = wiimotemanager.WiimoteManager()
-
-    bus = dbus.SystemBus()
-
-    obj = bus.get_object (DBUS_URI, DBUS_PATH)
-    bus_interface = dbus.Interface(obj, DBUS_URI)
-
-    if BLUEZ_URI in bus_interface.ListNames():
-        connect_bluez_signals()
-    else:
-        bus.add_signal_receiver(name_owner_changed_cb, dbus_interface=DBUS_URI,
-            signal_name='NameOwnerChanged')
-
-    hal_manager_obj = bus.get_object(HAL_URI, HAL_MANAGER_PATH)
-    hal_manager = dbus.Interface(hal_manager_obj, HAL_MANAGER_URI)
-    hal_manager.connect_to_signal("DeviceAdded", wiimanager.plug_cb)
-    hal_manager.connect_to_signal("DeviceRemoved", wiimanager.unplug_cb)
-
-    gobject.MainLoop().run()
+gobject.MainLoop().run()

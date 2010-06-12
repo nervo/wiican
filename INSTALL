@@ -28,7 +28,7 @@ Load uinput module with perms for non-root users:
       - Maybe you want to autoload uinput module by adding it on /etc/modules
 
 Running wiican:
-    - Type ./run-unintalled.sh if not installed
+    - Type ./run-unintalled.py if not installed
     - Type wiican if installed
 
 Install wiican:
