@@ -202,7 +202,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__aboutdlg.show()
 
     def __quit_cb(self, widget):
-        self.__wiican_iface.Stop()
+        self.__wiican_iface.Quit()
         sys.exit(0)
 
     def __discover_cb(self, discover_item, config=None):
