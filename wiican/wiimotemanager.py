@@ -24,9 +24,6 @@ import sys
 import os
 
 import gtk
-from gtk import glade
-
-import pynotify
 import gobject
 import dbus
 
@@ -40,40 +37,29 @@ import service
 
 class WiimoteStatusIcon(gtk.StatusIcon):
     def __init__(self):
-        def load_menu():
-            menu = gtk.Menu()
-
-            nobluez_item = gtk.MenuItem(_('No bluetooth adapters'))
-            menu.append(nobluez_item)
-
-            prefs_item = gtk.ImageMenuItem(gtk.STOCK_PREFERENCES)
-            prefs_item.connect('activate', self.__show_preferences_cb)
-            prefs_item.show()
-            menu.append(prefs_item)
-
-            sep_item = gtk.SeparatorMenuItem()
-            sep_item.show()
-            menu.append(sep_item)
-
-            about_item = gtk.ImageMenuItem(gtk.STOCK_ABOUT)
-            about_item.connect('activate', self.__about_cb)
-            about_item.show()
-            menu.append(about_item)
-
-            quit_item = gtk.ImageMenuItem(gtk.STOCK_QUIT)
-            quit_item.connect('activate', self.__quit_cb)
-            quit_item.show()
-            menu.append(quit_item)
-
-            return menu
-
-        gtk.StatusIcon.__init__(self)
+        super(WiimoteStatusIcon, self).__init__()
         self.set_visible(True)
+
+        # Load UI
+        builder = gtk.Builder()
+        if not builder.add_from_file(WIIMOTEMANAGER_UI):
+            raise 'Cant load %s' % WIIMOTEMANAGER_UI
+        builder.connect_signals(self)
         
-        self.__menu = load_menu()
+        self.aboutdlg = builder.get_object('WiiAboutDialog')
+        self.main_menu = builder.get_object('main_menu')
+        self.nobluez_menuitem = builder.get_object('nobluez_menuitem')
+
+        self.nobluez_menuitem.set_sensitive(False)
+        
+        self.aboutdlg.connect('response', lambda d, r: d.hide())
+        self.connect('popup-menu', self.__icon_popupmenu_cb, None)
+        self.connect('activate', self.__activate_cb)
+        
         self.__load_mappings_menu()
         self.__notificator = Notificator('wiican')
 
+        # Connect to wiican service
         bus = dbus.SessionBus()  
         self.__wiican_iface = dbus.Interface(bus.get_object ('org.gnome.Wiican', 
             '/org/gnome/Wiican'), 'org.gnome.Wiican')
@@ -89,18 +75,6 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__wiican_iface.connect_to_signal('StatusChanged', self.__status_cb, 
             dbus_interface='org.gnome.Wiican')
                         
-        # Load about dialog
-        about_builder = gtk.Builder()
-        if not about_builder.add_from_file(ABOUT_DLG):
-            raise 'Cant load %s' % ABOUT_DLG
-
-        self.__aboutdlg = about_builder.get_object('WiiAboutDialog')
-        self.__aboutdlg.connect('response', lambda d, r: d.hide())
-
-        # Connect left and right click
-        self.connect('popup-menu', self.__icon_popupmenu_cb, None)
-        self.connect('activate', self.__activate_cb)
-
     def __status_cb(self, new_status):
         print 'current:', self.__cur_status, 'new:', new_status
 
@@ -183,7 +157,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             self.__mappings_menu.append(item)
 
     def __icon_popupmenu_cb(self, status_icon, button, activate_time, data):
-        self.__menu.popup(None, None, gtk.status_icon_position_menu, button, 
+        self.main_menu.popup(None, None, gtk.status_icon_position_menu, button, 
 			        activate_time, status_icon)
 
     def __activate_cb(self, status_icon):
@@ -192,16 +166,16 @@ class WiimoteStatusIcon(gtk.StatusIcon):
                     gtk.status_icon_position_menu, 1, 
                     gtk.get_current_event_time(), status_icon)
 
-    def __show_preferences_cb(self, widget):
+    def preferences_cb(self, widget):
         mapping_dlg = MappingDialog()
         if mapping_dlg.run() == gtk.RESPONSE_OK:
             self.__load_mappings_menu()
         mapping_dlg.destroy()
 
-    def __about_cb(self, widget):
-        self.__aboutdlg.show()
+    def about_cb(self, widget):
+        self.aboutdlg.show()
 
-    def __quit_cb(self, widget):
+    def quit_cb(self, widget):
         self.__wiican_iface.Quit()
         sys.exit(0)
 

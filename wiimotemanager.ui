@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <interface>
-  <!-- interface-requires gtk+ 2.12 -->
+  <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkAboutDialog" id="WiiAboutDialog">
     <property name="border_width">5</property>
+    <property name="window_position">center</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">normal</property>
     <property name="program_name">WiiCan</property>
@@ -705,10 +706,8 @@ Ulisse &lt;ulisail@yahoo.it&gt;</property>
     <property name="logo">wiican.svg</property>
     <property name="logo_icon_name">wiican</property>
     <property name="wrap_license">True</property>
-    <signal name="close" handler="gtk_widget_destroy"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
-        <property name="orientation">vertical</property>
         <child internal-child="action_area">
           <object class="GtkHButtonBox" id="dialog-action_area1"/>
           <packing>
@@ -717,6 +716,48 @@ Ulisse &lt;ulisail@yahoo.it&gt;</property>
             <property name="position">0</property>
           </packing>
         </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMenu" id="main_menu">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkMenuItem" id="nobluez_menuitem">
+        <property name="visible">True</property>
+        <property name="label" translatable="yes">No bluetooth adapters</property>
+        <property name="use_underline">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="prefs_menuitem">
+        <property name="label">gtk-preferences</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="preferences_cb"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="menuitem3">
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="menuitem4">
+        <property name="label">gtk-about</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="about_cb"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="menuitem5">
+        <property name="label">gtk-quit</property>
+        <property name="visible">True</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+        <signal name="activate" handler="quit_cb"/>
       </object>
     </child>
   </object>
