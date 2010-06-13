@@ -55,16 +55,18 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         
         self.__load_mappings_menu()
         self.__notificator = Notificator('wiican')
-
+        
         # Connect to wiican service
         bus = dbus.SessionBus()  
         self.__wiican_iface = dbus.Interface(bus.get_object ('org.gnome.Wiican', 
-            '/org/gnome/Wiican'), 'org.gnome.Wiican')            
-        self.__status_cb(self.__wiican_iface.GetStatus())
+            '/org/gnome/Wiican'), 'org.gnome.Wiican')
+        self.__cur_status = self.__wiican_iface.GetStatus()
+        self.__status_cb(self.__cur_status)
         self.__wiican_iface.connect_to_signal('StatusChanged', self.__status_cb, 
             dbus_interface='org.gnome.Wiican')
                         
     def __status_cb(self, new_status):
+        #print 'New:', new_status, 'Old:', self.__cur_status
         if not new_status & service.WC_BLUEZ_PRESENT:
             self.__set_no_bluetooth_st()
         elif not new_status & service.WC_UINPUT_PRESENT:

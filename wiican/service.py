@@ -76,6 +76,7 @@ class WiicanDBus(dbus.service.Object):
     def __bluez_discover(self, bt_adapter):
         obj = dbus.SystemBus().get_object(BLUEZ_URI, BLUEZ_PATH)
         bluez_manager = dbus.Interface(obj, dbus_interface=BLUEZMANAGER_IFACE)
+        self.__check_uinput_present()
 
         if bluez_manager.ListAdapters():
             self.status = self.status | WC_BLUEZ_PRESENT
