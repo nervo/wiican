@@ -78,11 +78,14 @@ class WiicanDBus(dbus.service.Object):
         bluez_manager = dbus.Interface(obj, dbus_interface=BLUEZMANAGER_IFACE)
 
         if bluez_manager.ListAdapters():
-            self.StatusChanged(self.status | WC_BLUEZ_PRESENT)
+            self.status = self.status | WC_BLUEZ_PRESENT
+            self.StatusChanged(self.status)
             return True
 
-        if self.status: 
-            self.StatusChanged(self.status ^ WC_BLUEZ_PRESENT)
+        if self.status & WC_BLUEZ_PRESENT:
+            self.status = self.status ^ WC_BLUEZ_PRESENT
+            self.StatusChanged(self.status)
+
         return False
 
     def __check_uinput_present(self):
@@ -91,11 +94,13 @@ class WiicanDBus(dbus.service.Object):
         modules = mod_fp.read()
         mod_fp.close()
         if 'uinput' in modules:
-            self.StatusChanged(self.status | WC_UINPUT_PRESENT)
+            self.status = self.status | WC_UINPUT_PRESENT
+            self.StatusChanged(self.status)
             return True
         else:
-            if self.status: 
-                self.StatusChanged(self.status ^ WC_UINPUT_PRESENT)
+            if self.status & WC_UINPUT_PRESENT:
+                self.status = self.status ^ WC_UINPUT_PRESENT
+                self.StatusChanged(self.status)
             return False
 
     def __plug_cb(self, udi):
@@ -106,11 +111,13 @@ class WiicanDBus(dbus.service.Object):
         if properties.has_key('input.product') and 'Nintendo Wiimote' in \
                 properties['input.product']:
             self.wiimote_udi = udi
-            self.StatusChanged(self.status | WC_WIIMOTE_DISCOVERING)
+            self.status = self.status | WC_WIIMOTE_DISCOVERING
+            self.StatusChanged(self.status)
 
     def __unplug_cb(self, udi):
-        if self.wiimote_udi == udi and self.status:
-            self.StatusChanged(self.status ^ WC_WIIMOTE_DISCOVERING)
+        if self.wiimote_udi == udi and (self.status & WC_WIIMOTE_DISCOVERING):
+            self.status = self.status ^ WC_WIIMOTE_DISCOVERING
+            self.StatusChanged(self.status)
 
     @dbus.service.method(WIICAN_URI, out_signature='i')
     def GetStatus(self):
@@ -140,7 +147,7 @@ class WiicanDBus(dbus.service.Object):
 
     @dbus.service.signal(WIICAN_URI, signature='i')
     def StatusChanged(self, status):
-        self.status = status
+        pass
 
 if __name__ == '__main__':
     import gobject
