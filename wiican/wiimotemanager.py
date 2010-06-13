@@ -48,9 +48,6 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         
         self.aboutdlg = builder.get_object('WiiAboutDialog')
         self.main_menu = builder.get_object('main_menu')
-        self.nobluez_menuitem = builder.get_object('nobluez_menuitem')
-
-        self.nobluez_menuitem.set_sensitive(False)
         
         self.aboutdlg.connect('response', lambda d, r: d.hide())
         self.connect('popup-menu', self.__icon_popupmenu_cb, None)
@@ -62,22 +59,12 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         # Connect to wiican service
         bus = dbus.SessionBus()  
         self.__wiican_iface = dbus.Interface(bus.get_object ('org.gnome.Wiican', 
-            '/org/gnome/Wiican'), 'org.gnome.Wiican')
-        self.__cur_status = self.__wiican_iface.GetStatus()
-
-        if not self.__cur_status & service.WC_BLUEZ_PRESENT:
-            self.__set_no_bluetooth_st()
-        elif not self.__cur_status & service.WC_UINPUT_PRESENT:
-            self.__set_no_uinput_st()
-        elif self.__cur_status & (service.WC_UINPUT_PRESENT | service.WC_BLUEZ_PRESENT):
-            self.__idle_st()
-
+            '/org/gnome/Wiican'), 'org.gnome.Wiican')            
+        self.__status_cb(self.__wiican_iface.GetStatus())
         self.__wiican_iface.connect_to_signal('StatusChanged', self.__status_cb, 
             dbus_interface='org.gnome.Wiican')
                         
     def __status_cb(self, new_status):
-        print 'current:', self.__cur_status, 'new:', new_status
-
         if not new_status & service.WC_BLUEZ_PRESENT:
             self.__set_no_bluetooth_st()
         elif not new_status & service.WC_UINPUT_PRESENT:
@@ -86,9 +73,9 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             self.__discovering_st()
         elif new_status & (service.WC_UINPUT_PRESENT | service.WC_BLUEZ_PRESENT):
             self.__idle_st()
-                        
+
         self.__cur_status = new_status
-                
+
     def __set_no_bluetooth_st(self):
         self.set_from_file(ICON_OFF)
         self.set_tooltip(_('Plug a bluetooth adapter'))
@@ -176,7 +163,6 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.aboutdlg.show()
 
     def quit_cb(self, widget):
-        self.__wiican_iface.Quit()
         sys.exit(0)
 
     def __discover_cb(self, discover_item, config=None):

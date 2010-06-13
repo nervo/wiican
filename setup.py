@@ -71,7 +71,7 @@ setup(
                       ('share/dbus-1/services',
                           ['org.gnome.wiican.service']),
                       ('share/wiican', 
-                          ['about.ui','mapping.ui','entry.ui', 'wiican.svg']),
+                          ['wiimotemanager.ui','mapping.ui','entry.ui', 'wiican.svg']),
                       ('share/applications', ['wiican.desktop']),
                       ('share/pixmaps', ['wiican.svg'])]
 )
