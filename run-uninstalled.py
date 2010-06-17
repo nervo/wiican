@@ -3,7 +3,6 @@
 import gobject
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
-from wiican import wiimotemanager
 
 # Gen .in files with @PREFIX@ replaced
 for filename in ['org.gnome.wiican.service', 'wiican/defs.py']:
@@ -16,5 +15,8 @@ for filename in ['org.gnome.wiican.service', 'wiican/defs.py']:
     outfile.close()
 
 DBusGMainLoop(set_as_default=True)
+
+from wiican import wiimotemanager
+
 wiican = wiimotemanager.WiimoteStatusIcon()
 gobject.MainLoop().run()
