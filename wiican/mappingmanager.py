@@ -78,6 +78,7 @@ class Mapping(object):
 
     def write(self, dest_path):
         self.__info.write(os.path.join(dest_path, 'info.desktop'))
+        shutil.copy(self.icon_path, dest_path)
         mapping_fp = open(os.path.join(dest_path, 'mapping.wminput'), 'w')
         mapping_fp.write(self.mapping)
         mapping_fp.close()
@@ -137,6 +138,8 @@ class MappingManager(object):
         mapping_path = self.mapping_bag[mapping_name]['path']
         package_file = tarfile.TarFile(os.path.join(dest_path, 
             mapping_name+'.tgz'), 'w')
+
+        mapping.write(mapping_path)
 
         for f in os.listdir(mapping_path):
             package_file.add(os.path.join(mapping_path, f), arcname=f)
