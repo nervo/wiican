@@ -28,7 +28,6 @@ if not os.path.exists(BASE_DATA_DIR):
 
 WMINPUT_CMD = ['/usr/bin/wminput', '-w']
 
-USER_CONFIG_DIR = '.wiican'
 CONFIG_SKEL = os.path.join(BASE_DATA_DIR, 'config_skel')
 
 ICON_ON = os.path.join(BASE_DATA_DIR, 'img/wiitrayon.svg')
@@ -41,11 +40,3 @@ ICON_CONN3 = os.path.join(BASE_DATA_DIR, 'img/wiitrayon3.svg')
 
 WIIMOTEMANAGER_UI = os.path.join(BASE_DATA_DIR, 'wiimotemanager.ui')
 MAPPING_UI = os.path.join(BASE_DATA_DIR, 'mapping.ui')
-ENTRY_UI = os.path.join(BASE_DATA_DIR, 'entry.ui')
-
-MAPPING_DEFAULT_VALUES = {
-        'name': 'No name', 
-        'description': '',
-        'icon': ICON_DEFAULT,
-        'position': -1,
-        'visible': True}
