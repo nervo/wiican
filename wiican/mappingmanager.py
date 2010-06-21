@@ -28,8 +28,9 @@ import exceptions
 
 from xdg.DesktopEntry import DesktopEntry
 from xdg.IconTheme import getIconPath
+from xdg.BaseDirectory import xdg_data_home
 
-from defs import ICON_DEFAULT
+from defs import ICON_DEFAULT, BASE_DATA_DIR
 
 class Mapping(object):
     def __init__(self, info_path, mapping_path):
@@ -38,18 +39,18 @@ class Mapping(object):
         self.__info.parse(info_path)
 
         mapping_fp = open(mapping_path, 'r')
-        self.mapping = mapping_fp.read()
+        self.__mapping = mapping_fp.read()
         mapping_fp.close()
 
         # Get icon file path
         icon_name = self.__info.getIcon()
         if icon_name in os.listdir(os.path.dirname(info_path)): # Icon included
-            self.icon_path = os.path.join(os.path.dirname(info_path), icon_name)
+            self.set_icon(os.path.join(os.path.dirname(info_path), icon_name))
         elif getIconPath(icon_name): # Theme icon
-            self.icon_path = getIconPath(icon_name)
+            self.set_icon(getIconPath(icon_name))
         else:
-            self.icon_path = ICON_DEFAULT # Default icon
-            
+            self.set_icon(ICON_DEFAULT) # Default icon
+
     def get_name(self):
         return self.__info.getName()
         
@@ -64,6 +65,12 @@ class Mapping(object):
         self.__info.set('Comment', comment)
         self.__info.set('Comment', comment, locale=True)
 
+    def get_icon(self):
+        return self.__info.getIcon()
+                
+    def set_icon(self, icon_path):
+        self.__info.set('Icon', icon_path)
+
     def get_authors(self):
         self.__info.get('X-Authors')
 
@@ -76,11 +83,23 @@ class Mapping(object):
     def set_version(self, version):
         self.__info.setVersion(version)
 
+    def get_mapping(self):
+        return self.__mapping
+        
+    def set_mapping(self, mapping):
+        self.__mapping = mapping
+        
     def write(self, dest_path):
+        if not os.path.exists(dest_path):
+            os.mkdir(dest_path)
+        else:
+            for item in os.listdir(dest_path): 
+                os.unlink(os.path.join(dest_path, item))
+            
         self.__info.write(os.path.join(dest_path, 'info.desktop'))
-        shutil.copy(self.icon_path, dest_path)
+        shutil.copy(self.get_icon(), dest_path)
         mapping_fp = open(os.path.join(dest_path, 'mapping.wminput'), 'w')
-        mapping_fp.write(self.mapping)
+        mapping_fp.write(self.__mapping)
         mapping_fp.close()
 
     def __repr__(self):
@@ -101,8 +120,8 @@ class MappingManager(object):
     def scan(self):
         def load_mapping(mappings, dirname, fnames):
             if 'info.desktop' in fnames and 'mapping.wminput' in fnames:
-                mapping_name = os.path.splitext(os.path.basename(dirname))[0]
-                mappings[mapping_name] = {'path': dirname, 
+                mapping_id = os.path.splitext(os.path.basename(dirname))[0]
+                mappings[mapping_id] = {'path': dirname, 
                     'mapping': Mapping(os.path.join(dirname, 
                     'info.desktop'), os.path.join(dirname, 'mapping.wminput'))}
 
@@ -118,8 +137,8 @@ class MappingManager(object):
         if not 'mapping.wminput' in package_file.getnames():
             raise MappingManagerError, 'Not mapping.wminput file found'
 
-        mapping_name = os.path.splitext(os.path.basename(package_path))[0]
-        mapping_path = os.path.join(self.home_path, mapping_name)
+        mapping_id = os.path.splitext(os.path.basename(package_path))[0]
+        mapping_path = os.path.join(self.home_path, mapping_id)
         
         package_file.extractall(mapping_path)
         package_file.close()
@@ -127,17 +146,17 @@ class MappingManager(object):
         mapping = Mapping(os.path.join(mapping_path, 'info.desktop'), 
             os.path.join(mapping_path, 'mapping.wminput'))
  
-        self.mapping_bag[mapping_name] = {'path': mapping_path, 'mapping':
+        self.mapping_bag[mapping_id] = {'path': mapping_path, 'mapping':
             mapping}
 
-    def export(self, mapping_name, dest_path):
-        if not mapping_name in self.mapping_bag:
-            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_name
+    def export(self, mapping_id, dest_path):
+        if not mapping_id in self.mapping_bag:
+            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
 
-        mapping = self.mapping_bag[mapping_name]['mapping']
-        mapping_path = self.mapping_bag[mapping_name]['path']
+        mapping = self.mapping_bag[mapping_id]['mapping']
+        mapping_path = self.mapping_bag[mapping_id]['path']
         package_file = tarfile.TarFile(os.path.join(dest_path, 
-            mapping_name+'.tgz'), 'w')
+            mapping_id+'.tgz'), 'w')
 
         mapping.write(mapping_path)
 
@@ -146,13 +165,27 @@ class MappingManager(object):
             
         package_file.close()
         
-    def remove(self, mapping_name):
-        if not mapping_name in self.mapping_bag:
-            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_name
+    def remove(self, mapping_id):
+        if not mapping_id in self.mapping_bag:
+            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
     
-        mapping_path = self.mapping_bag[mapping_name]['path']
+        mapping_path = self.mapping_bag[mapping_id]['path']
         shutil.rmtree(mapping_path)
-        self.mapping_bag.pop(mapping_name)
+        self.mapping_bag.pop(mapping_id)
+
+    def get_mapping(self, mapping_id):
+        if not mapping_id in self.mapping_bag:
+            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
+
+        return self.mapping_bag[mapping_id]['mapping']
+
+    def get_mapping_path(self, mapping_id):
+        if not mapping_id in self.mapping_bag:
+            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
+
+        return self.mapping_bag[mapping_id]['path']
+        
+mapping_manager = MappingManager(os.path.join(xdg_data_home, 'wiican'), BASE_DATA_DIR)
 
 class MappingManagerError(exceptions.Exception):
     pass

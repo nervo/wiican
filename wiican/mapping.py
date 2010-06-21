@@ -27,7 +27,9 @@ from gtk import glade
 from exceptions import Exception
 
 import defs
-import dotconfig
+from mappingmanager import mapping_manager
+
+ICON_COL, NAME_COL, COMMENT_COL, VISIBLE_COL, MAPPING_ID_COL = range(5)
 
 class IconChooserDialog(gtk.FileChooserDialog):
     def __init__(self, parent, title=_('Select image icon..'), icon_size=64):
@@ -58,9 +60,11 @@ class IconChooserDialog(gtk.FileChooserDialog):
         filter.add_mime_type('image/png')
         filter.add_mime_type('image/jpeg')
         filter.add_mime_type('image/gif')
+        filter.add_mime_type('image/svg')        
         filter.add_pattern('*.png')
         filter.add_pattern('*.jpg')
         filter.add_pattern('*.gif')
+        filter.add_pattern('*.svg')        
         self.add_filter(filter)
 
         # Set a preview widget 
@@ -68,281 +72,139 @@ class IconChooserDialog(gtk.FileChooserDialog):
         self.set_preview_widget(preview)
         self.connect('update-preview', update_preview_cb, preview, icon_size)
 
-class EntryDialog:
-    def __init__(self, name='', description='', mapping='', 
-            icon_path=defs.ICON_DEFAULT):
-            
+class MappingEditorDialog:
+    def __init__(self, mapping):
+        self.mapping = mapping
+                    
         builder = gtk.Builder()
-        if not builder.add_from_file(defs.ENTRY_UI):
-            raise 'Cant load %s' % defs.ENTRY_UI
-            
-        self.__entry_dlg = builder.get_object('entry_dlg')
-        self.__name_entry = builder.get_object('name_entry')
-        self.__desc_entry = builder.get_object('desc_entry')
-        self.__file_buffer = builder.get_object('file_textview').get_buffer()
-        self.__icon_path = icon_path
-
-        # Get buttons
-        icon_btn = builder.get_object('icon_btn')
-        icon_btn.connect('clicked', self.__icon_cb)
-        link_btn = builder.get_object('link_btn')
-        link_btn.connect('clicked', self.__link_cb)
-
+        if not builder.add_objects_from_file(defs.MAPPING_UI, 
+                ['mapping_editor_dlg']):
+            raise 'Cant load %s' % defs.MAPPING_UI
+        builder.connect_signals(self)
+        
+        self.mapping_editor_dlg = builder.get_object('mapping_editor_dlg')
+        self.name_entry = builder.get_object('name_entry')
+        self.comment_entry = builder.get_object('comment_entry')
+        self.file_buffer = builder.get_object('file_textview').get_buffer()
+        self.icon_btn = builder.get_object('icon_btn')
+        
         # Set initial values
-        self.__name_entry.set_text(name)
-        self.__desc_entry.set_text(description)
-        self.__file_buffer.set_text(mapping)
-        if self.__icon_path:
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 48, 48)
-            image = gtk.Image()
-            image.set_from_pixbuf(pixbuf)
-            icon_btn.set_image(image)
+        self.name_entry.set_text(self.mapping.get_name())
+        self.comment_entry.set_text(self.mapping.get_comment())
+        self.file_buffer.set_text(self.mapping.get_mapping())
+        
+        pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(self.mapping.get_icon(),
+            48, 48)
+        image = gtk.Image()
+        image.set_from_pixbuf(pixbuf)
+        self.icon_btn.set_image(image)
 
-    #FIXME: What a lot of proxies. I wonder if i can subclass ...
     def set_title(self, title=''):
-        self.__entry_dlg.set_title(title)
+        self.mapping_editor_dlg.set_title(title)
 
     def run(self):
-        return self.__entry_dlg.run()
+        return self.mapping_editor_dlg.run()
 
     def destroy(self):
-        self.__entry_dlg.destroy()
+        self.mapping_editor_dlg.destroy()
 
-    def get_values(self):
-        start, end = self.__file_buffer.get_bounds()
+    def get_mapping(self):
+        start, end = self.file_buffer.get_bounds()
+        self.mapping.set_mapping(self.file_buffer.get_text(start, end))
+        self.mapping.set_name(self.name_entry.get_text())
+        self.mapping.set_comment(self.comment_entry.get_text())
 
-        return self.__name_entry.get_text() or _('No Name'),\
-                self.__desc_entry.get_text(), \
-                self.__file_buffer.get_text(start, end), \
-                self.__icon_path or defs.ICON_DEFAULT
+        return self.mapping
 
-    def __link_cb(self, widget):
+    def link_btn_clicked_cb(self, widget):
         webbrowser.open(widget.get_uri())
 
-    def __icon_cb(self, widget):
-        icon_dlg = IconChooserDialog(parent=self.__entry_dlg)
+    def icon_btn_clicked_cb(self, widget):
+        icon_dlg = IconChooserDialog(parent=self.mapping_editor_dlg)
 
         if icon_dlg.run() == gtk.RESPONSE_OK:
             filename = icon_dlg.get_filename()
+            print filename
             pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 48, 48)
             image = gtk.Image()
             image.set_from_pixbuf(pixbuf)
             widget.set_image(image)
-            self.__icon_path = filename
+            self.mapping.set_icon(filename)
 
         icon_dlg.destroy()
 
-class MappingDialog:
-    def __init__(self):
-        def load_widgets(wTree):
-            mapping_dlg = wTree.get_object('mapping_dlg')
-            mapping_list = wTree.get_object('mapping_list')
-
-            # Get buttons      
-            save_btn = wTree.get_object('save_btn')
-            new_btn = wTree.get_object('new_btn')
-            edit_btn = wTree.get_object('edit_btn')
-            delete_btn = wTree.get_object('delete_btn')
-            up_btn = wTree.get_object('up_btn')
-            down_btn = wTree.get_object('down_btn')
-
-            # Connect buttons to methods
-            save_btn.connect('clicked', self.__save_cb, mapping_list)
-            new_btn.connect('clicked', self.__new_cb, mapping_list)
-            edit_btn.connect('clicked', self.__edit_cb, mapping_list)
-            delete_btn.connect('clicked', self.__delete_cb, mapping_list)
-            up_btn.connect('clicked', self.__up_cb, mapping_list)
-            down_btn.connect('clicked', self.__down_cb, mapping_list)
-            mapping_list.connect('row-activated', self.__row_cb)
-
-            return mapping_dlg, mapping_list
-
-        def load_model(files):
-            model = gtk.ListStore(gtk.gdk.Pixbuf, # Icon
-                        gobject.TYPE_STRING, # Name
-                        gobject.TYPE_BOOLEAN,# Visible
-                        gobject.TYPE_INT,    # Position
-                        gobject.TYPE_STRING, # Description
-                        gobject.TYPE_STRING, # File_path
-                        gobject.TYPE_STRING, # Icon_path
-                        gobject.TYPE_STRING) # Mapping
-
-            # Set the model items from files metadata and order
-            positions = {}
-            row_index = 0
-
-            for file in files:
-                file_meta = dotconfig.read_metadata(file)
-                mapping = dotconfig.read_mapping(file)
-
-                meta = defs.MAPPING_DEFAULT_VALUES.copy()
-                meta.update(file_meta)
-
-                icon = gtk.gdk.pixbuf_new_from_file_at_size(meta['icon'], 
-                        16, 16)
-                while positions.has_key(meta['position']):
-                    meta['position'] += 1
-                model.append([icon, meta['name'], meta['visible'], 
-                    meta['position'], meta['description'], file, meta['icon'],
-                    mapping])
-                
-                positions[meta['position']]=row_index # map items and positions
-                row_index += 1
-
-            if positions:
-                # python dict applies meta order
-                model.reorder(positions.values())
-            
-            return model
-
-        def load_treeview(mapping_list):
-            # Set the cells
-            icon_cell = gtk.CellRendererPixbuf()
-            name_cell = gtk.CellRendererText()
-
-            def visible_toggled_cb(cell, path, model):
-                model[path][2] = not model[path][2]
-
-            visible_cell = gtk.CellRendererToggle()
-            visible_cell.connect('toggled', visible_toggled_cb, 
-                    mapping_list.get_model())
-
-            # Set the columns
-            mapping_list.append_column(gtk.TreeViewColumn('', 
-                        icon_cell, pixbuf=0))
-
-            name_column = gtk.TreeViewColumn(_('Name'), name_cell, text=1)
-            name_column.set_expand(True)
-            mapping_list.append_column(name_column)
-
-            visible_column = gtk.TreeViewColumn(_('Visible'), visible_cell, 
-                    active=2)
-            mapping_list.append_column(visible_column)
-
-            mapping_list.set_search_column(1)
-
-        # Get the widgets
+class MappingManagerDialog:
+    def __init__(self):    
         builder = gtk.Builder()
-        if not builder.add_from_file(defs.MAPPING_UI):
+        if not builder.add_objects_from_file(defs.MAPPING_UI, 
+                ['mapping_manager_dlg', 'image3', 'image4', 'mapping_store']):
             raise 'Cant load %s' % defs.MAPPING_UI
+        builder.connect_signals(self)
+        
+        self.mapping_dlg = builder.get_object('mapping_dlg')
+        self.mapping_store = builder.get_object('mapping_store')
+        self.mapping_list = builder.get_object('mapping_list')
 
-        self.__mapping_dlg, self.__mapping_list = load_widgets(builder)
+        for mapping_id, mapping_data in mapping_manager.mapping_bag.items():
+            mapping = mapping_data['mapping']
+            icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 24, 
+                24)
+            self.mapping_store.append([icon, mapping.get_name(), 
+                mapping.get_comment(), True, mapping_id])
 
-        # Setup mapping_list
-        self.__config_files = dotconfig.DotConfig(defs.USER_CONFIG_DIR, 
-            defs.CONFIG_SKEL)
-        files = self.__config_files.get_files('*.wminput', True)
-        self.__mapping_list.set_model(load_model(files))
-
-        # Mappings marked for delete
-        self.__deleted = {}
-
-        # Setup the treeview
-        load_treeview(self.__mapping_list)
-
-    def run(self):
-        return self.__mapping_dlg.run()
-
-    def destroy(self):
+    def close_btn_clicked_cb(self, widget):
         return self.__mapping_dlg.destroy()
 
-    def __save_cb(self, widget, mapping_list):
-        model = mapping_list.get_model()
-        row_index = 0
-
-        # If any mapping was deleted, now it's time to remove files
-        if self.__deleted:
-            delete_message = _('Are you sure you want to completely remove ') +\
-                    _('this mappings?:\n\n') + '\n'.join(self.__deleted.keys())
-
-            delete_dlg = gtk.MessageDialog(parent = self.__mapping_dlg, 
-                    flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-                    type = gtk.MESSAGE_QUESTION,
-                    buttons = gtk.BUTTONS_YES_NO,
-                    message_format = delete_message)
-            delete_dlg.set_title(_('Deleting mappings'))
-
-            if delete_dlg.run() == gtk.RESPONSE_YES:
-                # There is no need to delete any file of new unregistered
-                # mappings
-                todelete = [x for x in self.__deleted.values() if not x is None]
-                for file_path in todelete:
-                    try:
-                        dotconfig.remove_mapping(file_path)
-                    except:
-                        error_dlg = gtk.MessageDialog(
-                            parent = self.__mapping_dlg,
-                            flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-                            type = gtk.MESSAGE_ERROR,
-                            buttons = gtk.BUTTONS_CLOSE,
-                            message_format = _('Can\'t remove mapping ') + file_path)
-                        error_dlg.run()
-                        continue
-
-            delete_dlg.destroy()
-            self.__deleted = {}
-
-        # Make the changes effective by writing on wminput config files
-        # TODO: A better approx. it's to save only the changes
-        for row in model:
-            if not row[5]:
-                row[5] = self.__config_files.new_filename(row[1] + '_', 
-                        '.wminput')
-            dotconfig.write_mapping(
-                    name=row[1],        # Name
-                    visible=row[2],     # Visible
-                    position=row_index, # Position
-                    description=row[4], # Description
-                    file_path=row[5],   # File_path
-                    icon=row[6],        # Icon_path
-                    mapping=row[7])     # Mapping
-            row_index += 1
-
-    def __new_cb(self, widget, mapping_list):
+    def new_btn_clicked_cb(self, widget, mapping_list):
         entry_dlg = EntryDialog()
         if entry_dlg.run() == gtk.RESPONSE_OK:
             name, desc, mapping, icon_path = entry_dlg.get_values()
-            icon = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 16, 16)
+            icon = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 24, 24)
             model = mapping_list.get_model()
             model.append([icon, name, True, 0, desc, None, icon_path, mapping])
 
         entry_dlg.destroy()
 
-    def __edit_cb(self, widget, mapping_list):
-        selection = mapping_list.get_selection()
+    def edit_btn_clicked_cb(self, widget):
+        selection = self.mapping_list.get_selection()
         model, selected = selection.get_selected()
+        
         if selected is not None:
-            row_data = model[selected]
+            mapping_id = model[selected][MAPPING_ID_COL]
+            mapping = mapping_manager.get_mapping(mapping_id)
+            mapping_editor_dlg = MappingEditorDialog(mapping)
+            mapping_editor_dlg.set_title(_('Editing ') + mapping.get_name())
 
-            entry_dlg = EntryDialog(
-                    name = row_data[1],
-                    description = row_data[4],
-                    mapping = row_data[7],
-                    icon_path = row_data[6])
-
-            entry_dlg.set_title(_('Editing ') + row_data[1])
-
-            if entry_dlg.run() == gtk.RESPONSE_OK:
-                name, desc, mapping, icon_path = entry_dlg.get_values()
-                icon = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 16, 16)
-                row_data[0], row_data[1] = icon, name
-                row_data[4], row_data[6] = desc, icon_path
-                row_data[7] = mapping
+            if mapping_editor_dlg.run() == gtk.RESPONSE_OK:
+                new_mapping = mapping_editor_dlg.get_mapping()
+                new_mapping.write(mapping_manager.mapping_bag[mapping_id]['path'])
+                mapping_manager.mapping_bag[mapping_id]['mapping'] = new_mapping
+                model[selected][ICON_COL] = \
+                    gtk.gdk.pixbuf_new_from_file_at_size(new_mapping.get_icon(), 
+                        24, 24)
+                model[selected][NAME_COL] = new_mapping.get_name()
+                model[selected][COMMENT_COL] = new_mapping.get_comment()
                 
-            entry_dlg.destroy()
+            mapping_editor_dlg.destroy()
 
-    def __row_cb(self, widget, path, view_column):
-        self.__edit_cb(None, widget)
+    def mapping_list_row_activated_cb(self, widget, path, view_column):
+        self.edit_btn_clicked_cb(widget)
 
-    def __delete_cb(self, widget, mapping_list):
-        selection = mapping_list.get_selection()
+    def delete_btn_clicked_cb(self, widget):
+        selection = self.mapping_list.get_selection()
         model, selected = selection.get_selected()
         if selected is not None:
             row = model[selected]
             self.__deleted[row[1]] = row[5]
             model.remove(selected)
 
-    def __up_cb(self, widget, mapping_list):
+    def import_btn_clicked_cb(self, widget):
+        pass
+        
+    def export_btn_clicked_cb(self, widget):
+        pass
+                
+    def up_btn_clicked_cb(self, widget):
         # From PyGTK FAQ Entry 13.51
         # http://faq.pygtk.org/index.py?req=show&file=faq13.051.htp
         def iter_prev(iter, model):
@@ -355,7 +217,7 @@ class MappingDialog:
             prev = model.get_iter(tuple(prev_path))
             return prev
 
-        selection = mapping_list.get_selection()
+        selection = self.mapping_list.get_selection()
         model, selected = selection.get_selected()
         if selected is not None:
             selected_row = model.get_path(selected)[0]
@@ -363,19 +225,11 @@ class MappingDialog:
                 prev = iter_prev(selected, model)
                 model.swap(prev, selected)
 
-    def __down_cb(self, widget, mapping_list):
-        selection = mapping_list.get_selection()
+    def down_btn_clicked_cb(self, widget):
+        selection = self.mapping_list.get_selection()
         model, selected = selection.get_selected()
         if selected is not None:
             selected_row = model.get_path(selected)[0]
             if selected_row < len(model)-1:
                 next = model.iter_next(selected)
                 model.swap(selected, next)
-
-if __name__ == '__main__':
-    import gobject
-
-    mapping_dlg = MappingDialog()
-    mapping_dlg.run()
-    mapping_dlg.destroy()
-    gobject.MainLoop().run()
