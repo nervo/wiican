@@ -25,26 +25,35 @@ import shutil
 import tarfile
 import tempfile
 import exceptions
+import random
 
 from xdg.DesktopEntry import DesktopEntry
 from xdg.IconTheme import getIconPath
-from xdg.BaseDirectory import xdg_data_home
+from xdg.BaseDirectory import save_data_path
 
 from defs import ICON_DEFAULT, BASE_DATA_DIR
 
 class Mapping(object):
-    def __init__(self, info_path, mapping_path):
+    def __init__(self, info_path=None, mapping_path=None):
         # Get freedesktop definition file
         self.__info = DesktopEntry()
-        self.__info.parse(info_path)
-
-        mapping_fp = open(mapping_path, 'r')
-        self.__mapping = mapping_fp.read()
-        mapping_fp.close()
+        
+        if info_path:
+            self.__info.parse(info_path)
+        else:
+            self.__info.new('info.desktop')
+            self.__info.set('Type', 'Wiican Mapping')
+            
+        if mapping_path:
+            mapping_fp = open(mapping_path, 'r')
+            self.__mapping = mapping_fp.read()
+            mapping_fp.close()
+        else:
+            self.__mapping = ''
 
         # Get icon file path
         icon_name = self.__info.getIcon()
-        if icon_name in os.listdir(os.path.dirname(info_path)): # Icon included
+        if info_path and icon_name in os.listdir(os.path.dirname(info_path)): # Icon included
             self.set_icon(os.path.join(os.path.dirname(info_path), icon_name))
         elif getIconPath(icon_name): # Theme icon
             self.set_icon(getIconPath(icon_name))
@@ -127,7 +136,7 @@ class MappingManager(object):
 
         for path in self.system_paths + [self.home_path]:
             os.path.walk(path, load_mapping, self.mapping_bag)
-                
+
     def install(self, package_path):
         package_file = tarfile.open(package_path)
         
@@ -164,6 +173,19 @@ class MappingManager(object):
             package_file.add(os.path.join(mapping_path, f), arcname=f)
             
         package_file.close()
+
+    def add(self, mapping):
+        mapping_id = str(random.randint(1,999999))
+        while True:
+            if os.path.exists(os.path.join(self.home_path, mapping_id)):
+                mapping_id = str(random.randint(1,999999))
+            else: break
+
+        mapping_path = os.path.join(self.home_path, mapping_id)
+        mapping.write(mapping_path)
+        self.mapping_bag[mapping_id] = {'path': mapping_path, 'mapping': mapping}
+                
+        return mapping_id
         
     def remove(self, mapping_id):
         if not mapping_id in self.mapping_bag:
@@ -185,7 +207,7 @@ class MappingManager(object):
 
         return self.mapping_bag[mapping_id]['path']
         
-mapping_manager = MappingManager(os.path.join(xdg_data_home, 'wiican'), BASE_DATA_DIR)
+mapping_manager = MappingManager(save_data_path('wiican'), BASE_DATA_DIR)
 
 class MappingManagerError(exceptions.Exception):
     pass

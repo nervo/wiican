@@ -27,7 +27,7 @@ from gtk import glade
 from exceptions import Exception
 
 import defs
-from mappingmanager import mapping_manager
+from mappingmanager import mapping_manager, Mapping
 
 ICON_COL, NAME_COL, COMMENT_COL, VISIBLE_COL, MAPPING_ID_COL = range(5)
 
@@ -53,6 +53,7 @@ class IconChooserDialog(gtk.FileChooserDialog):
                                 gtk.STOCK_OPEN, gtk.RESPONSE_OK))
 
         self.set_default_response(gtk.RESPONSE_OK)
+        self.set_current_folder('/usr/share/pixmaps')
 
         #TODO: Maybe a better filter it's requiered
         filter = gtk.FileFilter()
@@ -124,7 +125,6 @@ class MappingEditorDialog:
 
         if icon_dlg.run() == gtk.RESPONSE_OK:
             filename = icon_dlg.get_filename()
-            print filename
             pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 48, 48)
             image = gtk.Image()
             image.set_from_pixbuf(pixbuf)
@@ -155,15 +155,20 @@ class MappingManagerDialog:
     def close_btn_clicked_cb(self, widget):
         return self.__mapping_dlg.destroy()
 
-    def new_btn_clicked_cb(self, widget, mapping_list):
-        entry_dlg = EntryDialog()
-        if entry_dlg.run() == gtk.RESPONSE_OK:
-            name, desc, mapping, icon_path = entry_dlg.get_values()
-            icon = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 24, 24)
-            model = mapping_list.get_model()
-            model.append([icon, name, True, 0, desc, None, icon_path, mapping])
+    def new_btn_clicked_cb(self, widget):
+        mapping_editor_dlg = MappingEditorDialog(Mapping())
+        mapping_editor_dlg.set_title(_('Editing new mapping'))
 
-        entry_dlg.destroy()
+        if mapping_editor_dlg.run() == gtk.RESPONSE_OK:
+            mapping = mapping_editor_dlg.get_mapping()
+            mapping_id = mapping_manager.add(mapping)
+
+            icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 24, 
+                24)
+            self.mapping_store.append([icon, mapping.get_name(), 
+                mapping.get_comment(), True, mapping_id])
+
+        mapping_editor_dlg.destroy()
 
     def edit_btn_clicked_cb(self, widget):
         selection = self.mapping_list.get_selection()
@@ -194,8 +199,8 @@ class MappingManagerDialog:
         selection = self.mapping_list.get_selection()
         model, selected = selection.get_selected()
         if selected is not None:
-            row = model[selected]
-            self.__deleted[row[1]] = row[5]
+            mapping_id = model[selected][MAPPING_ID_COL]
+            mapping_manager.remove(mapping_id)
             model.remove(selected)
 
     def import_btn_clicked_cb(self, widget):
