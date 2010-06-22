@@ -141,12 +141,12 @@ class MappingManager(object):
         package_file = tarfile.open(package_path)
         
         if not 'info.desktop' in package_file.getnames():
-            raise MappingManagerError, 'Not info.desktop file found'
+            raise MappingManagerError, _('Not info.desktop file found')
     
         if not 'mapping.wminput' in package_file.getnames():
-            raise MappingManagerError, 'Not mapping.wminput file found'
+            raise MappingManagerError, _('Not mapping.wminput file found')
 
-        mapping_id = os.path.splitext(os.path.basename(package_path))[0]
+        mapping_id = self.__gen_unique_mapping_id()
         mapping_path = os.path.join(self.home_path, mapping_id)
         
         package_file.extractall(mapping_path)
@@ -157,6 +157,8 @@ class MappingManager(object):
  
         self.mapping_bag[mapping_id] = {'path': mapping_path, 'mapping':
             mapping}
+            
+        return mapping_id
 
     def export(self, mapping_id, dest_path):
         if not mapping_id in self.mapping_bag:
@@ -175,12 +177,7 @@ class MappingManager(object):
         package_file.close()
 
     def add(self, mapping):
-        mapping_id = str(random.randint(1,999999))
-        while True:
-            if os.path.exists(os.path.join(self.home_path, mapping_id)):
-                mapping_id = str(random.randint(1,999999))
-            else: break
-
+        mapping_id = self.__gen_unique_mapping_id()
         mapping_path = os.path.join(self.home_path, mapping_id)
         mapping.write(mapping_path)
         self.mapping_bag[mapping_id] = {'path': mapping_path, 'mapping': mapping}
@@ -206,6 +203,15 @@ class MappingManager(object):
             raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
 
         return self.mapping_bag[mapping_id]['path']
+
+    def __gen_unique_mapping_id(self):
+        mapping_id = str(random.randint(1,999999))
+        while True:
+            if os.path.exists(os.path.join(self.home_path, mapping_id)):
+                mapping_id = str(random.randint(1,999999))
+            else: break
+            
+        return mapping_id
         
 mapping_manager = MappingManager(save_data_path('wiican'), BASE_DATA_DIR)
 

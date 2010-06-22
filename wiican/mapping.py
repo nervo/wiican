@@ -20,14 +20,10 @@
 # 
 ###
 import gtk
-import gobject
 import webbrowser
 
-from gtk import glade
-from exceptions import Exception
-
 import defs
-from mappingmanager import mapping_manager, Mapping
+from mappingmanager import mapping_manager, Mapping, MappingManagerError
 
 ICON_COL, NAME_COL, COMMENT_COL, VISIBLE_COL, MAPPING_ID_COL = range(5)
 
@@ -54,6 +50,7 @@ class IconChooserDialog(gtk.FileChooserDialog):
 
         self.set_default_response(gtk.RESPONSE_OK)
         self.set_current_folder('/usr/share/pixmaps')
+        self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
 
         #TODO: Maybe a better filter it's requiered
         filter = gtk.FileFilter()
@@ -207,6 +204,7 @@ class MappingManagerDialog:
                 buttons = gtk.BUTTONS_YES_NO,
                 message_format = delete_message)
                 
+            delete_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)    
             delete_dlg.set_title(_('Deleting mappings'))
             
             if delete_dlg.run() == gtk.RESPONSE_YES:
@@ -217,7 +215,41 @@ class MappingManagerDialog:
             delete_dlg.destroy()
 
     def import_btn_clicked_cb(self, widget):
-        pass
+        import_dlg = gtk.FileChooserDialog(_('Import mapping...'), 
+                self.mapping_dlg, gtk.FILE_CHOOSER_ACTION_OPEN,
+                (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, 
+                gtk.RESPONSE_OK))
+        import_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)                    
+        
+        filter = gtk.FileFilter()
+        filter.set_name(_('Wiican Mapping Package'))
+        filter.add_mime_type('application/x-tar')
+        filter.add_pattern('*.tgz')
+        filter.add_pattern('*.tar.gz')
+        import_dlg.add_filter(filter)
+            
+        if import_dlg.run() == gtk.RESPONSE_OK:
+            filename = import_dlg.get_filename()
+        import_dlg.destroy()
+
+        try:
+            mapping_id = mapping_manager.install(filename)
+        except MappingManagerError:
+            error_importing_message = _('Wiican Mapping Package import failed!')
+            error_importing_dlg = gtk.MessageDialog(parent = self.mapping_dlg,
+                flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+                type = gtk.MESSAGE_ERROR,
+                buttons = gtk.BUTTONS_CLOSE,
+                message_format = error_importing_message)
+            error_importing_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+            error_importing_dlg.run()
+            error_importing_dlg.destroy()
+            return
+            
+        mapping = mapping_manager.get_mapping(mapping_id)
+        icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 24, 24)
+        self.mapping_store.append([icon, mapping.get_name(), 
+            mapping.get_comment(), True, mapping_id])
         
     def export_btn_clicked_cb(self, widget):
         pass
