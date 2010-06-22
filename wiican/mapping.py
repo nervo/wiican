@@ -199,9 +199,22 @@ class MappingManagerDialog:
         selection = self.mapping_list.get_selection()
         model, selected = selection.get_selected()
         if selected is not None:
-            mapping_id = model[selected][MAPPING_ID_COL]
-            mapping_manager.remove(mapping_id)
-            model.remove(selected)
+            delete_message = _('Are you sure you want to completely remove this mapping?')
+
+            delete_dlg = gtk.MessageDialog(parent = self.mapping_dlg,
+                flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+                type = gtk.MESSAGE_QUESTION,
+                buttons = gtk.BUTTONS_YES_NO,
+                message_format = delete_message)
+                
+            delete_dlg.set_title(_('Deleting mappings'))
+            
+            if delete_dlg.run() == gtk.RESPONSE_YES:
+                mapping_id = model[selected][MAPPING_ID_COL]
+                mapping_manager.remove(mapping_id)
+                model.remove(selected)
+                
+            delete_dlg.destroy()
 
     def import_btn_clicked_cb(self, widget):
         pass
