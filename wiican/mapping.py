@@ -19,6 +19,9 @@
 # Authors : J. Félix Ontañón <felixonta@gmail.com>
 # 
 ###
+
+import os.path
+
 import gtk
 import webbrowser
 
@@ -26,6 +29,7 @@ import defs
 from mappingmanager import mapping_manager, Mapping, MappingManagerError
 
 ICON_COL, NAME_COL, COMMENT_COL, VISIBLE_COL, MAPPING_ID_COL = range(5)
+DEFAULT_PIXMAP_DIR = '/usr/share/pixmaps'
 
 class IconChooserDialog(gtk.FileChooserDialog):
     def __init__(self, parent, title=_('Select image icon..'), icon_size=64):
@@ -49,7 +53,7 @@ class IconChooserDialog(gtk.FileChooserDialog):
                                 gtk.STOCK_OPEN, gtk.RESPONSE_OK))
 
         self.set_default_response(gtk.RESPONSE_OK)
-        self.set_current_folder('/usr/share/pixmaps')
+        self.set_current_folder(DEFAULT_PIXMAP_DIR)
         self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
 
         #TODO: Maybe a better filter it's requiered
@@ -131,6 +135,12 @@ class MappingEditorDialog:
         icon_dlg.destroy()
 
 class MappingManagerDialog:
+    mapping_filter = gtk.FileFilter()
+    mapping_filter.set_name(_('Wiican Mapping Package'))
+    mapping_filter.add_mime_type('application/x-tar')
+    mapping_filter.add_pattern('*.tgz')
+    mapping_filter.add_pattern('*.tar.gz')
+    
     def __init__(self):    
         builder = gtk.Builder()
         if not builder.add_objects_from_file(defs.MAPPING_UI, 
@@ -220,13 +230,7 @@ class MappingManagerDialog:
                 (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, 
                 gtk.RESPONSE_OK))
         import_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)                    
-        
-        filter = gtk.FileFilter()
-        filter.set_name(_('Wiican Mapping Package'))
-        filter.add_mime_type('application/x-tar')
-        filter.add_pattern('*.tgz')
-        filter.add_pattern('*.tar.gz')
-        import_dlg.add_filter(filter)
+        import_dlg.add_filter(self.mapping_filter)
             
         if import_dlg.run() == gtk.RESPONSE_OK:
             filename = import_dlg.get_filename()
@@ -252,8 +256,29 @@ class MappingManagerDialog:
             mapping.get_comment(), True, mapping_id])
         
     def export_btn_clicked_cb(self, widget):
-        pass
-                
+        selection = self.mapping_list.get_selection()
+        model, selected = selection.get_selected()
+        if selected is not None:
+            mapping_id = model[selected][MAPPING_ID_COL]
+            mapping = mapping_manager.get_mapping(mapping_id)
+            
+            export_dlg = gtk.FileChooserDialog(_('Exporting mapping...'), 
+                    self.mapping_dlg, gtk.FILE_CHOOSER_ACTION_SAVE,
+                    (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_SAVE, 
+                    gtk.RESPONSE_OK))
+            export_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+            export_dlg.set_do_overwrite_confirmation(True)
+            export_dlg.set_current_folder(os.path.expanduser("~/"))
+            export_dlg.set_current_name(mapping.get_name())
+            export_dlg.set_modal(True)
+            export_dlg.add_filter(self.mapping_filter)
+
+            if export_dlg.run() == gtk.RESPONSE_OK:
+                dest_file_path = export_dlg.get_filename()
+                #TODO: Check writability before export (or wait for gnome-bug #137515)
+                mapping_manager.export(mapping_id, dest_file_path)
+            export_dlg.destroy()
+              
     def up_btn_clicked_cb(self, widget):
         # From PyGTK FAQ Entry 13.51
         # http://faq.pygtk.org/index.py?req=show&file=faq13.051.htp

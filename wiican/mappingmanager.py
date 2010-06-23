@@ -160,14 +160,13 @@ class MappingManager(object):
             
         return mapping_id
 
-    def export(self, mapping_id, dest_path):
+    def export(self, mapping_id, dest_filepath):
         if not mapping_id in self.mapping_bag:
             raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
 
         mapping = self.mapping_bag[mapping_id]['mapping']
         mapping_path = self.mapping_bag[mapping_id]['path']
-        package_file = tarfile.TarFile(os.path.join(dest_path, 
-            mapping_id+'.tgz'), 'w')
+        package_file = tarfile.TarFile(dest_filepath, 'w')
 
         mapping.write(mapping_path)
 
