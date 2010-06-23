@@ -148,7 +148,7 @@ class MappingManagerDialog:
             raise 'Cant load %s' % defs.MAPPING_UI
         builder.connect_signals(self)
         
-        self.mapping_dlg = builder.get_object('mapping_dlg')
+        self.mapping_dlg = builder.get_object('mapping_manager_dlg')
         self.mapping_store = builder.get_object('mapping_store')
         self.mapping_list = builder.get_object('mapping_list')
 
@@ -160,7 +160,7 @@ class MappingManagerDialog:
                 mapping.get_comment(), True, mapping_id])
 
     def close_btn_clicked_cb(self, widget):
-        return self.__mapping_dlg.destroy()
+        return self.mapping_dlg.destroy()
 
     def new_btn_clicked_cb(self, widget):
         mapping_editor_dlg = MappingEditorDialog(Mapping())
