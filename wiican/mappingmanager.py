@@ -34,32 +34,38 @@ from xdg.BaseDirectory import save_data_path
 from defs import ICON_DEFAULT, BASE_DATA_DIR
 
 class Mapping(object):
-    def __init__(self, info_path=None, mapping_path=None):
-        # Get freedesktop definition file
+    info_filename = 'info.desktop'
+    mapping_filename = 'mapping.wminput'
+    
+    def __init__(self, path=None):
+        self.__path = path
+        
+        # Getting freedesktop definition file
         self.__info = DesktopEntry()
         
-        if info_path:
-            self.__info.parse(info_path)
+        if path and os.path.exists(os.path.join(path, self.info_filename)):
+            self.__info.parse(os.path.join(path, self.info_filename))
         else:
             self.__info.new('info.desktop')
             self.__info.set('Type', 'Wiican Mapping')
-            
-        if mapping_path:
-            mapping_fp = open(mapping_path, 'r')
+
+        # Getting wminput mapping file            
+        if path and os.path.exists(os.path.join(path, self.mapping_filename)):
+            mapping_fp = open(os.path.join(path, self.mapping_filename), 'r')
             self.__mapping = mapping_fp.read()
             mapping_fp.close()
         else:
             self.__mapping = ''
 
-        # Get icon file path
+        # Getting icon file path
         icon_name = self.__info.getIcon()
-        if info_path and icon_name in os.listdir(os.path.dirname(info_path)): # Icon included
-            self.set_icon(os.path.join(os.path.dirname(info_path), icon_name))
+        if path and icon_name in os.listdir(os.path.dirname(path)): # Icon included
+            self.set_icon(os.path.join(path, icon_name))
         elif getIconPath(icon_name): # Theme icon
             self.set_icon(getIconPath(icon_name))
-        else:
-            self.set_icon(ICON_DEFAULT) # Default icon
-
+        else: # Default icon
+            self.set_icon(ICON_DEFAULT)
+            
     def get_name(self):
         return self.__info.getName()
         
@@ -75,8 +81,17 @@ class Mapping(object):
         self.__info.set('Comment', comment, locale=True)
 
     def get_icon(self):
-        return self.__info.getIcon()
-                
+        icon_name = self.__info.getIcon()
+        # Icon included
+        if self.__path and icon_name in os.listdir(os.path.dirname(self.__path)):
+            return os.path.join(self.__path, icon_name)
+        # Theme icon
+        elif getIconPath(icon_name): 
+            return getIconPath(icon_name)
+        # Default icon
+        else:
+            return ICON_DEFAULT
+                            
     def set_icon(self, icon_path):
         self.__info.set('Icon', icon_path)
 
@@ -98,18 +113,28 @@ class Mapping(object):
     def set_mapping(self, mapping):
         self.__mapping = mapping
         
-    def write(self, dest_path):
-        if not os.path.exists(dest_path):
+    def write(self, dest_path=None):
+        if not dest_path: 
+            dest_path = self.__path
+        elif not os.path.exists(dest_path):
             os.mkdir(dest_path)
-        else:
-            for item in os.listdir(dest_path): 
-                os.unlink(os.path.join(dest_path, item))
+
+        icon_path = self.get_icon()
+        icon_filename = os.path.basename(icon_path)
+        if not icon_path == os.path.join(dest_path, icon_filename):
+            shutil.copy(icon_path, dest_path)
+            self.set_icon(icon_filename)
             
-        self.__info.write(os.path.join(dest_path, 'info.desktop'))
-        shutil.copy(self.get_icon(), dest_path)
-        mapping_fp = open(os.path.join(dest_path, 'mapping.wminput'), 'w')
+        self.__info.write(os.path.join(dest_path, self.info_filename))
+        
+        mapping_fp = open(os.path.join(dest_path, self.mapping_filename), 'w')
         mapping_fp.write(self.__mapping)
         mapping_fp.close()
+
+        # Clean not useful files
+        for item in [x for x in os.listdir(dest_path) if not x in \
+                [self.info_filename, self.mapping_filename, icon_filename]]:
+            os.unlink(os.path.join(dest_path, item))
 
     def __repr__(self):
         return "Mapping <" + self.__info.get('Name', locale=False) + ' ' + \
@@ -123,16 +148,16 @@ class MappingManager(object):
 
         if not type(self.system_paths) is list:
             self.system_paths = [self.system_paths]
-        
+
+        # a bag of 'id': {'path': 'path_val', 'mapping': mapping_object'}
         self.mapping_bag = {}
             
     def scan(self):
         def load_mapping(mappings, dirname, fnames):
-            if 'info.desktop' in fnames and 'mapping.wminput' in fnames:
+            if Mapping.info_filename in fnames and Mapping.mapping_filename in fnames:
                 mapping_id = os.path.splitext(os.path.basename(dirname))[0]
-                mappings[mapping_id] = {'path': dirname, 
-                    'mapping': Mapping(os.path.join(dirname, 
-                    'info.desktop'), os.path.join(dirname, 'mapping.wminput'))}
+                mappings[mapping_id] = {'path': dirname,
+                    'mapping': Mapping(dirname)}
 
         for path in self.system_paths + [self.home_path]:
             os.path.walk(path, load_mapping, self.mapping_bag)
@@ -140,11 +165,13 @@ class MappingManager(object):
     def install(self, package_path):
         package_file = tarfile.open(package_path)
         
-        if not 'info.desktop' in package_file.getnames():
-            raise MappingManagerError, _('Not info.desktop file found')
+        if not Mapping.info_filename in package_file.getnames():
+            raise MappingManagerError, _('Not %s file found' % \
+                Mapping.info_filename)
     
-        if not 'mapping.wminput' in package_file.getnames():
-            raise MappingManagerError, _('Not mapping.wminput file found')
+        if not Mapping.mapping_filename in package_file.getnames():
+            raise MappingManagerError, _('Not %s file found' % \
+                Mapping.mapping_filename)
 
         mapping_id = self.__gen_unique_mapping_id()
         mapping_path = os.path.join(self.home_path, mapping_id)
@@ -152,8 +179,7 @@ class MappingManager(object):
         package_file.extractall(mapping_path)
         package_file.close()
 
-        mapping = Mapping(os.path.join(mapping_path, 'info.desktop'), 
-            os.path.join(mapping_path, 'mapping.wminput'))
+        mapping = Mapping(mapping_path)
  
         self.mapping_bag[mapping_id] = {'path': mapping_path, 'mapping':
             mapping}
