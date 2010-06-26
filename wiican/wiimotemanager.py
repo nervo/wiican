@@ -28,12 +28,12 @@ import gobject
 import dbus
 
 from defs import *
-from dotconfig import *
 from notificator import Notificator
 from pnganimation import PngAnimation
-from mapping import MappingDialog
+from mapping import MappingManagerDialog
 
 import service
+from mappingmanager import mapping_manager, Mapping, MappingManagerError
 
 class WiimoteStatusIcon(gtk.StatusIcon):
     def __init__(self):
@@ -52,7 +52,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.aboutdlg.connect('response', lambda d, r: d.hide())
         self.connect('popup-menu', self.__icon_popupmenu_cb, None)
         self.connect('activate', self.__activate_cb)
-        
+
         self.__load_mappings_menu()
         self.__notificator = Notificator('wiican')
         
@@ -106,9 +106,8 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.set_tooltip(_('Discovering Wiimote'))
         gobject.timeout_add(500, animate)
 
-    def __load_mappings_menu(self, ):
+    def __load_mappings_menu(self):
         self.__mappings_menu = gtk.Menu()
-        config_files = DotConfig(USER_CONFIG_DIR, CONFIG_SKEL)
 
         disconnect_item = gtk.ImageMenuItem(gtk.STOCK_DISCONNECT)
         disconnect_item.connect('activate', self.__discover_cb, -1)
@@ -120,30 +119,15 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         sep_item.show()
         self.__mappings_menu.append(sep_item)
 
-        # Add every wminput config file as menu item
-        mapping_order = {}
-        for file in config_files.get_files('*.wminput', True):
-            meta = MAPPING_DEFAULT_VALUES.copy()
-            meta.update(read_metadata(file))
-
-            if not meta['visible']:
-                continue
-
-            icon = gtk.gdk.pixbuf_new_from_file_at_size(meta['icon'], 16, 16)
-            item = gtk.ImageMenuItem(meta['name'])
-            item.set_tooltip_text(meta['description'])
-            item.set_image(gtk.image_new_from_pixbuf(icon))
-            item.connect('activate', self.__discover_cb, file)
-            item.show()
-
-            # Calculate the order of mappings
-            while mapping_order.has_key(meta['position']):
-                meta['position'] += 1
-            mapping_order[meta['position']] = item
-
-        # python dict applies meta order
-        for item in mapping_order.values():
-            self.__mappings_menu.append(item)
+        mapping_manager.scan()
+        for path, mapping in [item.values() for item in mapping_manager.mapping_bag.values()]:
+            icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 16, 16)
+            menuitem = gtk.ImageMenuItem(mapping.get_name())
+            menuitem.set_tooltip_text(mapping.get_comment())
+            menuitem.set_image(gtk.image_new_from_pixbuf(icon))
+            menuitem.connect('activate', self.__discover_cb, os.path.join(path, 'mapping.wminput'))
+            menuitem.show()
+            self.__mappings_menu.append(menuitem)
 
     def __icon_popupmenu_cb(self, status_icon, button, activate_time, data):
         self.main_menu.popup(None, None, gtk.status_icon_position_menu, button, 
@@ -156,10 +140,8 @@ class WiimoteStatusIcon(gtk.StatusIcon):
                     gtk.get_current_event_time(), status_icon)
 
     def preferences_cb(self, widget):
-        mapping_dlg = MappingDialog()
-        if mapping_dlg.run() == gtk.RESPONSE_OK:
-            self.__load_mappings_menu()
-        mapping_dlg.destroy()
+        mapping_dlg = MappingManagerDialog()
+        self.__load_mappings_menu()
 
     def about_cb(self, widget):
         self.aboutdlg.show()
@@ -168,17 +150,16 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         sys.exit(0)
 
     def __discover_cb(self, discover_item, config=None):
+        print config
         if self.__cur_status & service.WC_WIIMOTE_DISCOVERING:
             self.__wiican_iface.DisconnectWiimote()
         
         if config and config != -1:
-            # FIXME: This way of compare pixbufs it's awful
-            overlap_icon = discover_item.get_image().get_pixbuf()
-            if overlap_icon.get_pixels() == gtk.gdk.pixbuf_new_from_file_at_size(ICON_DEFAULT, 16, 16).get_pixels():
-                overlap_icon = None
-            self.__animation = PngAnimation(
-                    [ICON_CONN1, ICON_CONN2, ICON_CONN3, ICON_ON],
-                    overlap_icon)
+            # FIXME: This is awful
+            #overlap_icon = discover_item.get_image().get_pixbuf()
+            #if overlap_icon.get_pixels() == gtk.gdk.pixbuf_new_from_file_at_size(ICON_DEFAULT, 16, 16).get_pixels():
+            #    overlap_icon = None
+            self.__animation = PngAnimation([ICON_CONN1, ICON_CONN2, ICON_CONN3, ICON_ON])
             self.__wiican_iface.ConnectWiimote(config, False)
             self.__notificator.display_notification(title=_('Press 1+2'), 
                 text=_('To put you Wiimote in discoverable mode now'),
