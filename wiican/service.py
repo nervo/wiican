@@ -112,7 +112,7 @@ class WiicanDBus(dbus.service.Object):
         return False
 
     def __check_uinput_present(self):
-        # FIXME: There must be a better and pythonic way to check it
+        # FIXME: There must be a better, pythonic and signalable way to check it
         mod_fp = open('/proc/modules')
         modules = mod_fp.read()
         mod_fp.close()

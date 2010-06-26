@@ -2,7 +2,7 @@
 # vim: ts=4 
 ###
 #
-# Copyright (c) 2009 J. Félix Ontañón
+# Copyright (c) 2009, 2010 J. Félix Ontañón
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 3 as
@@ -151,7 +151,7 @@ class MappingManagerDialog:
         self.mapping_dlg = builder.get_object('mapping_manager_dlg')
         self.mapping_store = builder.get_object('mapping_store')
         self.mapping_list = builder.get_object('mapping_list')
-
+        
         for mapping_id, mapping_data in mapping_manager.mapping_bag.items():
             mapping = mapping_data['mapping']
             icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 24, 
