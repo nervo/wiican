@@ -226,6 +226,10 @@ class MappingManagerDialog:
                 
             delete_dlg.destroy()
 
+    def mapping_list_key_release_event_cb(self, widget, event):
+       if event.keyval == gtk.gdk.keyval_from_name("Delete"):
+            self.delete_btn_clicked_cb(None)
+
     def import_btn_clicked_cb(self, widget):
         import_dlg = gtk.FileChooserDialog(_('Import mapping...'), 
                 self.mapping_dlg, gtk.FILE_CHOOSER_ACTION_OPEN,

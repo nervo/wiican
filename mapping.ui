@@ -4,12 +4,13 @@
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkDialog" id="mapping_editor_dlg">
     <property name="title" translatable="yes">New entry</property>
-    <property name="window_position">center</property>
+    <property name="window_position">center-on-parent</property>
     <property name="default_width">320</property>
     <property name="default_height">400</property>
     <property name="destroy_with_parent">True</property>
     <property name="icon_name">gtk-new</property>
     <property name="type_hint">dialog</property>
+    <property name="transient_for">mapping_manager_dlg</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>
@@ -236,10 +237,10 @@
     <property name="visible">True</property>
     <property name="title" translatable="yes">Wiimote mappings</property>
     <property name="window_position">mouse</property>
-    <property name="default_width">400</property>
-    <property name="default_height">300</property>
+    <property name="default_width">500</property>
+    <property name="default_height">400</property>
     <property name="destroy_with_parent">True</property>
-    <property name="icon">wiican</property>
+    <property name="icon_name">preferences-desktop</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox3">
@@ -357,6 +358,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hscrollbar_policy">automatic</property>
+                        <property name="vscrollbar_policy">automatic</property>
                         <child>
                           <object class="GtkTreeView" id="mapping_list">
                             <property name="visible">True</property>
@@ -366,6 +368,7 @@
                             <property name="search_column">1</property>
                             <property name="tooltip_column">2</property>
                             <signal name="row_activated" handler="mapping_list_row_activated_cb"/>
+                            <signal name="key_release_event" handler="mapping_list_key_release_event_cb"/>
                             <child>
                               <object class="GtkTreeViewColumn" id="treeviewcolumn1">
                                 <child>
@@ -378,6 +381,7 @@
                             </child>
                             <child>
                               <object class="GtkTreeViewColumn" id="treeviewcolumn2">
+                                <property name="resizable">True</property>
                                 <property name="title">Mapping</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="mappingname_cell"/>
