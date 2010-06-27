@@ -122,6 +122,9 @@ class WiimoteStatusIcon(gtk.StatusIcon):
 
         mapping_manager.scan_mappings()
         for mapping_id, mapping in mapping_manager.items():
+            if not mapping_manager.is_visible(mapping_id):
+                continue
+                
             icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 16, 16)
             menuitem = gtk.ImageMenuItem(mapping.get_name())
             menuitem.set_tooltip_text(mapping.get_comment())

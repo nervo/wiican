@@ -155,8 +155,10 @@ class MappingManagerDialog(object):
         for mapping_id, mapping in mapping_manager.items():
             icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 24, 
                 24)
+            visible = mapping_manager.is_visible(mapping_id)
+            
             self.mapping_store.append([icon, mapping.get_name(), 
-                mapping.get_comment(), True, mapping_id])
+                mapping.get_comment(), visible, mapping_id])
 
     def run(self):
         return self.mapping_dlg.run()
@@ -286,6 +288,11 @@ class MappingManagerDialog(object):
                 #TODO: Check writability before export (or wait for gnome-bug #137515)
                 mapping_manager.export_mapping(mapping_id, dest_file_path)
             export_dlg.destroy()
+
+    def visible_cell_toggled_cb(self, widget, path):
+        mapping_id = self.mapping_store[path][MAPPING_ID_COL]
+        mapping_manager.set_visible(mapping_id, not self.mapping_store[path][VISIBLE_COL])
+        self.mapping_store[path][VISIBLE_COL] = not self.mapping_store[path][VISIBLE_COL]
               
     def up_btn_clicked_cb(self, widget):
         # From PyGTK FAQ Entry 13.51
@@ -307,7 +314,7 @@ class MappingManagerDialog(object):
             if selected_row > 0:
                 prev = iter_prev(selected, model)
                 model.swap(prev, selected)
-                mapping_manager.swap(model[prev][MAPPING_ID_COL], 
+                mapping_manager.swap_mapping_order(model[prev][MAPPING_ID_COL], 
                     model[selected][MAPPING_ID_COL])
 
     def down_btn_clicked_cb(self, widget):
@@ -318,5 +325,5 @@ class MappingManagerDialog(object):
             if selected_row < len(model)-1:
                 next = model.iter_next(selected)
                 model.swap(selected, next)
-                mapping_manager.swap(model[selected][MAPPING_ID_COL], 
+                mapping_manager.swap_mapping_order(model[selected][MAPPING_ID_COL], 
                     model[next][MAPPING_ID_COL])

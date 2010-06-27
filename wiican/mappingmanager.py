@@ -147,10 +147,10 @@ class Mapping(object):
     def __repr__(self):
         return "Mapping <" + self.__info.get('Name', locale=False) + ' ' + \
             str(self.__info.getVersion()) + ">"
-        
+
 class MappingManager(GConfStore):
     gconf_key = '/apps/wiican'
-    defaults = {'mapping_sort': [], 'mapping_visible': []}
+    defaults = {'mapping_sort': [], 'mapping_visible': set([])}
     
     def __init__(self, home_path, system_paths=[]):
         super(MappingManager, self).__init__(MappingManager.gconf_key)
@@ -162,7 +162,8 @@ class MappingManager(GConfStore):
 
         self.__mapping_bag = {}
         self.loadconf()
-
+        self.options['mapping_visible'] = set(self.options['mapping_visible'])
+        
     def scan_mappings(self):
         def load_mapping(mappings, dirname, fnames):
             if Mapping.info_filename in fnames and Mapping.mapping_filename in fnames:
@@ -176,6 +177,9 @@ class MappingManager(GConfStore):
 
         self.options['mapping_sort'] = [x for x in self.options['mapping_sort'] \
             if x in self.__mapping_bag.keys()]
+
+        self.options['mapping_visible'] = set([x for x in \
+            self.options['mapping_visible'] if x in self.__mapping_bag.keys()])
 
     def import_mapping(self, package_path):
         package_file = tarfile.open(package_path)
@@ -198,6 +202,7 @@ class MappingManager(GConfStore):
  
         self.__mapping_bag[mapping_id] = mapping
         self.options['mapping_sort'].append(mapping_id)
+        self.options['mapping_visible'].add(mapping_id)        
             
         return mapping_id
 
@@ -222,9 +227,36 @@ class MappingManager(GConfStore):
         mapping.write(mapping_path)
         self.__mapping_bag[mapping_id] = mapping
         self.options['mapping_sort'].append(mapping_id)
-        
+        self.options['mapping_visible'].add(mapping_id)        
+                
         return mapping_id
+
+    def swap_mapping_order(self, mapping_id1, mapping_id2):
+        if not mapping_id1 in self.__mapping_bag:
+            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id1
         
+        if not mapping_id2 in self.__mapping_bag:
+            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id2
+
+        index = self.options['mapping_sort'].index(mapping_id1)
+        self.options['mapping_sort'].remove(mapping_id2)
+        self.options['mapping_sort'].insert(index, mapping_id2)
+
+    def is_visible(self, mapping_id):
+        if not mapping_id in self.__mapping_bag:
+            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
+
+        return mapping_id in self.options['mapping_visible']
+        
+    def set_visible(self, mapping_id, visible):
+        if not mapping_id in self.__mapping_bag:
+            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
+
+        if visible:
+            self.options['mapping_visible'].add(mapping_id)
+        else:   
+            self.options['mapping_visible'].remove(mapping_id)
+
     def __gen_unique_mapping_id(self):
         mapping_id = str(random.randint(1,999999))
         while True:
@@ -240,8 +272,10 @@ class MappingManager(GConfStore):
     
         mapping_path = self.__mapping_bag[mapping_id].get_path()
         shutil.rmtree(mapping_path)
-        self.__mapping_bag.pop(mapping_id)
         self.options['mapping_sort'].remove(mapping_id)
+        if mapping_id in self.options['mapping_visible']:
+            self.options['mapping_visible'].remove(mapping_id)
+        self.__mapping_bag.pop(mapping_id)
 
     def __getitem__(self, mapping_id):
         if not mapping_id in self.__mapping_bag:
@@ -262,17 +296,6 @@ class MappingManager(GConfStore):
     def items(self):
         for mapping_id in self.options['mapping_sort']:
             yield mapping_id, self.__mapping_bag[mapping_id]
-
-    def swap(self, mapping_id1, mapping_id2):
-        if not mapping_id1 in self.__mapping_bag:
-            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id1
-        
-        if not mapping_id2 in self.__mapping_bag:
-            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id2
-
-        index = self.options['mapping_sort'].index(mapping_id1)
-        self.options['mapping_sort'].remove(mapping_id2)
-        self.options['mapping_sort'].insert(index, mapping_id2)
 
     def __repr__(self):
         return self.__mapping_bag.__repr__()
