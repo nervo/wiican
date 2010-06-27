@@ -10,7 +10,6 @@
     <property name="destroy_with_parent">True</property>
     <property name="icon_name">gtk-new</property>
     <property name="type_hint">dialog</property>
-    <property name="transient_for">mapping_manager_dlg</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>
@@ -242,6 +241,7 @@
     <property name="destroy_with_parent">True</property>
     <property name="icon_name">preferences-desktop</property>
     <property name="type_hint">dialog</property>
+    <signal name="response" handler="close_btn_clicked_cb"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox3">
         <property name="visible">True</property>
@@ -382,7 +382,7 @@
                             <child>
                               <object class="GtkTreeViewColumn" id="treeviewcolumn2">
                                 <property name="resizable">True</property>
-                                <property name="title">Mapping</property>
+                                <property name="title">Name</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="mappingname_cell"/>
                                   <attributes>
@@ -399,7 +399,7 @@
                                     <signal name="toggled" handler="visible_cell_toggled_cb"/>
                                   </object>
                                   <attributes>
-                                    <attribute name="activatable">3</attribute>
+                                    <attribute name="active">3</attribute>
                                   </attributes>
                                 </child>
                               </object>
