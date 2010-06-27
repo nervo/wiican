@@ -114,18 +114,20 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         disconnect_item.show()
         self.__mappings_menu.append(disconnect_item)
         self.__disconnect_item = disconnect_item
-
+        self.__disconnect_item.set_sensitive(False)
+        
         sep_item = gtk.SeparatorMenuItem()
         sep_item.show()
         self.__mappings_menu.append(sep_item)
 
-        mapping_manager.scan()
-        for path, mapping in [item.values() for item in mapping_manager.mapping_bag.values()]:
+        mapping_manager.scan_mappings()
+        for mapping_id, mapping in mapping_manager.items():
             icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 16, 16)
             menuitem = gtk.ImageMenuItem(mapping.get_name())
             menuitem.set_tooltip_text(mapping.get_comment())
             menuitem.set_image(gtk.image_new_from_pixbuf(icon))
-            menuitem.connect('activate', self.__discover_cb, os.path.join(path, 'mapping.wminput'))
+            menuitem.connect('activate', self.__discover_cb, os.path.join(mapping.get_path(), 
+                Mapping.mapping_filename))
             menuitem.show()
             self.__mappings_menu.append(menuitem)
 
@@ -141,6 +143,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
 
     def preferences_cb(self, widget):
         mapping_dlg = MappingManagerDialog()
+        mapping_dlg.run()
         self.__load_mappings_menu()
 
     def about_cb(self, widget):
@@ -150,7 +153,6 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         sys.exit(0)
 
     def __discover_cb(self, discover_item, config=None):
-        print config
         if self.__cur_status & service.WC_WIIMOTE_DISCOVERING:
             self.__wiican_iface.DisconnectWiimote()
         

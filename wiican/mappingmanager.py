@@ -66,6 +66,9 @@ class Mapping(object):
         else: # Default icon
             self.set_icon(ICON_DEFAULT)
             
+    def get_path(self):
+        return self.__path
+
     def get_name(self):
         return self.__info.getName()
         
@@ -114,7 +117,9 @@ class Mapping(object):
         self.__mapping = mapping
         
     def write(self, dest_path=None):
-        if not dest_path: 
+        if not dest_path:
+            if not self.__path:
+                raise MappingError, _('No path provided for writing mapping')
             dest_path = self.__path
         elif not os.path.exists(dest_path):
             os.mkdir(dest_path)
@@ -136,6 +141,8 @@ class Mapping(object):
                 [self.info_filename, self.mapping_filename, icon_filename]]:
             os.unlink(os.path.join(dest_path, item))
 
+        self.__path = dest_path
+        
     def __repr__(self):
         return "Mapping <" + self.__info.get('Name', locale=False) + ' ' + \
             str(self.__info.getVersion()) + ">"
@@ -149,28 +156,26 @@ class MappingManager(object):
         if not type(self.system_paths) is list:
             self.system_paths = [self.system_paths]
 
-        # a bag of 'id': {'path': 'path_val', 'mapping': mapping_object'}
-        self.mapping_bag = {}
+        self.__mapping_bag = {}
             
-    def scan(self):
+    def scan_mappings(self):
         def load_mapping(mappings, dirname, fnames):
             if Mapping.info_filename in fnames and Mapping.mapping_filename in fnames:
                 mapping_id = os.path.splitext(os.path.basename(dirname))[0]
-                mappings[mapping_id] = {'path': dirname,
-                    'mapping': Mapping(dirname)}
+                mappings[mapping_id] = Mapping(dirname)
 
         for path in self.system_paths + [self.home_path]:
-            os.path.walk(path, load_mapping, self.mapping_bag)
+            os.path.walk(path, load_mapping, self.__mapping_bag)
 
-    def install(self, package_path):
+    def import_mapping(self, package_path):
         package_file = tarfile.open(package_path)
         
         if not Mapping.info_filename in package_file.getnames():
-            raise MappingManagerError, _('Not %s file found' % \
+            raise MappingManagerError, _('Not %s file found on wiican package' % \
                 Mapping.info_filename)
     
         if not Mapping.mapping_filename in package_file.getnames():
-            raise MappingManagerError, _('Not %s file found' % \
+            raise MappingManagerError, _('Not %s file found  on wiican package' % \
                 Mapping.mapping_filename)
 
         mapping_id = self.__gen_unique_mapping_id()
@@ -181,54 +186,33 @@ class MappingManager(object):
 
         mapping = Mapping(mapping_path)
  
-        self.mapping_bag[mapping_id] = {'path': mapping_path, 'mapping':
-            mapping}
+        self.__mapping_bag[mapping_id] = mapping
             
         return mapping_id
 
-    def export(self, mapping_id, dest_filepath):
-        if not mapping_id in self.mapping_bag:
+    def export_mapping(self, mapping_id, dest_filepath):
+        if not mapping_id in self.__mapping_bag:
             raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
 
-        mapping = self.mapping_bag[mapping_id]['mapping']
-        mapping_path = self.mapping_bag[mapping_id]['path']
+        mapping = self.__mapping_bag[mapping_id]
+        mapping_path = self.__mapping_bag[mapping_id].get_path()
         package_file = tarfile.TarFile(dest_filepath, 'w')
 
-        mapping.write(mapping_path)
+        mapping.write()
 
         for f in os.listdir(mapping_path):
             package_file.add(os.path.join(mapping_path, f), arcname=f)
             
         package_file.close()
 
-    def add(self, mapping):
+    def add_new_mapping(self, mapping):
         mapping_id = self.__gen_unique_mapping_id()
         mapping_path = os.path.join(self.home_path, mapping_id)
         mapping.write(mapping_path)
-        self.mapping_bag[mapping_id] = {'path': mapping_path, 'mapping': mapping}
+        self.__mapping_bag[mapping_id] = mapping
                 
         return mapping_id
         
-    def remove(self, mapping_id):
-        if not mapping_id in self.mapping_bag:
-            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
-    
-        mapping_path = self.mapping_bag[mapping_id]['path']
-        shutil.rmtree(mapping_path)
-        self.mapping_bag.pop(mapping_id)
-
-    def get_mapping(self, mapping_id):
-        if not mapping_id in self.mapping_bag:
-            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
-
-        return self.mapping_bag[mapping_id]['mapping']
-
-    def get_mapping_path(self, mapping_id):
-        if not mapping_id in self.mapping_bag:
-            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
-
-        return self.mapping_bag[mapping_id]['path']
-
     def __gen_unique_mapping_id(self):
         mapping_id = str(random.randint(1,999999))
         while True:
@@ -237,8 +221,40 @@ class MappingManager(object):
             else: break
             
         return mapping_id
+
+    def __delitem__(self, mapping_id):
+        if not mapping_id in self.__mapping_bag:
+            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
+    
+        mapping_path = self.__mapping_bag[mapping_id].get_path()
+        shutil.rmtree(mapping_path)
+        self.__mapping_bag.pop(mapping_id)
+
+    def __getitem__(self, mapping_id):
+        if not mapping_id in self.__mapping_bag:
+            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
+
+        return self.__mapping_bag[mapping_id]
+
+    def __setitem__(self, mapping_id, mapping):
+        if not mapping_id in self.__mapping_bag:
+            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
+
+        self.__mapping_bag[mapping_id] = mapping
+
+    def __iter__(self):
+        return self.__mapping_bag.__iter__()
+
+    def items(self):
+        return self.__mapping_bag.items()
+
+    def __repr__(self):
+        return self.__mapping_bag.__repr__()
         
 mapping_manager = MappingManager(save_data_path('wiican'), BASE_DATA_DIR)
 
 class MappingManagerError(exceptions.Exception):
+    pass
+
+class MappingError(exceptions.Exception):
     pass

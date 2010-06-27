@@ -152,12 +152,14 @@ class MappingManagerDialog:
         self.mapping_store = builder.get_object('mapping_store')
         self.mapping_list = builder.get_object('mapping_list')
         
-        for mapping_id, mapping_data in mapping_manager.mapping_bag.items():
-            mapping = mapping_data['mapping']
+        for mapping_id, mapping in mapping_manager.items():
             icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 24, 
                 24)
             self.mapping_store.append([icon, mapping.get_name(), 
                 mapping.get_comment(), True, mapping_id])
+
+    def run(self):
+        return self.mapping_dlg.run()
 
     def close_btn_clicked_cb(self, widget):
         return self.mapping_dlg.destroy()
@@ -168,7 +170,7 @@ class MappingManagerDialog:
 
         if mapping_editor_dlg.run() == gtk.RESPONSE_OK:
             mapping = mapping_editor_dlg.get_mapping()
-            mapping_id = mapping_manager.add(mapping)
+            mapping_id = mapping_manager.add_new_mapping(mapping)
 
             icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 24, 
                 24)
@@ -183,14 +185,14 @@ class MappingManagerDialog:
         
         if selected is not None:
             mapping_id = model[selected][MAPPING_ID_COL]
-            mapping = mapping_manager.get_mapping(mapping_id)
+            mapping = mapping_manager[mapping_id]
             mapping_editor_dlg = MappingEditorDialog(mapping)
             mapping_editor_dlg.set_title(_('Editing ') + mapping.get_name())
 
             if mapping_editor_dlg.run() == gtk.RESPONSE_OK:
                 new_mapping = mapping_editor_dlg.get_mapping()
-                new_mapping.write(mapping_manager.mapping_bag[mapping_id]['path'])
-                mapping_manager.mapping_bag[mapping_id]['mapping'] = new_mapping
+                new_mapping.write(mapping_manager[mapping_id].get_path())
+                mapping_manager[mapping_id] = new_mapping
                 model[selected][ICON_COL] = \
                     gtk.gdk.pixbuf_new_from_file_at_size(new_mapping.get_icon(), 
                         24, 24)
@@ -219,7 +221,7 @@ class MappingManagerDialog:
             
             if delete_dlg.run() == gtk.RESPONSE_YES:
                 mapping_id = model[selected][MAPPING_ID_COL]
-                mapping_manager.remove(mapping_id)
+                del(mapping_manager[mapping_id])
                 model.remove(selected)
                 
             delete_dlg.destroy()
@@ -237,7 +239,7 @@ class MappingManagerDialog:
         import_dlg.destroy()
 
         try:
-            mapping_id = mapping_manager.install(filename)
+            mapping_id = mapping_manager.import_mapping(filename)
         except MappingManagerError:
             error_importing_message = _('Wiican Mapping Package import failed!')
             error_importing_dlg = gtk.MessageDialog(parent = self.mapping_dlg,
@@ -250,7 +252,7 @@ class MappingManagerDialog:
             error_importing_dlg.destroy()
             return
             
-        mapping = mapping_manager.get_mapping(mapping_id)
+        mapping = mapping_manager[mapping_id]
         icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 24, 24)
         self.mapping_store.append([icon, mapping.get_name(), 
             mapping.get_comment(), True, mapping_id])
@@ -260,7 +262,7 @@ class MappingManagerDialog:
         model, selected = selection.get_selected()
         if selected is not None:
             mapping_id = model[selected][MAPPING_ID_COL]
-            mapping = mapping_manager.get_mapping(mapping_id)
+            mapping = mapping_manager[mapping_id]
             
             export_dlg = gtk.FileChooserDialog(_('Exporting mapping...'), 
                     self.mapping_dlg, gtk.FILE_CHOOSER_ACTION_SAVE,
@@ -276,7 +278,7 @@ class MappingManagerDialog:
             if export_dlg.run() == gtk.RESPONSE_OK:
                 dest_file_path = export_dlg.get_filename()
                 #TODO: Check writability before export (or wait for gnome-bug #137515)
-                mapping_manager.export(mapping_id, dest_file_path)
+                mapping_manager.export_mapping(mapping_id, dest_file_path)
             export_dlg.destroy()
               
     def up_btn_clicked_cb(self, widget):
