@@ -54,36 +54,29 @@ class WMInputLauncher(gobject.GObject):
 
         self.config_file = config_file
         self.daemon = daemon
-        self.__pid = None
+        self._process = None
 
     @threaded
     def start(self):
-        cmd = self.wminput_cmd
         if self.config_file:
-            cmd += ['-c', self.config_file]
+            cmd = ['-c', self.config_file]
         if self.daemon:
-            cmd += ['-d']
+            cmd = ['-d']
 
         #TODO: Maybe exception tracking it's required here
-        proc = subprocess.Popen(cmd, stdout = subprocess.PIPE)
-        self.__pid = proc.pid
-        self.emit('wminput_launched', self.__pid)
-        retcode = proc.wait()
+        self._process = subprocess.Popen(self.wminput_cmd + cmd, stdout=subprocess.PIPE)
+        self.emit('wminput_launched', self._process.pid)
+        retcode = self._process.wait()
         self.emit('wminput_stopped', retcode)
 
     @gobject.property
     def running(self):
-        return self.__pid is not None
+        return self._process is not None
 
     def stop(self):
-        # FIXME: That's awful!
         if self.running:
-            try:
-                os.kill(self.__pid, signal.SIGTERM)
-            except:
-                pass
-
-            self.__pid = None
+            self._process.terminate()
+            self._process = None
 
 if __name__ == '__main__':
     def loaded(wminput, pid):
@@ -102,5 +95,5 @@ if __name__ == '__main__':
     x.connect('wminput_launched', loaded)
     x.connect('wminput_stopped', stopped)
     x.start()
-    #gobject.timeout_add(5000, stopit, x)
+    gobject.timeout_add(5000, stopit, x)
     gobject.MainLoop().run()
