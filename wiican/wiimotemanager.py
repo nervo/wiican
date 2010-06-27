@@ -150,6 +150,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.aboutdlg.show()
 
     def quit_cb(self, widget):
+        mapping_manager.saveconf()
         sys.exit(0)
 
     def __discover_cb(self, discover_item, config=None):

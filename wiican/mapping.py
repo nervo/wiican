@@ -74,7 +74,7 @@ class IconChooserDialog(gtk.FileChooserDialog):
         self.set_preview_widget(preview)
         self.connect('update-preview', update_preview_cb, preview, icon_size)
 
-class MappingEditorDialog:
+class MappingEditorDialog(object):
     def __init__(self, mapping):
         self.mapping = mapping
                     
@@ -134,7 +134,7 @@ class MappingEditorDialog:
 
         icon_dlg.destroy()
 
-class MappingManagerDialog:
+class MappingManagerDialog(object):
     mapping_filter = gtk.FileFilter()
     mapping_filter.set_name(_('Wiican Mapping Package'))
     mapping_filter.add_mime_type('application/x-tar')
@@ -161,7 +161,7 @@ class MappingManagerDialog:
     def run(self):
         return self.mapping_dlg.run()
 
-    def close_btn_clicked_cb(self, widget):
+    def close_btn_clicked_cb(self, widget, data=None):
         return self.mapping_dlg.destroy()
 
     def new_btn_clicked_cb(self, widget):
@@ -240,6 +240,8 @@ class MappingManagerDialog:
             
         if import_dlg.run() == gtk.RESPONSE_OK:
             filename = import_dlg.get_filename()
+        else:
+            return
         import_dlg.destroy()
 
         try:
@@ -305,6 +307,8 @@ class MappingManagerDialog:
             if selected_row > 0:
                 prev = iter_prev(selected, model)
                 model.swap(prev, selected)
+                mapping_manager.swap(model[prev][MAPPING_ID_COL], 
+                    model[selected][MAPPING_ID_COL])
 
     def down_btn_clicked_cb(self, widget):
         selection = self.mapping_list.get_selection()
@@ -314,3 +318,5 @@ class MappingManagerDialog:
             if selected_row < len(model)-1:
                 next = model.iter_next(selected)
                 model.swap(selected, next)
+                mapping_manager.swap(model[selected][MAPPING_ID_COL], 
+                    model[next][MAPPING_ID_COL])

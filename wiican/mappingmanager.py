@@ -32,6 +32,7 @@ from xdg.IconTheme import getIconPath
 from xdg.BaseDirectory import save_data_path
 
 from defs import ICON_DEFAULT, BASE_DATA_DIR
+from confstore import GConfStore
 
 class Mapping(object):
     info_filename = 'info.desktop'
@@ -43,15 +44,15 @@ class Mapping(object):
         # Getting freedesktop definition file
         self.__info = DesktopEntry()
         
-        if path and os.path.exists(os.path.join(path, self.info_filename)):
-            self.__info.parse(os.path.join(path, self.info_filename))
+        if path and os.path.exists(os.path.join(path, Mapping.info_filename)):
+            self.__info.parse(os.path.join(path, Mapping.info_filename))
         else:
             self.__info.new('info.desktop')
             self.__info.set('Type', 'Wiican Mapping')
 
         # Getting wminput mapping file            
-        if path and os.path.exists(os.path.join(path, self.mapping_filename)):
-            mapping_fp = open(os.path.join(path, self.mapping_filename), 'r')
+        if path and os.path.exists(os.path.join(path, Mapping.mapping_filename)):
+            mapping_fp = open(os.path.join(path, Mapping.mapping_filename), 'r')
             self.__mapping = mapping_fp.read()
             mapping_fp.close()
         else:
@@ -130,15 +131,15 @@ class Mapping(object):
             shutil.copy(icon_path, dest_path)
             self.set_icon(icon_filename)
             
-        self.__info.write(os.path.join(dest_path, self.info_filename))
+        self.__info.write(os.path.join(dest_path, Mapping.info_filename))
         
-        mapping_fp = open(os.path.join(dest_path, self.mapping_filename), 'w')
+        mapping_fp = open(os.path.join(dest_path, Mapping.mapping_filename), 'w')
         mapping_fp.write(self.__mapping)
         mapping_fp.close()
 
         # Clean not useful files
         for item in [x for x in os.listdir(dest_path) if not x in \
-                [self.info_filename, self.mapping_filename, icon_filename]]:
+                [Mapping.info_filename, Mapping.mapping_filename, icon_filename]]:
             os.unlink(os.path.join(dest_path, item))
 
         self.__path = dest_path
@@ -147,9 +148,12 @@ class Mapping(object):
         return "Mapping <" + self.__info.get('Name', locale=False) + ' ' + \
             str(self.__info.getVersion()) + ">"
         
-class MappingManager(object):
+class MappingManager(GConfStore):
+    gconf_key = '/apps/wiican'
+    defaults = {'mapping_sort': [], 'mapping_visible': []}
+    
     def __init__(self, home_path, system_paths=[]):
-
+        super(MappingManager, self).__init__(MappingManager.gconf_key)
         self.home_path = home_path
         self.system_paths = system_paths
 
@@ -157,15 +161,21 @@ class MappingManager(object):
             self.system_paths = [self.system_paths]
 
         self.__mapping_bag = {}
-            
+        self.loadconf()
+
     def scan_mappings(self):
         def load_mapping(mappings, dirname, fnames):
             if Mapping.info_filename in fnames and Mapping.mapping_filename in fnames:
                 mapping_id = os.path.splitext(os.path.basename(dirname))[0]
                 mappings[mapping_id] = Mapping(dirname)
+                if not mapping_id in self.options['mapping_sort']:
+                    self.options['mapping_sort'].append(mapping_id)
 
         for path in self.system_paths + [self.home_path]:
             os.path.walk(path, load_mapping, self.__mapping_bag)
+
+        self.options['mapping_sort'] = [x for x in self.options['mapping_sort'] \
+            if x in self.__mapping_bag.keys()]
 
     def import_mapping(self, package_path):
         package_file = tarfile.open(package_path)
@@ -187,6 +197,7 @@ class MappingManager(object):
         mapping = Mapping(mapping_path)
  
         self.__mapping_bag[mapping_id] = mapping
+        self.options['mapping_sort'].append(mapping_id)
             
         return mapping_id
 
@@ -210,7 +221,8 @@ class MappingManager(object):
         mapping_path = os.path.join(self.home_path, mapping_id)
         mapping.write(mapping_path)
         self.__mapping_bag[mapping_id] = mapping
-                
+        self.options['mapping_sort'].append(mapping_id)
+        
         return mapping_id
         
     def __gen_unique_mapping_id(self):
@@ -229,6 +241,7 @@ class MappingManager(object):
         mapping_path = self.__mapping_bag[mapping_id].get_path()
         shutil.rmtree(mapping_path)
         self.__mapping_bag.pop(mapping_id)
+        self.options['mapping_sort'].remove(mapping_id)
 
     def __getitem__(self, mapping_id):
         if not mapping_id in self.__mapping_bag:
@@ -243,10 +256,23 @@ class MappingManager(object):
         self.__mapping_bag[mapping_id] = mapping
 
     def __iter__(self):
-        return self.__mapping_bag.__iter__()
+        for mapping_id in self.options['mapping_sort']:
+            yield mapping_id
 
     def items(self):
-        return self.__mapping_bag.items()
+        for mapping_id in self.options['mapping_sort']:
+            yield mapping_id, self.__mapping_bag[mapping_id]
+
+    def swap(self, mapping_id1, mapping_id2):
+        if not mapping_id1 in self.__mapping_bag:
+            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id1
+        
+        if not mapping_id2 in self.__mapping_bag:
+            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id2
+
+        index = self.options['mapping_sort'].index(mapping_id1)
+        self.options['mapping_sort'].remove(mapping_id2)
+        self.options['mapping_sort'].insert(index, mapping_id2)
 
     def __repr__(self):
         return self.__mapping_bag.__repr__()
