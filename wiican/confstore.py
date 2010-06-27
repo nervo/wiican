@@ -27,7 +27,7 @@ import types
 import exceptions
 
 class GConfKeysDict(dict):
-    VALID_KEY_TYPES = (bool, str, int, float, list, tuple)
+    VALID_KEY_TYPES = (bool, str, int, float, list, tuple, set)
     
     def __init__(self, *args, **kwargs):
         super(dict, self).__init__(*args, **kwargs)
@@ -75,11 +75,12 @@ class GConfStore(object):
             types.FloatType:   gconf.Client.set_float,
             types.StringType:  gconf.Client.set_string,
             types.ListType:    gconf.Client.set_list,
-            types.TupleType:   gconf.Client.set_list}
+            types.TupleType:   gconf.Client.set_list,
+            set:               gconf.Client.set_list}
 
         #TODO: To clear the gconf dir before save, is it convenient?
         for name, value in self.options.items():
-            if type(value) in (list, tuple):
+            if type(value) in (list, tuple, set):
                 string_value = [str(item) for item in value]
                 casts[type(value)](self.__client, self.__app_key + '/' + name,
                     gconf.VALUE_STRING, string_value)
