@@ -47,7 +47,7 @@ class Mapping(object):
         if path and os.path.exists(os.path.join(path, Mapping.info_filename)):
             self.__info.parse(os.path.join(path, Mapping.info_filename))
         else:
-            self.__info.new('info.desktop')
+            self.__info.new(self.info_filename)
             self.__info.set('Type', 'Wiican Mapping')
 
         # Getting wminput mapping file            
@@ -60,7 +60,7 @@ class Mapping(object):
 
         # Getting icon file path
         icon_name = self.__info.getIcon()
-        if path and icon_name in os.listdir(os.path.dirname(path)): # Icon included
+        if path and icon_name in os.listdir(path): # Icon included
             self.set_icon(os.path.join(path, icon_name))
         elif getIconPath(icon_name): # Theme icon
             self.set_icon(getIconPath(icon_name))
@@ -87,7 +87,7 @@ class Mapping(object):
     def get_icon(self):
         icon_name = self.__info.getIcon()
         # Icon included
-        if self.__path and icon_name in os.listdir(os.path.dirname(self.__path)):
+        if self.__path and icon_name in os.listdir(self.__path):
             return os.path.join(self.__path, icon_name)
         # Theme icon
         elif getIconPath(icon_name): 
@@ -100,16 +100,16 @@ class Mapping(object):
         self.__info.set('Icon', icon_path)
 
     def get_authors(self):
-        self.__info.get('X-Authors')
+        return self.__info.get('X-Authors')
 
     def set_authors(self, authors):
         self.__info.set('X-Authors', authors)
 
     def get_version(self):
-        self.__info.getVersion()
+        return self.__info.get('X-Version')
 
     def set_version(self, version):
-        self.__info.setVersion(version)
+        self.__info.set('X-Version', version)
 
     def get_mapping(self):
         return self.__mapping

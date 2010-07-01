@@ -53,7 +53,6 @@ class IconChooserDialog(gtk.FileChooserDialog):
                                 gtk.STOCK_OPEN, gtk.RESPONSE_OK))
 
         self.set_default_response(gtk.RESPONSE_OK)
-        self.set_current_folder(DEFAULT_PIXMAP_DIR)
         self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
 
         #TODO: Maybe a better filter it's requiered
@@ -80,26 +79,34 @@ class MappingEditorDialog(object):
                     
         builder = gtk.Builder()
         if not builder.add_objects_from_file(defs.MAPPING_UI, 
-                ['mapping_editor_dlg']):
+                ['mapping_editor_dlg', 'mapping_buffer']):
             raise 'Cant load %s' % defs.MAPPING_UI
         builder.connect_signals(self)
         
         self.mapping_editor_dlg = builder.get_object('mapping_editor_dlg')
         self.name_entry = builder.get_object('name_entry')
         self.comment_entry = builder.get_object('comment_entry')
-        self.file_buffer = builder.get_object('file_textview').get_buffer()
-        self.icon_btn = builder.get_object('icon_btn')
+        self.version_entry = builder.get_object('version_entry')
+        self.authors_entry = builder.get_object('authors_entry')
+        self.mapping_buffer = builder.get_object('mapping_buffer')
+        self.icon_image = builder.get_object('icon_image')
         
-        # Set initial values
-        self.name_entry.set_text(self.mapping.get_name())
-        self.comment_entry.set_text(self.mapping.get_comment())
-        self.file_buffer.set_text(self.mapping.get_mapping())
-        
+        #FIXME: iconfilechooser with default dialog from glade 3.6.7 crashes
+        self.iconfilechooser_btn = gtk.FileChooserButton(IconChooserDialog(self.mapping_editor_dlg))
+        self.iconfilechooser_btn.show()
+        self.iconfilechooser_btn.connect('file-set', self.iconfilechooser_btn_file_set_cb)
+        builder.get_object('hbox2').add(self.iconfilechooser_btn)
+
+        # Populate dialog with mapping values
+        self.name_entry.set_text(self.mapping.get_name() or '')
+        self.comment_entry.set_text(self.mapping.get_comment() or '')
+        self.version_entry.set_text(self.mapping.get_version() or '')
+        self.authors_entry.set_text(self.mapping.get_authors() or '')
+        self.mapping_buffer.set_text(self.mapping.get_mapping() or '')
+
         pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(self.mapping.get_icon(),
             48, 48)
-        image = gtk.Image()
-        image.set_from_pixbuf(pixbuf)
-        self.icon_btn.set_image(image)
+        self.icon_image.set_from_pixbuf(pixbuf)
 
     def set_title(self, title=''):
         self.mapping_editor_dlg.set_title(title)
@@ -111,28 +118,23 @@ class MappingEditorDialog(object):
         self.mapping_editor_dlg.destroy()
 
     def get_mapping(self):
-        start, end = self.file_buffer.get_bounds()
-        self.mapping.set_mapping(self.file_buffer.get_text(start, end))
+        start, end = self.mapping_buffer.get_bounds()
+        self.mapping.set_mapping(self.mapping_buffer.get_text(start, end))
         self.mapping.set_name(self.name_entry.get_text())
         self.mapping.set_comment(self.comment_entry.get_text())
+        self.mapping.set_version(self.version_entry.get_text())
+        self.mapping.set_authors(self.authors_entry.get_text())
 
         return self.mapping
 
     def link_btn_clicked_cb(self, widget):
         webbrowser.open(widget.get_uri())
 
-    def icon_btn_clicked_cb(self, widget):
-        icon_dlg = IconChooserDialog(parent=self.mapping_editor_dlg)
-
-        if icon_dlg.run() == gtk.RESPONSE_OK:
-            filename = icon_dlg.get_filename()
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 48, 48)
-            image = gtk.Image()
-            image.set_from_pixbuf(pixbuf)
-            widget.set_image(image)
-            self.mapping.set_icon(filename)
-
-        icon_dlg.destroy()
+    def iconfilechooser_btn_file_set_cb(self, widget):
+        filename = self.iconfilechooser_btn.get_filename()
+        pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 48, 48)
+        self.icon_image.set_from_pixbuf(pixbuf)
+        self.mapping.set_icon(filename)
 
 class MappingManagerDialog(object):
     mapping_filter = gtk.FileFilter()
@@ -195,12 +197,11 @@ class MappingManagerDialog(object):
                 new_mapping = mapping_editor_dlg.get_mapping()
                 new_mapping.write(mapping_manager[mapping_id].get_path())
                 mapping_manager[mapping_id] = new_mapping
-                model[selected][ICON_COL] = \
-                    gtk.gdk.pixbuf_new_from_file_at_size(new_mapping.get_icon(), 
-                        24, 24)
+                model[selected][ICON_COL] = gtk.gdk.pixbuf_new_from_file_at_size(new_mapping.get_icon(), 
+                    24, 24)
                 model[selected][NAME_COL] = new_mapping.get_name()
                 model[selected][COMMENT_COL] = new_mapping.get_comment()
-                
+
             mapping_editor_dlg.destroy()
 
     def mapping_list_row_activated_cb(self, widget, path, view_column):
