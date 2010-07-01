@@ -208,7 +208,7 @@ class MappingManager(GConfStore):
 
     def export_mapping(self, mapping_id, dest_filepath):
         if not mapping_id in self.__mapping_bag:
-            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
+            raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id
 
         mapping = self.__mapping_bag[mapping_id]
         mapping_path = self.__mapping_bag[mapping_id].get_path()
@@ -233,10 +233,10 @@ class MappingManager(GConfStore):
 
     def swap_mapping_order(self, mapping_id1, mapping_id2):
         if not mapping_id1 in self.__mapping_bag:
-            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id1
+            raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id1
         
         if not mapping_id2 in self.__mapping_bag:
-            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id2
+            raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id2
 
         index = self.options['mapping_sort'].index(mapping_id1)
         self.options['mapping_sort'].remove(mapping_id2)
@@ -244,13 +244,13 @@ class MappingManager(GConfStore):
 
     def is_visible(self, mapping_id):
         if not mapping_id in self.__mapping_bag:
-            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
+            raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id
 
         return mapping_id in self.options['mapping_visible']
         
     def set_visible(self, mapping_id, visible):
         if not mapping_id in self.__mapping_bag:
-            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
+            raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id
 
         if visible:
             self.options['mapping_visible'].add(mapping_id)
@@ -268,7 +268,7 @@ class MappingManager(GConfStore):
 
     def __delitem__(self, mapping_id):
         if not mapping_id in self.__mapping_bag:
-            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
+            raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id
     
         mapping_path = self.__mapping_bag[mapping_id].get_path()
         shutil.rmtree(mapping_path)
@@ -279,13 +279,13 @@ class MappingManager(GConfStore):
 
     def __getitem__(self, mapping_id):
         if not mapping_id in self.__mapping_bag:
-            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
+            raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id
 
         return self.__mapping_bag[mapping_id]
 
     def __setitem__(self, mapping_id, mapping):
         if not mapping_id in self.__mapping_bag:
-            raise MappingManagerError, 'Mapping not found:' + ' ' + mapping_id
+            raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id
 
         self.__mapping_bag[mapping_id] = mapping
 

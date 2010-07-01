@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-02 01:16+0100\n"
+"POT-Creation-Date: 2010-07-01 23:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,114 +16,89 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../wiican/wiimotemanager.py:103 ../wiican/wiimotemanager.py:104
-msgid "Connected"
-msgstr ""
-
-#: ../wiican/wiimotemanager.py:105
-msgid "Put Wiimote in discoverable mode now (press 1+2)"
-msgstr ""
-
-#: ../wiican/wiimotemanager.py:112 ../wiican/wiimotemanager.py:113
-msgid "Disconnected"
-msgstr ""
-
-#: ../wiican/wiimotemanager.py:114
-msgid "Wiimote off"
-msgstr ""
-
-#: ../wiican/wiimotemanager.py:123
-msgid "No bluetooth adapters"
-msgstr ""
-
-#: ../wiican/wiimotemanager.py:186
+#: ../wiican/wiimotemanager.py:83
 msgid "Plug a bluetooth adapter"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:192
+#: ../wiican/wiimotemanager.py:88
+msgid "Please load uinput module first"
+msgstr ""
+
+#: ../wiican/wiimotemanager.py:94
 msgid ""
 "Hold left button for use wiimote\n"
 "Right button for menu"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:204
+#: ../wiican/wiimotemanager.py:106
 msgid "Discovering Wiimote"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:211
-msgid "Use your wiimote"
+#: ../wiican/wiimotemanager.py:170
+msgid "Press 1+2"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:301
-msgid "Fail!"
+#: ../wiican/wiimotemanager.py:171
+msgid "To put you Wiimote in discoverable mode now"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:303
-msgid "Error discovering Wiimote"
-msgstr ""
-
-#: ../wiican/wiimotemanager.py:306
-msgid "uinput module it's not loaded"
-msgstr ""
-
-#: ../wiican/wiimotemanager.py:309
-msgid "check mapping syntax"
-msgstr ""
-
-#: ../wiican/wiimotemanager.py:311
-msgid "Unknown error"
-msgstr ""
-
-#: ../wiican/wiimotemanager.py:312
-msgid "Can't discover or use wiimote"
-msgstr ""
-
-#: ../wiican/mapping.py:34
+#: ../wiican/mapping.py:35
 msgid "Select image icon.."
 msgstr ""
 
-#: ../wiican/mapping.py:58
+#: ../wiican/mapping.py:60
 msgid "Images"
 msgstr ""
 
-#: ../wiican/mapping.py:115
-msgid "No Name"
+#: ../wiican/mapping.py:141
+msgid "Wiican Mapping Package"
 msgstr ""
 
-#: ../wiican/mapping.py:215
-msgid "Name"
+#: ../wiican/mapping.py:173
+msgid "Editing new mapping"
 msgstr ""
 
-#: ../wiican/mapping.py:219
-msgid "Visible"
-msgstr ""
-
-#: ../wiican/mapping.py:256
-msgid "Are you sure you want to completely remove "
-msgstr ""
-
-#: ../wiican/mapping.py:257
-msgid ""
-"this mappings?:\n"
-"\n"
-msgstr ""
-
-#: ../wiican/mapping.py:264
-msgid "Deleting mappings"
-msgstr ""
-
-#: ../wiican/mapping.py:279
-msgid "Can't remove mapping "
-msgstr ""
-
-#: ../wiican/mapping.py:324
+#: ../wiican/mapping.py:194
 msgid "Editing "
 msgstr ""
 
-#: ../wiican/dotconfig.py:122
-msgid "Skel config dir doesn't exists"
+#: ../wiican/mapping.py:214
+msgid "Are you sure you want to completely remove this mapping?"
 msgstr ""
 
-#: ../wiican/dotconfig.py:128
-msgid "Wrong perms on user config dir"
+#: ../wiican/mapping.py:223
+msgid "Deleting mappings"
+msgstr ""
+
+#: ../wiican/mapping.py:237
+msgid "Import mapping..."
+msgstr ""
+
+#: ../wiican/mapping.py:253
+msgid "Wiican Mapping Package import failed!"
+msgstr ""
+
+#: ../wiican/mapping.py:276
+msgid "Exporting mapping..."
+msgstr ""
+
+#: ../wiican/mappingmanager.py:123
+msgid "No path provided for writing mapping"
+msgstr ""
+
+#: ../wiican/mappingmanager.py:188
+#, python-format
+msgid "Not %s file found on wiican package"
+msgstr ""
+
+#: ../wiican/mappingmanager.py:192
+#, python-format
+msgid "Not %s file found  on wiican package"
+msgstr ""
+
+#: ../wiican/mappingmanager.py:211 ../wiican/mappingmanager.py:236
+#: ../wiican/mappingmanager.py:239 ../wiican/mappingmanager.py:247
+#: ../wiican/mappingmanager.py:253 ../wiican/mappingmanager.py:271
+#: ../wiican/mappingmanager.py:282 ../wiican/mappingmanager.py:288
+msgid "Mapping not found:"
 msgstr ""

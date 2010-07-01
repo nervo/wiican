@@ -1,6 +1,5 @@
 ../wiican/wiimotemanager.py
 ../wiican/mapping.py
-../wiican/dotconfig.py
-../entry.ui
+../wiican/mappingmanager.py
 ../mapping.ui
-../about.ui
+../wiimotemanager.ui
