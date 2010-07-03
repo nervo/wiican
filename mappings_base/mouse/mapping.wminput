@@ -1,7 +1,3 @@
-## Wiican Config file for wminput
-# name: Mouse
-# position: 0
-# visible: True
 Wiimote.A		= BTN_LEFT
 Wiimote.B		= BTN_RIGHT
 Wiimote.Up		= KEY_UP

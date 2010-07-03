@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Neverball
+Name[es]=Neverball
+Comment=Control ball with accelerómeter
+Comment[es]=Controla la bola con el acelerómetro
+Icon=neverball
+X-Version=1.0
+X-Authors=J. Félix Ontañón <felixonta@gmail.com>
+Type=Wiican Mapping
+Encoding=UTF-8

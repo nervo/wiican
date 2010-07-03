@@ -61,9 +61,10 @@ setup(
 
         packages = ['wiican'],
         scripts = ['bin/wiican', 'bin/wiican-service'],
-        data_files = [('share/wiican/config_skel', 
-                        ['config_skel/mouse.wminput', 
-                        'config_skel/neverball.wminput']),
+        data_files = [('share/wiican/mappings_base/mouse', 
+                        ['mappings_base/mouse/mapping.wminput', 'mappings_base/mouse/info.desktop']),
+                     ('share/wiican/mappings_base/neverball',
+                        ['mappings_base/neverball/info.desktop', 'mappings_base/neverball/mapping.wminput']),
                       ('share/wiican/img', 
                           ['img/wiitrayoff.svg', 'img/wiitrayon.svg',
                           'img/wiitrayon1.svg', 'img/wiitrayon2.svg', 

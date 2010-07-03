@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Mouse
+Name[es]=Ratón
+Comment=Control mouse events with accelerometer and A+B buttons
+Comment[es]=Controla eventos de ratón con acelerómetro y los botones A+B
+Icon=gnome-mouse
+X-Version=1.0
+X-Authors=J. Félix Ontañón <felixonta@gmail.com>
+Type=Wiican Mapping
+Encoding=UTF-8

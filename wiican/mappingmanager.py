@@ -31,7 +31,7 @@ from xdg.DesktopEntry import DesktopEntry
 from xdg.IconTheme import getIconPath
 from xdg.BaseDirectory import save_data_path
 
-from defs import ICON_DEFAULT, BASE_DATA_DIR
+from defs import ICON_DEFAULT, MAPPINGS_BASE_DIR
 from confstore import GConfStore
 
 class Mapping(object):
@@ -300,7 +300,7 @@ class MappingManager(GConfStore):
     def __repr__(self):
         return self.__mapping_bag.__repr__()
         
-mapping_manager = MappingManager(save_data_path('wiican'), BASE_DATA_DIR)
+mapping_manager = MappingManager(save_data_path('wiican'), MAPPINGS_BASE_DIR)
 
 class MappingManagerError(exceptions.Exception):
     pass
