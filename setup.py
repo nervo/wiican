@@ -45,7 +45,7 @@ setup(
         long_description='Wiican its a systray that wrappers wminput',
         author='J. Félix Ontañón',
         author_email='felixonta@gmail.com',
-        url='http://launchpad.net/wiican',
+        url='http://fontanon.org/wiican',
 
         classifiers=[
             'Development Status :: 0.3 - Alpha',
@@ -57,9 +57,11 @@ setup(
 	    'Topic :: Desktop Environment :: Gnome',
 	    'Topic :: Utilities'],
         keywords = ['wii', 'wiimote', 'joystick', 'gamepad', 'cwiid', 'wminput'],
-        requires = ['PyGTK', 'dbuspython', 'PyYAML'],
+        requires = ['PyGTK', 'dbuspython'],
 
-        packages = ['wiican'],
+        packages = ['wiican', 'wiican.ui', 'wiican.service', 'wiican.mapping'],
+        package_dir =  {'wiican': 'wiican', 'wiican.ui': 'wiican/ui', 
+            'wiican.service': 'wiican/service', 'wiican.mapping': 'wiican/mapping'},
         scripts = ['bin/wiican', 'bin/wiican-service'],
         data_files = [('share/wiican/mappings_base/mouse', 
                         ['mappings_base/mouse/mapping.wminput', 'mappings_base/mouse/info.desktop']),

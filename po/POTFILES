@@ -1,5 +1,6 @@
-../wiican/wiimotemanager.py
-../wiican/mapping.py
-../wiican/mappingmanager.py
+../bin/wiican
+../wiican/ui/managerdlg.py
+../wiican/ui/editordlg.py
+../wiican/mapping/manager.py
 ../mapping.ui
 ../wiimotemanager.ui
