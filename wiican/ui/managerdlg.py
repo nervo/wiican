@@ -134,12 +134,12 @@ class MappingManagerDialog(object):
         import_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)                    
         import_dlg.add_filter(self.mapping_filter)
             
-        if import_dlg.run() == gtk.RESPONSE_OK:
-            filename = import_dlg.get_filename()
-        else:
+        if not import_dlg.run() == gtk.RESPONSE_OK:
+            import_dlg.destroy()
             return
-        import_dlg.destroy()
-
+            
+        filename = import_dlg.get_filename()
+        
         try:
             mapping_id = mapping_manager.import_mapping(filename)
         except MappingManagerError:
@@ -152,12 +152,15 @@ class MappingManagerDialog(object):
             error_importing_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
             error_importing_dlg.run()
             error_importing_dlg.destroy()
+            import_dlg.destroy()
             return
             
         mapping = mapping_manager[mapping_id]
         icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 24, 24)
         self.mapping_store.append([icon, mapping.get_name(), 
             mapping.get_comment(), True, mapping_id])
+            
+        import_dlg.destroy()
         
     def export_btn_clicked_cb(self, widget):
         selection = self.mapping_list.get_selection()
