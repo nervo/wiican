@@ -26,8 +26,6 @@ import webbrowser
 from wiican.defs import *
 from wiican.mapping import Mapping
 
-DEFAULT_PIXMAP_DIR = '/usr/share/pixmaps'
-
 class IconChooserDialog(gtk.FileChooserDialog):
     def __init__(self, parent, title=_('Select image icon..'), icon_size=64):
 
@@ -51,6 +49,7 @@ class IconChooserDialog(gtk.FileChooserDialog):
 
         self.set_default_response(gtk.RESPONSE_OK)
         self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+        self.add_shortcut_folder(ARTWORK_DIR)
 
         #TODO: Maybe a better filter it's requiered
         filter = gtk.FileFilter()
