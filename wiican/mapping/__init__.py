@@ -19,5 +19,5 @@
 # Authors : J. Félix Ontañón <felixonta@gmail.com>
 # 
 
-from manager import MappingManager, MappingManagerError, mapping_manager
+from manager import MappingManager, MappingManagerError
 from mapping import Mapping, MappingError

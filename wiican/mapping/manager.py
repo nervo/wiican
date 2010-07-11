@@ -26,21 +26,20 @@ import tarfile
 import exceptions
 import random
 
-from xdg.BaseDirectory import save_data_path
-
-from wiican.defs import ICON_DEFAULT, MAPPINGS_BASE_DIR
-from confstore import GConfStore
+from wiican.defs import GCONF_KEY, MAPPINGS_HOME_DIR, MAPPINGS_BASE_DIR
+from wiican.utils import Borg, GConfStore
 from wiican.mapping.mapping import Mapping
 
-class MappingManager(GConfStore):
-    gconf_key = '/apps/wiican'
+class MappingManager(Borg, GConfStore):
     defaults = {'mapping_sort': [], 'mapping_visible': set([])}
     
-    def __init__(self, home_path, system_paths=[]):
-        super(MappingManager, self).__init__(MappingManager.gconf_key)
-        self.home_path = home_path
-        self.system_paths = system_paths
-
+    def __init__(self):
+        Borg.__init__(self)
+        GConfStore.__init__(self, GCONF_KEY)
+        
+        self.home_path = MAPPINGS_HOME_DIR
+        self.system_paths = MAPPINGS_BASE_DIR
+        
         if not type(self.system_paths) is list:
             self.system_paths = [self.system_paths]
 
@@ -183,8 +182,6 @@ class MappingManager(GConfStore):
 
     def __repr__(self):
         return self.__mapping_bag.__repr__()
-        
-mapping_manager = MappingManager(save_data_path('wiican'), MAPPINGS_BASE_DIR)
 
 class MappingManagerError(exceptions.Exception):
     pass

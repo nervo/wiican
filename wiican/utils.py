@@ -26,6 +26,11 @@ import gconf
 import types
 import exceptions
 
+class Borg():
+    __shared_state = {}
+    def __init__(self):
+        self.__dict__ = self.__shared_state
+
 class GConfKeysDict(dict):
     VALID_KEY_TYPES = (bool, str, int, float, list, tuple, set)
     

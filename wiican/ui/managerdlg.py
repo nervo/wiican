@@ -24,10 +24,12 @@ import os.path
 import gtk
 
 from wiican.defs import *
-from wiican.mapping import mapping_manager, Mapping, MappingManagerError
+from wiican.mapping import Mapping, MappingManager, MappingManagerError
 from wiican.ui.editordlg import MappingEditorDialog
 
 ICON_COL, NAME_COL, COMMENT_COL, VISIBLE_COL, MAPPING_ID_COL = range(5)
+
+mapping_manager = MappingManager()
 
 class MappingManagerDialog(object):
     mapping_filter = gtk.FileFilter()
@@ -46,7 +48,7 @@ class MappingManagerDialog(object):
         self.mapping_dlg = builder.get_object('mapping_manager_dlg')
         self.mapping_store = builder.get_object('mapping_store')
         self.mapping_list = builder.get_object('mapping_list')
-        
+
         for mapping_id, mapping in mapping_manager.items():
             icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 24, 
                 24)

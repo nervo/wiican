@@ -32,10 +32,12 @@ from dbus.mainloop.glib import DBusGMainLoop
 from wiican.defs import *
 from wiican.ui import Notificator, PngAnimation
 from wiican.ui import MappingManagerDialog
-from wiican.mapping import mapping_manager, Mapping, MappingManagerError
+from wiican.mapping import Mapping, MappingManager, MappingManagerError
 from wiican.service import WIICAN_PATH, WIICAN_URI
 from wiican.service import WC_DISABLED, WC_BLUEZ_PRESENT, WC_UINPUT_PRESENT, \
     WC_WIIMOTE_DISCOVERING
+
+mapping_manager = MappingManager()
 
 class WiimoteStatusIcon(gtk.StatusIcon):
     def __init__(self):
