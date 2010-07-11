@@ -141,7 +141,8 @@ class WiimoteStatusIcon(gtk.StatusIcon):
 			        activate_time, status_icon)
 
     def __activate_cb(self, status_icon):
-        if self.__cur_status & (WC_UINPUT_PRESENT | WC_BLUEZ_PRESENT):
+        if self.__cur_status & WC_UINPUT_PRESENT and \
+                self.__cur_status & WC_BLUEZ_PRESENT:
             self.__mappings_menu.popup(None, None, 
                     gtk.status_icon_position_menu, 1, 
                     gtk.get_current_event_time(), status_icon)
