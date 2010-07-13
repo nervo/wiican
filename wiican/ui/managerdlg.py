@@ -26,10 +26,12 @@ import gtk
 from wiican.defs import *
 from wiican.mapping import Mapping, MappingManager, MappingManagerError
 from wiican.ui.editordlg import MappingEditorDialog
+from wiican.ui import UIPrefStore
 
 ICON_COL, NAME_COL, COMMENT_COL, VISIBLE_COL, MAPPING_ID_COL = range(5)
 
 mapping_manager = MappingManager()
+pref_store = UIPrefStore()
 
 class MappingManagerDialog(object):
     mapping_filter = gtk.FileFilter()
@@ -37,14 +39,14 @@ class MappingManagerDialog(object):
     mapping_filter.add_mime_type('application/x-tar')
     mapping_filter.add_pattern('*.tgz')
     mapping_filter.add_pattern('*.tar.gz')
-    
-    def __init__(self):    
+
+    def __init__(self):
         builder = gtk.Builder()
         if not builder.add_objects_from_file(MAPPING_UI, 
                 ['mapping_manager_dlg', 'image3', 'image4', 'mapping_store']):
             raise 'Cant load %s' % MAPPING_UI
         builder.connect_signals(self)
-        
+
         self.mapping_dlg = builder.get_object('mapping_manager_dlg')
         self.mapping_store = builder.get_object('mapping_store')
         self.mapping_list = builder.get_object('mapping_list')
@@ -57,10 +59,23 @@ class MappingManagerDialog(object):
             self.mapping_store.append([icon, mapping.get_name(), 
                 mapping.get_comment(), visible, mapping_id])
 
+        def catch_window_size(widget, allocate):
+            pref_store.options['mapping_dlg_width'] = allocate.width
+            pref_store.options['mapping_dlg_height'] = allocate.height
+
+        self.mapping_dlg.connect('size_allocate', catch_window_size)
+
+        pref_store.loadconf()
+        self.mapping_dlg.resize(pref_store.options['mapping_dlg_width'], 
+            pref_store.options['mapping_dlg_height'])
+
     def run(self):
-        return self.mapping_dlg.run()
+        runcode = self.mapping_dlg.run()
+        pref_store.saveconf()
+        return runcode
 
     def close_btn_clicked_cb(self, widget, data=None):
+        pref_store.saveconf()
         return self.mapping_dlg.destroy()
 
     def new_btn_clicked_cb(self, widget):
@@ -133,8 +148,9 @@ class MappingManagerDialog(object):
                 self.mapping_dlg, gtk.FILE_CHOOSER_ACTION_OPEN,
                 (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, 
                 gtk.RESPONSE_OK))
-        import_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)                    
+        import_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
         import_dlg.add_filter(self.mapping_filter)
+        import_dlg.set_current_folder(pref_store.options['import_dir'])
             
         if not import_dlg.run() == gtk.RESPONSE_OK:
             import_dlg.destroy()
@@ -162,6 +178,7 @@ class MappingManagerDialog(object):
         self.mapping_store.append([icon, mapping.get_name(), 
             mapping.get_comment(), True, mapping_id])
             
+        pref_store.options['import_dir'] = import_dlg.get_current_folder()
         import_dlg.destroy()
         
     def export_btn_clicked_cb(self, widget):
@@ -177,7 +194,7 @@ class MappingManagerDialog(object):
                     gtk.RESPONSE_OK))
             export_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
             export_dlg.set_do_overwrite_confirmation(True)
-            export_dlg.set_current_folder(os.path.expanduser("~/"))
+            export_dlg.set_current_folder(pref_store.options['export_dir'])
             export_dlg.set_current_name(mapping.get_name())
             export_dlg.set_modal(True)
             export_dlg.add_filter(self.mapping_filter)
@@ -186,6 +203,7 @@ class MappingManagerDialog(object):
                 dest_file_path = export_dlg.get_filename()
                 #TODO: Check writability before export (or wait for gnome-bug #137515)
                 mapping_manager.export_mapping(mapping_id, dest_file_path)
+                pref_store.options['export_dir'] = export_dlg.get_current_folder()
             export_dlg.destroy()
 
     def visible_cell_toggled_cb(self, widget, path):

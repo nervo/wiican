@@ -25,6 +25,9 @@ import webbrowser
 
 from wiican.defs import *
 from wiican.mapping import Mapping
+from wiican.ui import UIPrefStore
+
+pref_store = UIPrefStore()
 
 class IconChooserDialog(gtk.FileChooserDialog):
     def __init__(self, parent, title=_('Select image icon..'), icon_size=64):
@@ -50,6 +53,8 @@ class IconChooserDialog(gtk.FileChooserDialog):
         self.set_default_response(gtk.RESPONSE_OK)
         self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
         self.add_shortcut_folder(ARTWORK_DIR)
+        #FIXME: Why it doesn't work?
+        self.set_current_folder(pref_store.options['icon_dir'])
 
         #TODO: Maybe a better filter it's requiered
         filter = gtk.FileFilter()
@@ -88,7 +93,8 @@ class MappingEditorDialog(object):
         self.icon_image = builder.get_object('icon_image')
         
         #FIXME: iconfilechooser with default dialog from glade 3.6.7 crashes
-        self.iconfilechooser_btn = gtk.FileChooserButton(IconChooserDialog(self.mapping_editor_dlg))
+        self.icon_dlg = IconChooserDialog(self.mapping_editor_dlg)
+        self.iconfilechooser_btn = gtk.FileChooserButton(self.icon_dlg)
         self.iconfilechooser_btn.show()
         self.iconfilechooser_btn.connect('file-set', self.iconfilechooser_btn_file_set_cb)
         builder.get_object('hbox2').add(self.iconfilechooser_btn)
@@ -131,3 +137,4 @@ class MappingEditorDialog(object):
         pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 48, 48)
         self.icon_image.set_from_pixbuf(pixbuf)
         self.mapping.set_icon(filename)
+        pref_store.options['icon_dir'] = self.icon_dlg.get_current_folder()

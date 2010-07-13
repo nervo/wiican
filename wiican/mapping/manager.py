@@ -27,14 +27,14 @@ import exceptions
 import random
 
 from wiican.defs import GCONF_KEY, MAPPINGS_HOME_DIR, MAPPINGS_BASE_DIR
-from wiican.utils import Borg, GConfStore
+from wiican.utils import Singleton, GConfStore
 from wiican.mapping.mapping import Mapping
 
-class MappingManager(Borg, GConfStore):
+class MappingManager(Singleton, GConfStore):
     defaults = {'mapping_sort': [], 'mapping_visible': set([])}
     
     def __init__(self):
-        Borg.__init__(self)
+        Singleton.__init__(self)
         GConfStore.__init__(self, GCONF_KEY)
         
         self.home_path = MAPPINGS_HOME_DIR
@@ -44,7 +44,7 @@ class MappingManager(Borg, GConfStore):
             self.system_paths = [self.system_paths]
 
         self.__mapping_bag = {}
-        self.loadconf()
+        self.loadconf(only_defaults=True)
         self.options['mapping_visible'] = set(self.options['mapping_visible'])
         
     def scan_mappings(self):

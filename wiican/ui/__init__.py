@@ -19,6 +19,27 @@
 # Authors : J. Félix Ontañón <felixonta@gmail.com>
 # 
 
+from os.path import expanduser
+from wiican.utils import Singleton, GConfStore
+from wiican.defs import GCONF_KEY, ARTWORK_DIR
+
+class UIPrefStore(Singleton, GConfStore):
+
+    defaults = {
+        'mapping_dlg_width': 500,
+        'mapping_dlg_height': 400,
+        'import_dir': expanduser("~/"),
+        'export_dir': expanduser("~/"),
+        'icon_dir': ARTWORK_DIR
+    }
+
+    def __init__(self):
+        Singleton.__init__(self)
+        GConfStore.__init__(self, GCONF_KEY)
+
+    def loadconf(self):
+        GConfStore.loadconf(self, only_defaults=True)
+
 from notificator import Notificator
 from pnganimation import PngAnimation
 from editordlg import MappingEditorDialog

@@ -302,7 +302,7 @@
     <property name="icon_name">package-x-generic</property>
   </object>
   <object class="GtkDialog" id="mapping_editor_dlg">
-    <property name="height_request">400</property>
+    <property name="height_request">500</property>
     <property name="border_width">5</property>
     <property name="modal">True</property>
     <property name="window_position">mouse</property>

@@ -26,10 +26,12 @@ import gconf
 import types
 import exceptions
 
-class Borg():
-    __shared_state = {}
-    def __init__(self):
-        self.__dict__ = self.__shared_state
+class Singleton (object):
+    instance = None
+    def __new__(cls, *args, **kargs):
+        if cls.instance is None:
+            cls.instance = object.__new__(cls, *args, **kargs)
+        return cls.instance
 
 class GConfKeysDict(dict):
     VALID_KEY_TYPES = (bool, str, int, float, list, tuple, set)
@@ -51,20 +53,30 @@ class GConfStore(object):
     defaults = {}
 
     def __init__(self, key):
+        if key.endswith('/'):
+            raise GConfStoreError, "Bad directory name %s: May not end with slash '/'" % key
+            return None
+
         self.__app_key = key
         self.__client = gconf.client_get_default()
         
         self.options = GConfKeysDict()
         self.options.update(self.defaults)
 
-    def loadconf(self): 
+    def loadconf(self, only_defaults=False): 
         casts = {gconf.VALUE_BOOL:   gconf.Value.get_bool,
             gconf.VALUE_INT:    gconf.Value.get_int,
             gconf.VALUE_FLOAT:  gconf.Value.get_float,
             gconf.VALUE_STRING: gconf.Value.get_string,
             gconf.VALUE_LIST:   gconf.Value.get_list}
-    
-        for entry in self.__client.all_entries(self.__app_key):
+
+        if only_defaults: 
+            key_iterator = [self.__client.get_entry(self.__app_key + '/' + key, 
+            '', False) for key in self.defaults.keys()]
+        else:
+             key_iterator = self.__client.all_entries(self.__app_key)
+        
+        for entry in key_iterator:
             gval = self.__client.get(entry.key)
             if gval == None: continue
             
@@ -93,3 +105,5 @@ class GConfStore(object):
                 casts[type(value)](self.__client, self.__app_key + '/' + name, 
                     value)
 
+class GConfStoreError(exceptions.Exception):
+    pass
