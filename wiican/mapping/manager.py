@@ -23,6 +23,7 @@
 import os
 import shutil
 import tarfile
+import tempfile
 import exceptions
 import random
 
@@ -94,16 +95,18 @@ class MappingManager(Singleton, GConfStore):
             raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id
 
         mapping = self.__mapping_bag[mapping_id]
-        mapping_path = self.__mapping_bag[mapping_id].get_path()
         package_file = tarfile.TarFile(dest_filepath, 'w')
 
-        mapping.write()
+        # Write into a temp dir to avoid the user for saving a system mapping.
+        mapping_tmp_path = tempfile.mkdtemp()
+        mapping.write(mapping_tmp_path)
 
-        for f in os.listdir(mapping_path):
-            package_file.add(os.path.join(mapping_path, f), arcname=f)
+        for f in os.listdir(mapping_tmp_path):
+            package_file.add(os.path.join(mapping_tmp_path, f), arcname=f)
             
         package_file.close()
-
+        shutil.rmtree(mapping_tmp_path)
+        
     def add_new_mapping(self, mapping):
         mapping_id = self.__gen_unique_mapping_id()
         mapping_path = os.path.join(self.home_path, mapping_id)
