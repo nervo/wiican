@@ -56,6 +56,8 @@ class MappingManager(Singleton, GConfStore):
                 if not mapping_id in self.options['mapping_sort']:
                     self.options['mapping_sort'].append(mapping_id)
 
+        # Load first system mappings, then user mappings.
+        # If same mapping_id, the user mapping remains.
         for path in self.system_paths + [self.home_path]:
             os.path.walk(path, load_mapping, self.__mapping_bag)
 
@@ -116,6 +118,13 @@ class MappingManager(Singleton, GConfStore):
         self.options['mapping_visible'].add(mapping_id)        
                 
         return mapping_id
+
+    def write_mapping(self, mapping):
+        if os.path.dirname(mapping.get_path()) in self.system_paths:
+            mapping.write(os.path.join(self.home_path, 
+                os.path.basename(mapping.get_path())))
+        else:
+            mapping.write()
 
     def swap_mapping_order(self, mapping_id1, mapping_id2):
         if not mapping_id1 in self.__mapping_bag:

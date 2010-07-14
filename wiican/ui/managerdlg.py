@@ -108,7 +108,7 @@ class MappingManagerDialog(object):
 
             if mapping_editor_dlg.run() == gtk.RESPONSE_OK:
                 new_mapping = mapping_editor_dlg.get_mapping()
-                new_mapping.write(mapping_manager[mapping_id].get_path())
+                mapping_manager.write_mapping(new_mapping)
                 mapping_manager[mapping_id] = new_mapping
                 model[selected][ICON_COL] = gtk.gdk.pixbuf_new_from_file_at_size(new_mapping.get_icon(), 
                     24, 24)
