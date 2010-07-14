@@ -52,8 +52,11 @@ class MappingManagerDialog(object):
         self.mapping_list = builder.get_object('mapping_list')
 
         for mapping_id, mapping in mapping_manager.items():
-            icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 24, 
-                24)
+            # Prevent for loading a not found icon path
+            icon_path = mapping.get_icon()
+            if not os.path.exists(icon_path): icon_path = ICON_DEFAULT
+            
+            icon = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 24, 24)
             visible = mapping_manager.is_visible(mapping_id)
             
             self.mapping_store.append([icon, mapping.get_name(), 
