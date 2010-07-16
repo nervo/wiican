@@ -4,6 +4,10 @@
 #
 # Copyright (c) 2010 J. Félix Ontañón
 #
+# Ripped idea from lex/yacc definition of cwiid's wminput
+# cwiid it's a great piece of software by L. Donnie Smith
+# Copyright (C) 2007 L. Donnie Smith <wiimote@abstrakraft.org>
+#
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 3 as
 # published by the Free Software Foundation
@@ -54,10 +58,10 @@ class Parser():
                   write_tables=0) #FIXME: Smarter parsetab managing it's needed
                   #tabmodule="parsetab.py")
 
-    def run(self):
+    def run(self, prompt='parser > '):
         while 1:
             try:
-                s = raw_input('parser > ')
+                s = raw_input(prompt)
             except EOFError:
                 break
             if not s: continue
@@ -66,6 +70,11 @@ class Parser():
 from action_enum import BTN_ACTION_ENUM, ABS_ACTION_ENUM, REL_ACTION_ENUM
         
 class WMInputValidator(Parser):
+    """
+    Lex and syntax validator for wminput config files.
+    The wminput's "include" directive it's not allowed by now.
+    """
+
     literals = ['-', '.', '=', '~']
 
     tokens = (
@@ -89,7 +98,10 @@ class WMInputValidator(Parser):
     def __init__(self):
         Parser.__init__(self)
         self.lineno = 0
-        
+
+    def run(self):
+        Parser.run(self, 'wminput > ')
+                
     def validate(self, path):
         self.lineno = 1
         
@@ -193,4 +205,8 @@ if __name__ == '__main__':
     import sys
     
     wminput_validator = WMInputValidator()
-    wminput_validator.validate(sys.argv[1])
+
+    if len(sys.argv) >= 2:
+        wminput_validator.validate(sys.argv[1])
+    else:
+        wminput_validator.run()

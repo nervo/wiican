@@ -4,6 +4,10 @@
 #
 # Copyright (c) 2010 J. Félix Ontañón
 #
+# Totally ripped from wminput/action_enum.txt file included in cwiid
+# cwiid it's a great piece of software by L. Donnie Smith
+# Copyright (C) 2007 L. Donnie Smith <wiimote@abstrakraft.org>
+# 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 3 as
 # published by the Free Software Foundation
