@@ -80,7 +80,7 @@ class WMInputValidator(Parser):
     tokens = (
         'WM_BTN', 'NC_BTN', 'CC_BTN', 'PLUGIN', 'AXIS', 
         'WM_RUMBLE', 'ON_OFF',
-        'ID', 'BTN_ACTION', 'ABS_AXIS_ACTION', 'REL_AXIS_ACTION', 
+        'BTN_ACTION', 'ABS_AXIS_ACTION', 'REL_AXIS_ACTION', 
         'INT', 'FLOAT',
     )
 
@@ -92,27 +92,32 @@ class WMInputValidator(Parser):
     t_WM_BTN =      r'Wiimote\.(Up|Down|Left|Right|A|B|Minus|Plus|Home|1|2)'    
     t_WM_RUMBLE =   r'Wiimote\.Rumble'
     t_NC_BTN =      r'Nunchuk\.(C|Z)'
-    t_ID =          r'[\w_][\w_-]*'
+    t_PLUGIN =      'Plugin\.[\w_][\w_-]*.[\w_][\w_-]*'
     t_ignore  = ' \t'
         
-    def __init__(self):
-        Parser.__init__(self)
-        self.lineno = 0
+    def __init__(self, dbg_mode=False):
+        Parser.__init__(self, debug=dbg_mode)
+        self.validation_errors = []
 
-    def run(self):
-        Parser.run(self, 'wminput > ')
+    def validate(self, config, halt_on_errors=True, verbose=False):
+        self.validation_errors = []
+        self.halt_on_errors = halt_on_errors
+        self.verbose = verbose
+                        
+        yacc.parse(config)
                 
-    def validate(self, path):
-        self.lineno = 1
-        
-        f = open(path, 'r')
-        yacc.parse(f.read())
+    def validate_file(self, file_path, halt_on_errors=True, verbose=False):
+        f = open(file_path, 'r')
+        config = f.read()
         f.close()
+
+        self.validate(config, halt_on_errors, verbose)
 
     # PLY makes function tokens resolved first, in this order:
     def t_NEWLINE(self, t):
         r'\n+'
-        self.lineno += t.value.count("\n")
+        t.lexer.lineno += t.value.count("\n")
+        #t.lexer.begin('INITIAL')
 
     def t_COMMENT(self, t):
         r'\#.*'
@@ -126,10 +131,6 @@ class WMInputValidator(Parser):
     def t_INT(self, t):
         r'[0-9]+'
         t.value = int(t.value)
-        return t
-
-    def t_PLUGIN(self, t):
-        r'Plugin\.'
         return t
 
     def t_ON_OFF(self, t):
@@ -158,7 +159,15 @@ class WMInputValidator(Parser):
         return t
 
     def t_error(self, t):
-        print "[lineno: %d] Illegal character '%s'" % (self.lineno, t.value[0]) 
+        mesg = "Illegal character at lineno %d: '%s'" % (t.lexer.lineno, t)
+    
+        if self.verbose:
+            print mesg
+            
+        if self.halt_on_errors:
+            raise RuntimeError, mesg
+
+        self.validation_errors.append(t)
         t.lexer.skip(1)
 
     def p_conf_list(self, p):
@@ -174,13 +183,14 @@ class WMInputValidator(Parser):
                     | CC_BTN '=' BTN_ACTION
                     | AXIS '=' sign pointer ABS_AXIS_ACTION 
                     | AXIS '=' sign REL_AXIS_ACTION
-                    | PLUGIN ID '.' ID '=' BTN_ACTION
-                    | PLUGIN ID '.' ID '=' sign pointer ABS_AXIS_ACTION
-                    | PLUGIN ID '.' ID '=' sign REL_AXIS_ACTION
-                    | PLUGIN ID '.' ID '=' INT
-                    | PLUGIN ID '.' ID '=' FLOAT """
+                    | PLUGIN '=' BTN_ACTION
+                    | PLUGIN '=' sign pointer ABS_AXIS_ACTION
+                    | PLUGIN '=' sign REL_AXIS_ACTION
+                    | PLUGIN '=' INT
+                    | PLUGIN '=' FLOAT """
 
         p[0] = p[1]
+        p.set_lineno(0, p.lineno(1))
 
     def p_sign_item(self, p):
         """ sign : empty
@@ -196,10 +206,13 @@ class WMInputValidator(Parser):
         """ empty : """
         
     def p_error(self, p):
-        if p:
-            print "[lineno: %d] Syntax error at '%s'" % (self.lineno, p.value)
-        else:
-            print "Syntax error at EOF"
+        if p: mesg = "Syntax error at lineno %d: '%s'" % (p.lineno, p)
+        else: mesg = "Syntax error at EOF" 
+
+        if self.verbose: print mesg
+        if self.halt_on_errors: raise SyntaxError, mesg
+
+        self.validation_errors.append(p)
 
 if __name__ == '__main__':
     import sys
@@ -207,6 +220,6 @@ if __name__ == '__main__':
     wminput_validator = WMInputValidator()
 
     if len(sys.argv) >= 2:
-        wminput_validator.validate(sys.argv[1])
+        wminput_validator.validate_file(sys.argv[1], halt_on_errors=False)
     else:
         wminput_validator.run()
