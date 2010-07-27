@@ -32,7 +32,7 @@ from dbus.mainloop.glib import DBusGMainLoop
 from wiican.defs import *
 from wiican.ui import Notificator, PngAnimation
 from wiican.ui import MappingManagerDialog
-from wiican.mapping import Mapping, MappingManager, MappingManagerError
+from wiican.mapping import *
 from wiican.service import WIICAN_PATH, WIICAN_URI
 from wiican.service import WC_DISABLED, WC_BLUEZ_PRESENT, WC_UINPUT_PRESENT, \
     WC_WIIMOTE_DISCOVERING
@@ -155,7 +155,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__load_mappings_menu()
 
     def about_cb(self, widget):
-        self.aboutdlg.show()
+        self.aboutdlg.run()
 
     def quit_cb(self, widget):
         mapping_manager.saveconf()
@@ -166,10 +166,21 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             self.__wiican_iface.DisconnectWiimote()
         
         if config and config != -1:
-            # FIXME: This is awful
-            #overlap_icon = discover_item.get_image().get_pixbuf()
-            #if overlap_icon.get_pixels() == gtk.gdk.pixbuf_new_from_file_at_size(ICON_DEFAULT, 16, 16).get_pixels():
-            #    overlap_icon = None
+            validator = MappingValidator()
+            
+            try:
+                MappingValidator().validate_file(config)
+            except SyntaxError, err:
+                validate_error_dlg = gtk.MessageDialog(parent = None,
+                    flags = gtk.DIALOG_MODAL, type = gtk.MESSAGE_ERROR,
+                    buttons = gtk.BUTTONS_CLOSE,
+                    message_format = str(err))
+                validate_error_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+                validate_error_dlg.set_title(_('Mapping validation error'))
+                validate_error_dlg.run()
+                validate_error_dlg.destroy()
+                return
+                                
             self.__animation = PngAnimation([ICON_CONN1, ICON_CONN2, ICON_CONN3, ICON_ON])
             self.__wiican_iface.ConnectWiimote(config, False)
             self.__notificator.display_notification(title=_('Press 1+2'), 

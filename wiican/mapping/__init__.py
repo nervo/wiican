@@ -21,3 +21,4 @@
 
 from manager import MappingManager, MappingManagerError
 from mapping import Mapping, MappingError
+from validator import WMInputValidator as MappingValidator
