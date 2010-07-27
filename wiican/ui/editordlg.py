@@ -22,9 +22,10 @@
 
 import gtk
 import webbrowser
+import pango
 
 from wiican.defs import *
-from wiican.mapping import Mapping
+from wiican.mapping import Mapping, MappingValidator
 from wiican.ui import UIPrefStore
 
 pref_store = UIPrefStore()
@@ -106,9 +107,43 @@ class MappingEditorDialog(object):
         self.authors_entry.set_text(self.mapping.get_authors() or '')
         self.mapping_buffer.set_text(self.mapping.get_mapping() or '')
 
+        # Initial error underlining on mapping
+        self.mapping_buffer.create_tag('underline_error', 
+            underline=pango.UNDERLINE_ERROR)
+
+        self.validator = MappingValidator()
+        self.validator.validate(self.mapping.get_mapping() or '', 
+            halt_on_errors=False)
+
+        for error in self.validator.validation_errors:
+            if not error: continue
+            start = self.mapping_buffer.get_iter_at_offset(error.lexpos)
+            #FIXME: Finding '\n' for underlining error it's not the best way
+            end = self.mapping_buffer.get_iter_at_offset(error.lexpos + \
+                    error.value.find('\n'))
+            self.mapping_buffer.apply_tag_by_name('underline_error', start, end)
+
+        self.mapping_buffer.connect('changed', self.changed_cb)
+
         pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(self.mapping.get_icon(),
             48, 48)
         self.icon_image.set_from_pixbuf(pixbuf)
+
+    def changed_cb(self, widget, data=None):
+        start, end = self.mapping_buffer.get_bounds()
+        self.mapping_buffer.remove_all_tags(start, end)
+
+        start, end = self.mapping_buffer.get_bounds()
+        self.validator.validate(self.mapping_buffer.get_text(start, end), 
+            halt_on_errors=False)
+
+        for error in self.validator.validation_errors:
+            if not error: continue
+            start = self.mapping_buffer.get_iter_at_offset(error.lexpos)
+            #FIXME: Finding '\n' for underlining error it's not the best way
+            end = self.mapping_buffer.get_iter_at_offset(error.lexpos + \
+                    error.value.find('\n'))
+            self.mapping_buffer.apply_tag_by_name('underline_error', start, end)
 
     def set_title(self, title=''):
         self.mapping_editor_dlg.set_title(title)
