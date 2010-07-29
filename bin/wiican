@@ -31,7 +31,7 @@ from dbus.mainloop.glib import DBusGMainLoop
 
 from wiican.defs import *
 from wiican.ui import Notificator, PngAnimation
-from wiican.ui import MappingManagerDialog
+from wiican.ui import MappingManagerDialog, MappingEditorDialog
 from wiican.mapping import *
 from wiican.service import WIICAN_PATH, WIICAN_URI
 from wiican.service import WC_DISABLED, WC_BLUEZ_PRESENT, WC_UINPUT_PRESENT, \
@@ -51,9 +51,12 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         builder.connect_signals(self)
         
         self.aboutdlg = builder.get_object('WiiAboutDialog')
+        self.valerrdlg = builder.get_object('ValidatorErrorDialog')
         self.main_menu = builder.get_object('main_menu')
+        self.icon_image = builder.get_object('icon_image')
         
         self.aboutdlg.connect('response', lambda d, r: d.hide())
+        self.valerrdlg.connect('response', lambda d, r: d.hide())
         self.connect('popup-menu', self.__icon_popupmenu_cb, None)
         self.connect('activate', self.__activate_cb)
 
@@ -133,8 +136,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             menuitem = gtk.ImageMenuItem(mapping.get_name())
             menuitem.set_tooltip_text(mapping.get_comment())
             menuitem.set_image(gtk.image_new_from_pixbuf(icon))
-            menuitem.connect('activate', self.__discover_cb, os.path.join(mapping.get_path(), 
-                Mapping.mapping_filename))
+            menuitem.connect('activate', self.__discover_cb, mapping)
             menuitem.show()
             self.__mappings_menu.append(menuitem)
 
@@ -161,32 +163,51 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         mapping_manager.saveconf()
         sys.exit(0)
 
-    def __discover_cb(self, discover_item, config=None):
+    def __discover_cb(self, discover_item, mapping=None):
         if self.__cur_status & WC_WIIMOTE_DISCOVERING:
             self.__wiican_iface.DisconnectWiimote()
         
-        if config and config != -1:
+        if mapping and mapping != -1:
+            filename = os.path.join(mapping.get_path(), Mapping.mapping_filename)
             validator = MappingValidator()
             
             try:
-                MappingValidator().validate_file(config)
-            except SyntaxError, err:
-                validate_error_dlg = gtk.MessageDialog(parent = None,
-                    flags = gtk.DIALOG_MODAL, type = gtk.MESSAGE_ERROR,
-                    buttons = gtk.BUTTONS_CLOSE,
-                    message_format = str(err))
-                validate_error_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-                validate_error_dlg.set_title(_('Mapping validation error'))
-                validate_error_dlg.run()
-                validate_error_dlg.destroy()
+                MappingValidator().validate_file(filename)
+            except RuntimeError, SyntaxError:
+                self.__prompt_valerrdlg(mapping)
                 return
                                 
             self.__animation = PngAnimation([ICON_CONN1, ICON_CONN2, ICON_CONN3, ICON_ON])
-            self.__wiican_iface.ConnectWiimote(config, False)
+            self.__wiican_iface.ConnectWiimote(filename, False)
             self.__notificator.display_notification(title=_('Press 1+2'), 
                 text=_('To put you Wiimote in discoverable mode now'),
                 icon='wiican')
 
+    def __prompt_valerrdlg(self, mapping):
+        icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 64, 64)
+        error = gtk.Invisible().render_icon(gtk.STOCK_DIALOG_ERROR, 
+            gtk.ICON_SIZE_BUTTON)
+        thumb = error.scale_simple(32, 32, gtk.gdk.INTERP_BILINEAR)
+        thumb.composite(icon, 0, 0, icon.get_width(), icon.get_height(),
+                icon.get_width() - thumb.get_width(),
+                icon.get_height() - thumb.get_height(),
+                1, 1, gtk.gdk.INTERP_BILINEAR, 255)
+        self.icon_image.set_from_pixbuf(icon)
+
+        location = self.get_geometry()[1]
+        self.valerrdlg.move(location.x, location.y)
+        
+        if self.valerrdlg.run() == gtk.RESPONSE_YES:
+            mapping_editor_dlg = MappingEditorDialog(mapping)
+            mapping_editor_dlg.set_title(_('Editing ') + mapping.get_name())
+
+            if mapping_editor_dlg.run() == gtk.RESPONSE_OK:
+                new_mapping = mapping_editor_dlg.get_mapping()
+                mapping_manager.write_mapping(new_mapping)
+
+            mapping_editor_dlg.destroy()
+            self.__load_mappings_menu()
+                
 if __name__ == '__main__':
     DBusGMainLoop(set_as_default=True)
     wiican = WiimoteStatusIcon()

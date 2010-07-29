@@ -70,7 +70,9 @@ class GConfStore(object):
             gconf.VALUE_STRING: gconf.Value.get_string,
             gconf.VALUE_LIST:   gconf.Value.get_list}
 
-        if only_defaults: 
+        if only_defaults:
+            #FIXME: Why appears this message in stderr?
+            #GConf-WARNING **: haven't implemented getting a specific locale in GConfClient
             key_iterator = [self.__client.get_entry(self.__app_key + '/' + key, 
             '', False) for key in self.defaults.keys()]
         else:
