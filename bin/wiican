@@ -26,7 +26,7 @@ import os
 
 import gtk
 import gobject
-import dbus
+import dbus, dbus.exceptions
 from dbus.mainloop.glib import DBusGMainLoop
 
 from wiican.defs import *
@@ -59,7 +59,8 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.valerrdlg.connect('response', lambda d, r: d.hide())
         self.connect('popup-menu', self.__icon_popupmenu_cb, None)
         self.connect('activate', self.__activate_cb)
-
+        
+        self.__animation = PngAnimation([ICON_CONN1, ICON_CONN2, ICON_CONN3, ICON_ON])
         self.__load_mappings_menu()
         self.__notificator = Notificator('wiican')
         
@@ -169,16 +170,14 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         
         if mapping and mapping != -1:
             filename = os.path.join(mapping.get_path(), Mapping.mapping_filename)
-            validator = MappingValidator()
-            
+           
             try:
-                MappingValidator().validate_file(filename)
-            except RuntimeError, SyntaxError:
-                self.__prompt_valerrdlg(mapping)
+                self.__wiican_iface.ConnectWiimote(filename, False)
+            except dbus.exceptions.DBusException, error:
+                if error.message == ('Mapping validation error'):
+                    self.__prompt_valerrdlg(mapping)
                 return
-                                
-            self.__animation = PngAnimation([ICON_CONN1, ICON_CONN2, ICON_CONN3, ICON_ON])
-            self.__wiican_iface.ConnectWiimote(filename, False)
+                
             self.__notificator.display_notification(title=_('Press 1+2'), 
                 text=_('To put you Wiimote in discoverable mode now'),
                 icon='wiican')

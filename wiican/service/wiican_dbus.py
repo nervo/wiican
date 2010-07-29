@@ -23,6 +23,8 @@
 import dbus, dbus.service, dbus.exceptions
 from wminput import WMInputLauncher
 
+from wiican.mapping import MappingValidator
+
 WIICAN_URI = 'org.gnome.Wiican'
 WIICAN_PATH = '/org/gnome/Wiican'
 
@@ -157,6 +159,12 @@ class WiicanDBus(dbus.service.Object):
         elif self.status & WC_WIIMOTE_DISCOVERING:
             raise dbus.exceptions.DBusException('Disconnect wiimote first')
         else:
+            validator = MappingValidator()
+            validator.validate_file(config_file, False)
+            if validator.validation_errors:
+                raise dbus.exceptions.DBusException('Mapping validation error')
+                return
+
             self.__wminput = WMInputLauncher(config_file, daemon)
             self.__wminput.start()
 
