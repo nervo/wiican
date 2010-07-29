@@ -58,10 +58,11 @@ class WMInputLauncher(gobject.GObject):
 
     @threaded
     def start(self):
+        cmd = []
         if self.config_file:
-            cmd = ['-c', self.config_file]
+            cmd += ['-c', self.config_file]
         if self.daemon:
-            cmd = ['-d']
+            cmd += ['-d']
 
         #TODO: Maybe exception tracking it's required here
         self._process = subprocess.Popen(self.wminput_cmd + cmd, stdout=subprocess.PIPE)
