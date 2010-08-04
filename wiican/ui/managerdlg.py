@@ -103,17 +103,25 @@ class MappingManagerDialog(object):
         if selected is not None:
             mapping_id = model[selected][MAPPING_ID_COL]
             mapping = mapping_manager[mapping_id]
-            mapping_editor_dlg = MappingEditorDialog(mapping)
+            system_mapping = mapping_manager.is_system_mapping(mapping_id)
+            mapping_editor_dlg = MappingEditorDialog(mapping, system_mapping)
             mapping_editor_dlg.set_title(_('Editing ') + mapping.get_name())
 
             if mapping_editor_dlg.run() == gtk.RESPONSE_OK:
                 new_mapping = mapping_editor_dlg.get_mapping()
-                mapping_manager.write_mapping(new_mapping)
-                mapping_manager[mapping_id] = new_mapping
-                model[selected][ICON_COL] = gtk.gdk.pixbuf_new_from_file_at_size(new_mapping.get_icon(), 
-                    24, 24)
-                model[selected][NAME_COL] = new_mapping.get_name()
-                model[selected][COMMENT_COL] = new_mapping.get_comment()
+                new_mapping_id = mapping_manager.write_mapping(new_mapping)
+
+                if system_mapping:
+                    icon = gtk.gdk.pixbuf_new_from_file_at_size(new_mapping.get_icon(), 
+                        24, 24)
+                    self.mapping_store.append([icon, new_mapping.get_name(), 
+                        new_mapping.get_comment(), True, new_mapping_id])
+                else:
+                    mapping_manager[mapping_id] = new_mapping
+                    model[selected][ICON_COL] = gtk.gdk.pixbuf_new_from_file_at_size(new_mapping.get_icon(), 
+                        24, 24)
+                    model[selected][NAME_COL] = new_mapping.get_name()
+                    model[selected][COMMENT_COL] = new_mapping.get_comment()
 
             mapping_editor_dlg.destroy()
 
@@ -132,14 +140,27 @@ class MappingManagerDialog(object):
                 buttons = gtk.BUTTONS_YES_NO,
                 message_format = delete_message)
                 
-            delete_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)    
+            delete_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
             delete_dlg.set_title(_('Deleting mappings'))
-            
+
             if delete_dlg.run() == gtk.RESPONSE_YES:
                 mapping_id = model[selected][MAPPING_ID_COL]
-                del(mapping_manager[mapping_id])
+                try:
+                    del(mapping_manager[mapping_id])
+                except MappingManagerError, e:
+                    delete_dlg.destroy()
+                    error_importing_dlg = gtk.MessageDialog(parent = self.mapping_dlg,
+                    flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+                    type = gtk.MESSAGE_ERROR,
+                    buttons = gtk.BUTTONS_CLOSE,
+                    message_format = e.message)
+                    error_importing_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+                    error_importing_dlg.run()
+                    error_importing_dlg.destroy()
+                    delete_dlg.destroy()
+                    return
+
                 model.remove(selected)
-                
             delete_dlg.destroy()
 
     def mapping_list_key_release_event_cb(self, widget, event):

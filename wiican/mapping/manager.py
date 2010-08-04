@@ -26,6 +26,7 @@ import tarfile
 import tempfile
 import exceptions
 import random
+import copy
 
 from wiican.defs import GCONF_KEY, MAPPINGS_HOME_DIR, MAPPINGS_BASE_DIR
 from wiican.utils import Singleton, GConfStore
@@ -115,16 +116,16 @@ class MappingManager(Singleton, GConfStore):
         mapping.write(mapping_path)
         self.__mapping_bag[mapping_id] = mapping
         self.options['mapping_sort'].append(mapping_id)
-        self.options['mapping_visible'].add(mapping_id)        
-                
+        self.options['mapping_visible'].add(mapping_id)
+
         return mapping_id
 
     def write_mapping(self, mapping):
         if os.path.dirname(mapping.get_path()) in self.system_paths:
-            mapping.write(os.path.join(self.home_path, 
-                os.path.basename(mapping.get_path())))
+            return self.add_new_mapping(copy.copy(mapping))
         else:
             mapping.write()
+            return False
 
     def swap_mapping_order(self, mapping_id1, mapping_id2):
         if not mapping_id1 in self.__mapping_bag:
@@ -137,6 +138,12 @@ class MappingManager(Singleton, GConfStore):
         self.options['mapping_sort'].remove(mapping_id2)
         self.options['mapping_sort'].insert(index, mapping_id2)
 
+    def is_system_mapping(self, mapping_id):
+        if not mapping_id in self.__mapping_bag:
+            raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id
+
+        return os.path.dirname(self.__mapping_bag[mapping_id].get_path()) in self.system_paths
+            
     def is_visible(self, mapping_id):
         if not mapping_id in self.__mapping_bag:
             raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id
@@ -164,7 +171,10 @@ class MappingManager(Singleton, GConfStore):
     def __delitem__(self, mapping_id):
         if not mapping_id in self.__mapping_bag:
             raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id
-    
+
+        if os.path.dirname(self.__mapping_bag[mapping_id].get_path()) in self.system_paths:
+            raise MappingManagerError, _('Cannot remove a system installed mapping')
+
         mapping_path = self.__mapping_bag[mapping_id].get_path()
         shutil.rmtree(mapping_path)
         self.options['mapping_sort'].remove(mapping_id)

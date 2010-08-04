@@ -76,7 +76,7 @@ class IconChooserDialog(gtk.FileChooserDialog):
         self.connect('update-preview', update_preview_cb, preview, icon_size)
 
 class MappingEditorDialog(object):
-    def __init__(self, mapping):
+    def __init__(self, mapping, system_mapping = False):
         self.mapping = mapping
                     
         builder = gtk.Builder()
@@ -93,6 +93,11 @@ class MappingEditorDialog(object):
         self.mapping_buffer = builder.get_object('mapping_buffer')
         self.icon_image = builder.get_object('icon_image')
         
+        if system_mapping:
+            self.warning_box = builder.get_object('warning_box')
+            self.warning_box.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#F6FA9C'))
+            self.warning_box.show()
+            
         #FIXME: iconfilechooser with default dialog from glade 3.6.7 crashes
         self.icon_dlg = IconChooserDialog(self.mapping_editor_dlg)
         self.iconfilechooser_btn = gtk.FileChooserButton(self.icon_dlg)
@@ -166,6 +171,7 @@ class MappingEditorDialog(object):
 
     def link_btn_clicked_cb(self, widget):
         webbrowser.open(widget.get_uri())
+        pass
 
     def iconfilechooser_btn_file_set_cb(self, widget):
         filename = self.iconfilechooser_btn.get_filename()
