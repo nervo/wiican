@@ -129,6 +129,8 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__mappings_menu.append(sep_item)
 
         mapping_manager.scan_mappings()
+
+        no_visible_mappings = True
         for mapping_id, mapping in mapping_manager.items():
             if not mapping_manager.is_visible(mapping_id):
                 continue
@@ -140,6 +142,13 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             menuitem.connect('activate', self.__discover_cb, mapping)
             menuitem.show()
             self.__mappings_menu.append(menuitem)
+            no_visible_mappings = False
+
+        if no_visible_mappings:
+            add_mappings_item = gtk.MenuItem(_('Add visible mappings'))
+            add_mappings_item.connect('activate', self.preferences_cb)
+            add_mappings_item.show()
+            self.__mappings_menu.append(add_mappings_item)
 
     def __icon_popupmenu_cb(self, status_icon, button, activate_time, data):
         self.main_menu.popup(None, None, gtk.status_icon_position_menu, button, 

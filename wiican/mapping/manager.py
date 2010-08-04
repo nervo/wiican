@@ -34,21 +34,21 @@ from wiican.mapping.mapping import Mapping
 
 class MappingManager(Singleton, GConfStore):
     defaults = {'mapping_sort': [], 'mapping_visible': set([])}
-    
+
     def __init__(self):
         Singleton.__init__(self)
         GConfStore.__init__(self, GCONF_KEY)
-        
+
         self.home_path = MAPPINGS_HOME_DIR
         self.system_paths = MAPPINGS_BASE_DIR
-        
+
         if not type(self.system_paths) is list:
             self.system_paths = [self.system_paths]
 
         self.__mapping_bag = {}
         self.loadconf(only_defaults=True)
         self.options['mapping_visible'] = set(self.options['mapping_visible'])
-        
+
     def scan_mappings(self):
         def load_mapping(mappings, dirname, fnames):
             if Mapping.info_filename in fnames and Mapping.mapping_filename in fnames:
@@ -70,27 +70,27 @@ class MappingManager(Singleton, GConfStore):
 
     def import_mapping(self, package_path):
         package_file = tarfile.open(package_path)
-        
+
         if not Mapping.info_filename in package_file.getnames():
             raise MappingManagerError, _('Not %s file found on wiican package' % \
                 Mapping.info_filename)
-    
+
         if not Mapping.mapping_filename in package_file.getnames():
             raise MappingManagerError, _('Not %s file found  on wiican package' % \
                 Mapping.mapping_filename)
 
         mapping_id = self.__gen_unique_mapping_id()
         mapping_path = os.path.join(self.home_path, mapping_id)
-        
+
         package_file.extractall(mapping_path)
         package_file.close()
 
         mapping = Mapping(mapping_path)
- 
+
         self.__mapping_bag[mapping_id] = mapping
         self.options['mapping_sort'].append(mapping_id)
         self.options['mapping_visible'].add(mapping_id)        
-            
+
         return mapping_id
 
     def export_mapping(self, mapping_id, dest_filepath):
@@ -197,6 +197,9 @@ class MappingManager(Singleton, GConfStore):
     def __iter__(self):
         for mapping_id in self.options['mapping_sort']:
             yield mapping_id
+
+    def __len__(self):
+        return len(self.__mapping_bag)
 
     def items(self):
         for mapping_id in self.options['mapping_sort']:
