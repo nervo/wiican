@@ -36,9 +36,8 @@ pref_store = UIPrefStore()
 class MappingManagerDialog(object):
     mapping_filter = gtk.FileFilter()
     mapping_filter.set_name(_('Wiican Mapping Package'))
-    mapping_filter.add_mime_type('application/x-tar')
-    mapping_filter.add_pattern('*.tgz')
-    mapping_filter.add_pattern('*.tar.gz')
+    mapping_filter.add_mime_type('application/x-wii')
+    mapping_filter.add_pattern('*.wii')
 
     def __init__(self):
         builder = gtk.Builder()
@@ -225,6 +224,8 @@ class MappingManagerDialog(object):
 
             if export_dlg.run() == gtk.RESPONSE_OK:
                 dest_file_path = export_dlg.get_filename()
+                if not dest_file_path.endswith('.wii'):
+                    dest_file_path += '.wii'
                 #TODO: Check writability before export (or wait for gnome-bug #137515)
                 mapping_manager.export_mapping(mapping_id, dest_file_path)
                 pref_store.options['export_dir'] = export_dlg.get_current_folder()

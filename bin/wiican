@@ -183,7 +183,6 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             try:
                 self.__wiican_iface.ConnectWiimote(filename, False)
             except dbus.exceptions.DBusException, error:
-
                 if error.message == ('Mapping validation error'):
                     self.__prompt_valerrdlg(mapping)
                     return
