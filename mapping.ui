@@ -305,12 +305,13 @@
     <property name="icon_name">package-x-generic</property>
   </object>
   <object class="GtkDialog" id="mapping_editor_dlg">
+    <property name="width_request">300</property>
     <property name="height_request">500</property>
     <property name="border_width">5</property>
     <property name="modal">True</property>
     <property name="window_position">mouse</property>
     <property name="destroy_with_parent">True</property>
-    <property name="icon">wiican.svg</property>
+    <property name="icon_name">document-properties</property>
     <property name="type_hint">dialog</property>
     <property name="has_separator">False</property>
     <child internal-child="vbox">
@@ -525,17 +526,72 @@
                     <property name="top_padding">6</property>
                     <property name="left_padding">12</property>
                     <child>
-                      <object class="GtkScrolledWindow" id="scrolledwindow2">
+                      <object class="GtkVBox" id="vbox5">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="hscrollbar_policy">automatic</property>
-                        <property name="vscrollbar_policy">automatic</property>
+                        <property name="orientation">vertical</property>
                         <child>
-                          <object class="GtkTextView" id="mapping_textview">
+                          <object class="GtkScrolledWindow" id="scrolledwindow2">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="buffer">mapping_buffer</property>
+                            <property name="hscrollbar_policy">automatic</property>
+                            <property name="vscrollbar_policy">automatic</property>
+                            <property name="shadow_type">in</property>
+                            <child>
+                              <object class="GtkTextView" id="mapping_textview">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="buffer">mapping_buffer</property>
+                              </object>
+                            </child>
                           </object>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkHBox" id="hbox3">
+                            <property name="visible">True</property>
+                            <child>
+                              <object class="GtkButton" id="execute_btn">
+                                <property name="label">gtk-execute</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="use_stock">True</property>
+                                <signal name="clicked" handler="execute_btn_clicked_cb"/>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLinkButton" id="link_btn">
+                                <property name="label" translatable="yes">wminput help</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="relief">none</property>
+                                <property name="xalign">1</property>
+                                <property name="uri">http://abstrakraft.org/cwiid/wiki/wminput</property>
+                                <signal name="clicked" handler="link_btn_clicked_cb"/>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="pack_type">end</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="padding">6</property>
+                            <property name="pack_type">end</property>
+                            <property name="position">1</property>
+                          </packing>
                         </child>
                       </object>
                     </child>
@@ -562,7 +618,7 @@
           <object class="GtkEventBox" id="warning_box">
             <property name="above_child">True</property>
             <child>
-              <object class="GtkHBox" id="vbox10">
+              <object class="GtkHBox" id="hbox10">
                 <property name="visible">True</property>
                 <child>
                   <object class="GtkImage" id="image1">
@@ -606,26 +662,13 @@ Your changes will be saved in a new mapping.</property>
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="cancel_btn">
+              <placeholder/>
+            </child>
+            <child>
+              <object class="GtkButton" id="button2">
                 <property name="label">gtk-cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="ok_btn">
-                <property name="label">gtk-ok</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="has_default">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
               </object>
@@ -636,21 +679,17 @@ Your changes will be saved in a new mapping.</property>
               </packing>
             </child>
             <child>
-              <object class="GtkLinkButton" id="link_btn">
-                <property name="label" translatable="yes">wminput help</property>
+              <object class="GtkButton" id="button1">
+                <property name="label">gtk-save</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="relief">none</property>
-                <property name="xalign">1</property>
-                <property name="uri">http://abstrakraft.org/cwiid/wiki/wminput</property>
-                <signal name="clicked" handler="link_btn_clicked_cb"/>
+                <property name="use_stock">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
                 <property name="position">2</property>
-                <property name="secondary">True</property>
               </packing>
             </child>
           </object>
@@ -663,9 +702,8 @@ Your changes will be saved in a new mapping.</property>
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-6">cancel_btn</action-widget>
-      <action-widget response="-5">ok_btn</action-widget>
-      <action-widget response="0">link_btn</action-widget>
+      <action-widget response="-6">button2</action-widget>
+      <action-widget response="-5">button1</action-widget>
     </action-widgets>
   </object>
   <object class="GtkTextBuffer" id="mapping_buffer"/>

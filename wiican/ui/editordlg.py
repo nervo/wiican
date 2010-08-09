@@ -23,10 +23,17 @@
 import gtk
 import webbrowser
 import pango
+import tempfile
+
+import dbus, dbus.exceptions
+from dbus.mainloop.glib import DBusGMainLoop
 
 from wiican.defs import *
 from wiican.mapping import Mapping, MappingValidator
-from wiican.ui import UIPrefStore
+from wiican.ui import UIPrefStore, Notificator
+from wiican.service import WIICAN_PATH, WIICAN_URI
+from wiican.service import WC_DISABLED, WC_BLUEZ_PRESENT, WC_UINPUT_PRESENT, \
+    WC_WIIMOTE_DISCOVERING
 
 pref_store = UIPrefStore()
 
@@ -92,6 +99,7 @@ class MappingEditorDialog(object):
         self.authors_entry = builder.get_object('authors_entry')
         self.mapping_buffer = builder.get_object('mapping_buffer')
         self.icon_image = builder.get_object('icon_image')
+        self.execute_btn = builder.get_object('execute_btn')
         
         if system_mapping:
             self.warning_box = builder.get_object('warning_box')
@@ -134,6 +142,25 @@ class MappingEditorDialog(object):
             48, 48)
         self.icon_image.set_from_pixbuf(pixbuf)
 
+        # Connect and manage wiican service status
+        bus = dbus.SessionBus()
+        self.wiican_iface = dbus.Interface(bus.get_object (WIICAN_URI, 
+            WIICAN_PATH), WIICAN_URI)
+            
+        if not self.wiican_iface.GetStatus() == WC_UINPUT_PRESENT | WC_BLUEZ_PRESENT:
+            self.execute_btn.set_sensitive(False)
+
+        def wiican_status_changed(new_status):
+            if new_status == (WC_UINPUT_PRESENT | WC_BLUEZ_PRESENT):
+                self.execute_btn.set_sensitive(True)
+            else:
+                self.execute_btn.set_sensitive(False)
+
+        self.wiican_iface.connect_to_signal('StatusChanged', wiican_status_changed, 
+            dbus_interface='org.gnome.Wiican')
+        
+        self.notificator = Notificator('wiican')
+            
     def changed_cb(self, widget, data=None):
         start, end = self.mapping_buffer.get_bounds()
         self.mapping_buffer.remove_all_tags(start, end)
@@ -171,7 +198,33 @@ class MappingEditorDialog(object):
 
     def link_btn_clicked_cb(self, widget):
         webbrowser.open(widget.get_uri())
-        pass
+
+    def execute_btn_clicked_cb(self, widget):
+        start, end = self.mapping_buffer.get_bounds()
+        mapping = self.mapping_buffer.get_text(start, end)
+        
+        filename = tempfile.mktemp()
+        fp = open(filename, 'w')
+        fp.write(mapping)
+        fp.close()
+        
+        try:
+            self.wiican_iface.ConnectWiimote(filename, False)
+        except dbus.exceptions.DBusException, error:
+            if error.message == ('Mapping validation error'):
+                error_importing_dlg = gtk.MessageDialog(parent = self.mapping_dlg,
+                    flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+                    type = gtk.MESSAGE_ERROR,
+                    buttons = gtk.BUTTONS_CLOSE,
+                    message_format = _("It looks the mapping contains errors."))
+                error_importing_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+                error_importing_dlg.run()
+                error_importing_dlg.destroy()
+                return
+
+        self.notificator.display_notification(title=_('Press 1+2'), 
+            text=_('To put you Wiimote in discoverable mode now'),
+            icon='wiican')
 
     def iconfilechooser_btn_file_set_cb(self, widget):
         filename = self.iconfilechooser_btn.get_filename()
