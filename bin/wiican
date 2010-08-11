@@ -28,6 +28,9 @@ import gtk
 import gobject
 import dbus, dbus.exceptions
 
+import tarfile
+import tempfile
+
 from wiican.defs import *
 from wiican.ui import Notificator, PngAnimation
 from wiican.ui import MappingManagerDialog, MappingEditorDialog
@@ -48,21 +51,21 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         if not builder.add_from_file(WIIMOTEMANAGER_UI):
             raise 'Cant load %s' % WIIMOTEMANAGER_UI
         builder.connect_signals(self)
-        
+
         self.aboutdlg = builder.get_object('WiiAboutDialog')
         self.valerrdlg = builder.get_object('ValidatorErrorDialog')
         self.main_menu = builder.get_object('main_menu')
         self.icon_image = builder.get_object('icon_image')
-        
+
         self.aboutdlg.connect('response', lambda d, r: d.hide())
         self.valerrdlg.connect('response', lambda d, r: d.hide())
         self.connect('popup-menu', self.__icon_popupmenu_cb, None)
         self.connect('activate', self.__activate_cb)
-        
+
         self.__animation = PngAnimation([ICON_CONN1, ICON_CONN2, ICON_CONN3, ICON_ON])
         self.__load_mappings_menu()
         self.__notificator = Notificator('wiican')
-        
+
         # Connect to wiican service
         bus = dbus.SessionBus()  
         self.__wiican_iface = dbus.Interface(bus.get_object (WIICAN_URI, 
@@ -71,7 +74,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__status_cb(self.__cur_status)
         self.__wiican_iface.connect_to_signal('StatusChanged', self.__status_cb, 
             dbus_interface='org.gnome.Wiican')
-                        
+
     def __status_cb(self, new_status):
         #print 'New:', new_status, 'Old:', self.__cur_status
         if not new_status & WC_BLUEZ_PRESENT:
@@ -122,7 +125,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__mappings_menu.append(disconnect_item)
         self.__disconnect_item = disconnect_item
         self.__disconnect_item.set_sensitive(False)
-        
+
         sep_item = gtk.SeparatorMenuItem()
         sep_item.show()
         self.__mappings_menu.append(sep_item)
@@ -133,7 +136,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         for mapping_id, mapping in mapping_manager.items():
             if not mapping_manager.is_visible(mapping_id):
                 continue
-                
+
             icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 16, 16)
             menuitem = gtk.ImageMenuItem(mapping.get_name())
             menuitem.set_tooltip_text(mapping.get_comment())
@@ -175,17 +178,17 @@ class WiimoteStatusIcon(gtk.StatusIcon):
     def __discover_cb(self, discover_item, mapping=None):
         if self.__cur_status & WC_WIIMOTE_DISCOVERING:
             self.__wiican_iface.DisconnectWiimote()
-        
+
         if mapping and mapping != -1:
             filename = os.path.join(mapping.get_path(), Mapping.mapping_filename)
 
             try:
-                self.__wiican_iface.ConnectWiimote(filename, False)
+                self.__wiican_iface.ConnectWiimote(filename, True)
             except dbus.exceptions.DBusException, error:
                 if error.message == ('Mapping validation error'):
                     self.__prompt_valerrdlg(mapping)
                     return
-                
+
             self.__notificator.display_notification(title=_('Press 1+2'), 
                 text=_('To put you Wiimote in discoverable mode now'),
                 icon='wiican')
@@ -203,7 +206,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
 
         location = self.get_geometry()[1]
         self.valerrdlg.move(location.x, location.y)
-        
+
         if self.valerrdlg.run() == gtk.RESPONSE_YES:
             mapping_editor_dlg = MappingEditorDialog(mapping)
             mapping_editor_dlg.set_title(_('Editing ') + mapping.get_name())
@@ -215,41 +218,42 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             mapping_editor_dlg.destroy()
             self.__load_mappings_menu()
 
+class MappingLauncherDialog(MappingEditorDialog):
+    def __init__(self, mapping_package):
+        mapping_path = self.load_mapping_in_tmp(mapping_package)
+        mapping = Mapping(mapping_path)
+
+        MappingEditorDialog.__init__(self, mapping, system_mapping = False)  
+
+    def load_mapping_in_tmp(self, package_path):
+        package_file = tarfile.open(package_path)
+
+        if not Mapping.info_filename in package_file.getnames():
+            raise MappingError, _('Not %s file found on wiican package' % \
+                Mapping.info_filename)
+
+        if not Mapping.mapping_filename in package_file.getnames():
+            raise MappingError, _('Not %s file found  on wiican package' % \
+                Mapping.mapping_filename)
+
+        mapping_path = tempfile.mkdtemp()
+        package_file.extractall(mapping_path)
+        package_file.close()
+
+        return mapping_path
+
 if __name__ == '__main__':
     from optparse import OptionParser
   
-    parser = OptionParser('usage: %prog [options] arg')
+    parser = OptionParser(_('usage: %prog [options] arg'))
     parser.add_option('-f', '--file', dest='filename',
-                      help='read data from FILENAME')
+                      help=_('loads mapping package from FILENAME'))
     (options, args) = parser.parse_args()
 
     if options.filename != None:
         if os.path.exists(options.filename):
-            import sys
-            import tarfile
-            import tempfile
-
-            from wiican.mapping import Mapping, MappingError
-                        
-            def load_mapping_in_tmp(package_path):
-                package_file = tarfile.open(package_path)
-
-                if not Mapping.info_filename in package_file.getnames():
-                    raise MappingError, _('Not %s file found on wiican package' % \
-                        Mapping.info_filename)
-
-                if not Mapping.mapping_filename in package_file.getnames():
-                    raise MappingError, _('Not %s file found  on wiican package' % \
-                        Mapping.mapping_filename)
-
-                mapping_path = tempfile.mkdtemp()
-                package_file.extractall(mapping_path)
-                package_file.close()
-                
-                return mapping_path
-
             try:
-                mapping_path = load_mapping_in_tmp(options.filename)
+                mapping_launcher_dlg = MappingLauncherDialog(options.filename)
             except MappingError, e:
                 error_loading_dlg = gtk.MessageDialog(
                     flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
@@ -261,11 +265,7 @@ if __name__ == '__main__':
                 error_loading_dlg.destroy()
                 sys.exit(-1)
 
-            mapping = Mapping(mapping_path)
-            mapping_editor_dlg = MappingEditorDialog(mapping)
-            mapping_editor_dlg.set_title(_('Editing ') + mapping.get_name())
-
-            mapping_editor_dlg.run()
+            mapping_launcher_dlg.run()
             sys.exit(0)
     else:
         from dbus.mainloop.glib import DBusGMainLoop

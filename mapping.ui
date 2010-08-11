@@ -552,13 +552,14 @@
                           <object class="GtkHBox" id="hbox3">
                             <property name="visible">True</property>
                             <child>
-                              <object class="GtkButton" id="execute_btn">
+                              <object class="GtkToggleButton" id="execute_btn">
                                 <property name="label">gtk-execute</property>
+                                <property name="width_request">100</property>
+                                <property name="height_request">30</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="use_stock">True</property>
-                                <signal name="clicked" handler="execute_btn_clicked_cb"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>

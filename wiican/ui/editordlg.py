@@ -146,21 +146,37 @@ class MappingEditorDialog(object):
         bus = dbus.SessionBus()
         self.wiican_iface = dbus.Interface(bus.get_object (WIICAN_URI, 
             WIICAN_PATH), WIICAN_URI)
-            
-        if not self.wiican_iface.GetStatus() == WC_UINPUT_PRESENT | WC_BLUEZ_PRESENT:
-            self.execute_btn.set_sensitive(False)
+
+        #FIXME: I think that handler_block/unblock its a bad design for this
+        self.sig_id = self.execute_btn.connect('clicked', self.execute_btn_clicked_cb)
 
         def wiican_status_changed(new_status):
-            if new_status == (WC_UINPUT_PRESENT | WC_BLUEZ_PRESENT):
+            print new_status
+            if new_status & WC_WIIMOTE_DISCOVERING:
+                if not self.execute_btn.get_active():
+                    self.execute_btn.handler_block(self.sig_id)
+                    self.execute_btn.set_active(True)
+                    self.execute_btn.handler_unblock(self.sig_id)
+            elif new_status == (WC_UINPUT_PRESENT | WC_BLUEZ_PRESENT):
                 self.execute_btn.set_sensitive(True)
+                self.execute_btn.set_tooltip_text('')
+                if self.execute_btn.get_active():
+                    self.execute_btn.handler_block(self.sig_id)
+                    self.execute_btn.set_active(False)
+                    self.execute_btn.handler_unblock(self.sig_id)
             else:
                 self.execute_btn.set_sensitive(False)
+                self.execute_btn.set_tooltip_text(_('Ensure a bluetooth ' \
+                    +'adapter its available and uinput module its loaded'))
 
         self.wiican_iface.connect_to_signal('StatusChanged', wiican_status_changed, 
             dbus_interface='org.gnome.Wiican')
-        
-        self.notificator = Notificator('wiican')
             
+        status = self.wiican_iface.GetStatus()
+        wiican_status_changed(status)
+       
+        self.notificator = Notificator('wiican')
+
     def changed_cb(self, widget, data=None):
         start, end = self.mapping_buffer.get_bounds()
         self.mapping_buffer.remove_all_tags(start, end)
@@ -200,32 +216,38 @@ class MappingEditorDialog(object):
         webbrowser.open(widget.get_uri())
 
     def execute_btn_clicked_cb(self, widget):
-        start, end = self.mapping_buffer.get_bounds()
-        mapping = self.mapping_buffer.get_text(start, end)
+        print 'hola'
+        if self.execute_btn.get_active():
+            start, end = self.mapping_buffer.get_bounds()
+            mapping = self.mapping_buffer.get_text(start, end)
         
-        filename = tempfile.mktemp()
-        fp = open(filename, 'w')
-        fp.write(mapping)
-        fp.close()
+            filename = tempfile.mktemp()
+            fp = open(filename, 'w')
+            fp.write(mapping)
+            fp.close()
         
-        try:
-            self.wiican_iface.ConnectWiimote(filename, False)
-        except dbus.exceptions.DBusException, error:
-            if error.message == ('Mapping validation error'):
-                error_importing_dlg = gtk.MessageDialog(parent = self.mapping_dlg,
-                    flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-                    type = gtk.MESSAGE_ERROR,
-                    buttons = gtk.BUTTONS_CLOSE,
-                    message_format = _("It looks the mapping contains errors."))
-                error_importing_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-                error_importing_dlg.run()
-                error_importing_dlg.destroy()
-                return
+            try:
+                self.wiican_iface.ConnectWiimote(filename, True)
+            except dbus.exceptions.DBusException, error:
+                if error.message == ('Mapping validation error'):
+                    error_importing_dlg = gtk.MessageDialog(parent = self.mapping_editor_dlg,
+                        flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+                        type = gtk.MESSAGE_ERROR,
+                        buttons = gtk.BUTTONS_CLOSE,
+                        message_format = _("It looks the mapping contains errors."))
+                    error_importing_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+                    error_importing_dlg.run()
+                    error_importing_dlg.destroy()
+                    return
 
-        self.notificator.display_notification(title=_('Press 1+2'), 
-            text=_('To put you Wiimote in discoverable mode now'),
-            icon='wiican')
-
+            self.notificator.display_notification(title=_('Press 1+2'), 
+                text=_('To put you Wiimote in discoverable mode now'),
+                icon='wiican')
+        else:
+            self.wiican_iface.DisconnectWiimote()
+            
+        self.execute_btn.set_active(self.execute_btn.get_active())
+        
     def iconfilechooser_btn_file_set_cb(self, widget):
         filename = self.iconfilechooser_btn.get_filename()
         pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 48, 48)
