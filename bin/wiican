@@ -30,6 +30,7 @@ import dbus, dbus.exceptions
 
 import tarfile
 import tempfile
+import shutil
 
 from wiican.defs import *
 from wiican.ui import Notificator, PngAnimation
@@ -76,7 +77,6 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             dbus_interface='org.gnome.Wiican')
 
     def __status_cb(self, new_status):
-        #print 'New:', new_status, 'Old:', self.__cur_status
         if not new_status & WC_BLUEZ_PRESENT:
             self.__set_no_bluetooth_st()
         elif not new_status & WC_UINPUT_PRESENT:
@@ -219,12 +219,27 @@ class WiimoteStatusIcon(gtk.StatusIcon):
             self.__load_mappings_menu()
 
 class MappingLauncherDialog(MappingEditorDialog):
-    def __init__(self, mapping_package):
-        mapping_path = self.load_mapping_in_tmp(mapping_package)
-        mapping = Mapping(mapping_path)
+    def __init__(self, package_filename):
+        self.package_filename = package_filename
+        self.mapping_path = self.load_mapping_in_tmp(package_filename)
 
-        MappingEditorDialog.__init__(self, mapping, system_mapping = False)  
+        MappingEditorDialog.__init__(self, Mapping(self.mapping_path), 
+            system_mapping = False)
 
+        self.save_btn = self.builder.get_object('save_btn')
+        self.save_btn.connect('clicked', self.save_mapping)
+
+    def save_mapping(self, widget):
+        mapping = self.get_mapping()
+        mapping.write(self.mapping_path)
+
+        package_file = tarfile.TarFile(self.package_filename, 'w')
+        for f in os.listdir(self.mapping_path):
+            package_file.add(os.path.join(self.mapping_path, f), arcname=f)
+
+        package_file.close()
+        shutil.rmtree(self.mapping_path)
+        
     def load_mapping_in_tmp(self, package_path):
         package_file = tarfile.open(package_path)
 

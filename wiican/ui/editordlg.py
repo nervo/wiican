@@ -86,23 +86,23 @@ class MappingEditorDialog(object):
     def __init__(self, mapping, system_mapping = False):
         self.mapping = mapping
                     
-        builder = gtk.Builder()
-        if not builder.add_objects_from_file(MAPPING_UI, 
+        self.builder = gtk.Builder()
+        if not self.builder.add_objects_from_file(MAPPING_UI, 
                 ['mapping_editor_dlg', 'mapping_buffer']):
             raise 'Cant load %s' % MAPPING_UI
-        builder.connect_signals(self)
+        self.builder.connect_signals(self)
         
-        self.mapping_editor_dlg = builder.get_object('mapping_editor_dlg')
-        self.name_entry = builder.get_object('name_entry')
-        self.comment_entry = builder.get_object('comment_entry')
-        self.version_entry = builder.get_object('version_entry')
-        self.authors_entry = builder.get_object('authors_entry')
-        self.mapping_buffer = builder.get_object('mapping_buffer')
-        self.icon_image = builder.get_object('icon_image')
-        self.execute_btn = builder.get_object('execute_btn')
+        self.mapping_editor_dlg = self.builder.get_object('mapping_editor_dlg')
+        self.name_entry = self.builder.get_object('name_entry')
+        self.comment_entry = self.builder.get_object('comment_entry')
+        self.version_entry = self.builder.get_object('version_entry')
+        self.authors_entry = self.builder.get_object('authors_entry')
+        self.mapping_buffer = self.builder.get_object('mapping_buffer')
+        self.icon_image = self.builder.get_object('icon_image')
+        self.execute_btn = self.builder.get_object('execute_btn')
         
         if system_mapping:
-            self.warning_box = builder.get_object('warning_box')
+            self.warning_box = self.builder.get_object('warning_box')
             self.warning_box.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#F6FA9C'))
             self.warning_box.show()
             
@@ -111,7 +111,7 @@ class MappingEditorDialog(object):
         self.iconfilechooser_btn = gtk.FileChooserButton(self.icon_dlg)
         self.iconfilechooser_btn.show()
         self.iconfilechooser_btn.connect('file-set', self.iconfilechooser_btn_file_set_cb)
-        builder.get_object('hbox2').add(self.iconfilechooser_btn)
+        self.builder.get_object('hbox2').add(self.iconfilechooser_btn)
 
         # Populate dialog with mapping values
         self.name_entry.set_text(self.mapping.get_name() or '')
@@ -151,7 +151,6 @@ class MappingEditorDialog(object):
         self.sig_id = self.execute_btn.connect('clicked', self.execute_btn_clicked_cb)
 
         def wiican_status_changed(new_status):
-            print new_status
             if new_status & WC_WIIMOTE_DISCOVERING:
                 if not self.execute_btn.get_active():
                     self.execute_btn.handler_block(self.sig_id)
@@ -216,7 +215,6 @@ class MappingEditorDialog(object):
         webbrowser.open(widget.get_uri())
 
     def execute_btn_clicked_cb(self, widget):
-        print 'hola'
         if self.execute_btn.get_active():
             start, end = self.mapping_buffer.get_bounds()
             mapping = self.mapping_buffer.get_text(start, end)

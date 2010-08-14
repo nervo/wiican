@@ -1,6 +1,6 @@
 
 wiican
-	command=wiican
+	command=wiican -f
 	name=Use a wiican package mapping
 	can_open_multiple_files=false
 	expects_uris=false
