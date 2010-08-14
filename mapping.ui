@@ -544,36 +544,46 @@
                             <property name="visible">True</property>
                             <child>
                               <object class="GtkToggleButton" id="execute_btn">
-                                <property name="label">gtk-execute</property>
-                                <property name="width_request">100</property>
-                                <property name="height_request">30</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <property name="use_stock">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLinkButton" id="link_btn">
-                                <property name="label" translatable="yes">wminput help</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Execute mapping</property>
                                 <property name="relief">none</property>
-                                <property name="xalign">1</property>
-                                <property name="uri">http://abstrakraft.org/cwiid/wiki/wminput</property>
-                                <signal name="clicked" handler="link_btn_clicked_cb"/>
+                                <child>
+                                  <object class="GtkImage" id="image2">
+                                    <property name="visible">True</property>
+                                    <property name="stock">gtk-execute</property>
+                                  </object>
+                                </child>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
                                 <property name="pack_type">end</property>
-                                <property name="position">1</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLinkButton" id="help_btn">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Mapping programming help</property>
+                                <property name="xalign">1</property>
+                                <property name="uri">http://abstrakraft.org/cwiid/wiki/wminput</property>
+                                <signal name="clicked" handler="help_btn_clicked_cb"/>
+                                <child>
+                                  <object class="GtkImage" id="image3">
+                                    <property name="visible">True</property>
+                                    <property name="stock">gtk-help</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="pack_type">end</property>
+                                <property name="position">0</property>
                               </packing>
                             </child>
                           </object>
@@ -629,7 +639,7 @@
                     <property name="visible">True</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">This is a system installed mapping. 
-Your changes will be saved in a new mapping.</property>
+Changes will be saved in a new mapping.</property>
                     <attributes>
                       <attribute name="foreground" value="#000000000000"/>
                     </attributes>

@@ -158,7 +158,7 @@ class MappingEditorDialog(object):
                     self.execute_btn.handler_unblock(self.sig_id)
             elif new_status == (WC_UINPUT_PRESENT | WC_BLUEZ_PRESENT):
                 self.execute_btn.set_sensitive(True)
-                self.execute_btn.set_tooltip_text('')
+                self.execute_btn.set_tooltip_text(_('Execute mapping'))
                 if self.execute_btn.get_active():
                     self.execute_btn.handler_block(self.sig_id)
                     self.execute_btn.set_active(False)
@@ -211,7 +211,7 @@ class MappingEditorDialog(object):
 
         return self.mapping
 
-    def link_btn_clicked_cb(self, widget):
+    def help_btn_clicked_cb(self, widget):
         webbrowser.open(widget.get_uri())
 
     def execute_btn_clicked_cb(self, widget):
