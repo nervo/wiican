@@ -220,25 +220,16 @@ class WiimoteStatusIcon(gtk.StatusIcon):
 
 class MappingLauncherDialog(MappingEditorDialog):
     def __init__(self, package_filename):
-        self.package_filename = package_filename
         self.mapping_path = self.load_mapping_in_tmp(package_filename)
-
         MappingEditorDialog.__init__(self, Mapping(self.mapping_path), 
             system_mapping = False)
 
+        self.package_filename = package_filename
         self.save_btn = self.builder.get_object('save_btn')
+        self.cancel_btn = self.builder.get_object('cancel_btn')
+
         self.save_btn.connect('clicked', self.save_mapping)
-
-    def save_mapping(self, widget):
-        mapping = self.get_mapping()
-        mapping.write(self.mapping_path)
-
-        package_file = tarfile.TarFile(self.package_filename, 'w')
-        for f in os.listdir(self.mapping_path):
-            package_file.add(os.path.join(self.mapping_path, f), arcname=f)
-
-        package_file.close()
-        shutil.rmtree(self.mapping_path)
+        self.cancel_btn.connect('clicked', self.cancel_cb)
         
     def load_mapping_in_tmp(self, package_path):
         package_file = tarfile.open(package_path)
@@ -256,7 +247,23 @@ class MappingLauncherDialog(MappingEditorDialog):
         package_file.close()
 
         return mapping_path
+        
+    def save_mapping(self, widget):
+        mapping = self.get_mapping()
+        save_path = tempfile.mkdtemp()
+        mapping.write(save_path)
 
+        package_file = tarfile.TarFile(self.package_filename, 'w')
+        for f in os.listdir(save_path):
+            package_file.add(os.path.join(save_path, f), arcname=f)
+
+        package_file.close()
+        shutil.rmtree(save_path)
+        shutil.rmtree(self.mapping_path)
+
+    def cancel_cb(self, widget):
+        shutil.rmtree(self.mapping_path)
+        
 if __name__ == '__main__':
     from optparse import OptionParser
   

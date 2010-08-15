@@ -550,7 +550,7 @@
                                 <property name="tooltip_text" translatable="yes">Execute mapping</property>
                                 <property name="relief">none</property>
                                 <child>
-                                  <object class="GtkImage" id="image2">
+                                  <object class="GtkImage" id="execute_image">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-execute</property>
                                   </object>
@@ -560,7 +560,7 @@
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
                                 <property name="pack_type">end</property>
-                                <property name="position">0</property>
+                                <property name="position">1</property>
                               </packing>
                             </child>
                             <child>
@@ -573,7 +573,7 @@
                                 <property name="uri">http://abstrakraft.org/cwiid/wiki/wminput</property>
                                 <signal name="clicked" handler="help_btn_clicked_cb"/>
                                 <child>
-                                  <object class="GtkImage" id="image3">
+                                  <object class="GtkImage" id="help_image">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-help</property>
                                   </object>
