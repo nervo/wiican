@@ -98,9 +98,11 @@ class WMInputValidator(Parser):
     def __init__(self, dbg_mode=False):
         Parser.__init__(self, debug=dbg_mode)
         self.validation_errors = []
-
+        self.comments = []
+        
     def validate(self, config, halt_on_errors=True, verbose=False):
         self.validation_errors = []
+        self.comments = []        
         self.halt_on_errors = halt_on_errors
         self.verbose = verbose
                         
@@ -121,16 +123,14 @@ class WMInputValidator(Parser):
 
     def t_COMMENT(self, t):
         r'\#.*'
-        pass
-
-    def t_FLOAT(self, t):
-        r'[0-9]+(\.[0-9]*)?([eE][+/-]?[0-9]+)?'
-        t.value = float(t.value)    
-        return t
+        self.comments.append(t)
 
     def t_INT(self, t):
         r'[0-9]+'
-        t.value = int(t.value)
+        return t
+
+    def t_FLOAT(self, t):
+        r'[0-9]+(\.[0-9]*)?([eE][+/-]?[0-9]+)?'
         return t
 
     def t_ON_OFF(self, t):
@@ -179,9 +179,9 @@ class WMInputValidator(Parser):
     def p_conf_item(self, p):
         """ conf_item : WM_RUMBLE '=' ON_OFF
                     | WM_BTN '=' BTN_ACTION
-                    | NC_BTN '=' BTN_ACTION 
+                    | NC_BTN '=' BTN_ACTION
                     | CC_BTN '=' BTN_ACTION
-                    | AXIS '=' sign pointer ABS_AXIS_ACTION 
+                    | AXIS '=' sign pointer ABS_AXIS_ACTION
                     | AXIS '=' sign REL_AXIS_ACTION
                     | PLUGIN '=' BTN_ACTION
                     | PLUGIN '=' sign pointer ABS_AXIS_ACTION

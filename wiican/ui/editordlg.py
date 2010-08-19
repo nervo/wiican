@@ -114,33 +114,21 @@ class MappingEditorDialog(object):
         self.builder.get_object('hbox2').add(self.iconfilechooser_btn)
 
         # Populate dialog with mapping values
+        pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(self.mapping.get_icon(),
+            48, 48)
+        self.icon_image.set_from_pixbuf(pixbuf)
         self.name_entry.set_text(self.mapping.get_name() or '')
         self.comment_entry.set_text(self.mapping.get_comment() or '')
         self.version_entry.set_text(self.mapping.get_version() or '')
         self.authors_entry.set_text(self.mapping.get_authors() or '')
         self.mapping_buffer.set_text(self.mapping.get_mapping() or '')
 
-        # Initial error underlining on mapping
-        self.mapping_buffer.create_tag('underline_error', 
-            underline=pango.UNDERLINE_ERROR)
-
+        # Initial error underlining and colorize comments
+        self.mapping_buffer.create_tag('underline_error', underline=pango.UNDERLINE_ERROR)
+        self.mapping_buffer.create_tag("comment", foreground="darkblue")
         self.validator = MappingValidator()
-        self.validator.validate(self.mapping.get_mapping() or '', 
-            halt_on_errors=False)
-
-        for error in self.validator.validation_errors:
-            if not error: continue
-            start = self.mapping_buffer.get_iter_at_offset(error.lexpos)
-            #FIXME: Finding '\n' for underlining error it's not the best way
-            end = self.mapping_buffer.get_iter_at_offset(error.lexpos + \
-                    error.value.find('\n'))
-            self.mapping_buffer.apply_tag_by_name('underline_error', start, end)
-
+        self.changed_cb(None)
         self.mapping_buffer.connect('changed', self.changed_cb)
-
-        pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(self.mapping.get_icon(),
-            48, 48)
-        self.icon_image.set_from_pixbuf(pixbuf)
 
         # Connect and manage wiican service status
         bus = dbus.SessionBus()
@@ -191,6 +179,11 @@ class MappingEditorDialog(object):
             end = self.mapping_buffer.get_iter_at_offset(error.lexpos + \
                     error.value.find('\n'))
             self.mapping_buffer.apply_tag_by_name('underline_error', start, end)
+            
+        for comment in self.validator.comments:
+            start = self.mapping_buffer.get_iter_at_offset(comment.lexpos)
+            end = self.mapping_buffer.get_iter_at_offset(comment.lexpos + len(comment.value))
+            self.mapping_buffer.apply_tag_by_name('comment', start, end)
 
     def set_title(self, title=''):
         self.mapping_editor_dlg.set_title(title)
