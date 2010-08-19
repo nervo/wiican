@@ -723,11 +723,11 @@ Ulisse &lt;ulisail@yahoo.it&gt;</property>
   <object class="GtkMenu" id="main_menu">
     <property name="visible">True</property>
     <child>
-      <object class="GtkImageMenuItem" id="prefs_menuitem">
-        <property name="label">gtk-preferences</property>
+      <object class="GtkImageMenuItem" id="edit_menuitem">
+        <property name="label" translatable="yes">Edit mappings...</property>
         <property name="visible">True</property>
-        <property name="use_underline">True</property>
-        <property name="use_stock">True</property>
+        <property name="image">image2</property>
+        <property name="use_stock">False</property>
         <signal name="activate" handler="preferences_cb"/>
       </object>
     </child>
@@ -852,5 +852,9 @@ Do you want open the mapping editor dialog?</property>
   <object class="GtkImage" id="image1">
     <property name="visible">True</property>
     <property name="stock">gtk-jump-to</property>
+  </object>
+  <object class="GtkImage" id="image2">
+    <property name="visible">True</property>
+    <property name="stock">gtk-edit</property>
   </object>
 </interface>

@@ -103,8 +103,9 @@ class MappingEditorDialog(object):
         
         if system_mapping:
             self.warning_box = self.builder.get_object('warning_box')
+            self.warning_frame = self.builder.get_object('warning_frame')
             self.warning_box.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#F6FA9C'))
-            self.warning_box.show()
+            self.warning_frame.show_all()
             
         #FIXME: iconfilechooser with default dialog from glade 3.6.7 crashes
         self.icon_dlg = IconChooserDialog(self.mapping_editor_dlg)
@@ -196,7 +197,11 @@ class MappingEditorDialog(object):
 
     def get_mapping(self):
         start, end = self.mapping_buffer.get_bounds()
-        self.mapping.set_mapping(self.mapping_buffer.get_text(start, end))
+        mapping_code = self.mapping_buffer.get_text(start, end)
+        #FIXME: If mapping doesn't ends with \n wminput prompts segfault
+        if not mapping_code.endswith('\n'): mapping_code += '\n'
+
+        self.mapping.set_mapping(mapping_code)
         self.mapping.set_name(self.name_entry.get_text())
         self.mapping.set_comment(self.comment_entry.get_text())
         self.mapping.set_version(self.version_entry.get_text())
@@ -210,13 +215,15 @@ class MappingEditorDialog(object):
     def execute_btn_clicked_cb(self, widget):
         if self.execute_btn.get_active():
             start, end = self.mapping_buffer.get_bounds()
-            mapping = self.mapping_buffer.get_text(start, end)
-        
+            mapping_code = self.mapping_buffer.get_text(start, end)
+            #FIXME: If mapping doesn't ends with \n wminput prompts segfault
+            if not mapping_code.endswith('\n'): mapping_code += '\n'
+
             filename = tempfile.mktemp()
             fp = open(filename, 'w')
-            fp.write(mapping)
+            fp.write(mapping_code)
             fp.close()
-        
+
             try:
                 self.wiican_iface.ConnectWiimote(filename, True)
             except dbus.exceptions.DBusException, error:
@@ -236,9 +243,10 @@ class MappingEditorDialog(object):
                 icon='wiican')
         else:
             self.wiican_iface.DisconnectWiimote()
-            
+
         self.execute_btn.set_active(self.execute_btn.get_active())
-        
+        os.unlink(filename)
+
     def iconfilechooser_btn_file_set_cb(self, widget):
         filename = self.iconfilechooser_btn.get_filename()
         pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 48, 48)
