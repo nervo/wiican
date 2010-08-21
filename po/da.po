@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wiican\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-01-02 01:16+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-21 18:08+0200\n"
 "PO-Revision-Date: 2010-01-04 06:01+0000\n"
 "Last-Translator: Wiican Team <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -17,31 +17,16 @@ msgstr ""
 "X-Launchpad-Export-Date: 2010-01-05 04:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../wiican/wiimotemanager.py:103 ../wiican/wiimotemanager.py:104
-msgid "Connected"
-msgstr "Forbundet"
-
-#: ../wiican/wiimotemanager.py:105
-msgid "Put Wiimote in discoverable mode now (press 1+2)"
-msgstr "Gør din Wii controller søgbar (tryk 1+2)"
-
-#: ../wiican/wiimotemanager.py:112 ../wiican/wiimotemanager.py:113
-msgid "Disconnected"
-msgstr "Afbrudt"
-
-#: ../wiican/wiimotemanager.py:114
-msgid "Wiimote off"
-msgstr "Wii controlleren er slukket"
-
-#: ../wiican/wiimotemanager.py:123
-msgid "No bluetooth adapters"
+#: ../bin/wiican:91
+#, fuzzy
+msgid "Plug a bluetooth adapter"
 msgstr "Der er ingen bluetooth adapter"
 
-#: ../wiican/wiimotemanager.py:186
-msgid "Plug a bluetooth adapter"
-msgstr "Indsæt en bluetooth adapter"
+#: ../bin/wiican:96
+msgid "Please load uinput module first"
+msgstr ""
 
-#: ../wiican/wiimotemanager.py:192
+#: ../bin/wiican:102
 msgid ""
 "Hold left button for use wiimote\n"
 "Right button for menu"
@@ -49,87 +34,223 @@ msgstr ""
 "Tryk venstre knappen for at bruge Wii controlleren\n"
 "Højre knappen for menu"
 
-#: ../wiican/wiimotemanager.py:204
+#: ../bin/wiican:114
 msgid "Discovering Wiimote"
 msgstr "Søger efter Wii controlleren"
 
-#: ../wiican/wiimotemanager.py:211
-msgid "Use your wiimote"
-msgstr "Brug din Wii controller"
-
-#: ../wiican/wiimotemanager.py:301
-msgid "Fail!"
-msgstr "Fejl!"
-
-#: ../wiican/wiimotemanager.py:303
-msgid "Error discovering Wiimote"
-msgstr "Ingen Wii controller fundet"
-
-#: ../wiican/wiimotemanager.py:306
-msgid "uinput module it's not loaded"
+#: ../bin/wiican:147
+msgid "Add visible mappings"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:309
-msgid "check mapping syntax"
-msgstr ""
-
-#: ../wiican/wiimotemanager.py:311
-msgid "Unknown error"
-msgstr "Ukendt fejl"
-
-#: ../wiican/wiimotemanager.py:312
-msgid "Can't discover or use wiimote"
-msgstr "Kan ikke finde eller bruge Wii controlleren"
-
-#: ../wiican/mapping.py:34
-msgid "Select image icon.."
-msgstr "Vælg billed ikon.."
-
-#: ../wiican/mapping.py:58
-msgid "Images"
-msgstr "Billeder"
-
-#: ../wiican/mapping.py:115
-msgid "No Name"
-msgstr "Intet navn"
-
-#: ../wiican/mapping.py:215
-msgid "Name"
-msgstr "Navn"
-
-#: ../wiican/mapping.py:219
-msgid "Visible"
-msgstr "Synlig"
-
-#: ../wiican/mapping.py:256
-msgid "Are you sure you want to completely remove "
-msgstr "Er du sikker på at du vil slette fuldstændigt "
-
-#: ../wiican/mapping.py:257
-msgid ""
-"this mappings?:\n"
-"\n"
-msgstr ""
-
-#: ../wiican/mapping.py:264
-msgid "Deleting mappings"
-msgstr ""
-
-#: ../wiican/mapping.py:279
-msgid "Can't remove mapping "
-msgstr ""
-
-#: ../wiican/mapping.py:324
+#: ../bin/wiican:192 ../wiican/ui/editordlg.py:127
 msgid "Editing "
 msgstr "Redigerer "
 
-#: ../wiican/dotconfig.py:122
-msgid "Skel config dir doesn't exists"
-msgstr "Skel config mappen eksisterer ikke."
+#: ../bin/wiican:205 ../wiican/ui/editordlg.py:241
+msgid "Press 1+2"
+msgstr ""
 
-#: ../wiican/dotconfig.py:128
-msgid "Wrong perms on user config dir"
-msgstr "Forkerte rettigheder i user config mappen"
+#: ../bin/wiican:206 ../wiican/ui/editordlg.py:242
+#, fuzzy
+msgid "To put you Wiimote in discoverable mode now"
+msgstr "Gør din Wii controller søgbar (tryk 1+2)"
+
+#: ../bin/wiican:226 ../wiican/mapping/manager.py:75
+#, python-format
+msgid "Not %s file found on wiican package"
+msgstr ""
+
+#: ../bin/wiican:230 ../wiican/mapping/manager.py:79
+#, python-format
+msgid "Not %s file found  on wiican package"
+msgstr ""
+
+#: ../bin/wiican:258
+msgid "usage: %prog [options] arg"
+msgstr ""
+
+#: ../bin/wiican:260
+msgid "loads mapping package from FILENAME"
+msgstr ""
+
+#: ../bin/wiican:273
+msgid "Wiican Mapping Package load failed!"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:38
+msgid "Wiican Mapping Package"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:85
+msgid "Editing new mapping"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:133
+#, fuzzy
+msgid "Are you sure you want to completely remove this mapping?"
+msgstr "Er du sikker på at du vil slette fuldstændigt "
+
+#: ../wiican/ui/managerdlg.py:142
+msgid "Deleting mappings"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:169
+msgid "Import mapping..."
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:186
+msgid "Wiican Mapping Package import failed!"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:213
+msgid "Exporting mapping..."
+msgstr ""
+
+#: ../wiican/ui/editordlg.py:42
+msgid "Select image icon.."
+msgstr "Vælg billed ikon.."
+
+#: ../wiican/ui/editordlg.py:70
+msgid "Images"
+msgstr "Billeder"
+
+#: ../wiican/ui/editordlg.py:150
+msgid "A mapping is running"
+msgstr ""
+
+#: ../wiican/ui/editordlg.py:153
+msgid "Execute this mapping"
+msgstr ""
+
+#: ../wiican/ui/editordlg.py:160
+#, fuzzy
+msgid "Ensure a bluetooth "
+msgstr "Indsæt en bluetooth adapter"
+
+#: ../wiican/mapping/manager.py:98 ../wiican/mapping/manager.py:132
+#: ../wiican/mapping/manager.py:135 ../wiican/mapping/manager.py:143
+#: ../wiican/mapping/manager.py:149 ../wiican/mapping/manager.py:155
+#: ../wiican/mapping/manager.py:173 ../wiican/mapping/manager.py:187
+#: ../wiican/mapping/manager.py:193
+msgid "Mapping not found:"
+msgstr ""
+
+#: ../wiican/mapping/manager.py:176
+msgid "Cannot remove a system installed mapping"
+msgstr ""
+
+#: ../mapping.ui:21
+msgid "Wiimote mappings"
+msgstr ""
+
+#: ../mapping.ui:93
+msgid "_Import"
+msgstr ""
+
+#: ../mapping.ui:110
+msgid "E_xport"
+msgstr ""
+
+#: ../mapping.ui:202
+msgid "<b>Mappings</b>"
+msgstr ""
+
+#: ../mapping.ui:354
+#, fuzzy
+msgid "_Name:"
+msgstr "Navn"
+
+#: ../mapping.ui:366
+msgid "Co_mment:"
+msgstr ""
+
+#: ../mapping.ui:377
+msgid "A_uthor/s:"
+msgstr ""
+
+#: ../mapping.ui:388
+msgid "_Version:"
+msgstr ""
+
+#: ../mapping.ui:484
+msgid "_Icon:"
+msgstr ""
+
+#: ../mapping.ui:507
+msgid "<b>General</b>"
+msgstr ""
+
+#: ../mapping.ui:585
+msgid ""
+"This is a system installed mapping. \n"
+"Changes will be saved in a new mapping."
+msgstr ""
+
+#: ../mapping.ui:611
+msgid "Execute mapping"
+msgstr ""
+
+#: ../mapping.ui:632
+msgid "Mapping programming help"
+msgstr ""
+
+#: ../mapping.ui:666
+msgid "<b>Mapping</b>"
+msgstr ""
+
+#: ../wiimotemanager.ui:13
+msgid ""
+"Yes wii can\n"
+"Wiimote usage assistant and mapping manager"
+msgstr ""
+
+#: ../wiimotemanager.ui:726
+msgid "Edit mappings..."
+msgstr ""
+
+#: ../wiimotemanager.ui:759
+msgid "Mapping validation failed"
+msgstr ""
+
+#: ../wiimotemanager.ui:789
+msgid "It looks the activated mapping contains errors."
+msgstr ""
+
+#~ msgid "Connected"
+#~ msgstr "Forbundet"
+
+#~ msgid "Disconnected"
+#~ msgstr "Afbrudt"
+
+#~ msgid "Wiimote off"
+#~ msgstr "Wii controlleren er slukket"
+
+#~ msgid "Use your wiimote"
+#~ msgstr "Brug din Wii controller"
+
+#~ msgid "Fail!"
+#~ msgstr "Fejl!"
+
+#~ msgid "Error discovering Wiimote"
+#~ msgstr "Ingen Wii controller fundet"
+
+#~ msgid "Unknown error"
+#~ msgstr "Ukendt fejl"
+
+#~ msgid "Can't discover or use wiimote"
+#~ msgstr "Kan ikke finde eller bruge Wii controlleren"
+
+#~ msgid "No Name"
+#~ msgstr "Intet navn"
+
+#~ msgid "Visible"
+#~ msgstr "Synlig"
+
+#~ msgid "Skel config dir doesn't exists"
+#~ msgstr "Skel config mappen eksisterer ikke."
+
+#~ msgid "Wrong perms on user config dir"
+#~ msgstr "Forkerte rettigheder i user config mappen"
 
 #~ msgid "translator-credits"
 #~ msgstr ""

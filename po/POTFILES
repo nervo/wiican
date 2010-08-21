@@ -2,5 +2,3 @@
 ../wiican/ui/managerdlg.py
 ../wiican/ui/editordlg.py
 ../wiican/mapping/manager.py
-[type: gettext/glade]../mapping.ui
-[type: gettext/glade]../wiimotemanager.ui

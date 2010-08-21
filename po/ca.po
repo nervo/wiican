@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wiican\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-01-02 01:16+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-21 18:08+0200\n"
 "PO-Revision-Date: 2010-05-20 06:13+0000\n"
 "Last-Translator: josep87 <josep87@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -17,31 +17,16 @@ msgstr ""
 "X-Launchpad-Export-Date: 2010-05-21 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../wiican/wiimotemanager.py:103 ../wiican/wiimotemanager.py:104
-msgid "Connected"
-msgstr "Connectat"
-
-#: ../wiican/wiimotemanager.py:105
-msgid "Put Wiimote in discoverable mode now (press 1+2)"
-msgstr "Poseu el Wiimote en mode detectable (premeu 1+2)"
-
-#: ../wiican/wiimotemanager.py:112 ../wiican/wiimotemanager.py:113
-msgid "Disconnected"
-msgstr "Desconnectat"
-
-#: ../wiican/wiimotemanager.py:114
-msgid "Wiimote off"
-msgstr "Wiimote apagat"
-
-#: ../wiican/wiimotemanager.py:123
-msgid "No bluetooth adapters"
+#: ../bin/wiican:91
+#, fuzzy
+msgid "Plug a bluetooth adapter"
 msgstr "No s'ha trobat adaptador Bluetooth"
 
-#: ../wiican/wiimotemanager.py:186
-msgid "Plug a bluetooth adapter"
-msgstr "Connecteu un adaptador Bluetooth"
+#: ../bin/wiican:96
+msgid "Please load uinput module first"
+msgstr ""
 
-#: ../wiican/wiimotemanager.py:192
+#: ../bin/wiican:102
 msgid ""
 "Hold left button for use wiimote\n"
 "Right button for menu"
@@ -49,110 +34,254 @@ msgstr ""
 "Premeu el botó esquerra per a utilitzar el Wiimote\n"
 "o el botó dret per a accedir al menú"
 
-#: ../wiican/wiimotemanager.py:204
+#: ../bin/wiican:114
 msgid "Discovering Wiimote"
 msgstr "S'està cercant el Wiimote"
 
-#: ../wiican/wiimotemanager.py:211
-msgid "Use your wiimote"
-msgstr "Utilitzeu el vostre Wiimote"
+#: ../bin/wiican:147
+#, fuzzy
+msgid "Add visible mappings"
+msgstr "Mapatges del Wiimote"
 
-#: ../wiican/wiimotemanager.py:301
-msgid "Fail!"
-msgstr "S'ha produït un error!"
+#: ../bin/wiican:192 ../wiican/ui/editordlg.py:127
+msgid "Editing "
+msgstr "S'està editant "
 
-#: ../wiican/wiimotemanager.py:303
-msgid "Error discovering Wiimote"
-msgstr "S'ha produït un error al intentar trobar el Wiimote"
+#: ../bin/wiican:205 ../wiican/ui/editordlg.py:241
+msgid "Press 1+2"
+msgstr ""
 
-#: ../wiican/wiimotemanager.py:306
-msgid "uinput module it's not loaded"
-msgstr "El mòdul «uinput» no està carregat"
+#: ../bin/wiican:206 ../wiican/ui/editordlg.py:242
+#, fuzzy
+msgid "To put you Wiimote in discoverable mode now"
+msgstr "Poseu el Wiimote en mode detectable (premeu 1+2)"
 
-#: ../wiican/wiimotemanager.py:309
-msgid "check mapping syntax"
-msgstr "comproveu la sintaxi del mapatge"
+#: ../bin/wiican:226 ../wiican/mapping/manager.py:75
+#, python-format
+msgid "Not %s file found on wiican package"
+msgstr ""
 
-#: ../wiican/wiimotemanager.py:311
-msgid "Unknown error"
-msgstr "S'ha produït un error desconegut"
+#: ../bin/wiican:230 ../wiican/mapping/manager.py:79
+#, python-format
+msgid "Not %s file found  on wiican package"
+msgstr ""
 
-#: ../wiican/wiimotemanager.py:312
-msgid "Can't discover or use wiimote"
-msgstr "No s'ha pogut trobar o utilitzar el Wiimote"
+#: ../bin/wiican:258
+msgid "usage: %prog [options] arg"
+msgstr ""
 
-#: ../wiican/mapping.py:34
+#: ../bin/wiican:260
+msgid "loads mapping package from FILENAME"
+msgstr ""
+
+#: ../bin/wiican:273
+msgid "Wiican Mapping Package load failed!"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:38
+msgid "Wiican Mapping Package"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:85
+#, fuzzy
+msgid "Editing new mapping"
+msgstr "S'està esborrant els mapatges"
+
+#: ../wiican/ui/managerdlg.py:133
+#, fuzzy
+msgid "Are you sure you want to completely remove this mapping?"
+msgstr "Esteu segur que voleu esborrar completament "
+
+#: ../wiican/ui/managerdlg.py:142
+msgid "Deleting mappings"
+msgstr "S'està esborrant els mapatges"
+
+#: ../wiican/ui/managerdlg.py:169
+#, fuzzy
+msgid "Import mapping..."
+msgstr "Mapatges del Wiimote"
+
+#: ../wiican/ui/managerdlg.py:186
+msgid "Wiican Mapping Package import failed!"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:213
+#, fuzzy
+msgid "Exporting mapping..."
+msgstr "S'està esborrant els mapatges"
+
+#: ../wiican/ui/editordlg.py:42
 msgid "Select image icon.."
 msgstr "Trieu una icona..."
 
-#: ../wiican/mapping.py:58
+#: ../wiican/ui/editordlg.py:70
 msgid "Images"
 msgstr "Imatges"
 
-#: ../wiican/mapping.py:115
-msgid "No Name"
-msgstr "Sense nom"
+#: ../wiican/ui/editordlg.py:150
+msgid "A mapping is running"
+msgstr ""
 
-#: ../wiican/mapping.py:215
-msgid "Name"
-msgstr "Nom"
-
-#: ../wiican/mapping.py:219
-msgid "Visible"
-msgstr "Visible"
-
-#: ../wiican/mapping.py:256
-msgid "Are you sure you want to completely remove "
-msgstr "Esteu segur que voleu esborrar completament "
-
-#: ../wiican/mapping.py:257
-msgid ""
-"this mappings?:\n"
-"\n"
+#: ../wiican/ui/editordlg.py:153
+#, fuzzy
+msgid "Execute this mapping"
 msgstr ""
 "aquests mapatges?\n"
 "\n"
 
-#: ../wiican/mapping.py:264
-msgid "Deleting mappings"
-msgstr "S'està esborrant els mapatges"
+#: ../wiican/ui/editordlg.py:160
+#, fuzzy
+msgid "Ensure a bluetooth "
+msgstr "Connecteu un adaptador Bluetooth"
 
-#: ../wiican/mapping.py:279
-msgid "Can't remove mapping "
+#: ../wiican/mapping/manager.py:98 ../wiican/mapping/manager.py:132
+#: ../wiican/mapping/manager.py:135 ../wiican/mapping/manager.py:143
+#: ../wiican/mapping/manager.py:149 ../wiican/mapping/manager.py:155
+#: ../wiican/mapping/manager.py:173 ../wiican/mapping/manager.py:187
+#: ../wiican/mapping/manager.py:193
+#, fuzzy
+msgid "Mapping not found:"
+msgstr "Mapatge:"
+
+#: ../wiican/mapping/manager.py:176
+#, fuzzy
+msgid "Cannot remove a system installed mapping"
 msgstr "No s'ha pogut esborrar el mapatge "
 
-#: ../wiican/mapping.py:324
-msgid "Editing "
-msgstr "S'està editant "
+#: ../mapping.ui:21
+msgid "Wiimote mappings"
+msgstr "Mapatges del Wiimote"
 
-#: ../wiican/dotconfig.py:122
-msgid "Skel config dir doesn't exists"
-msgstr "El directori de configuració Skel no existeix"
+#: ../mapping.ui:93
+msgid "_Import"
+msgstr ""
 
-#: ../wiican/dotconfig.py:128
-msgid "Wrong perms on user config dir"
-msgstr "Permisos erronis a la carpeta de configuració de l'usuari"
+#: ../mapping.ui:110
+msgid "E_xport"
+msgstr ""
+
+#: ../mapping.ui:202
+#, fuzzy
+msgid "<b>Mappings</b>"
+msgstr "Mapatges"
+
+#: ../mapping.ui:354
+#, fuzzy
+msgid "_Name:"
+msgstr "Nom:"
+
+#: ../mapping.ui:366
+msgid "Co_mment:"
+msgstr ""
+
+#: ../mapping.ui:377
+msgid "A_uthor/s:"
+msgstr ""
+
+#: ../mapping.ui:388
+msgid "_Version:"
+msgstr ""
+
+#: ../mapping.ui:484
+msgid "_Icon:"
+msgstr ""
+
+#: ../mapping.ui:507
+msgid "<b>General</b>"
+msgstr ""
+
+#: ../mapping.ui:585
+msgid ""
+"This is a system installed mapping. \n"
+"Changes will be saved in a new mapping."
+msgstr ""
+
+#: ../mapping.ui:611
+#, fuzzy
+msgid "Execute mapping"
+msgstr "Mapatges del Wiimote"
+
+#: ../mapping.ui:632
+msgid "Mapping programming help"
+msgstr ""
+
+#: ../mapping.ui:666
+#, fuzzy
+msgid "<b>Mapping</b>"
+msgstr "Mapatges"
+
+#: ../wiimotemanager.ui:13
+msgid ""
+"Yes wii can\n"
+"Wiimote usage assistant and mapping manager"
+msgstr ""
+
+#: ../wiimotemanager.ui:726
+#, fuzzy
+msgid "Edit mappings..."
+msgstr "Mapatges del Wiimote"
+
+#: ../wiimotemanager.ui:759
+msgid "Mapping validation failed"
+msgstr ""
+
+#: ../wiimotemanager.ui:789
+msgid "It looks the activated mapping contains errors."
+msgstr ""
+
+#~ msgid "Connected"
+#~ msgstr "Connectat"
+
+#~ msgid "Disconnected"
+#~ msgstr "Desconnectat"
+
+#~ msgid "Wiimote off"
+#~ msgstr "Wiimote apagat"
+
+#~ msgid "Use your wiimote"
+#~ msgstr "Utilitzeu el vostre Wiimote"
+
+#~ msgid "Fail!"
+#~ msgstr "S'ha produït un error!"
+
+#~ msgid "Error discovering Wiimote"
+#~ msgstr "S'ha produït un error al intentar trobar el Wiimote"
+
+#~ msgid "uinput module it's not loaded"
+#~ msgstr "El mòdul «uinput» no està carregat"
+
+#~ msgid "check mapping syntax"
+#~ msgstr "comproveu la sintaxi del mapatge"
+
+#~ msgid "Unknown error"
+#~ msgstr "S'ha produït un error desconegut"
+
+#~ msgid "Can't discover or use wiimote"
+#~ msgstr "No s'ha pogut trobar o utilitzar el Wiimote"
+
+#~ msgid "No Name"
+#~ msgstr "Sense nom"
+
+#~ msgid "Name"
+#~ msgstr "Nom"
+
+#~ msgid "Visible"
+#~ msgstr "Visible"
+
+#~ msgid "Skel config dir doesn't exists"
+#~ msgstr "El directori de configuració Skel no existeix"
+
+#~ msgid "Wrong perms on user config dir"
+#~ msgstr "Permisos erronis a la carpeta de configuració de l'usuari"
 
 #~ msgid "New entry"
 #~ msgstr "Nova entrada"
 
-#~ msgid "Name:"
-#~ msgstr "Nom:"
-
 #~ msgid "Short name for the mapping"
 #~ msgstr "Nom curt per al mapatge"
 
-#~ msgid "Wiimote mappings"
-#~ msgstr "Mapatges del Wiimote"
-
-#~ msgid "Mappings"
-#~ msgstr "Mapatges"
-
 #~ msgid "Description:"
 #~ msgstr "Descripció:"
-
-#~ msgid "Mapping:"
-#~ msgstr "Mapatge:"
 
 #~ msgid "2009 J. Félix Ontañón <felixonta@gmail.com>"
 #~ msgstr "2009 J. Félix Ontañón <felixonta@gmail.com>"

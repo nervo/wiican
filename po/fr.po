@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wiican\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-01-02 01:16+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-21 18:08+0200\n"
 "PO-Revision-Date: 2010-01-14 05:56+0000\n"
 "Last-Translator: Fabien Boutantin <fabien.boutantin@laposte.net>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -17,31 +17,16 @@ msgstr ""
 "X-Launchpad-Export-Date: 2010-01-15 04:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../wiican/wiimotemanager.py:103 ../wiican/wiimotemanager.py:104
-msgid "Connected"
-msgstr "Connecté"
-
-#: ../wiican/wiimotemanager.py:105
-msgid "Put Wiimote in discoverable mode now (press 1+2)"
-msgstr "Mettez la wiimote en mode visible (appuyez sur 1 et 2)"
-
-#: ../wiican/wiimotemanager.py:112 ../wiican/wiimotemanager.py:113
-msgid "Disconnected"
-msgstr "Déconnecté"
-
-#: ../wiican/wiimotemanager.py:114
-msgid "Wiimote off"
-msgstr "Wiimote éteinte"
-
-#: ../wiican/wiimotemanager.py:123
-msgid "No bluetooth adapters"
+#: ../bin/wiican:91
+#, fuzzy
+msgid "Plug a bluetooth adapter"
 msgstr "Pas d'adaptateur bluetooth"
 
-#: ../wiican/wiimotemanager.py:186
-msgid "Plug a bluetooth adapter"
-msgstr "Branchez un adaptateur bluetooth"
+#: ../bin/wiican:96
+msgid "Please load uinput module first"
+msgstr ""
 
-#: ../wiican/wiimotemanager.py:192
+#: ../bin/wiican:102
 msgid ""
 "Hold left button for use wiimote\n"
 "Right button for menu"
@@ -49,93 +34,243 @@ msgstr ""
 "Maintenez le bouton de gauche enfoncé pour utiliser la wiimote\n"
 "Maintenez le bouton de droite enfoncé pour le menu"
 
-#: ../wiican/wiimotemanager.py:204
+#: ../bin/wiican:114
 msgid "Discovering Wiimote"
 msgstr "Recherche de wiimotes"
 
-#: ../wiican/wiimotemanager.py:211
-msgid "Use your wiimote"
-msgstr "Utilisez votre wiimote"
+#: ../bin/wiican:147
+#, fuzzy
+msgid "Add visible mappings"
+msgstr "Mappings de Wiimote"
 
-#: ../wiican/wiimotemanager.py:301
-msgid "Fail!"
-msgstr "Échec!"
+#: ../bin/wiican:192 ../wiican/ui/editordlg.py:127
+msgid "Editing "
+msgstr "Édition "
 
-#: ../wiican/wiimotemanager.py:303
-msgid "Error discovering Wiimote"
-msgstr "Erreur lors de la recherche de wiimotes"
+#: ../bin/wiican:205 ../wiican/ui/editordlg.py:241
+msgid "Press 1+2"
+msgstr ""
 
-#: ../wiican/wiimotemanager.py:306
-msgid "uinput module it's not loaded"
-msgstr "Le module uinput n'est pas chargé"
+#: ../bin/wiican:206 ../wiican/ui/editordlg.py:242
+#, fuzzy
+msgid "To put you Wiimote in discoverable mode now"
+msgstr "Mettez la wiimote en mode visible (appuyez sur 1 et 2)"
 
-#: ../wiican/wiimotemanager.py:309
-msgid "check mapping syntax"
-msgstr "Vérifiez la synthaxe du mapping"
+#: ../bin/wiican:226 ../wiican/mapping/manager.py:75
+#, python-format
+msgid "Not %s file found on wiican package"
+msgstr ""
 
-#: ../wiican/wiimotemanager.py:311
-msgid "Unknown error"
-msgstr "Erreur inconnue"
+#: ../bin/wiican:230 ../wiican/mapping/manager.py:79
+#, python-format
+msgid "Not %s file found  on wiican package"
+msgstr ""
 
-#: ../wiican/wiimotemanager.py:312
-msgid "Can't discover or use wiimote"
-msgstr "Impossible de découvrir ou d'utiliser une wiimote"
+#: ../bin/wiican:258
+msgid "usage: %prog [options] arg"
+msgstr ""
 
-#: ../wiican/mapping.py:34
+#: ../bin/wiican:260
+msgid "loads mapping package from FILENAME"
+msgstr ""
+
+#: ../bin/wiican:273
+msgid "Wiican Mapping Package load failed!"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:38
+msgid "Wiican Mapping Package"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:85
+#, fuzzy
+msgid "Editing new mapping"
+msgstr "Suppression des mappings"
+
+#: ../wiican/ui/managerdlg.py:133
+#, fuzzy
+msgid "Are you sure you want to completely remove this mapping?"
+msgstr "Souhaitez-vous bien complètement retirer "
+
+#: ../wiican/ui/managerdlg.py:142
+msgid "Deleting mappings"
+msgstr "Suppression des mappings"
+
+#: ../wiican/ui/managerdlg.py:169
+#, fuzzy
+msgid "Import mapping..."
+msgstr "Mappings de Wiimote"
+
+#: ../wiican/ui/managerdlg.py:186
+msgid "Wiican Mapping Package import failed!"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:213
+#, fuzzy
+msgid "Exporting mapping..."
+msgstr "Suppression des mappings"
+
+#: ../wiican/ui/editordlg.py:42
 msgid "Select image icon.."
 msgstr "Sélectionnez l'icône de l'image.."
 
-#: ../wiican/mapping.py:58
+#: ../wiican/ui/editordlg.py:70
 msgid "Images"
 msgstr "Images"
 
-#: ../wiican/mapping.py:115
-msgid "No Name"
-msgstr "Sans nom"
+#: ../wiican/ui/editordlg.py:150
+msgid "A mapping is running"
+msgstr ""
 
-#: ../wiican/mapping.py:215
-msgid "Name"
-msgstr "Nom"
-
-#: ../wiican/mapping.py:219
-msgid "Visible"
-msgstr "Visible"
-
-#: ../wiican/mapping.py:256
-msgid "Are you sure you want to completely remove "
-msgstr "Souhaitez-vous bien complètement retirer "
-
-#: ../wiican/mapping.py:257
-msgid ""
-"this mappings?:\n"
-"\n"
+#: ../wiican/ui/editordlg.py:153
+#, fuzzy
+msgid "Execute this mapping"
 msgstr ""
 "ce mapping?\n"
 "\n"
 
-#: ../wiican/mapping.py:264
-msgid "Deleting mappings"
-msgstr "Suppression des mappings"
+#: ../wiican/ui/editordlg.py:160
+#, fuzzy
+msgid "Ensure a bluetooth "
+msgstr "Branchez un adaptateur bluetooth"
 
-#: ../wiican/mapping.py:279
-msgid "Can't remove mapping "
+#: ../wiican/mapping/manager.py:98 ../wiican/mapping/manager.py:132
+#: ../wiican/mapping/manager.py:135 ../wiican/mapping/manager.py:143
+#: ../wiican/mapping/manager.py:149 ../wiican/mapping/manager.py:155
+#: ../wiican/mapping/manager.py:173 ../wiican/mapping/manager.py:187
+#: ../wiican/mapping/manager.py:193
+msgid "Mapping not found:"
+msgstr ""
+
+#: ../wiican/mapping/manager.py:176
+#, fuzzy
+msgid "Cannot remove a system installed mapping"
 msgstr "Impossible de supprimer le mapping "
 
-#: ../wiican/mapping.py:324
-msgid "Editing "
-msgstr "Édition "
+#: ../mapping.ui:21
+msgid "Wiimote mappings"
+msgstr "Mappings de Wiimote"
 
-#: ../wiican/dotconfig.py:122
-msgid "Skel config dir doesn't exists"
-msgstr "Le fichier de configuration de base n'existe pas"
-
-#: ../wiican/dotconfig.py:128
-msgid "Wrong perms on user config dir"
+#: ../mapping.ui:93
+msgid "_Import"
 msgstr ""
-"Mauvaises permissions sur le répertoire de configuration de l'utilisateur"
 
-#~ msgid "Name:"
-#~ msgstr "Nom:"
+#: ../mapping.ui:110
+msgid "E_xport"
+msgstr ""
+
+#: ../mapping.ui:202
+msgid "<b>Mappings</b>"
+msgstr ""
+
+#: ../mapping.ui:354
+#, fuzzy
+msgid "_Name:"
+msgstr "Nom:"
+
+#: ../mapping.ui:366
+msgid "Co_mment:"
+msgstr ""
+
+#: ../mapping.ui:377
+msgid "A_uthor/s:"
+msgstr ""
+
+#: ../mapping.ui:388
+msgid "_Version:"
+msgstr ""
+
+#: ../mapping.ui:484
+msgid "_Icon:"
+msgstr ""
+
+#: ../mapping.ui:507
+msgid "<b>General</b>"
+msgstr ""
+
+#: ../mapping.ui:585
+msgid ""
+"This is a system installed mapping. \n"
+"Changes will be saved in a new mapping."
+msgstr ""
+
+#: ../mapping.ui:611
+#, fuzzy
+msgid "Execute mapping"
+msgstr "Mappings de Wiimote"
+
+#: ../mapping.ui:632
+msgid "Mapping programming help"
+msgstr ""
+
+#: ../mapping.ui:666
+msgid "<b>Mapping</b>"
+msgstr ""
+
+#: ../wiimotemanager.ui:13
+msgid ""
+"Yes wii can\n"
+"Wiimote usage assistant and mapping manager"
+msgstr ""
+
+#: ../wiimotemanager.ui:726
+#, fuzzy
+msgid "Edit mappings..."
+msgstr "Mappings de Wiimote"
+
+#: ../wiimotemanager.ui:759
+msgid "Mapping validation failed"
+msgstr ""
+
+#: ../wiimotemanager.ui:789
+msgid "It looks the activated mapping contains errors."
+msgstr ""
+
+#~ msgid "Connected"
+#~ msgstr "Connecté"
+
+#~ msgid "Disconnected"
+#~ msgstr "Déconnecté"
+
+#~ msgid "Wiimote off"
+#~ msgstr "Wiimote éteinte"
+
+#~ msgid "Use your wiimote"
+#~ msgstr "Utilisez votre wiimote"
+
+#~ msgid "Fail!"
+#~ msgstr "Échec!"
+
+#~ msgid "Error discovering Wiimote"
+#~ msgstr "Erreur lors de la recherche de wiimotes"
+
+#~ msgid "uinput module it's not loaded"
+#~ msgstr "Le module uinput n'est pas chargé"
+
+#~ msgid "check mapping syntax"
+#~ msgstr "Vérifiez la synthaxe du mapping"
+
+#~ msgid "Unknown error"
+#~ msgstr "Erreur inconnue"
+
+#~ msgid "Can't discover or use wiimote"
+#~ msgstr "Impossible de découvrir ou d'utiliser une wiimote"
+
+#~ msgid "No Name"
+#~ msgstr "Sans nom"
+
+#~ msgid "Name"
+#~ msgstr "Nom"
+
+#~ msgid "Visible"
+#~ msgstr "Visible"
+
+#~ msgid "Skel config dir doesn't exists"
+#~ msgstr "Le fichier de configuration de base n'existe pas"
+
+#~ msgid "Wrong perms on user config dir"
+#~ msgstr ""
+#~ "Mauvaises permissions sur le répertoire de configuration de l'utilisateur"
 
 #~ msgid "Description:"
 #~ msgstr "Description :"
@@ -151,9 +286,6 @@ msgstr ""
 
 #~ msgid "gtk-cancel"
 #~ msgstr "gtk-cancel"
-
-#~ msgid "Wiimote mappings"
-#~ msgstr "Mappings de Wiimote"
 
 #~ msgid "Comment the use for this mapping"
 #~ msgstr "Commentez l'utilisation de ce mapping"

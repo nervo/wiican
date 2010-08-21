@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-01 23:59+0200\n"
+"POT-Creation-Date: 2010-08-21 18:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,89 +16,194 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../wiican/wiimotemanager.py:83
+#: ../bin/wiican:91
 msgid "Plug a bluetooth adapter"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:88
+#: ../bin/wiican:96
 msgid "Please load uinput module first"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:94
+#: ../bin/wiican:102
 msgid ""
 "Hold left button for use wiimote\n"
 "Right button for menu"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:106
+#: ../bin/wiican:114
 msgid "Discovering Wiimote"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:170
-msgid "Press 1+2"
+#: ../bin/wiican:147
+msgid "Add visible mappings"
 msgstr ""
 
-#: ../wiican/wiimotemanager.py:171
-msgid "To put you Wiimote in discoverable mode now"
-msgstr ""
-
-#: ../wiican/mapping.py:35
-msgid "Select image icon.."
-msgstr ""
-
-#: ../wiican/mapping.py:60
-msgid "Images"
-msgstr ""
-
-#: ../wiican/mapping.py:141
-msgid "Wiican Mapping Package"
-msgstr ""
-
-#: ../wiican/mapping.py:173
-msgid "Editing new mapping"
-msgstr ""
-
-#: ../wiican/mapping.py:194
+#: ../bin/wiican:192 ../wiican/ui/editordlg.py:127
 msgid "Editing "
 msgstr ""
 
-#: ../wiican/mapping.py:214
-msgid "Are you sure you want to completely remove this mapping?"
+#: ../bin/wiican:205 ../wiican/ui/editordlg.py:241
+msgid "Press 1+2"
 msgstr ""
 
-#: ../wiican/mapping.py:223
-msgid "Deleting mappings"
+#: ../bin/wiican:206 ../wiican/ui/editordlg.py:242
+msgid "To put you Wiimote in discoverable mode now"
 msgstr ""
 
-#: ../wiican/mapping.py:237
-msgid "Import mapping..."
-msgstr ""
-
-#: ../wiican/mapping.py:253
-msgid "Wiican Mapping Package import failed!"
-msgstr ""
-
-#: ../wiican/mapping.py:276
-msgid "Exporting mapping..."
-msgstr ""
-
-#: ../wiican/mappingmanager.py:123
-msgid "No path provided for writing mapping"
-msgstr ""
-
-#: ../wiican/mappingmanager.py:188
+#: ../bin/wiican:226 ../wiican/mapping/manager.py:75
 #, python-format
 msgid "Not %s file found on wiican package"
 msgstr ""
 
-#: ../wiican/mappingmanager.py:192
+#: ../bin/wiican:230 ../wiican/mapping/manager.py:79
 #, python-format
 msgid "Not %s file found  on wiican package"
 msgstr ""
 
-#: ../wiican/mappingmanager.py:211 ../wiican/mappingmanager.py:236
-#: ../wiican/mappingmanager.py:239 ../wiican/mappingmanager.py:247
-#: ../wiican/mappingmanager.py:253 ../wiican/mappingmanager.py:271
-#: ../wiican/mappingmanager.py:282 ../wiican/mappingmanager.py:288
+#: ../bin/wiican:258
+msgid "usage: %prog [options] arg"
+msgstr ""
+
+#: ../bin/wiican:260
+msgid "loads mapping package from FILENAME"
+msgstr ""
+
+#: ../bin/wiican:273
+msgid "Wiican Mapping Package load failed!"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:38
+msgid "Wiican Mapping Package"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:85
+msgid "Editing new mapping"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:133
+msgid "Are you sure you want to completely remove this mapping?"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:142
+msgid "Deleting mappings"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:169
+msgid "Import mapping..."
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:186
+msgid "Wiican Mapping Package import failed!"
+msgstr ""
+
+#: ../wiican/ui/managerdlg.py:213
+msgid "Exporting mapping..."
+msgstr ""
+
+#: ../wiican/ui/editordlg.py:42
+msgid "Select image icon.."
+msgstr ""
+
+#: ../wiican/ui/editordlg.py:70
+msgid "Images"
+msgstr ""
+
+#: ../wiican/ui/editordlg.py:150
+msgid "A mapping is running"
+msgstr ""
+
+#: ../wiican/ui/editordlg.py:153
+msgid "Execute this mapping"
+msgstr ""
+
+#: ../wiican/ui/editordlg.py:160
+msgid "Ensure a bluetooth "
+msgstr ""
+
+#: ../wiican/mapping/manager.py:98 ../wiican/mapping/manager.py:132
+#: ../wiican/mapping/manager.py:135 ../wiican/mapping/manager.py:143
+#: ../wiican/mapping/manager.py:149 ../wiican/mapping/manager.py:155
+#: ../wiican/mapping/manager.py:173 ../wiican/mapping/manager.py:187
+#: ../wiican/mapping/manager.py:193
 msgid "Mapping not found:"
+msgstr ""
+
+#: ../wiican/mapping/manager.py:176
+msgid "Cannot remove a system installed mapping"
+msgstr ""
+
+#: ../mapping.ui:21
+msgid "Wiimote mappings"
+msgstr ""
+
+#: ../mapping.ui:93
+msgid "_Import"
+msgstr ""
+
+#: ../mapping.ui:110
+msgid "E_xport"
+msgstr ""
+
+#: ../mapping.ui:202
+msgid "<b>Mappings</b>"
+msgstr ""
+
+#: ../mapping.ui:354
+msgid "_Name:"
+msgstr ""
+
+#: ../mapping.ui:366
+msgid "Co_mment:"
+msgstr ""
+
+#: ../mapping.ui:377
+msgid "A_uthor/s:"
+msgstr ""
+
+#: ../mapping.ui:388
+msgid "_Version:"
+msgstr ""
+
+#: ../mapping.ui:484
+msgid "_Icon:"
+msgstr ""
+
+#: ../mapping.ui:507
+msgid "<b>General</b>"
+msgstr ""
+
+#: ../mapping.ui:585
+msgid ""
+"This is a system installed mapping. \n"
+"Changes will be saved in a new mapping."
+msgstr ""
+
+#: ../mapping.ui:611
+msgid "Execute mapping"
+msgstr ""
+
+#: ../mapping.ui:632
+msgid "Mapping programming help"
+msgstr ""
+
+#: ../mapping.ui:666
+msgid "<b>Mapping</b>"
+msgstr ""
+
+#: ../wiimotemanager.ui:13
+msgid ""
+"Yes wii can\n"
+"Wiimote usage assistant and mapping manager"
+msgstr ""
+
+#: ../wiimotemanager.ui:726
+msgid "Edit mappings..."
+msgstr ""
+
+#: ../wiimotemanager.ui:759
+msgid "Mapping validation failed"
+msgstr ""
+
+#: ../wiimotemanager.ui:789
+msgid "It looks the activated mapping contains errors."
 msgstr ""
