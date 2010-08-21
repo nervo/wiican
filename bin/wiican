@@ -35,6 +35,7 @@ import shutil
 from wiican.defs import *
 from wiican.ui import Notificator, PngAnimation
 from wiican.ui import MappingManagerDialog, MappingEditorDialog
+from wiican.ui.validationerrordlg import ValidationErrorDialog
 from wiican.mapping import *
 from wiican.service import WIICAN_PATH, WIICAN_URI
 from wiican.service import WC_DISABLED, WC_BLUEZ_PRESENT, WC_UINPUT_PRESENT, \
@@ -54,12 +55,9 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         builder.connect_signals(self)
 
         self.aboutdlg = builder.get_object('WiiAboutDialog')
-        self.valerrdlg = builder.get_object('ValidatorErrorDialog')
         self.main_menu = builder.get_object('main_menu')
-        self.icon_image = builder.get_object('icon_image')
 
         self.aboutdlg.connect('response', lambda d, r: d.hide())
-        self.valerrdlg.connect('response', lambda d, r: d.hide())
         self.connect('popup-menu', self.__icon_popupmenu_cb, None)
         self.connect('activate', self.__activate_cb)
 
@@ -186,37 +184,28 @@ class WiimoteStatusIcon(gtk.StatusIcon):
                 self.__wiican_iface.ConnectWiimote(filename, True)
             except dbus.exceptions.DBusException, error:
                 if error.message == ('Mapping validation error'):
-                    self.__prompt_valerrdlg(mapping)
+                    valerr_dlg = ValidationErrorDialog(mapping.get_icon(), open_editor=True)
+                    location = self.get_geometry()[1]
+                    valerr_dlg.move(location[0], location[1])
+                    
+                    if valerr_dlg.run() == gtk.RESPONSE_YES:
+                        mapping_editor_dlg = MappingEditorDialog(mapping)
+                        mapping_editor_dlg.set_title(_('Editing ') + \
+                            mapping.get_name())
+
+                        if mapping_editor_dlg.run() == gtk.RESPONSE_OK:
+                            new_mapping = mapping_editor_dlg.get_mapping()
+                            mapping_manager.write_mapping(new_mapping)
+
+                        mapping_editor_dlg.destroy()
+                        
+                    valerr_dlg.destroy()
+                    self.__load_mappings_menu()
                     return
 
             self.__notificator.display_notification(title=_('Press 1+2'), 
                 text=_('To put you Wiimote in discoverable mode now'),
                 icon='wiican')
-
-    def __prompt_valerrdlg(self, mapping):
-        icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 64, 64)
-        error = gtk.Invisible().render_icon(gtk.STOCK_DIALOG_ERROR, 
-            gtk.ICON_SIZE_BUTTON)
-        thumb = error.scale_simple(32, 32, gtk.gdk.INTERP_BILINEAR)
-        thumb.composite(icon, 0, 0, icon.get_width(), icon.get_height(),
-                icon.get_width() - thumb.get_width(),
-                icon.get_height() - thumb.get_height(),
-                1, 1, gtk.gdk.INTERP_BILINEAR, 255)
-        self.icon_image.set_from_pixbuf(icon)
-
-        location = self.get_geometry()[1]
-        self.valerrdlg.move(location.x, location.y)
-
-        if self.valerrdlg.run() == gtk.RESPONSE_YES:
-            mapping_editor_dlg = MappingEditorDialog(mapping)
-            mapping_editor_dlg.set_title(_('Editing ') + mapping.get_name())
-
-            if mapping_editor_dlg.run() == gtk.RESPONSE_OK:
-                new_mapping = mapping_editor_dlg.get_mapping()
-                mapping_manager.write_mapping(new_mapping)
-
-            mapping_editor_dlg.destroy()
-            self.__load_mappings_menu()
 
 class MappingLauncherDialog(MappingEditorDialog):
     def __init__(self, package_filename):

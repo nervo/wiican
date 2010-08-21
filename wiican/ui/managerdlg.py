@@ -104,7 +104,6 @@ class MappingManagerDialog(object):
             mapping = mapping_manager[mapping_id]
             system_mapping = mapping_manager.is_system_mapping(mapping_id)
             mapping_editor_dlg = MappingEditorDialog(mapping, system_mapping)
-            mapping_editor_dlg.set_title(_('Editing ') + mapping.get_name())
 
             if mapping_editor_dlg.run() == gtk.RESPONSE_OK:
                 new_mapping = mapping_editor_dlg.get_mapping()
@@ -218,7 +217,7 @@ class MappingManagerDialog(object):
             export_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
             export_dlg.set_do_overwrite_confirmation(True)
             export_dlg.set_current_folder(pref_store.options['export_dir'])
-            export_dlg.set_current_name(mapping.get_name())
+            export_dlg.set_current_name(mapping.get_name()+'.wii')
             export_dlg.set_modal(True)
             export_dlg.add_filter(self.mapping_filter)
 

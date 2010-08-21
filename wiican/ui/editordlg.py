@@ -31,6 +31,7 @@ from dbus.mainloop.glib import DBusGMainLoop
 from wiican.defs import *
 from wiican.mapping import Mapping, MappingValidator
 from wiican.ui import UIPrefStore, Notificator
+from wiican.ui.validationerrordlg import ValidationErrorDialog
 from wiican.service import WIICAN_PATH, WIICAN_URI
 from wiican.service import WC_DISABLED, WC_BLUEZ_PRESENT, WC_UINPUT_PRESENT, \
     WC_WIIMOTE_DISCOVERING
@@ -123,7 +124,8 @@ class MappingEditorDialog(object):
         self.version_entry.set_text(self.mapping.get_version() or '')
         self.authors_entry.set_text(self.mapping.get_authors() or '')
         self.mapping_buffer.set_text(self.mapping.get_mapping() or '')
-
+        self.mapping_editor_dlg.set_title(_('Editing ') + self.mapping.get_name())
+        
         # Initial error underlining and colorize comments
         self.mapping_buffer.create_tag('underline_error', underline=pango.UNDERLINE_ERROR)
         self.mapping_buffer.create_tag("comment", foreground="darkblue")
@@ -145,9 +147,10 @@ class MappingEditorDialog(object):
                     self.execute_btn.handler_block(self.sig_id)
                     self.execute_btn.set_active(True)
                     self.execute_btn.handler_unblock(self.sig_id)
+                    self.execute_btn.set_tooltip_text(_('A mapping is running'))
             elif new_status == (WC_UINPUT_PRESENT | WC_BLUEZ_PRESENT):
                 self.execute_btn.set_sensitive(True)
-                self.execute_btn.set_tooltip_text(_('Execute mapping'))
+                self.execute_btn.set_tooltip_text(_('Execute this mapping'))
                 if self.execute_btn.get_active():
                     self.execute_btn.handler_block(self.sig_id)
                     self.execute_btn.set_active(False)
@@ -228,14 +231,10 @@ class MappingEditorDialog(object):
                 self.wiican_iface.ConnectWiimote(filename, True)
             except dbus.exceptions.DBusException, error:
                 if error.message == ('Mapping validation error'):
-                    error_importing_dlg = gtk.MessageDialog(parent = self.mapping_editor_dlg,
-                        flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-                        type = gtk.MESSAGE_ERROR,
-                        buttons = gtk.BUTTONS_CLOSE,
-                        message_format = _("It looks the mapping contains errors."))
-                    error_importing_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-                    error_importing_dlg.run()
-                    error_importing_dlg.destroy()
+                    valerr_dlg = ValidationErrorDialog(self.mapping.get_icon(),
+                        parent=self.mapping_editor_dlg)
+                    valerr_dlg.run()
+                    valerr_dlg.destroy()
                     return
 
             self.notificator.display_notification(title=_('Press 1+2'), 
