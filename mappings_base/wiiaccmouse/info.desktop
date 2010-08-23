@@ -1,10 +1,10 @@
 [Desktop Entry]
-Name=Mouse
-Name[es]=Ratón
+Name=Wiimote Mouse
+Name[es]=Ratón con wiimote
 Comment=Control mouse events with accelerometer and A+B buttons
 Comment[es]=Controla eventos de ratón con acelerómetro y los botones A+B
-Icon=gnome-mouse
-X-Version=1.0
 X-Authors=J. Félix Ontañón <felixonta@gmail.com>
+X-Version=0.3.0
+Icon=gnome-mouse
 Type=Wiican Mapping
 Encoding=UTF-8

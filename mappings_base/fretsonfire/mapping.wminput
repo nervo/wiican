@@ -1,0 +1,28 @@
+# Pick Up/Down (default frets on fire key settings)
+Classic.Up		= KEY_ENTER
+Classic.Down		= KEY_RIGHTSHIFT
+
+# Pick Up/Down (recommended)
+# Comment previous and uncomment this
+# to use guitar pick for navigate through menues
+# Classic.Up		= KEY_UP
+# Classic.Down	= KEY_DOWN
+
+# Plus and Minus
+Classic.Plus		= KEY_ESC
+Classic.Minus		= KEY_ESC
+
+# Frets green, red, yellow, blue, orange
+Classic.A			= KEY_F1
+Classic.B			= KEY_F2
+Classic.X			= KEY_F3
+Classic.Y			= KEY_F4
+Classic.ZL		= KEY_F5
+
+# Wiimote controls
+Wiimote.Left		= KEY_LEFT
+Wiimote.Right	= KEY_RIGHT
+Wiimote.Up		= KEY_UP
+Wiimote.Down	= KEY_DOWN
+Wiimote.A		= KEY_ENTER
+Wiimote.Home	= KEY_ESC

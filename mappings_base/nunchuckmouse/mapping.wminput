@@ -1,0 +1,26 @@
+# Nunchuk accelerometer as mouse XY axis
+Plugin.nunchuk_acc.X    = REL_X
+Plugin.nunchuk_acc.Y    = REL_Y
+
+# Left and right mouse buttons
+Nunchuk.C       = BTN_LEFT
+Nunchuk.Z       = BTN_RIGHT
+
+# Nunchuk stick as keyboard arrows
+Plugin.nunchuk_stick2btn.Up = KEY_UP
+Plugin.nunchuk_stick2btn.Down   = KEY_DOWN
+Plugin.nunchuk_stick2btn.Left   = KEY_LEFT
+Plugin.nunchuk_stick2btn.Right  = KEY_RIGHT
+
+# Be free to map wiimote buttons to any other keys
+# Wiimote.A       = BTN_LEFT
+# Wiimote.B       = BTN_RIGHT
+# Wiimote.Up      = KEY_UP
+# Wiimote.Down    = KEY_DOWN
+# Wiimote.Left    = KEY_LEFT
+# Wiimote.Right   = KEY_RIGHT
+# Wiimote.Minus   = KEY_BACK
+# Wiimote.Plus    = KEY_FORWARD
+# Wiimote.Home    = KEY_HOME
+# Wiimote.1       = KEY_PROG1
+# Wiimote.2       = KEY_PROG2

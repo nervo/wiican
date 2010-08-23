@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Frets on Fire
+Name[es_ES]=Frets on Fire
+Comment=For playing with Guitar Hero Wii Guitar
+Comment[es_ES]=Para jugar con la Guitarra Wii de Guitar Hero
+X-Authors=J. Félix Ontañón <felixonta@gmail.com>
+X-Version=0.3.0
+Icon=fretsonfire.png
+Type=Wiican Mapping
+Encoding=UTF-8

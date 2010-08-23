@@ -1,5 +1,12 @@
+# Wiimote accelerometer as mouse XY axis
+Plugin.acc.X	= REL_X
+Plugin.acc.Y	= REL_Y
+
+# Left and right mouse buttons
 Wiimote.A		= BTN_LEFT
 Wiimote.B		= BTN_RIGHT
+
+# Other wiimote buttons mapped to keys
 Wiimote.Up		= KEY_UP
 Wiimote.Down	= KEY_DOWN
 Wiimote.Left	= KEY_LEFT
@@ -9,6 +16,3 @@ Wiimote.Plus	= KEY_FORWARD
 Wiimote.Home	= KEY_HOME
 Wiimote.1		= KEY_PROG1
 Wiimote.2		= KEY_PROG2
-
-Plugin.acc.X	= REL_X
-Plugin.acc.Y	= REL_Y
