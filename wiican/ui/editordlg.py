@@ -222,6 +222,7 @@ class MappingEditorDialog(object):
             #FIXME: If mapping doesn't ends with \n wminput prompts segfault
             if not mapping_code.endswith('\n'): mapping_code += '\n'
 
+            #TODO: This file must be unlinked after being used
             filename = tempfile.mktemp()
             fp = open(filename, 'w')
             fp.write(mapping_code)
@@ -236,7 +237,7 @@ class MappingEditorDialog(object):
                     valerr_dlg.run()
                     valerr_dlg.destroy()
                     return
-
+                
             self.notificator.display_notification(title=_('Press 1+2'), 
                 text=_('To put you Wiimote in discoverable mode now'),
                 icon='wiican')
@@ -244,7 +245,6 @@ class MappingEditorDialog(object):
             self.wiican_iface.DisconnectWiimote()
 
         self.execute_btn.set_active(self.execute_btn.get_active())
-        os.unlink(filename)
 
     def iconfilechooser_btn_file_set_cb(self, widget):
         filename = self.iconfilechooser_btn.get_filename()

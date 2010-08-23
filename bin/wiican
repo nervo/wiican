@@ -122,7 +122,6 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         disconnect_item.show()
         self.__mappings_menu.append(disconnect_item)
         self.__disconnect_item = disconnect_item
-        self.__disconnect_item.set_sensitive(False)
 
         sep_item = gtk.SeparatorMenuItem()
         sep_item.show()
