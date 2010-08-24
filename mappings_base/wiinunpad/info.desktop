@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Wii Gamepad
+Name[es]=Wii Gamepad
+Comment=Use wiimote and nunchuk as a joystick device
+Comment[es]=Usa el wiimote y nunchuk como dispositivo joystick
+X-Authors=J. Félix Ontañón <felixonta@gmail.com>
+X-Version=0.3.0
+Icon=wiinunpad.svg
+Type=Wiican Mapping
+Encoding=UTF-8
