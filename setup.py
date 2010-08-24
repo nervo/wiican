@@ -63,24 +63,31 @@ setup(
         package_dir =  {'wiican': 'wiican', 'wiican.ui': 'wiican/ui', 
             'wiican.service': 'wiican/service', 'wiican.mapping': 'wiican/mapping'},
         scripts = ['bin/wiican', 'bin/wiican-service'],
-        data_files = [('share/wiican/mappings_base/wiiaccmouse', 
-                        ['mappings_base/wiiaccmouse/mapping.wminput', 'mappings_base/wiiaccmouse/info.desktop']),
-                      ('share/wiican/mappings_base/neverball',
-                        ['mappings_base/neverball/info.desktop', 'mappings_base/neverball/mapping.wminput']),
+        data_files = [('share/wiican/mappings_base', ['mappings_base/README']),
+
+                      ('share/wiican/packages_base', 
+                        ['packages_base/classicgamepad.wii', 
+                        'packages_base/neverball.wii', 'packages_base/wiiaccmouse.wii', 
+                        'packages_base/fretsonfire.wii', 'packages_base/nunchukmouse.wii', 
+                        'packages_base/wiigamepad.wii']),
+                      
                       ('share/wiican/img', 
                           ['img/wiitrayoff.svg', 'img/wiitrayon.svg',
                           'img/wiitrayon1.svg', 'img/wiitrayon2.svg', 
                           'img/wiitrayon3.svg']),
+                          
                       ('share/wiican/WiiArt', 
                           ['WiiArt/wiitrayoff.svg', 'WiiArt/wiitrayon.svg',
                           'WiiArt/wiitrayon1.svg', 'WiiArt/wiitrayon2.svg', 
                           'WiiArt/wiitrayon3.svg', 'WiiArt/console.svg', 
                           'WiiArt/nunchuk.svg', 'WiiArt/remote.svg', 
                           'WiiArt/controller.svg']),
-                      ('share/dbus-1/services',
-                          ['org.gnome.wiican.service']),
+                          
+                      ('share/dbus-1/services', ['org.gnome.wiican.service']),
+                          
                       ('share/wiican', 
                           ['wiimotemanager.ui','mapping.ui', 'wiican.svg']),
+                          
                       ('share/applications', ['wiican.desktop']),
                       ('share/pixmaps', ['wiican.svg']),
                       ('share/gconf/schemas', ['wiican.schemas']),

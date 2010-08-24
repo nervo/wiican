@@ -28,13 +28,14 @@ import exceptions
 import random
 import copy
 
-from wiican.defs import GCONF_KEY, MAPPINGS_HOME_DIR, MAPPINGS_BASE_DIR
 from wiican.utils import Singleton, GConfStore
 from wiican.mapping.mapping import Mapping
-
+from wiican.defs import GCONF_KEY, MAPPINGS_HOME_DIR, MAPPINGS_BASE_DIR, \
+    INIT_PACKAGES
+   
 class MappingManager(Singleton, GConfStore):
     defaults = {'mapping_sort': [], 'mapping_visible': set([])}
-
+   
     def __init__(self):
         Singleton.__init__(self)
         GConfStore.__init__(self, GCONF_KEY)
@@ -56,6 +57,13 @@ class MappingManager(Singleton, GConfStore):
                 mappings[mapping_id] = Mapping(dirname)
                 if not mapping_id in self.options['mapping_sort']:
                     self.options['mapping_sort'].append(mapping_id)
+
+        # Import INIT_PACKAGES into home_path at first run
+        if not os.path.exists(self.home_path):
+            os.mkdir(self.home_path)
+
+            for package_path in [x for x in INIT_PACKAGES if os.path.exists(x)]:
+                self.import_mapping(package_path)
 
         # Load first system mappings, then user mappings.
         # If same mapping_id, the user mapping remains.
@@ -89,7 +97,7 @@ class MappingManager(Singleton, GConfStore):
 
         self.__mapping_bag[mapping_id] = mapping
         self.options['mapping_sort'].append(mapping_id)
-        self.options['mapping_visible'].add(mapping_id)        
+        self.options['mapping_visible'].add(mapping_id)
 
         return mapping_id
 
