@@ -24,15 +24,14 @@ import gtk.gdk
 
 #TODO: Replace this with gtk.gdk.PixbufAnimation
 class PngAnimation:
-    def __init__(self, files=[], thumb_pixbuf=None):
+    def __init__(self, pixbufs=[], thumb_pixbuf=None):
         self.__frames = []
         self.__current_frame = -1
  
-        for file in files:
-            self.append(file, thumb_pixbuf)
+        for pixbuf in pixbufs:
+            self.append(pixbuf, thumb_pixbuf)
 
-    def append(self, file, thumb_pixbuf=None):
-        frame = gtk.gdk.pixbuf_new_from_file(file)
+    def append(self, frame, thumb_pixbuf=None):
         if thumb_pixbuf:
             frame = self.__composite_thumb(thumb_pixbuf, frame)
 

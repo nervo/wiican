@@ -23,6 +23,7 @@
 import os
 from xdg.BaseDirectory import xdg_data_home
 
+
 BASE_DATA_DIR = '@PREFIX@/share/wiican/'
 if not os.path.exists(BASE_DATA_DIR):
     BASE_DATA_DIR='.'
@@ -44,10 +45,4 @@ MAPPING_UI = os.path.join(BASE_DATA_DIR, 'mapping.ui')
 
 ARTWORK_DIR = os.path.join(BASE_DATA_DIR, 'WiiArt')
 
-ICON_ON = os.path.join(BASE_DATA_DIR, 'img/wiitrayon.svg')
-ICON_OFF = os.path.join(BASE_DATA_DIR, 'img/wiitrayoff.svg')
-ICON_DEFAULT = os.path.join(BASE_DATA_DIR, 'img/wiitrayon.svg')
-
-ICON_CONN1 = os.path.join(BASE_DATA_DIR, 'img/wiitrayon1.svg')
-ICON_CONN2 = os.path.join(BASE_DATA_DIR, 'img/wiitrayon2.svg')
-ICON_CONN3 = os.path.join(BASE_DATA_DIR, 'img/wiitrayon3.svg')
+ICON_DEFAULT = os.path.join(BASE_DATA_DIR, 'wiican.svg')

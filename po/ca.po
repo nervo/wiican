@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-21 18:08+0200\n"
+"POT-Creation-Date: 2010-08-26 20:05+0200\n"
 "PO-Revision-Date: 2010-05-20 06:13+0000\n"
 "Last-Translator: josep87 <josep87@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -56,12 +56,12 @@ msgstr ""
 msgid "To put you Wiimote in discoverable mode now"
 msgstr "Poseu el Wiimote en mode detectable (premeu 1+2)"
 
-#: ../bin/wiican:226 ../wiican/mapping/manager.py:75
+#: ../bin/wiican:226 ../wiican/mapping/manager.py:83
 #, python-format
 msgid "Not %s file found on wiican package"
 msgstr ""
 
-#: ../bin/wiican:230 ../wiican/mapping/manager.py:79
+#: ../bin/wiican:230 ../wiican/mapping/manager.py:87
 #, python-format
 msgid "Not %s file found  on wiican package"
 msgstr ""
@@ -101,11 +101,11 @@ msgstr "S'està esborrant els mapatges"
 msgid "Import mapping..."
 msgstr "Mapatges del Wiimote"
 
-#: ../wiican/ui/managerdlg.py:186
+#: ../wiican/ui/managerdlg.py:187
 msgid "Wiican Mapping Package import failed!"
 msgstr ""
 
-#: ../wiican/ui/managerdlg.py:213
+#: ../wiican/ui/managerdlg.py:214
 #, fuzzy
 msgid "Exporting mapping..."
 msgstr "S'està esborrant els mapatges"
@@ -134,98 +134,98 @@ msgstr ""
 msgid "Ensure a bluetooth "
 msgstr "Connecteu un adaptador Bluetooth"
 
-#: ../wiican/mapping/manager.py:98 ../wiican/mapping/manager.py:132
-#: ../wiican/mapping/manager.py:135 ../wiican/mapping/manager.py:143
-#: ../wiican/mapping/manager.py:149 ../wiican/mapping/manager.py:155
-#: ../wiican/mapping/manager.py:173 ../wiican/mapping/manager.py:187
-#: ../wiican/mapping/manager.py:193
+#: ../wiican/mapping/manager.py:106 ../wiican/mapping/manager.py:140
+#: ../wiican/mapping/manager.py:143 ../wiican/mapping/manager.py:151
+#: ../wiican/mapping/manager.py:157 ../wiican/mapping/manager.py:163
+#: ../wiican/mapping/manager.py:181 ../wiican/mapping/manager.py:195
+#: ../wiican/mapping/manager.py:201
 #, fuzzy
 msgid "Mapping not found:"
 msgstr "Mapatge:"
 
-#: ../wiican/mapping/manager.py:176
+#: ../wiican/mapping/manager.py:184
 #, fuzzy
 msgid "Cannot remove a system installed mapping"
 msgstr "No s'ha pogut esborrar el mapatge "
 
-#: ../mapping.ui:21
+#: ../data/mapping.ui:21
 msgid "Wiimote mappings"
 msgstr "Mapatges del Wiimote"
 
-#: ../mapping.ui:93
+#: ../data/mapping.ui:93
 msgid "_Import"
 msgstr ""
 
-#: ../mapping.ui:110
+#: ../data/mapping.ui:110
 msgid "E_xport"
 msgstr ""
 
-#: ../mapping.ui:202
+#: ../data/mapping.ui:202
 #, fuzzy
 msgid "<b>Mappings</b>"
 msgstr "Mapatges"
 
-#: ../mapping.ui:354
+#: ../data/mapping.ui:354
 #, fuzzy
 msgid "_Name:"
 msgstr "Nom:"
 
-#: ../mapping.ui:366
+#: ../data/mapping.ui:366
 msgid "Co_mment:"
 msgstr ""
 
-#: ../mapping.ui:377
+#: ../data/mapping.ui:377
 msgid "A_uthor/s:"
 msgstr ""
 
-#: ../mapping.ui:388
+#: ../data/mapping.ui:388
 msgid "_Version:"
 msgstr ""
 
-#: ../mapping.ui:484
+#: ../data/mapping.ui:484
 msgid "_Icon:"
 msgstr ""
 
-#: ../mapping.ui:507
+#: ../data/mapping.ui:507
 msgid "<b>General</b>"
 msgstr ""
 
-#: ../mapping.ui:585
+#: ../data/mapping.ui:585
 msgid ""
 "This is a system installed mapping. \n"
 "Changes will be saved in a new mapping."
 msgstr ""
 
-#: ../mapping.ui:611
+#: ../data/mapping.ui:611
 #, fuzzy
 msgid "Execute mapping"
 msgstr "Mapatges del Wiimote"
 
-#: ../mapping.ui:632
+#: ../data/mapping.ui:632
 msgid "Mapping programming help"
 msgstr ""
 
-#: ../mapping.ui:666
+#: ../data/mapping.ui:666
 #, fuzzy
 msgid "<b>Mapping</b>"
 msgstr "Mapatges"
 
-#: ../wiimotemanager.ui:13
+#: ../data/wiimotemanager.ui:13
 msgid ""
 "Yes wii can\n"
 "Wiimote usage assistant and mapping manager"
 msgstr ""
 
-#: ../wiimotemanager.ui:726
+#: ../data/wiimotemanager.ui:726
 #, fuzzy
 msgid "Edit mappings..."
 msgstr "Mapatges del Wiimote"
 
-#: ../wiimotemanager.ui:759
+#: ../data/wiimotemanager.ui:759
 msgid "Mapping validation failed"
 msgstr ""
 
-#: ../wiimotemanager.ui:789
+#: ../data/wiimotemanager.ui:789
 msgid "It looks the activated mapping contains errors."
 msgstr ""
 

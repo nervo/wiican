@@ -172,6 +172,7 @@ class MappingManagerDialog(object):
                 gtk.RESPONSE_OK))
         import_dlg.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
         import_dlg.add_filter(self.mapping_filter)
+        import_dlg.add_shortcut_folder(MAPPING_PACKAGES_BASE_DIR)
         import_dlg.set_current_folder(pref_store.options['import_dir'])
             
         if not import_dlg.run() == gtk.RESPONSE_OK:

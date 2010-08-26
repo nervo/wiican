@@ -36,6 +36,13 @@ from wiican.service import WIICAN_PATH, WIICAN_URI
 from wiican.service import WC_DISABLED, WC_BLUEZ_PRESENT, WC_UINPUT_PRESENT, \
     WC_WIIMOTE_DISCOVERING
 
+# Load icons
+theme = gtk.icon_theme_get_default()
+
+wiican_on_icon = theme.load_icon('wiican-on', 24, 0)
+wiican_off_icon = theme.load_icon('wiican-off', 24, 0)
+wiican_disc3_icon = theme.load_icon('wiican-discover3', 24, 0)
+
 pref_store = UIPrefStore()
 
 class IconChooserDialog(gtk.FileChooserDialog):
@@ -61,7 +68,9 @@ class IconChooserDialog(gtk.FileChooserDialog):
 
         self.set_default_response(gtk.RESPONSE_OK)
         self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-        self.add_shortcut_folder(ARTWORK_DIR)
+        self.add_shortcut_folder('/usr/share/icons')
+        self.add_shortcut_folder('/usr/share/pixmaps')
+
         #FIXME: Why it doesn't work?
         self.set_current_folder(pref_store.options['icon_dir'])
 
@@ -148,15 +157,19 @@ class MappingEditorDialog(object):
                     self.execute_btn.set_active(True)
                     self.execute_btn.handler_unblock(self.sig_id)
                     self.execute_btn.set_tooltip_text(_('A mapping is running'))
+                    self.execute_btn.set_image(gtk.image_new_from_pixbuf(wiican_disc3_icon))
+                    
             elif new_status == (WC_UINPUT_PRESENT | WC_BLUEZ_PRESENT):
                 self.execute_btn.set_sensitive(True)
                 self.execute_btn.set_tooltip_text(_('Execute this mapping'))
+                self.execute_btn.set_image(gtk.image_new_from_pixbuf(wiican_on_icon))
                 if self.execute_btn.get_active():
                     self.execute_btn.handler_block(self.sig_id)
                     self.execute_btn.set_active(False)
                     self.execute_btn.handler_unblock(self.sig_id)
             else:
                 self.execute_btn.set_sensitive(False)
+                self.execute_btn.set_image(gtk.image_new_from_pixbuf(wiican_off_icon))
                 self.execute_btn.set_tooltip_text(_('Ensure a bluetooth ' \
                     +'adapter its available and uinput module its loaded'))
 

@@ -38,9 +38,52 @@ for filename in ['org.gnome.wiican.service', 'wiican/defs.py']:
     outfile.write(data)
     outfile.close()
 
+PO_DIR = 'po'
+MO_DIR = os.path.join('build', 'mo')
+
+class BuildData(build):
+    def run (self):
+        build.run (self)
+
+        for po in glob.glob (os.path.join (PO_DIR, '*.po')):
+            lang = os.path.basename(po[:-3])
+            mo = os.path.join(MO_DIR, lang, 'wiican.mo')
+
+            directory = os.path.dirname(mo)
+            if not os.path.exists(directory):
+                info('creating %s' % directory)
+                os.makedirs(directory)
+
+            if newer(po, mo):
+                info('compiling %s -> %s' % (po, mo))
+                try:
+                    rc = subprocess.call(['msgfmt', '-o', mo, po])
+                    if rc != 0:
+                        raise Warning, "msgfmt returned %d" % rc
+                except Exception, e:
+                    error("Building gettext files failed.  Try setup.py \
+                        --without-gettext [build|install]")
+                    error("Error: %s" % str(e))
+                    sys.exit(1)
+
+class InstallData(install_data):
+    def run (self):
+        self.data_files.extend (self._find_mo_files ())
+        install_data.run (self)
+
+    def _find_mo_files (self):
+        data_files = []
+
+        for mo in glob.glob (os.path.join (MO_DIR, '*', 'wiican.mo')):
+            lang = os.path.basename(os.path.dirname(mo))
+            dest = os.path.join('share', 'locale', lang, 'LC_MESSAGES')
+            data_files.append((dest, [mo]))
+
+        return data_files
+
 setup(
         name='wiican',
-        version='0.3',
+        version='0.3.0',
         description='Wiimote manager',
         long_description='Wiican its a systray that wrappers wminput',
         author='J. Félix Ontañón',
@@ -62,34 +105,33 @@ setup(
         packages = ['wiican', 'wiican.ui', 'wiican.service', 'wiican.mapping'],
         package_dir =  {'wiican': 'wiican', 'wiican.ui': 'wiican/ui', 
             'wiican.service': 'wiican/service', 'wiican.mapping': 'wiican/mapping'},
+            
         scripts = ['bin/wiican', 'bin/wiican-service'],
-        data_files = [('share/wiican/mappings_base', ['mappings_base/README']),
+        
+        cmdclass={'build': BuildData, 'install_data': InstallData},
+        
+        data_files = [('share/wiican/mappings_base', ['data/mappings_base/README']),
 
-                      ('share/wiican/packages_base', 
-                        ['packages_base/classicgamepad.wii', 
-                        'packages_base/neverball.wii', 'packages_base/wiiaccmouse.wii', 
-                        'packages_base/fretsonfire.wii', 'packages_base/nunchukmouse.wii', 
-                        'packages_base/wiigamepad.wii']),
+                      ('share/wiican/packages_base', glob.glob('data/packages_base/*')),
                       
-                      ('share/wiican/img', 
-                          ['img/wiitrayoff.svg', 'img/wiitrayon.svg',
-                          'img/wiitrayon1.svg', 'img/wiitrayon2.svg', 
-                          'img/wiitrayon3.svg']),
-                          
-                      ('share/wiican/WiiArt', 
-                          ['WiiArt/wiitrayoff.svg', 'WiiArt/wiitrayon.svg',
-                          'WiiArt/wiitrayon1.svg', 'WiiArt/wiitrayon2.svg', 
-                          'WiiArt/wiitrayon3.svg', 'WiiArt/console.svg', 
-                          'WiiArt/nunchuk.svg', 'WiiArt/remote.svg', 
-                          'WiiArt/controller.svg']),
-                          
+                      # Need to call gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
+                      # after installing icons
+                      ('share/icons/hicolor/16x16/devices', glob.glob('data/icons/16x16/devices/*')),
+                      ('share/icons/hicolor/22x22/devices', glob.glob('data/icons/22x22/devices/*')),
+                      ('share/icons/hicolor/32x32/devices', glob.glob('data/icons/32x32/devices/*')),
+                      ('share/icons/hicolor/48x48/devices', glob.glob('data/icons/48x48/devices/*')),
+                      ('share/icons/hicolor/scalable/devices', glob.glob('data/icons/scalable/devices/*')),
+                      ('share/icons/hicolor/16x16/status', glob.glob('data/icons/16x16/status/*')),
+                      ('share/icons/hicolor/22x22/status', glob.glob('data/icons/22x22/status/*')),
+                      ('share/icons/hicolor/24x24/status', glob.glob('data/icons/24x24/status/*')),
+                      ('share/icons/hicolor/48x48/status', glob.glob('data/icons/48x48/status/*')),
+                      ('share/icons/hicolor/64x64/status', glob.glob('data/icons/64x64/status/*')),
+                      ('share/icons/hicolor/scalable/status', glob.glob('data/icons/scalable/status/*')),
+
                       ('share/dbus-1/services', ['org.gnome.wiican.service']),
-                          
-                      ('share/wiican', 
-                          ['wiimotemanager.ui','mapping.ui', 'wiican.svg']),
-                          
-                      ('share/applications', ['wiican.desktop']),
-                      ('share/pixmaps', ['wiican.svg']),
-                      ('share/gconf/schemas', ['wiican.schemas']),
-                     ]
+
+                      ('share/wiican', ['data/wiimotemanager.ui','data/mapping.ui']),
+
+                      ('share/applications', ['data/wiican.desktop']),
+                      ('share/pixmaps', ['data/wiican.svg'])]
 )
