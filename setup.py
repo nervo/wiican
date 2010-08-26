@@ -84,14 +84,17 @@ class InstallData(install_data):
 setup(
         name='wiican',
         version='0.3.0',
-        description='Wiimote manager',
-        long_description='Wiican its a systray that wrappers wminput',
+        description='Wiimote connection and mapping manager',
+        long_description='WiiCan assists on configuration and management of ' + \
+            'your wiimote under GNU/Linux. It tracks bluetooth connectivity ' + \
+            'and allows to use and create mappings to adapt your wiimote for ' + \
+            'use on any application.',
         author='J. Félix Ontañón',
         author_email='felixonta@gmail.com',
         url='http://fontanon.org/wiican',
 
         classifiers=[
-            'Development Status :: 0.3 - Alpha',
+            'Development Status :: 0.3.0 - Beta',
             'Environment :: Desktop Environment',
             'Intended Audience :: End Users/Desktop',
             'License :: OSI Approved :: GNU General Public License (GPL)',
@@ -100,7 +103,7 @@ setup(
 	    'Topic :: Desktop Environment :: Gnome',
 	    'Topic :: Utilities'],
         keywords = ['wii', 'wiimote', 'joystick', 'gamepad', 'cwiid', 'wminput'],
-        requires = ['PyGTK', 'dbuspython'],
+        requires = ['PyGTK', 'dbuspython', 'ply'],
 
         packages = ['wiican', 'wiican.ui', 'wiican.service', 'wiican.mapping'],
         package_dir =  {'wiican': 'wiican', 'wiican.ui': 'wiican/ui', 
@@ -112,7 +115,7 @@ setup(
         
         data_files = [('share/wiican/mappings_base', ['data/mappings_base/README']),
 
-                      ('share/wiican/packages_base', glob.glob('data/packages_base/*')),
+                      ('share/wiican/WiiPackages', glob.glob('data/WiiPackages/*')),
                       
                       # Need to call gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
                       # after installing icons

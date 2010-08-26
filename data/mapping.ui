@@ -18,7 +18,7 @@
   </object>
   <object class="GtkDialog" id="mapping_manager_dlg">
     <property name="visible">True</property>
-    <property name="title" translatable="yes">Wiimote mappings</property>
+    <property name="title" translatable="yes">Wiican mappings</property>
     <property name="window_position">mouse</property>
     <property name="default_width">500</property>
     <property name="default_height">400</property>

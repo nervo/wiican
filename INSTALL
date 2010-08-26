@@ -4,31 +4,25 @@ Installing wiican:
 Install wminput: You can 'apt-getit' on Debian/Ubunty systems 
     - Download and install cwiid [1]
     - Download and install wminput [2]
-    - Your wminput executable must be on /usr/bin. 
-      Otherwise check wiican/defs.py and set the correct wminput path.
 
 Other dependencies:
     - Python >= 2.5
     - dbus-python
+    - python-gconf
+    - python-gobject
     - PyGTK
-    - PyYAML
-    - PyINotify
+    - PyXDG
+    - PLY
     - gnome-bluetooth (bluez-gnome in older versions)
+    - HAL
+    - udev
 
 Load uinput module with perms for non-root users:
-    For new versions of udev:
-      - sudo modprobe uinput
-      - sudo chmod 0666 /dev/uinput
-      - Maybe you want to autoload uinput module by adding it on /etc/modules 
-        but you still need to chmod 0666 /dev/uinput or launch wiican as root
-
-    For old versions of udev:
-      - Copy udev-rules/* to your udev rules directory (i.e.: /etc/udev/rules.d)
-      - Reload udev. (i.e.: On Ubuntu and Debian run /etc/init.d/udev reload
-      - Maybe you want to autoload uinput module by adding it on /etc/modules
+    - Copy udev-rules/* to your udev rules directory (i.e.: /lib/udev/rules.d)
+    - Reload udev. (i.e.: On Ubuntu and Debian run /etc/init.d/udev reload
+    - Maybe you want to autoload uinput module by adding it on /etc/modules
 
 Running wiican:
-    - Type ./run-unintalled.py if not installed
     - Type wiican if installed
 
 Install wiican:

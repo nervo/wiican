@@ -21,16 +21,16 @@
 
 from os.path import expanduser
 from wiican.utils import Singleton, GConfStore
-from wiican.defs import GCONF_KEY, ARTWORK_DIR
+from wiican.defs import GCONF_KEY, MAPPING_PACKAGES_BASE_DIR
 
 class UIPrefStore(Singleton, GConfStore):
 
     defaults = {
         'mapping_dlg_width': 500,
         'mapping_dlg_height': 400,
-        'import_dir': expanduser("~/"),
+        'import_dir': expanduser(MAPPING_PACKAGES_BASE_DIR),
         'export_dir': expanduser("~/"),
-        'icon_dir': ARTWORK_DIR
+        'icon_dir': '/usr/share/icons'
     }
 
     def __init__(self):
