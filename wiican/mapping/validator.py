@@ -125,12 +125,12 @@ class WMInputValidator(Parser):
         r'\#.*'
         self.comments.append(t)
 
-    def t_INT(self, t):
-        r'[0-9]+'
-        return t
-
     def t_FLOAT(self, t):
         r'[0-9]+(\.[0-9]*)?([eE][+/-]?[0-9]+)?'
+        return t
+
+    def t_INT(self, t):
+        r'[0-9]+'
         return t
 
     def t_ON_OFF(self, t):
