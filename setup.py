@@ -29,7 +29,7 @@ for arg in sys.argv:
         prefix = os.path.expandvars(prefix)
 
 # Gen .in files with @PREFIX@ replaced
-for filename in ['org.gnome.wiican.service', 'wiican/defs.py']:
+for filename in ['data/org.gnome.wiican.service', 'wiican/defs.py']:
     infile = open(filename + '.in', 'r')
     data = infile.read().replace('@PREFIX@', prefix)
     infile.close()
@@ -131,10 +131,17 @@ setup(
                       ('share/icons/hicolor/64x64/status', glob.glob('data/icons/64x64/status/*')),
                       ('share/icons/hicolor/scalable/status', glob.glob('data/icons/scalable/status/*')),
 
-                      ('share/dbus-1/services', ['org.gnome.wiican.service']),
+                      ('share/dbus-1/services', ['data/org.gnome.wiican.service']),
 
                       ('share/wiican', ['data/wiimotemanager.ui','data/mapping.ui']),
 
                       ('share/applications', ['data/wiican.desktop']),
-                      ('share/pixmaps', ['data/wiican.svg'])]
+                      ('share/pixmaps', ['data/wiican.svg']),
+
+                      ('share/mime/packages', ['data/mime/wiican.xml']),
+
+                      ('share/gconf/schemas', ['data/wiican.schemas']),
+
+                      ('lib/udev/rules.d', ['data/udev-rules/99-uinput-rules'])
+                      ]
 )
