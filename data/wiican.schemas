@@ -7,7 +7,6 @@
             <owner>wiican</owner>
             <type>string</type>
             <default></default>
-            <gettext_domain>wiican</gettext_domain>            
             <locale name="C">
                 <short>Path of the lastest export dir used</short>
                 <long>Stores the lastest dir the user export a mapping. 
@@ -22,7 +21,6 @@
             <owner>wiican</owner>
             <type>string</type>
             <default></default>
-            <gettext_domain>wiican</gettext_domain>            
             <locale name="C">
                 <short>Path of the lastest icon dir used</short>
                 <long>Stores the lastest dir the user grab an icon for mapping.
@@ -37,7 +35,6 @@
             <owner>wiican</owner>
             <type>string</type>
             <default></default>
-            <gettext_domain>wiican</gettext_domain>            
             <locale name="C">
                 <short>Path of the lastest import dir used</short>
                 <long>Stores the lastest dir the user import a mapping.
@@ -52,7 +49,6 @@
             <owner>wiican</owner>
             <type>string</type>
             <default>400</default>
-            <gettext_domain>wiican</gettext_domain>            
             <locale name="C">
                 <short>Saved height of the mapping manager dialog</short>
                 <long>Determines the pixel height of the mapping manager dialog.
@@ -67,7 +63,6 @@
             <owner>wiican</owner>
             <type>string</type>
             <default>500</default>
-            <gettext_domain>wiican</gettext_domain>            
             <locale name="C">
                 <short>Saved width of the mapping manager dialog</short>
                 <long>Determines the pixel width of the mapping manager dialog.
@@ -83,7 +78,6 @@
             <type>list</type>
             <list_type>string</list_type>
             <default>[]</default>
-            <gettext_domain>wiican</gettext_domain>
             <locale name="C">
                 <short>Saved order of mappings</short>
                 <long>Stores the order of mappings for the manager dialog and
@@ -99,7 +93,6 @@
             <type>list</type>
             <list_type>string</list_type>
             <default>[]</default>
-            <gettext_domain>wiican</gettext_domain>
             <locale name="C">
                 <short>Mappings to show on systray left click menu</short>
                 <long>Determines which mappings will appear on systray left 
