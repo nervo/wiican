@@ -141,7 +141,7 @@ setup(
 
                       ('share/mime/packages', ['data/mime/wiican.xml']),
 
-                      ('share/gconf/schemas', ['data/wiican.schemas']),
+                      ('/etc/gconf/schemas', ['data/wiican.schemas']),
 
                       ('lib/udev/rules.d', ['data/udev-rules/99-uinput-rules'])
                       ]
