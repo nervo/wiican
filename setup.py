@@ -130,6 +130,7 @@ setup(
                       ('share/icons/hicolor/48x48/status', glob.glob('data/icons/48x48/status/*')),
                       ('share/icons/hicolor/64x64/status', glob.glob('data/icons/64x64/status/*')),
                       ('share/icons/hicolor/scalable/status', glob.glob('data/icons/scalable/status/*')),
+                      ('share/icons/hicolor/scalable/mimetypes', glob.glob('data/icons/scalable/mimetypes/*')),
 
                       ('share/dbus-1/services', ['data/org.gnome.wiican.service']),
 
