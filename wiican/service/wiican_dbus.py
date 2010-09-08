@@ -46,9 +46,13 @@ HAL_MANAGER_PATH = '/org/freedesktop/Hal/Manager'
 WC_DISABLED = 0
 WC_BLUEZ_PRESENT = 1
 WC_UINPUT_PRESENT = 2
+WC_AVAILABLE = 3
 WC_WIIMOTE_DISCOVERING = 4
+WC_WIIMOTE_CONNECTED = 7
 
 class WiicanDBus(dbus.service.Object):
+    """A D-Bus service which allows to manage wiimote connections and track the wiimote connection states"""
+    
     __dbus_object_path__ = WIICAN_PATH
 
     def __init__(self, loop):
@@ -146,11 +150,44 @@ class WiicanDBus(dbus.service.Object):
 
     @dbus.service.method(WIICAN_URI, out_signature='i')
     def GetStatus(self):
+        """Get the current status as defined in the StatusChanged signal.
+
+        Returns:
+            an integer representing the current status
+
+        """
+
         self.__check_uinput_present()
         return self.status
 
     @dbus.service.method(WIICAN_URI, in_signature='sb')
     def ConnectWiimote(self, config_file, daemon):
+        """Request a wiimote connection using the config_file as mapping.
+
+        In order to allow connections a bluetooth adaptor must be available, 
+        the uinput module must be loaded and no other connection could be in 
+        use (3 - WC_AVAILABLE status, check the StatusChanged signal for more info).
+
+        The bluetooth adaptor connection changes are auto-discovered.
+        By now, the uinput module load/unload it's only discovered at service 
+        start and at bluetooth adaptor connection changes too. So the best
+        it's to ensure that module it's loaded before launching the service.
+
+        The daemon mode sets the connection for waiting indefinitely for 
+        pressing 1+2 (not daemon mode only wait for 3 seconds) and trying to 
+        reconnect if wiimote it's disconnected.
+
+        Parameters:
+        config_file - a string with the absolute path to mapping config file
+        daemon - a boolean to set the daemon mode
+
+        Potential Errors:
+        Not uinput module present
+        Not bluetooth adapter present
+        A wiimote connection still in use (disconnect first)
+        Mapping validation error
+        """
+
         self.__check_uinput_present()
         if not self.status & WC_UINPUT_PRESENT:
             raise dbus.exceptions.DBusException('Not uinput module present')
@@ -171,14 +208,45 @@ class WiicanDBus(dbus.service.Object):
 
     @dbus.service.method(WIICAN_URI)
     def DisconnectWiimote(self):
+        """Close the wiimote connection or do nothing if no connection in use"""
+        
         self.__wminput.stop()
         
     @dbus.service.method(WIICAN_URI)
     def Quit(self):
+        """Exit wiican dbus service"""
+        
         self.mainloop.quit()
 
     @dbus.service.signal(WIICAN_URI, signature='i')
     def StatusChanged(self, status):
+        """Emitted when the status of the connection changes.
+        All states have numerical values, as defined here:
+
+        0 - WC_DISABLED
+            No bluetooth adaptor available and uinput module it's not loaded.
+            Wiimote connection could not be performed.
+
+        1 - WC_BLUEZ_PRESENT
+            Bluetooth adaptor available, nor uinput module. 
+            Wiimote connection could not be performed.
+
+        2 - WC_UINPUT_PRESENT
+            The uinput module it's loaded, no bluetooth device available. 
+            Wiimote connection could not be performed.
+
+        3 - WC_AVAILABLE
+            Bluetooth adaptor available, uinput module loaded.
+            Wiimote connection could be performed.
+
+        7 - WC_WIIMOTE_CONNECTED
+            Wiimote connection in use.
+            Disconnect first to make a new connection.
+
+        Parameters:
+        status - an integer indicating the new status
+        """
+
         pass
 
 if __name__ == '__main__':
