@@ -79,6 +79,9 @@ class GConfStore(object):
              key_iterator = self.__client.all_entries(self.__app_key)
         
         for entry in key_iterator:
+            if entry is None:
+                continue
+                
             gval = self.__client.get(entry.key)
             if gval == None: continue
             
