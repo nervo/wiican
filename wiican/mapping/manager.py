@@ -34,9 +34,21 @@ from wiican.defs import GCONF_KEY, MAPPINGS_HOME_DIR, MAPPINGS_BASE_DIR, \
     INIT_PACKAGES
    
 class MappingManager(Singleton, GConfStore):
+    """
+    Handles one-shot mapping manager instance (singleton).
+
+    The MappingManager allows scan mappings from the system and user data paths, 
+    and perform a bunch of operation with mappings.
+
+    The MappingManager object offers some python dict methods allowing to get/set
+    attributes, iteration, deletion and check size (number of mappings managed).
+    """
+    
     defaults = {'mapping_sort': [], 'mapping_visible': set([])}
    
     def __init__(self):
+        """Gets the single mapping manager instance"""
+        
         Singleton.__init__(self)
         GConfStore.__init__(self, GCONF_KEY)
 
@@ -51,6 +63,15 @@ class MappingManager(Singleton, GConfStore):
         self.options['mapping_visible'] = set(self.options['mapping_visible'])
 
     def scan_mappings(self):
+        """
+        Scan mappings from default system and user data directories.
+        Auto-import the initial wiican mapping packages into user data dir if it
+        doesn't exists.
+        
+        Mappings are distinguished by dirname. If a system mapping has the same 
+        dirname as the user data dir, the system mapping it's ignored.
+        """
+        
         def load_mapping(mappings, dirname, fnames):
             if Mapping.info_filename in fnames and Mapping.mapping_filename in fnames:
                 mapping_id = os.path.splitext(os.path.basename(dirname))[0]
@@ -77,6 +98,7 @@ class MappingManager(Singleton, GConfStore):
             self.options['mapping_visible'] if x in self.__mapping_bag.keys()])
 
     def import_mapping(self, package_path):
+        """Import a wiican mapping package into user data dir"""
         package_file = tarfile.open(package_path)
 
         if not Mapping.info_filename in package_file.getnames():
@@ -102,6 +124,8 @@ class MappingManager(Singleton, GConfStore):
         return mapping_id
 
     def export_mapping(self, mapping_id, dest_filepath):
+        """Export a mapping as a wiican mapping package"""
+
         if not mapping_id in self.__mapping_bag:
             raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id
 
@@ -119,6 +143,8 @@ class MappingManager(Singleton, GConfStore):
         shutil.rmtree(mapping_tmp_path)
         
     def add_new_mapping(self, mapping):
+        """Add a mapping to be controlled by mapping manager"""
+        
         mapping_id = self.__gen_unique_mapping_id()
         mapping_path = os.path.join(self.home_path, mapping_id)
         mapping.write(mapping_path)
@@ -129,6 +155,8 @@ class MappingManager(Singleton, GConfStore):
         return mapping_id
 
     def write_mapping(self, mapping):
+        """Write a mapping to disk"""
+        
         if os.path.dirname(mapping.get_path()) in self.system_paths:
             return self.add_new_mapping(copy.copy(mapping))
         else:
@@ -136,6 +164,8 @@ class MappingManager(Singleton, GConfStore):
             return False
 
     def swap_mapping_order(self, mapping_id1, mapping_id2):
+        """Swap the order in the mapping list between two mappings"""
+        
         if not mapping_id1 in self.__mapping_bag:
             raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id1
         
@@ -147,18 +177,24 @@ class MappingManager(Singleton, GConfStore):
         self.options['mapping_sort'].insert(index, mapping_id2)
 
     def is_system_mapping(self, mapping_id):
+        """Check if the mapping (identified by mapping_id) it's a system mapping"""
+        
         if not mapping_id in self.__mapping_bag:
             raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id
 
         return os.path.dirname(self.__mapping_bag[mapping_id].get_path()) in self.system_paths
             
     def is_visible(self, mapping_id):
+        """Check if the mapping (identified by mapping_id) it's marked as visible"""
+
         if not mapping_id in self.__mapping_bag:
             raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id
 
         return mapping_id in self.options['mapping_visible']
         
     def set_visible(self, mapping_id, visible):
+        """Mark a mapping (identified by mapping_id) as visible or invisible"""
+
         if not mapping_id in self.__mapping_bag:
             raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id
 
