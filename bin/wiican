@@ -266,33 +266,50 @@ class MappingLauncherDialog(MappingEditorDialog):
         shutil.rmtree(self.mapping_path)
         
 if __name__ == '__main__':
+    def launch_statusicon():
+        from dbus.mainloop.glib import DBusGMainLoop
+
+        DBusGMainLoop(set_as_default=True)
+        wiican = WiimoteStatusIcon()
+        gobject.MainLoop().run()
+
+    def display_error(message):
+        error_loading_dlg = gtk.MessageDialog(
+            flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+            type = gtk.MESSAGE_ERROR,
+            buttons = gtk.BUTTONS_CLOSE,
+            message_format = message)
+        error_loading_dlg.set_title(_('Wiican Mapping Package load failed!'))
+        error_loading_dlg.run()
+        error_loading_dlg.destroy()
+
+    import exceptions
     from optparse import OptionParser
-  
+
     parser = OptionParser(_('usage: %prog [options] arg'))
     parser.add_option('-f', '--file', dest='filename',
                       help=_('loads mapping package from FILENAME'))
     (options, args) = parser.parse_args()
 
     if options.filename != None:
-        if os.path.exists(options.filename):
+        filename = options.filename
+        if filename.startswith("'") or filename.startswith('"') :
+            filename = filename[1:-1]
+
+        if os.path.exists(filename):
             try:
-                mapping_launcher_dlg = MappingLauncherDialog(options.filename)
-            except MappingError, e:
-                error_loading_dlg = gtk.MessageDialog(
-                    flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-                    type = gtk.MESSAGE_ERROR,
-                    buttons = gtk.BUTTONS_CLOSE,
-                    message_format = e.message)
-                error_loading_dlg.set_title(_('Wiican Mapping Package load failed!'))
-                error_loading_dlg.run()
-                error_loading_dlg.destroy()
+                mapping_launcher_dlg = MappingLauncherDialog(filename)
+            except exceptions.Exception, e:
+                display_error(e.message)
                 sys.exit(-1)
 
             mapping_launcher_dlg.run()
             sys.exit(0)
-    else:
-        from dbus.mainloop.glib import DBusGMainLoop
 
-        DBusGMainLoop(set_as_default=True)
-        wiican = WiimoteStatusIcon()
-        gobject.MainLoop().run()
+        else:
+            display_error(_('No wiican package mapping found: %s' % filename))
+            sys.exit(-2)
+
+    else:
+        launch_statusicon()
+        sys.exit(0)
