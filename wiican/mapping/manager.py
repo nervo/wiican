@@ -99,6 +99,7 @@ class MappingManager(Singleton, GConfStore):
 
     def import_mapping(self, package_path):
         """Import a wiican mapping package into user data dir"""
+
         package_file = tarfile.open(package_path)
 
         if not Mapping.info_filename in package_file.getnames():
@@ -129,7 +130,7 @@ class MappingManager(Singleton, GConfStore):
         if not mapping_id in self.__mapping_bag:
             raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id
 
-        mapping = self.__mapping_bag[mapping_id]
+        mapping = copy.copy(self.__mapping_bag[mapping_id])
         package_file = tarfile.TarFile(dest_filepath, 'w')
 
         # Write into a temp dir to avoid the user for saving a system mapping.
