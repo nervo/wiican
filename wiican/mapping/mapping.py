@@ -30,10 +30,48 @@ from xdg.IconTheme import getIconPath
 from wiican.defs import ICON_DEFAULT
 
 class Mapping(object):
+    """
+    An object representation of a wiican mapping.
+
+    A wiican mapping must be located in a single directory containing a file 
+    with the wminput code, a file containing the metadata (name, description, 
+    author, version) and an optional icon file.
+    """
+    
+    # Mandatory filename for the metadata file
     info_filename = 'info.desktop'
+
+    # Mandatory filename for the wminput config file
     mapping_filename = 'mapping.wminput'
     
     def __init__(self, path=None):
+        """
+        Builds a mapping object.
+
+        Parameters:
+        path -  scans the path for building a mapping object if the needed files
+                where found. If None it builds an empty mapping. If some of the 
+                needed files wasn't found it tries to build a mapping with the 
+                found info.
+
+        The Mapping.info_filename and Mapping.mapping_filename class attributes 
+        marks the requiered filenames for the metadata file and wminput config file 
+        respectively.
+
+        The Mapping.mapping_filename file must contain wminput config file code
+        The Mapping.info_filename follows XDG DesktopEntry syntax.
+        
+        The Mapping.info_filename contains the source of the optional associated
+        icon. If no icon found or no icon directive it falls back to default 
+        icon.
+
+        There are three posibilities for icon setting:
+
+        - An absolute path where the icon it's stored
+        - Icon filename if it's stored in the same dir as Mapping.info_filename
+        - Theme-icon-name for auto-getting the icon from the icon theme
+        """
+
         self.__path = path
         
         # Getting freedesktop definition file
@@ -63,23 +101,39 @@ class Mapping(object):
             self.set_icon(ICON_DEFAULT)
             
     def get_path(self):
+        """Returns the absolute path where the wiican mapping it's saved.
+        It returns None if the mapping it's not saved yet"""
+
         return self.__path
 
     def get_name(self):
+        """Gets the name of the mapping"""
+
         return self.__info.getName()
         
     def set_name(self, name):
+        """Sets the name for the mapping"""
+
         self.__info.set('Name', name)
         self.__info.set('Name', name, locale=True)
 
     def get_comment(self):
+        """Gets the descriptional comment"""
+
         return self.__info.getComment()
 
     def set_comment(self, comment):
+        """Sets the descriptional comment for the mapping"""
+
         self.__info.set('Comment', comment)
         self.__info.set('Comment', comment, locale=True)
 
     def get_icon(self):
+        """
+        Gets the associated icon. 
+        If no icon found or no icon directive it falls back to default icon.
+        """
+
         icon_name = self.__info.getIcon()
         # Icon included
         if self.__path and icon_name in os.listdir(self.__path):
@@ -92,27 +146,55 @@ class Mapping(object):
             return ICON_DEFAULT
                             
     def set_icon(self, icon_path):
+        """
+        Sets the icon for the mapping. There are three posibilities for icon 
+        setting:
+
+        - An absolute path where the icon it's stored
+        - Icon filename if it's stored in the same dir as Mapping.info_filename
+        - Theme-icon-name for auto-getting the icon from the icon theme        
+        """
+
         self.__info.set('Icon', icon_path)
 
     def get_authors(self):
+        """Gets the mapping author/s"""
+
         return self.__info.get('X-Authors')
 
     def set_authors(self, authors):
+        """Sets the author/s for the mapping"""
+
         self.__info.set('X-Authors', authors)
 
     def get_version(self):
+        """Gets the version of the mapping"""
+
         return self.__info.get('X-Version')
 
     def set_version(self, version):
+        """Sets the version of the mapping"""
+
         self.__info.set('X-Version', version)
 
     def get_mapping(self):
+        """Gets the wminput config code"""
+
         return self.__mapping
         
     def set_mapping(self, mapping):
+        """Sets the wminput config code"""
+
         self.__mapping = mapping
         
     def write(self, dest_path=None):
+        """
+        Saves the mapping object by writing the files in the mapping directory.
+
+        The metadata it's saved in Mapping.info_filename file.
+        The wminput config code it's saved in Mapping.mapping_filename file.
+        The associated icon it's copied to the mapping directory.
+        """
         if not dest_path:
             if not self.__path:
                 raise MappingError, _('No path provided for writing mapping')

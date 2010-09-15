@@ -25,6 +25,8 @@
 ###
 
 BTN_ACTION_ENUM = [
+
+ # Keyboard basic keys
  'KEY_ESC',
  'KEY_1',
  'KEY_2',
@@ -79,50 +81,14 @@ BTN_ACTION_ENUM = [
  'KEY_DOT',
  'KEY_SLASH',
  'KEY_RIGHTSHIFT',
- 'KEY_KPASTERISK',
  'KEY_LEFTALT',
  'KEY_SPACE',
  'KEY_CAPSLOCK',
- 'KEY_F1',
- 'KEY_F2',
- 'KEY_F3',
- 'KEY_F4',
- 'KEY_F5',
- 'KEY_F6',
- 'KEY_F7',
- 'KEY_F8',
- 'KEY_F9',
- 'KEY_F10',
  'KEY_NUMLOCK',
  'KEY_SCROLLLOCK',
- 'KEY_KP7',
- 'KEY_KP8',
- 'KEY_KP9',
- 'KEY_KPMINUS',
- 'KEY_KP4',
- 'KEY_KP5',
- 'KEY_KP6',
- 'KEY_KPPLUS',
- 'KEY_KP1',
- 'KEY_KP2',
- 'KEY_KP3',
- 'KEY_KP0',
- 'KEY_KPDOT',
 
- 'KEY_ZENKAKUHANKAKU',
- 'KEY_102ND',
- 'KEY_F11',
- 'KEY_F12',
- 'KEY_RO',
- 'KEY_KATAKANA',
- 'KEY_HIRAGANA',
- 'KEY_HENKAN',
- 'KEY_KATAKANAHIRAGANA',
- 'KEY_MUHENKAN',
- 'KEY_KPJPCOMMA',
- 'KEY_KPENTER',
+ # Control keys
  'KEY_RIGHTCTRL',
- 'KEY_KPSLASH',
  'KEY_SYSRQ',
  'KEY_RIGHTALT',
  'KEY_LINEFEED',
@@ -137,22 +103,65 @@ BTN_ACTION_ENUM = [
  'KEY_INSERT',
  'KEY_DELETE',
  'KEY_MACRO',
- 'KEY_MUTE',
- 'KEY_VOLUMEDOWN',
- 'KEY_VOLUMEUP',
  'KEY_POWER',
- 'KEY_KPEQUAL',
- 'KEY_KPPLUSMINUS',
  'KEY_PAUSE',
-
- 'KEY_KPCOMMA',
- 'KEY_HANGUEL',
- 'KEY_HANJA',
- 'KEY_YEN',
  'KEY_LEFTMETA',
  'KEY_RIGHTMETA',
  'KEY_COMPOSE',
 
+ # Function keys
+ 'KEY_F1',
+ 'KEY_F2',
+ 'KEY_F3',
+ 'KEY_F4',
+ 'KEY_F5',
+ 'KEY_F6',
+ 'KEY_F7',
+ 'KEY_F8',
+ 'KEY_F9',
+ 'KEY_F10',
+ 'KEY_F11',
+ 'KEY_F12',
+ 'KEY_F13',
+ 'KEY_F14',
+ 'KEY_F15',
+ 'KEY_F16',
+ 'KEY_F17',
+ 'KEY_F18',
+ 'KEY_F19',
+ 'KEY_F20',
+ 'KEY_F21',
+ 'KEY_F22',
+ 'KEY_F23',
+ 'KEY_F24',
+
+ 
+ # Keypad
+ 'KEY_KP7',
+ 'KEY_KP8',
+ 'KEY_KP9',
+ 'KEY_KPMINUS',
+ 'KEY_KP4',
+ 'KEY_KP5',
+ 'KEY_KP6',
+ 'KEY_KPPLUS',
+ 'KEY_KP1',
+ 'KEY_KP2',
+ 'KEY_KP3',
+ 'KEY_KP0',
+ 'KEY_KPDOT',
+ 'KEY_KPJPCOMMA',
+ 'KEY_KPENTER',
+ 'KEY_KPSLASH',
+ 'KEY_KPEQUAL',
+ 'KEY_KPPLUSMINUS',
+ 'KEY_KPCOMMA',
+ 'KEY_KPASTERISK',
+
+ # Multimedia keys
+ 'KEY_MUTE',
+ 'KEY_VOLUMEDOWN',
+ 'KEY_VOLUMEUP',
  'KEY_STOP',
  'KEY_AGAIN',
  'KEY_PROPS',
@@ -208,20 +217,6 @@ BTN_ACTION_ENUM = [
  'KEY_KPRIGHTPAREN',
  'KEY_NEW',
  'KEY_REDO',
-
- 'KEY_F13',
- 'KEY_F14',
- 'KEY_F15',
- 'KEY_F16',
- 'KEY_F17',
- 'KEY_F18',
- 'KEY_F19',
- 'KEY_F20',
- 'KEY_F21',
- 'KEY_F22',
- 'KEY_F23',
- 'KEY_F24',
-
  'KEY_PLAYCD',
  'KEY_PAUSECD',
  'KEY_PROG3',
@@ -248,22 +243,32 @@ BTN_ACTION_ENUM = [
  'KEY_BRIGHTNESSDOWN',
  'KEY_BRIGHTNESSUP',
  'KEY_MEDIA',
-
  'KEY_SWITCHVIDEOMODE',
  'KEY_KBDILLUMTOGGLE',
  'KEY_KBDILLUMDOWN',
  'KEY_KBDILLUMUP',
-
  'KEY_SEND',
  'KEY_REPLY',
  'KEY_FORWARDMAIL',
  'KEY_SAVE',
  'KEY_DOCUMENTS',
-
  'KEY_BATTERY',
-
  'KEY_UNKNOWN',
 
+ # Japanese/chinese input method? Don't know
+ 'KEY_ZENKAKUHANKAKU',
+ 'KEY_102ND',
+ 'KEY_RO',
+ 'KEY_KATAKANA',
+ 'KEY_HIRAGANA',
+ 'KEY_HENKAN',
+ 'KEY_KATAKANAHIRAGANA',
+ 'KEY_MUHENKAN',
+ 'KEY_HANGUEL',
+ 'KEY_HANJA',
+ 'KEY_YEN',
+
+ # Mouse buttons
  'BTN_MISC',
  'BTN_0',
  'BTN_1',
@@ -275,7 +280,6 @@ BTN_ACTION_ENUM = [
  'BTN_7',
  'BTN_8',
  'BTN_9',
-
  'BTN_MOUSE',
  'BTN_LEFT',
  'BTN_RIGHT',
@@ -286,6 +290,7 @@ BTN_ACTION_ENUM = [
  'BTN_BACK',
  'BTN_TASK',
 
+ # Gamepad/Joystick buttons
  'BTN_JOYSTICK',
  'BTN_TRIGGER',
  'BTN_THUMB',
@@ -300,7 +305,6 @@ BTN_ACTION_ENUM = [
  'BTN_BASE5',
  'BTN_BASE6',
  'BTN_DEAD',
-
  'BTN_GAMEPAD',
  'BTN_A',
  'BTN_B',
@@ -317,7 +321,11 @@ BTN_ACTION_ENUM = [
  'BTN_MODE',
  'BTN_THUMBL',
  'BTN_THUMBR',
+ 'BTN_WHEEL',
+ 'BTN_GEAR_DOWN',
+ 'BTN_GEAR_UP',
 
+ # Tablet buttons?
  'BTN_DIGI',
  'BTN_TOOL_PEN',
  'BTN_TOOL_RUBBER',
@@ -332,11 +340,8 @@ BTN_ACTION_ENUM = [
  'BTN_STYLUS2',
  'BTN_TOOL_DOUBLETAP',
  'BTN_TOOL_TRIPLETAP',
-
- 'BTN_WHEEL',
- 'BTN_GEAR_DOWN',
- 'BTN_GEAR_UP',
-
+ 
+ # PVR Keys?
  'KEY_OK',
  'KEY_SELECT',
  'KEY_GOTO',
@@ -402,11 +407,13 @@ BTN_ACTION_ENUM = [
  'KEY_TEEN',
  'KEY_TWEN',
 
+ # Don't know
  'KEY_DEL_EOL',
  'KEY_DEL_EOS',
  'KEY_INS_LINE',
  'KEY_DEL_LINE',
 
+ # Alternative FN functional keys
  'KEY_FN',
  'KEY_FN_ESC',
  'KEY_FN_F1',
@@ -429,6 +436,7 @@ BTN_ACTION_ENUM = [
  'KEY_FN_S',
  'KEY_FN_B',
 
+ # Braille line input
  'KEY_BRL_DOT1',
  'KEY_BRL_DOT2',
  'KEY_BRL_DOT3',
@@ -440,6 +448,8 @@ BTN_ACTION_ENUM = [
 ]
 
 REL_ACTION_ENUM = [
+
+ # Relative axis actions
  'REL_X',
  'REL_Y',
  'REL_Z',
@@ -453,6 +463,8 @@ REL_ACTION_ENUM = [
 ]
 
 ABS_ACTION_ENUM = [
+
+ # Absolute axis actions
  'ABS_X',
  'ABS_Y',
  'ABS_Z',
