@@ -24,7 +24,14 @@ Features:
 
 * D-Bus API to manage the wiimote connections
 
-Contents:
+******************
+User documentation
+******************
+
+.. toctree::
+    :maxdepth: 3
+
+    mappings.rst
 
 ********************
 Developers Reference

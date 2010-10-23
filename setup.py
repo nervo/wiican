@@ -83,7 +83,7 @@ class InstallData(install_data):
 
 setup(
         name='wiican',
-        version='0.3.0',
+        version='0.3.1',
         description='Wiimote connection and mapping manager',
         long_description='WiiCan assists on configuration and management of ' + \
             'your wiimote under GNU/Linux. It tracks bluetooth connectivity ' + \
@@ -94,7 +94,7 @@ setup(
         url='http://fontanon.org/wiican',
 
         classifiers=[
-            'Development Status :: 0.3.0 - Beta',
+            'Development Status :: 0.3.1 - Beta',
             'Environment :: Desktop Environment',
             'Intended Audience :: End Users/Desktop',
             'License :: OSI Approved :: GNU General Public License (GPL)',

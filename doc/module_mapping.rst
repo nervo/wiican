@@ -185,7 +185,7 @@ Load a mapping, set a theme icon and save::
 
     >>> y = Mapping('/tmp/test_mapping/')
     >>> print y.get_name(), y.get_comment()
-    >>> A test mapping for doing doc examples
+    A test mapping for doing doc examples
     >>> y.set_icon('gnome-mouse')
     >>> y.get_icon()
     u'/usr/share/pixmaps/gnome-mouse.png'
