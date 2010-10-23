@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-# Authors : J. Félix Ontañón <felixonta@gmail.com>
+# Authors : J. Félix Ontañón <fontanon@emergya.es>
 # 
 
 from wiican_dbus import WiicanDBus, WIICAN_URI, WIICAN_PATH

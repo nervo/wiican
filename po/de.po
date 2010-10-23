@@ -257,8 +257,8 @@ msgstr ""
 #~ msgid "Description:"
 #~ msgstr "Beschreibung:"
 
-#~ msgid "2009 J. Félix Ontañón <felixonta@gmail.com>"
-#~ msgstr "2009 J. Félix Ontañón <felixonta@gmail.com>"
+#~ msgid "2009 J. Félix Ontañón <fontanon@emergya.es>"
+#~ msgstr "2009 J. Félix Ontañón <fontanon@emergya.es>"
 
 #~ msgid "http://dev.emergya.info/projects/show/wiican"
 #~ msgstr "http://dev.emergya.info/projects/show/wiican"

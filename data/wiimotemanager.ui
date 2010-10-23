@@ -9,7 +9,7 @@
     <property name="type_hint">normal</property>
     <property name="program_name">WiiCan</property>
     <property name="version">0.3.1</property>
-    <property name="copyright">2009, 2010 J. F&#xE9;lix Onta&#xF1;&#xF3;n &lt;felixonta@gmail.com&gt;</property>
+    <property name="copyright">2009, 2010 J. F&#xE9;lix Onta&#xF1;&#xF3;n &lt;fontanon@emergya.es&gt;</property>
     <property name="comments" translatable="yes">Yes wii can
 Wiimote usage assistant and mapping manager</property>
     <property name="website">http://launchpad.net/wiican</property>
@@ -690,8 +690,8 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 &lt;http://www.gnu.org/philosophy/why-not-lgpl.html&gt;.
 </property>
-    <property name="authors">J. F&#xE9;lix Onta&#xF1;&#xF3;n &lt;felixonta@gmail.com&gt;</property>
-    <property name="translator_credits" comments="TRANSLATORS: Replace this string with your names, one name per line.">J. F&#xE9;lix Onta&#xF1;&#xF3;n &lt;felixonta@gmail.com&gt;
+    <property name="authors">J. F&#xE9;lix Onta&#xF1;&#xF3;n &lt;fontanon@emergya.es&gt;</property>
+    <property name="translator_credits" comments="TRANSLATORS: Replace this string with your names, one name per line.">J. F&#xE9;lix Onta&#xF1;&#xF3;n &lt;fontanon@emergya.es&gt;
 Pierre Slamich &lt;pierre.slamich@gmail.com&gt;
 Siegfried Gevatter &lt;rainct@ubuntu.com&gt;
 Christian Widell &lt;christian.widell@gmail.com&gt;

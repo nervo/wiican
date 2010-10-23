@@ -90,7 +90,7 @@ setup(
             'and allows to use and create mappings to adapt your wiimote for ' + \
             'use on any application.',
         author='J. Félix Ontañón',
-        author_email='felixonta@gmail.com',
+        author_email='fontanon@emergya.es',
         url='http://fontanon.org/wiican',
 
         classifiers=[

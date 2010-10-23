@@ -1,7 +1,7 @@
 # Spanish translation of WiiCan.
 # Copyright (C) 2009 J. Félix Ontañón
 # This file is distributed under the same license as the WiiCan package.
-# J. Félix Ontañón <felixonta@gmail.com>, 2009.
+# J. Félix Ontañón <fontanon@emergya.es>, 2009.
 #
 msgid ""
 msgstr ""
@@ -297,8 +297,8 @@ msgstr ""
 #~ msgid "gtk-cancel"
 #~ msgstr "gtk-cancel"
 
-#~ msgid "2009 J. Félix Ontañón <felixonta@gmail.com>"
-#~ msgstr "2009 J. Félix Ontañón <felixonta@gmail.com>"
+#~ msgid "2009 J. Félix Ontañón <fontanon@emergya.es>"
+#~ msgstr "2009 J. Félix Ontañón <fontanon@emergya.es>"
 
 #~ msgid "http://dev.emergya.info/projects/show/wiican"
 #~ msgstr "http://dev.emergya.info/projects/show/wiican"

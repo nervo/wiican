@@ -294,8 +294,8 @@ msgstr ""
 #~ msgid "Comment the use for this mapping"
 #~ msgstr "Comente o uso deste mapeamento"
 
-#~ msgid "2009 J. Félix Ontañón <felixonta@gmail.com>"
-#~ msgstr "2009 J. Félix Ontañón <felixonta@gmail.com>"
+#~ msgid "2009 J. Félix Ontañón <fontanon@emergya.es>"
+#~ msgstr "2009 J. Félix Ontañón <fontanon@emergya.es>"
 
 #~ msgid "gtk-cancel"
 #~ msgstr "gtk-cancel"

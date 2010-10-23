@@ -246,8 +246,8 @@ msgstr ""
 #~ msgid "Description:"
 #~ msgstr "Beskrivning:"
 
-#~ msgid "2009 J. Félix Ontañón <felixonta@gmail.com>"
-#~ msgstr "2009 J. Félix Ontañón <felixonta@gmail.com>"
+#~ msgid "2009 J. Félix Ontañón <fontanon@emergya.es>"
+#~ msgstr "2009 J. Félix Ontañón <fontanon@emergya.es>"
 
 #~ msgid "gtk-cancel"
 #~ msgstr "Avbryt"
