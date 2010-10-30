@@ -20,6 +20,7 @@
 # 
 ###
 
+import os
 import dbus, dbus.service, dbus.exceptions
 from wminput import WMInputLauncher
 
@@ -118,19 +119,18 @@ class WiicanDBus(dbus.service.Object):
         return False
 
     def __check_uinput_present(self):
-        # FIXME: There must be a better, pythonic and signalable way to check it
-        mod_fp = open('/proc/modules')
-        modules = mod_fp.read()
-        mod_fp.close()
-        if 'uinput' in modules:
-            self.status = self.status | WC_UINPUT_PRESENT
-            self.StatusChanged(self.status)
-            return True
-        else:
-            if self.status & WC_UINPUT_PRESENT:
-                self.status = self.status ^ WC_UINPUT_PRESENT
+        # FIXME: Checking the wminput way, it may be a better way ...
+        for uinput_filename in ['/dev/uinput', '/dev/input/uinput',
+                '/dev/misc/uinput']:
+            if os.access(uinput_filename, os.W_OK):
+                self.status = self.status | WC_UINPUT_PRESENT
                 self.StatusChanged(self.status)
-            return False
+                return True
+            
+        if self.status & WC_UINPUT_PRESENT:
+            self.status = self.status ^ WC_UINPUT_PRESENT
+            self.StatusChanged(self.status)
+        return False
 
     def __plug_cb(self, udi):
         bus = dbus.SystemBus()
