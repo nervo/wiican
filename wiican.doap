@@ -5,10 +5,11 @@
          xmlns="http://usefulinc.com/ns/doap#">
 
   <name xml:lang="en">wiican</name>
-  <shortdesc xml:lang="en">Simple wiimote usage assistant and mapping manager</shortdesc>
-  <homepage rdf:resource="http://fontanon.org/wiican" />
+  <shortdesc xml:lang="en">
+      Simple wiimote usage assistant and mapping manager
+  </shortdesc>
+  <homepage rdf:resource="http://fontanon.org/wiican/" />
   <mailing-list rdf:resource="http://mail.gnome.org/mailman/listinfo/wiican-list" />
-  <category rdf:resource="http://api.gnome.org/doap-extensions#other" />
 
   <maintainer>
     <foaf:Person>
