@@ -291,7 +291,7 @@ if __name__ == '__main__':
                       help=_('loads mapping package from FILENAME'))
     (options, args) = parser.parse_args()
 
-    if options.filename != None:
+    if options.filename not in (None, ''):
         filename = options.filename
         if filename.startswith("'") or filename.startswith('"') :
             filename = filename[1:-1]
