@@ -58,7 +58,8 @@ class MappingManagerDialog(object):
             icon = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 24, 24)
             visible = mapping_manager.is_visible(mapping_id)
             
-            self.mapping_store.append([icon, mapping.get_name(), 
+            mapping_name = '<b>%s</b>\n<i>%s</i>' % (mapping.get_name(), mapping.get_comment())
+            self.mapping_store.append([icon, mapping_name, 
                 mapping.get_comment(), visible, mapping_id])
 
         def catch_window_size(widget, allocate):
@@ -90,7 +91,9 @@ class MappingManagerDialog(object):
 
             icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 24, 
                 24)
-            self.mapping_store.append([icon, mapping.get_name(), 
+
+            mapping_name = '<b>%s</b>\n<i>%s</i>' % (mapping.get_name(), mapping.get_comment())
+            self.mapping_store.append([icon, mapping_name,
                 mapping.get_comment(), True, mapping_id])
 
         mapping_editor_dlg.destroy()
@@ -198,9 +201,11 @@ class MappingManagerDialog(object):
             
         mapping = mapping_manager[mapping_id]
         icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 24, 24)
-        self.mapping_store.append([icon, mapping.get_name(), 
+
+        mapping_name = '<b>%s</b>\n<i>%s</i>' % (mapping.get_name(), mapping.get_comment())
+        self.mapping_store.append([icon, mapping_name,
             mapping.get_comment(), True, mapping_id])
-            
+
         pref_store.options['import_dir'] = import_dlg.get_current_folder()
         import_dlg.destroy()
         
