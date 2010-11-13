@@ -23,6 +23,7 @@
 import gtk
 import webbrowser
 import pango
+import gtksourceview2
 import tempfile
 
 import dbus, dbus.exceptions
@@ -98,7 +99,7 @@ class MappingEditorDialog(object):
                     
         self.builder = gtk.Builder()
         if not self.builder.add_objects_from_file(MAPPING_UI, 
-                ['mapping_editor_dlg', 'mapping_buffer']):
+                ['mapping_editor_dlg']):#, 'mapping_buffer']):
             raise 'Cant load %s' % MAPPING_UI
         self.builder.connect_signals(self)
         
@@ -107,10 +108,20 @@ class MappingEditorDialog(object):
         self.comment_entry = self.builder.get_object('comment_entry')
         self.version_entry = self.builder.get_object('version_entry')
         self.authors_entry = self.builder.get_object('authors_entry')
-        self.mapping_buffer = self.builder.get_object('mapping_buffer')
+        self.scrolledwindow2 = self.builder.get_object('scrolledwindow2')
         self.icon_image = self.builder.get_object('icon_image')
         self.execute_btn = self.builder.get_object('execute_btn')
         
+        lm = gtksourceview2.LanguageManager()
+        self.mapping_buffer = gtksourceview2.Buffer()
+        self.mapping_buffer.set_data('languages-manager', lm)
+        view = gtksourceview2.View(self.mapping_buffer)
+        view.set_show_line_numbers(True)
+        view.set_auto_indent(True)
+
+        self.scrolledwindow2.add(view)
+        self.scrolledwindow2.show_all()
+
         if system_mapping:
             self.warning_box = self.builder.get_object('warning_box')
             self.warning_frame = self.builder.get_object('warning_frame')
@@ -133,6 +144,7 @@ class MappingEditorDialog(object):
         self.version_entry.set_text(self.mapping.get_version() or '')
         self.authors_entry.set_text(self.mapping.get_authors() or '')
         self.mapping_buffer.set_text(self.mapping.get_mapping() or '')
+        self.mapping_buffer.place_cursor(self.mapping_buffer.get_start_iter())
         self.mapping_editor_dlg.set_title(_('Editing ') + self.mapping.get_name())
         
         # Initial error underlining and colorize comments

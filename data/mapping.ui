@@ -495,11 +495,7 @@
                             <property name="vscrollbar_policy">automatic</property>
                             <property name="shadow_type">in</property>
                             <child>
-                              <object class="GtkTextView" id="mapping_textview">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="buffer">mapping_buffer</property>
-                              </object>
+                              <placeholder/>
                             </child>
                           </object>
                           <packing>
@@ -684,39 +680,38 @@ Changes will be saved in a new mapping.</property>
       <action-widget response="-5">save_btn</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkTextBuffer" id="mapping_buffer"/>
   <object class="GtkAction" id="edit_action">
-    <property name="label">_Edit mapping</property>
-    <property name="short_label">_Edit</property>
-    <property name="tooltip">_Edit mapping properties</property>
+    <property name="label" translatable="yes">Edit mapping</property>
+    <property name="short_label" translatable="yes">_Edit</property>
+    <property name="tooltip" translatable="yes">Edit mapping properties</property>
     <property name="stock_id">gtk-edit</property>
     <signal name="activate" handler="edit_action_activate_cb"/>
   </object>
   <object class="GtkAction" id="delete_action">
-    <property name="label">Delete mapping</property>
-    <property name="short_label">Delete</property>
-    <property name="tooltip">Removes the mapping from the catalog</property>
+    <property name="label" translatable="yes">Delete mapping</property>
+    <property name="short_label" translatable="yes">_Delete</property>
+    <property name="tooltip" translatable="yes">Removes the mapping from the catalog</property>
     <property name="stock_id">gtk-delete</property>
     <signal name="activate" handler="delete_action_activate_cb"/>
   </object>
   <object class="GtkAction" id="import_action">
-    <property name="label">Import mapping</property>
-    <property name="short_label">Import</property>
-    <property name="tooltip">Import a mapping from a .wii file</property>
+    <property name="label" translatable="yes">Import mapping</property>
+    <property name="short_label" translatable="yes">_Import</property>
+    <property name="tooltip" translatable="yes">Import a mapping from a .wii file</property>
     <property name="stock_id">gtk-add</property>
     <signal name="activate" handler="import_action_activate_cb"/>
   </object>
   <object class="GtkAction" id="export_action">
-    <property name="label">_Export mapping</property>
-    <property name="short_label">_Export</property>
-    <property name="tooltip">Export mapping as a .wii file</property>
+    <property name="label" translatable="yes">_Export mapping</property>
+    <property name="short_label" translatable="yes">E_xport</property>
+    <property name="tooltip" translatable="yes">Export mapping as a .wii file</property>
     <property name="icon_name">package-x-generic</property>
     <signal name="activate" handler="export_action_activate_cb"/>
   </object>
   <object class="GtkAction" id="new_action">
-    <property name="label">New mapping</property>
-    <property name="short_label">New</property>
-    <property name="tooltip">Creates a new mapping</property>
+    <property name="label" translatable="yes">New mapping</property>
+    <property name="short_label" translatable="yes">_New</property>
+    <property name="tooltip" translatable="yes">Creates a new mapping</property>
     <property name="stock_id">gtk-new</property>
     <signal name="activate" handler="new_action_activate_cb"/>
   </object>

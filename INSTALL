@@ -10,6 +10,7 @@ Other dependencies:
     - dbus-python
     - python-gconf
     - python-gobject
+    - python-gtksourceview2
     - PyGTK
     - PyXDG
     - PLY
