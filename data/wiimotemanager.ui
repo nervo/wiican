@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy toplevel-contextual -->
@@ -7,13 +7,13 @@
     <property name="window_position">center</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">normal</property>
-    <property name="program_name">WiiCan</property>
+    <property name="program_name">Wiican</property>
     <property name="version">0.3.1</property>
-    <property name="copyright">2009, 2010 J. F&#xE9;lix Onta&#xF1;&#xF3;n &lt;fontanon@emergya.es&gt;</property>
+    <property name="copyright">2009, 2010 J. Félix Ontañón &lt;fontanon@emergya.es&gt;</property>
     <property name="comments" translatable="yes">Yes wii can
 Wiimote usage assistant and mapping manager</property>
-    <property name="website">http://launchpad.net/wiican</property>
-    <property name="website_label">http://launchpad.net/wiican</property>
+    <property name="website">http://fontanon.org/wiican</property>
+    <property name="website_label">http://fontanon.org/wiican</property>
     <property name="license">
 		    GNU GENERAL PUBLIC LICENSE
 		       Version 3, 29 June 2007
@@ -690,8 +690,8 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 &lt;http://www.gnu.org/philosophy/why-not-lgpl.html&gt;.
 </property>
-    <property name="authors">J. F&#xE9;lix Onta&#xF1;&#xF3;n &lt;fontanon@emergya.es&gt;</property>
-    <property name="translator_credits" comments="TRANSLATORS: Replace this string with your names, one name per line.">J. F&#xE9;lix Onta&#xF1;&#xF3;n &lt;fontanon@emergya.es&gt;
+    <property name="authors">J. Félix Ontañón &lt;fontanon@emergya.es&gt;</property>
+    <property name="translator_credits" comments="TRANSLATORS: Replace this string with your names, one name per line.">J. Félix Ontañón &lt;fontanon@emergya.es&gt;
 Pierre Slamich &lt;pierre.slamich@gmail.com&gt;
 Siegfried Gevatter &lt;rainct@ubuntu.com&gt;
 Christian Widell &lt;christian.widell@gmail.com&gt;
@@ -765,7 +765,6 @@ Ulisse &lt;ulisail@yahoo.it&gt;</property>
     <property name="type_hint">dialog</property>
     <property name="skip_pager_hint">True</property>
     <property name="urgency_hint">True</property>
-    <property name="has_separator">False</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>

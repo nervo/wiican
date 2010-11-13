@@ -42,7 +42,9 @@ class MappingManagerDialog(object):
     def __init__(self):
         builder = gtk.Builder()
         if not builder.add_objects_from_file(MAPPING_UI, 
-                ['mapping_manager_dlg', 'image3', 'image4', 'mapping_store']):
+                ['mapping_manager_dlg', 'image3', 'image4', 'mapping_store',
+                    'new_action', 'edit_action', 'delete_action', 
+                    'import_action', 'export_action']):
             raise 'Cant load %s' % MAPPING_UI
         builder.connect_signals(self)
 
@@ -81,7 +83,7 @@ class MappingManagerDialog(object):
         pref_store.saveconf()
         return self.mapping_dlg.destroy()
 
-    def new_btn_clicked_cb(self, widget):
+    def new_action_activate_cb(self, widget):
         mapping_editor_dlg = MappingEditorDialog(Mapping())
         mapping_editor_dlg.set_title(_('Editing new mapping'))
 
@@ -92,13 +94,14 @@ class MappingManagerDialog(object):
             icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 24, 
                 24)
 
-            mapping_name = '<b>%s</b>\n<i>%s</i>' % (mapping.get_name(), mapping.get_comment())
+            mapping_name = '<b>%s</b>\n<i>%s</i>' % (mapping.get_name(), 
+                    mapping.get_comment())
             self.mapping_store.append([icon, mapping_name,
                 mapping.get_comment(), True, mapping_id])
 
         mapping_editor_dlg.destroy()
 
-    def edit_btn_clicked_cb(self, widget):
+    def edit_action_activate_cb(self, widget):
         selection = self.mapping_list.get_selection()
         model, selected = selection.get_selected()
         
@@ -115,21 +118,25 @@ class MappingManagerDialog(object):
                 if system_mapping:
                     icon = gtk.gdk.pixbuf_new_from_file_at_size(new_mapping.get_icon(), 
                         24, 24)
-                    self.mapping_store.append([icon, new_mapping.get_name(), 
-                        new_mapping.get_comment(), True, new_mapping_id])
+
+                    mapping_name = '<b>%s</b>\n<i>%s</i>' % (mapping.get_name(), 
+                            mapping.get_comment())
+                    self.mapping_store.append([icon, mapping_name,
+                        mapping.get_comment(), True, mapping_id])
                 else:
                     mapping_manager[mapping_id] = new_mapping
                     model[selected][ICON_COL] = gtk.gdk.pixbuf_new_from_file_at_size(new_mapping.get_icon(), 
                         24, 24)
-                    model[selected][NAME_COL] = new_mapping.get_name()
+                    model[selected][NAME_COL] = '<b>%s</b>\n<i>%s</i>' % (new_mapping.get_name(), 
+                            new_mapping.get_comment())
                     model[selected][COMMENT_COL] = new_mapping.get_comment()
 
             mapping_editor_dlg.destroy()
 
     def mapping_list_row_activated_cb(self, widget, path, view_column):
-        self.edit_btn_clicked_cb(widget)
+        self.edit_action_activate_cb(widget)
 
-    def delete_btn_clicked_cb(self, widget):
+    def delete_action_activate_cb(self, widget):
         selection = self.mapping_list.get_selection()
         model, selected = selection.get_selected()
         if selected is not None:
@@ -166,9 +173,9 @@ class MappingManagerDialog(object):
 
     def mapping_list_key_release_event_cb(self, widget, event):
        if event.keyval == gtk.gdk.keyval_from_name("Delete"):
-            self.delete_btn_clicked_cb(None)
+            self.delete_action_activate_cb(None)
 
-    def import_btn_clicked_cb(self, widget):
+    def import_action_activate_cb(self, widget):
         import_dlg = gtk.FileChooserDialog(_('Import mapping...'), 
                 self.mapping_dlg, gtk.FILE_CHOOSER_ACTION_OPEN,
                 (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, 
@@ -202,14 +209,15 @@ class MappingManagerDialog(object):
         mapping = mapping_manager[mapping_id]
         icon = gtk.gdk.pixbuf_new_from_file_at_size(mapping.get_icon(), 24, 24)
 
-        mapping_name = '<b>%s</b>\n<i>%s</i>' % (mapping.get_name(), mapping.get_comment())
+        mapping_name = '<b>%s</b>\n<i>%s</i>' % (mapping.get_name(), 
+                mapping.get_comment())
         self.mapping_store.append([icon, mapping_name,
             mapping.get_comment(), True, mapping_id])
 
         pref_store.options['import_dir'] = import_dlg.get_current_folder()
         import_dlg.destroy()
         
-    def export_btn_clicked_cb(self, widget):
+    def export_action_activate_cb(self, widget):
         selection = self.mapping_list.get_selection()
         model, selected = selection.get_selected()
         if selected is not None:
