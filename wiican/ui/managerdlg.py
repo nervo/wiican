@@ -52,6 +52,13 @@ class MappingManagerDialog(object):
         self.mapping_store = builder.get_object('mapping_store')
         self.mapping_list = builder.get_object('mapping_list')
 
+        # Enable Drag&Drop
+        target_entries = [('catalog', gtk.TARGET_SAME_WIDGET, 0)]
+        self.mapping_list.enable_model_drag_source(gtk.gdk.BUTTON1_MASK,
+                target_entries, gtk.gdk.ACTION_MOVE)
+        self.mapping_list.enable_model_drag_dest(target_entries, 
+                gtk.gdk.ACTION_MOVE)
+
         for mapping_id, mapping in mapping_manager.items():
             # Prevent for loading a not found icon path
             icon_path = mapping.get_icon()
@@ -60,7 +67,8 @@ class MappingManagerDialog(object):
             icon = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 24, 24)
             visible = mapping_manager.is_visible(mapping_id)
             
-            mapping_name = '<b>%s</b>\n<i>%s</i>' % (mapping.get_name(), mapping.get_comment())
+            mapping_name = '<b>%s</b>\n<i>%s</i>' % (mapping.get_name(), 
+                mapping.get_comment())
             self.mapping_store.append([icon, mapping_name, 
                 mapping.get_comment(), visible, mapping_id])
 
@@ -282,3 +290,35 @@ class MappingManagerDialog(object):
                 model.swap(selected, next)
                 mapping_manager.swap_mapping_order(model[selected][MAPPING_ID_COL], 
                     model[next][MAPPING_ID_COL])
+
+    def mapping_list_drag_data_received_cb(self, treeview, context, x, y,
+            selection, info, etime):
+
+        selection = self.mapping_list.get_selection()
+        model, selected = selection.get_selected()
+        data = [model[selected][ICON_COL], model[selected][NAME_COL], \
+            model[selected][COMMENT_COL], model[selected][VISIBLE_COL], \
+            model[selected][MAPPING_ID_COL]]
+
+        drop_info = treeview.get_dest_row_at_pos(x, y)
+        if drop_info:
+            path, position = drop_info
+            iter = model.get_iter(path)
+            if position in (gtk.TREE_VIEW_DROP_BEFORE, 
+                    gtk.TREE_VIEW_DROP_INTO_OR_BEFORE):
+                model.insert_before(iter, data)
+                mapping_manager.swap_mapping_order(model[iter][MAPPING_ID_COL],
+                        model[selected][MAPPING_ID_COL])
+            else:
+                model.insert_after(iter, data)
+                mapping_manager.swap_mapping_order(model[iter][MAPPING_ID_COL],
+                        model[selected][MAPPING_ID_COL], True)
+        else:
+            model.append(data)
+            mapping_manager.swap_mapping_order(
+                mapping_manager.options['mapping_sort'][-1],
+                model[selected][MAPPING_ID_COL], True)
+
+        if context.action == gtk.gdk.ACTION_MOVE:
+            context.finish(True, True, etime)
+        return

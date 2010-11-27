@@ -137,6 +137,7 @@
                         <property name="search_column">1</property>
                         <property name="tooltip_column">2</property>
                         <signal name="row_activated" handler="mapping_list_row_activated_cb"/>
+                        <signal name="drag_data_received" handler="mapping_list_drag_data_received_cb"/>
                         <signal name="key_release_event" handler="mapping_list_key_release_event_cb"/>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn3">
