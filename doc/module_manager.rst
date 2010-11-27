@@ -113,15 +113,18 @@ Mapping options in a collection
 
 .. method:: MappingManager.swap_mapping_order(mapping_id1, mapping_id2)
 
-    Swap the order in the mapping collection between two mappings
+    Swaps mapping_id2 before mapping_id1
 
     :param mapping_id1: The :class:`MappingManager` key that refers a 
-        :class:`Mapping` object to swap order.
+        :class:`Mapping` object to revolve around.
     :type mapping_id1: string
     
     :param mapping_id2: The other :class:`MappingManager` key that refers a
-        :class:`Mapping` object to swap order.
+        :class:`Mapping` object to be swapped.
     :type mapping_id2: string
+
+    :param after: default False, if true: it swaps mapping_id2 after mapping_id1
+    :type after: bool
 
     :raises: :exc:`MappingManagerError` if no mapping found by the given 
         mapping_id

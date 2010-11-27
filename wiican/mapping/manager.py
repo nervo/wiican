@@ -164,8 +164,8 @@ class MappingManager(Singleton, GConfStore):
             mapping.write()
             return False
 
-    def swap_mapping_order(self, mapping_id1, mapping_id2):
-        """Swap the order in the mapping list between two mappings"""
+    def swap_mapping_order(self, mapping_id1, mapping_id2, after=False):
+        """Swaps mapping_id2 before mapping_id1"""
         
         if not mapping_id1 in self.__mapping_bag:
             raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id1
@@ -173,9 +173,18 @@ class MappingManager(Singleton, GConfStore):
         if not mapping_id2 in self.__mapping_bag:
             raise MappingManagerError, _('Mapping not found:') + ' ' + mapping_id2
 
-        index = self.options['mapping_sort'].index(mapping_id1)
-        self.options['mapping_sort'].remove(mapping_id2)
-        self.options['mapping_sort'].insert(index, mapping_id2)
+        if mapping_id1 == mapping_id2: return
+
+        sort_list = copy.copy(self.options['mapping_sort'])
+        sort_list.remove(mapping_id2)
+        index = sort_list.index(mapping_id1)
+
+        if after: 
+            sort_list = sort_list[0:index+1] + [mapping_id2] + sort_list[index+1:]
+        else: 
+            sort_list.insert(index, mapping_id2)
+
+        self.options['mapping_sort'] = sort_list
 
     def is_system_mapping(self, mapping_id):
         """Check if the mapping (identified by mapping_id) it's a system mapping"""
