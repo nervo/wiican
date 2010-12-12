@@ -21,8 +21,11 @@
 ###
 
 import os
+import gudev
 import dbus, dbus.service, dbus.exceptions
+
 from wminput import WMInputLauncher
+from wiifinder import WiimoteFinder
 
 from wiican.mapping import MappingValidator
 
@@ -32,17 +35,9 @@ WIICAN_PATH = '/org/gnome/Wiican'
 DBUS_URI = 'org.freedesktop.DBus'
 DBUS_PATH = '/org/freedesktop/DBus'
 
-HAL_URI = 'org.freedesktop.Hal'
-HAL_DEVICE_IFACE = 'org.freedesktop.Hal.Device'
-
 BLUEZ_PATH = '/'
 BLUEZ_URI = 'org.bluez'
 BLUEZMANAGER_IFACE = 'org.bluez.Manager'
-
-HAL_URI = 'org.freedesktop.Hal'
-HAL_DEVICE_IFACE = 'org.freedesktop.Hal.Device'
-HAL_MANAGER_URI = 'org.freedesktop.Hal.Manager'
-HAL_MANAGER_PATH = '/org/freedesktop/Hal/Manager'
 
 WC_DISABLED = 0
 WC_BLUEZ_PRESENT = 1
@@ -60,7 +55,7 @@ class WiicanDBus(dbus.service.Object):
         self.bus = dbus.SessionBus()
         self.mainloop = loop
         self.status = 0
-        self.wiimote_udi = 0
+        self.wiimote_device = None
         self.wminput = None
         
         dbus.service.Object.__init__(self, dbus.service.BusName(WIICAN_URI, 
@@ -86,11 +81,10 @@ class WiicanDBus(dbus.service.Object):
         # Check for uinput module
         self.__check_uinput_present()
 
-        # Setup HAL
-        hal_manager_obj = bus.get_object(HAL_URI, HAL_MANAGER_PATH)
-        hal_manager = dbus.Interface(hal_manager_obj, HAL_MANAGER_URI)
-        hal_manager.connect_to_signal('DeviceAdded', self.__plug_cb)
-        hal_manager.connect_to_signal('DeviceRemoved', self.__unplug_cb)
+        # Setup Wiimote finder
+        self.wiimote_finder = WiimoteFinder()
+        self.wiimote_finder.connect('connected', self.__plug_cb)
+        self.wiimote_finder.connect('disconnected', self.__unplug_cb)
 
     def __wait_for_bluez(self, names, old_owner, new_owner):
         if BLUEZ_URI in names:
@@ -132,19 +126,13 @@ class WiicanDBus(dbus.service.Object):
             self.StatusChanged(self.status)
         return False
 
-    def __plug_cb(self, udi):
-        bus = dbus.SystemBus()
-        device_dbus_obj = bus.get_object(HAL_URI, udi)
-        properties = device_dbus_obj.GetAllProperties(dbus_interface=HAL_DEVICE_IFACE)
+    def __plug_cb(self, finder, wiimote):
+        self.wiimote_device = wiimote
+        self.status = self.status | WC_WIIMOTE_DISCOVERING
+        self.StatusChanged(self.status)
 
-        if properties.has_key('input.product') and 'Nintendo Wiimote' in \
-                properties['input.product']:
-            self.wiimote_udi = udi
-            self.status = self.status | WC_WIIMOTE_DISCOVERING
-            self.StatusChanged(self.status)
-
-    def __unplug_cb(self, udi):
-        if self.wiimote_udi == udi and (self.status & WC_WIIMOTE_DISCOVERING):
+    def __unplug_cb(self, finder, wiimote):
+        if self.wiimote_device.path == wiimote.path and (self.status & WC_WIIMOTE_DISCOVERING):
             self.status = self.status ^ WC_WIIMOTE_DISCOVERING
             self.StatusChanged(self.status)
 
