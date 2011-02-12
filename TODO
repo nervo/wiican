@@ -1,6 +1,5 @@
 "using-wiimote" state
 drag'n'drop on mapping dialog
 fix some issues on wminput file syntax checker
-hal deprecation
 new mapping syntax for wiimote_events-atk_actions binding
 source code documentation

@@ -11,11 +11,11 @@ Other dependencies:
     - python-gconf
     - python-gobject
     - python-gtksourceview2
+    - python-gudev
     - PyGTK
     - PyXDG
     - PLY
     - gnome-bluetooth (bluez-gnome in older versions)
-    - HAL
     - udev
 
 Load uinput module with perms for non-root users:
