@@ -26,7 +26,7 @@ metadata and icon associated:
 Every mapping lives on home directory under .local/share/wiican/
 so maybe you want to see if i'm telling the true now ;).
 
-By the current mapping definition (wiican 0.3.1) there are names reserved for
+By the current mapping definition (wiican 0.3.2) there are names reserved for
 the mapping file and the info file: mapping.wminput and info.desktop 
 respectively.
 
@@ -46,7 +46,7 @@ translations and special fields easily. This is the basic structure::
     Comment=Control mouse with IR and A+B buttons
     Comment[es_ES]=Controla el ratón con infrarojos y los botones A+B
     X-Authors=J. Félix Ontañón <felixonta `at` gmail `dot` com>
-    X-Version=0.3.1
+    X-Version=0.3.2
     Icon=wiimouse.svg
 
 *Name* and *Comment* fields support translations via XDG DesktopEntry localized 
