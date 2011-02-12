@@ -1,42 +1,39 @@
-# German translation for wiican
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# Estonian translation for wiican
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the wiican package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: wiican\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-13 14:38+0100\n"
-"PO-Revision-Date: 2010-11-19 13:27+0000\n"
-"Last-Translator: Rico Eberle <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
+"PO-Revision-Date: 2010-08-23 20:10+0000\n"
+"Last-Translator: lyyser <Unknown>\n"
+"Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-02-12 22:44+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
-"Language: de\n"
 
 #: ../bin/wiican:102
 msgid "Plug a bluetooth adapter"
-msgstr "Bluetoothadapter anschließen"
+msgstr ""
 
 #: ../bin/wiican:107
 msgid "Please load uinput module first"
-msgstr "Bitte laden Sie zuerst das uinput-Modul"
+msgstr ""
 
 #: ../bin/wiican:113
 msgid ""
 "Hold left button for use wiimote\n"
 "Right button for menu"
 msgstr ""
-"Linke Maustaste: Wiimote benutzen\n"
-"Rechte Maustaste: Menü"
 
 #: ../bin/wiican:125
 msgid "Discovering Wiimote"
-msgstr "Wiimote entdecken"
+msgstr ""
 
 #: ../bin/wiican:160
 msgid "Add visible mappings"
@@ -44,11 +41,11 @@ msgstr ""
 
 #: ../bin/wiican:205 ../wiican/ui/editordlg.py:148
 msgid "Editing "
-msgstr "Bearbeiten "
+msgstr "Muudan "
 
 #: ../bin/wiican:218 ../wiican/ui/editordlg.py:266
 msgid "Press 1+2"
-msgstr "Drücken Sie 1+2"
+msgstr ""
 
 #: ../bin/wiican:219 ../wiican/ui/editordlg.py:267
 msgid "To put you Wiimote in discoverable mode now"
@@ -57,12 +54,12 @@ msgstr ""
 #: ../bin/wiican:239 ../wiican/mapping/manager.py:106
 #, python-format
 msgid "Not %s file found on wiican package"
-msgstr "Datei %s wurde im wiican-Paket nicht gefunden"
+msgstr ""
 
 #: ../bin/wiican:243 ../wiican/mapping/manager.py:110
 #, python-format
 msgid "Not %s file found  on wiican package"
-msgstr "Datei %s wurde im wiican-Paket nicht gefunden"
+msgstr ""
 
 #: ../bin/wiican:282
 msgid "Wiican Mapping Package load failed!"
@@ -70,7 +67,7 @@ msgstr ""
 
 #: ../bin/wiican:289
 msgid "usage: %prog [options] arg"
-msgstr "Aufruf: %prog [Optionen] Argumente"
+msgstr ""
 
 #: ../bin/wiican:291
 msgid "loads mapping package from FILENAME"
@@ -87,7 +84,7 @@ msgstr ""
 
 #: ../wiican/ui/managerdlg.py:88
 msgid "Editing new mapping"
-msgstr "Neue Zuordnung bearbeiten"
+msgstr ""
 
 #: ../wiican/ui/managerdlg.py:143
 msgid "Are you sure you want to completely remove this mapping?"
@@ -111,11 +108,11 @@ msgstr ""
 
 #: ../wiican/ui/editordlg.py:50
 msgid "Select image icon.."
-msgstr "Bildsymbol auswählen …"
+msgstr ""
 
 #: ../wiican/ui/editordlg.py:80
 msgid "Images"
-msgstr "Bilder"
+msgstr ""
 
 #: ../wiican/ui/editordlg.py:171
 msgid "A mapping is running"
@@ -167,27 +164,27 @@ msgstr ""
 
 #: ../data/mapping.ui:314
 msgid "_Name:"
-msgstr "_Name:"
+msgstr "_Nimi:"
 
 #: ../data/mapping.ui:326
 msgid "Co_mment:"
-msgstr "_Kommentar:"
+msgstr "_Kommentaar:"
 
 #: ../data/mapping.ui:337
 msgid "A_uthor/s:"
-msgstr "A_utor(en):"
+msgstr ""
 
 #: ../data/mapping.ui:348
 msgid "_Version:"
-msgstr "_Version:"
+msgstr "_Versioon:"
 
 #: ../data/mapping.ui:443
 msgid "_Icon:"
-msgstr "_Symbol:"
+msgstr "_Ikoon:"
 
 #: ../data/mapping.ui:466
 msgid "<b>General</b>"
-msgstr "<b>Allgemein</b>"
+msgstr "<b>Üldine</b>"
 
 #: ../data/mapping.ui:539
 msgid ""
@@ -205,7 +202,7 @@ msgstr ""
 
 #: ../data/mapping.ui:620
 msgid "<b>Mapping</b>"
-msgstr ""
+msgstr "<b>Kaardistus</b>"
 
 #: ../data/mapping.ui:684
 msgid "Edit mapping"
@@ -237,7 +234,7 @@ msgstr ""
 
 #: ../data/mapping.ui:699
 msgid "_Import"
-msgstr "_Importieren"
+msgstr "_Impordi"
 
 #: ../data/mapping.ui:700
 msgid "Import a mapping from a .wii file"
@@ -249,7 +246,7 @@ msgstr ""
 
 #: ../data/mapping.ui:706
 msgid "E_xport"
-msgstr "E_xportieren"
+msgstr "_Ekspordi"
 
 #: ../data/mapping.ui:707
 msgid "Export mapping as a .wii file"
@@ -275,7 +272,7 @@ msgstr ""
 
 #: ../data/wiimotemanager.ui:726
 msgid "Edit mappings..."
-msgstr ""
+msgstr "Muuda kaardistust..."
 
 #: ../data/wiimotemanager.ui:759
 msgid "Mapping validation failed"
@@ -285,71 +282,7 @@ msgstr ""
 msgid "It looks the activated mapping contains errors."
 msgstr ""
 
-#~ msgid "Disconnected"
-#~ msgstr "Verbindung getrennt"
-
-#~ msgid "Connected"
-#~ msgstr "Verbunden"
-
-#~ msgid "Unknown error"
-#~ msgstr "Unbekannter Fehler"
-
-#~ msgid "Visible"
-#~ msgstr "Sichtbar"
-
-#~ msgid "New entry"
-#~ msgstr "Neuer Eintrag"
-
-#~ msgid "Name:"
-#~ msgstr "Name:"
-
-#~ msgid "Description:"
-#~ msgstr "Beschreibung:"
-
-#~ msgid "2009 J. Félix Ontañón <felixonta@gmail.com>"
-#~ msgstr "2009 J. Félix Ontañón <felixonta@gmail.com>"
-
-#~ msgid "http://dev.emergya.info/projects/show/wiican"
-#~ msgstr "http://dev.emergya.info/projects/show/wiican"
-
-#~ msgid "Wiimote off"
-#~ msgstr "Wiimote aus"
-
-#~ msgid "No bluetooth adapters"
-#~ msgstr "Kein Bluetoothadapter"
-
-#~ msgid "Fail!"
-#~ msgstr "Fehlgeschlagen!"
-
-#~ msgid "Use your wiimote"
-#~ msgstr "Benutze deine Wiimote"
-
-#~ msgid "Error discovering Wiimote"
-#~ msgstr "Fehler beim Auffinden der Wiimote"
-
-#~ msgid "check mapping syntax"
-#~ msgstr "Kontrolliere die Zuordnungsyntax"
-
-#~ msgid "uinput module it's not loaded"
-#~ msgstr "uinput Modul ist nicht geladen"
-
-#~ msgid "Can't discover or use wiimote"
-#~ msgstr "Kann Wiimote nicht finden oder benutzen"
-
-#~ msgid "Name"
-#~ msgstr "Name"
-
-#~ msgid "No Name"
-#~ msgstr "Unbenannt"
-
 #~ msgid "translator-credits"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
-#~ "  Ceelight https://launchpad.net/~forum-ceelight\n"
-#~ "  Daniel Garcia Stelzner https://launchpad.net/~dani-garcia87\n"
-#~ "  Gregor Santner https://launchpad.net/~gregi94\n"
-#~ "  J. Félix Ontañón https://launchpad.net/~fontanon\n"
-#~ "  Mario Blättermann https://launchpad.net/~mariobl-freenet\n"
-#~ "  Wiican Team https://launchpad.net/~wiicanteam\n"
-#~ "  siziwi https://launchpad.net/~siziwi\n"
-#~ "  yanuzz https://launchpad.net/~3000-janus"
+#~ "  lyyser https://launchpad.net/~lyyser"

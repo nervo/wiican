@@ -7,25 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-13 14:30+0100\n"
-"PO-Revision-Date: 2010-05-19 17:33+0000\n"
-"Last-Translator: Licio Fonseca <liciofernando@gmail.com>\n"
+"POT-Creation-Date: 2010-11-13 14:38+0100\n"
+"PO-Revision-Date: 2011-02-04 01:40+0000\n"
+"Last-Translator: Sam Samuels <gemini_sam_samuels@hotmail.co.uk>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
-"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-20 05:30+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-12 22:44+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
+"Language: pt_BR\n"
 
 #: ../bin/wiican:102
-#, fuzzy
 msgid "Plug a bluetooth adapter"
-msgstr "Nenhum adaptador bluetooth encontrado"
+msgstr "Ative um adaptador bluetooth"
 
 #: ../bin/wiican:107
 msgid "Please load uinput module first"
-msgstr ""
+msgstr "Por favor, carregue primeiro o módulo uinput"
 
 #: ../bin/wiican:113
 msgid ""
@@ -40,9 +39,8 @@ msgid "Discovering Wiimote"
 msgstr "Procurando o Wii Remote"
 
 #: ../bin/wiican:160
-#, fuzzy
 msgid "Add visible mappings"
-msgstr "Mapeamentos para o Wii Remote"
+msgstr "Adicionar mapeamentos visíveis"
 
 #: ../bin/wiican:205 ../wiican/ui/editordlg.py:148
 msgid "Editing "
@@ -50,71 +48,66 @@ msgstr "Editando "
 
 #: ../bin/wiican:218 ../wiican/ui/editordlg.py:266
 msgid "Press 1+2"
-msgstr ""
+msgstr "Pressione 1+2"
 
 #: ../bin/wiican:219 ../wiican/ui/editordlg.py:267
-#, fuzzy
 msgid "To put you Wiimote in discoverable mode now"
-msgstr "Coloque o Wii Remote em modo de descoberta agora (pressione 1+2)"
+msgstr "Colocar seu Wii Remote no modo de busca agora"
 
 #: ../bin/wiican:239 ../wiican/mapping/manager.py:106
 #, python-format
 msgid "Not %s file found on wiican package"
-msgstr ""
+msgstr "Arquivo %s não encontrado no pacote wiican"
 
 #: ../bin/wiican:243 ../wiican/mapping/manager.py:110
 #, python-format
 msgid "Not %s file found  on wiican package"
-msgstr ""
+msgstr "Arquivo %s não encontrado no pacote wiican"
 
 #: ../bin/wiican:282
 msgid "Wiican Mapping Package load failed!"
-msgstr ""
+msgstr "Falha ao carregar Pacote de Mapeamento do Wiican!"
 
 #: ../bin/wiican:289
 msgid "usage: %prog [options] arg"
-msgstr ""
+msgstr "uso: %prog [opções] arg"
 
 #: ../bin/wiican:291
 msgid "loads mapping package from FILENAME"
-msgstr ""
+msgstr "carrega pacote de mapeamento do FILENAME"
 
 #: ../bin/wiican:310
 #, python-format
 msgid "No wiican package mapping found: %s"
-msgstr ""
+msgstr "Nenhum mapeamento de pacote Wican encontrados: %s"
 
 #: ../wiican/ui/managerdlg.py:38
 msgid "Wiican Mapping Package"
-msgstr ""
+msgstr "Pacote de Mapeamento do Wiican"
 
 #: ../wiican/ui/managerdlg.py:88
-#, fuzzy
 msgid "Editing new mapping"
-msgstr "Deletando mapeamentos"
+msgstr "Editando novo mapeamento"
 
 #: ../wiican/ui/managerdlg.py:143
-#, fuzzy
 msgid "Are you sure you want to completely remove this mapping?"
-msgstr "Você tem certeza que deseja remover permanentemente "
+msgstr "Tem certeza que deseja remover este mapeamento?"
 
 #: ../wiican/ui/managerdlg.py:152
 msgid "Deleting mappings"
 msgstr "Deletando mapeamentos"
 
 #: ../wiican/ui/managerdlg.py:179
-#, fuzzy
 msgid "Import mapping..."
-msgstr "Mapeamentos para o Wii Remote"
+msgstr "Importar mapeamento..."
 
 #: ../wiican/ui/managerdlg.py:197
 msgid "Wiican Mapping Package import failed!"
-msgstr ""
+msgstr "Falha ao importar Pacote de Mapeamento do Wiican!"
 
 #: ../wiican/ui/managerdlg.py:227
-#, fuzzy
 msgid "Exporting mapping..."
-msgstr "Deletando mapeamentos"
+msgstr "Exportando mapeamento..."
 
 #: ../wiican/ui/editordlg.py:50
 msgid "Select image icon.."
@@ -126,173 +119,155 @@ msgstr "Imagens"
 
 #: ../wiican/ui/editordlg.py:171
 msgid "A mapping is running"
-msgstr ""
+msgstr "Um mapeamento está em uso"
 
 #: ../wiican/ui/editordlg.py:176
-#, fuzzy
 msgid "Execute this mapping"
-msgstr ""
-"este mapeamento?:\n"
-"\n"
+msgstr "Execute este mapeamento"
 
 #: ../wiican/ui/editordlg.py:185
-#, fuzzy
 msgid "Ensure a bluetooth "
-msgstr "Ative um adaptador bluetooth"
+msgstr "Confirma um bluetooth "
 
 #: ../wiican/mapping/manager.py:131 ../wiican/mapping/manager.py:171
 #: ../wiican/mapping/manager.py:174 ../wiican/mapping/manager.py:184
 #: ../wiican/mapping/manager.py:192 ../wiican/mapping/manager.py:200
 #: ../wiican/mapping/manager.py:218 ../wiican/mapping/manager.py:232
 #: ../wiican/mapping/manager.py:238
-#, fuzzy
 msgid "Mapping not found:"
-msgstr "Mapeamento:"
+msgstr "Mapeamento não encontrado:"
 
 #: ../wiican/mapping/manager.py:221
-#, fuzzy
 msgid "Cannot remove a system installed mapping"
-msgstr "Não foi possível remover o mapeamento "
+msgstr "Impossível remover um sistema de mapeamento instalado"
 
 #: ../data/mapping.ui:21
-#, fuzzy
 msgid "Wiican mappings"
-msgstr "Mapeamentos para o Wii Remote"
+msgstr "Mapeamentos Wiican"
 
 #: ../data/mapping.ui:44
 msgid "toolbutton1"
-msgstr ""
+msgstr "ferramenta de botão 1"
 
 #: ../data/mapping.ui:57
 msgid "toolbutton2"
-msgstr ""
+msgstr "ferramenta de botão 2"
 
 #: ../data/mapping.ui:70
 msgid "toolbutton3"
-msgstr ""
+msgstr "ferramenta de botão 3"
 
 #: ../data/mapping.ui:92
 msgid "toolbutton4"
-msgstr ""
+msgstr "ferramenta de botão 4"
 
 #: ../data/mapping.ui:105
 msgid "toolbutton5"
-msgstr ""
+msgstr "ferramenta de botão 5"
 
 #: ../data/mapping.ui:314
-#, fuzzy
 msgid "_Name:"
-msgstr "Nome:"
+msgstr "_Nome:"
 
 #: ../data/mapping.ui:326
 msgid "Co_mment:"
-msgstr ""
+msgstr "Co_mentário:"
 
 #: ../data/mapping.ui:337
 msgid "A_uthor/s:"
-msgstr ""
+msgstr "A_utor/es"
 
 #: ../data/mapping.ui:348
 msgid "_Version:"
-msgstr ""
+msgstr "_Versão:"
 
 #: ../data/mapping.ui:443
 msgid "_Icon:"
-msgstr ""
+msgstr "_Ícone:"
 
 #: ../data/mapping.ui:466
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>Geral</b>"
 
 #: ../data/mapping.ui:539
 msgid ""
 "This is a system installed mapping. \n"
 "Changes will be saved in a new mapping."
 msgstr ""
+"Este é um mapeamento pré-instalado pelo sistema. \n"
+"Qualquer mudança será salva em um novo mapeamento."
 
 #: ../data/mapping.ui:565
-#, fuzzy
 msgid "Execute mapping"
-msgstr "Mapeamentos para o Wii Remote"
+msgstr "Executar mapeamento"
 
 #: ../data/mapping.ui:586
 msgid "Mapping programming help"
-msgstr ""
+msgstr "Ajuda de configuração de mapeamento"
 
 #: ../data/mapping.ui:620
-#, fuzzy
 msgid "<b>Mapping</b>"
-msgstr "Mapeamentos"
+msgstr "<b>Mapeamento</b>"
 
 #: ../data/mapping.ui:684
-#, fuzzy
 msgid "Edit mapping"
-msgstr "Mapeamentos para o Wii Remote"
+msgstr "Editar mapeamento"
 
 #: ../data/mapping.ui:685
-#, fuzzy
 msgid "_Edit"
-msgstr "Editando "
+msgstr "_Editar"
 
 #: ../data/mapping.ui:686
-#, fuzzy
 msgid "Edit mapping properties"
-msgstr "Mapeamentos para o Wii Remote"
+msgstr "Editar propriedades de mapeamento"
 
 #: ../data/mapping.ui:691
-#, fuzzy
 msgid "Delete mapping"
-msgstr "Deletando mapeamentos"
+msgstr "Excluir mapeamento"
 
 #: ../data/mapping.ui:692
 msgid "_Delete"
-msgstr ""
+msgstr "_Excluir"
 
 #: ../data/mapping.ui:693
 msgid "Removes the mapping from the catalog"
-msgstr ""
+msgstr "Remove o mapeamento a partir do catálogo"
 
 #: ../data/mapping.ui:698
-#, fuzzy
 msgid "Import mapping"
-msgstr "Mapeamentos para o Wii Remote"
+msgstr "Mapeamento de Importação"
 
 #: ../data/mapping.ui:699
 msgid "_Import"
-msgstr ""
+msgstr "_Importar"
 
 #: ../data/mapping.ui:700
-#, fuzzy
 msgid "Import a mapping from a .wii file"
-msgstr "Mapeamentos para o Wii Remote"
+msgstr "Importar um mapeamento de um arquivo. wii"
 
 #: ../data/mapping.ui:705
-#, fuzzy
 msgid "_Export mapping"
-msgstr "Deletando mapeamentos"
+msgstr "_Mapeamento de Exportação"
 
 #: ../data/mapping.ui:706
 msgid "E_xport"
-msgstr ""
+msgstr "_Exportar"
 
 #: ../data/mapping.ui:707
-#, fuzzy
 msgid "Export mapping as a .wii file"
-msgstr "Deletando mapeamentos"
+msgstr "Exportar mapeamento como um arquivo. wii"
 
 #: ../data/mapping.ui:712
-#, fuzzy
 msgid "New mapping"
-msgstr "Mapeamentos para o Wii Remote"
+msgstr "Novo mapeamento"
 
 #: ../data/mapping.ui:713
 msgid "_New"
-msgstr ""
+msgstr "_Novo"
 
 #: ../data/mapping.ui:714
-#, fuzzy
 msgid "Creates a new mapping"
-msgstr "Deletando mapeamentos"
+msgstr "Cria um novo mapeamento"
 
 #: ../data/wiimotemanager.ui:13
 msgid ""
@@ -303,30 +278,28 @@ msgstr ""
 "Assistente de configuração e utilização do Wii Remote"
 
 #: ../data/wiimotemanager.ui:726
-#, fuzzy
 msgid "Edit mappings..."
-msgstr "Mapeamentos para o Wii Remote"
+msgstr "Editar mapeamentos..."
 
 #: ../data/wiimotemanager.ui:759
 msgid "Mapping validation failed"
-msgstr ""
+msgstr "Falha na validação de mapeamento"
 
 #: ../data/wiimotemanager.ui:788
 msgid "It looks the activated mapping contains errors."
-msgstr ""
+msgstr "O mapeamento ativado parece conter erros."
 
-#, fuzzy
-#~ msgid "<b>Mappings</b>"
-#~ msgstr "Mapeamentos"
-
-#~ msgid "Connected"
-#~ msgstr "Conectado"
+#~ msgid "Put Wiimote in discoverable mode now (press 1+2)"
+#~ msgstr "Coloque o Wii Remote em modo de descoberta agora (pressione 1+2)"
 
 #~ msgid "Disconnected"
 #~ msgstr "Desconectado"
 
-#~ msgid "Wiimote off"
-#~ msgstr "Wii Remote está desligado"
+#~ msgid "Connected"
+#~ msgstr "Conectado"
+
+#~ msgid "No bluetooth adapters"
+#~ msgstr "Nenhum adaptador bluetooth encontrado"
 
 #~ msgid "Use your wiimote"
 #~ msgstr "Use o seu Wii Remote"
@@ -334,41 +307,57 @@ msgstr ""
 #~ msgid "Fail!"
 #~ msgstr "Falhou!"
 
-#~ msgid "Error discovering Wiimote"
-#~ msgstr "Erro ao procurar pelo Wii Remote"
-
-#~ msgid "uinput module it's not loaded"
-#~ msgstr "módulo uinput não está carregado"
+#~ msgid "Can't discover or use wiimote"
+#~ msgstr "Não foi possível encontrar ou usar o Wii Remote"
 
 #~ msgid "check mapping syntax"
 #~ msgstr "verifique o mapeamento dos botões do Wii Remote"
 
+#~ msgid "uinput module it's not loaded"
+#~ msgstr "módulo uinput não está carregado"
+
 #~ msgid "Unknown error"
 #~ msgstr "Erro Desconhecido"
 
-#~ msgid "Can't discover or use wiimote"
-#~ msgstr "Não foi possível encontrar ou usar o Wii Remote"
-
-#~ msgid "No Name"
-#~ msgstr "Nenhum Nome"
+#~ msgid "Error discovering Wiimote"
+#~ msgstr "Erro ao procurar pelo Wii Remote"
 
 #~ msgid "Name"
 #~ msgstr "Nome"
 
+#~ msgid "No Name"
+#~ msgstr "Nenhum Nome"
+
 #~ msgid "Visible"
 #~ msgstr "Visível"
 
-#~ msgid "Skel config dir doesn't exists"
-#~ msgstr "O diretório configuração Skel não existe"
-
-#~ msgid "Wrong perms on user config dir"
-#~ msgstr "Permições incorretas no diretório de configurações do usuário"
+#~ msgid ""
+#~ "this mappings?:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "este mapeamento?:\n"
+#~ "\n"
 
 #~ msgid "Short name for the mapping"
 #~ msgstr "Curto nome para o mapeamento"
 
+#~ msgid "Name:"
+#~ msgstr "Nome:"
+
+#~ msgid "Skel config dir doesn't exists"
+#~ msgstr "O diretório configuração Skel não existe"
+
+#~ msgid "Can't remove mapping "
+#~ msgstr "Não foi possível remover o mapeamento "
+
 #~ msgid "New entry"
 #~ msgstr "Nova entrada"
+
+#~ msgid "Wiimote mappings"
+#~ msgstr "Mapeamentos para o Wii Remote"
+
+#~ msgid "Mappings"
+#~ msgstr "Mapeamentos"
 
 #~ msgid "Description:"
 #~ msgstr "Descrição:"
@@ -382,8 +371,11 @@ msgstr ""
 #~ msgid "Comment the use for this mapping"
 #~ msgstr "Comente o uso deste mapeamento"
 
-#~ msgid "2009 J. Félix Ontañón <fontanon@emergya.es>"
-#~ msgstr "2009 J. Félix Ontañón <fontanon@emergya.es>"
+#~ msgid "Mapping:"
+#~ msgstr "Mapeamento:"
+
+#~ msgid "2009 J. Félix Ontañón <felixonta@gmail.com>"
+#~ msgstr "2009 J. Félix Ontañón <felixonta@gmail.com>"
 
 #~ msgid "gtk-cancel"
 #~ msgstr "gtk-cancel"
@@ -467,19 +459,16 @@ msgstr ""
 #~ "\n"
 #~ "  0. Definitions.\n"
 #~ "\n"
-#~ "  \"This License\" refers to version 3 of the GNU General Public "
-#~ "License.\n"
+#~ "  \"This License\" refers to version 3 of the GNU General Public License.\n"
 #~ "\n"
-#~ "  \"Copyright\" also means copyright-like laws that apply to other kinds "
-#~ "of\n"
+#~ "  \"Copyright\" also means copyright-like laws that apply to other kinds of\n"
 #~ "works, such as semiconductor masks.\n"
 #~ " \n"
 #~ "  \"The Program\" refers to any copyrightable work licensed under this\n"
 #~ "License.  Each licensee is addressed as \"you\".  \"Licensees\" and\n"
 #~ "\"recipients\" may be individuals or organizations.\n"
 #~ "\n"
-#~ "  To \"modify\" a work means to copy from or adapt all or part of the "
-#~ "work\n"
+#~ "  To \"modify\" a work means to copy from or adapt all or part of the work\n"
 #~ "in a fashion requiring copyright permission, other than the making of an\n"
 #~ "exact copy.  The resulting work is called a \"modified version\" of the\n"
 #~ "earlier work or a work \"based on\" the earlier work.\n"
@@ -692,13 +681,10 @@ msgstr ""
 #~ "from the Corresponding Source as a System Library, need not be\n"
 #~ "included in conveying the object code work.\n"
 #~ "\n"
-#~ "  A \"User Product\" is either (1) a \"consumer product\", which means "
-#~ "any\n"
+#~ "  A \"User Product\" is either (1) a \"consumer product\", which means any\n"
 #~ "tangible personal property which is normally used for personal, family,\n"
-#~ "or household purposes, or (2) anything designed or sold for "
-#~ "incorporation\n"
-#~ "into a dwelling.  In determining whether a product is a consumer "
-#~ "product,\n"
+#~ "or household purposes, or (2) anything designed or sold for incorporation\n"
+#~ "into a dwelling.  In determining whether a product is a consumer product,\n"
 #~ "doubtful cases shall be resolved in favor of coverage.  For a particular\n"
 #~ "product received by a particular user, \"normally used\" refers to a\n"
 #~ "typical or common use of that class of product, regardless of the status\n"
@@ -710,8 +696,7 @@ msgstr ""
 #~ "\n"
 #~ "  \"Installation Information\" for a User Product means any methods,\n"
 #~ "procedures, authorization keys, or other information required to install\n"
-#~ "and execute modified versions of a covered work in that User Product "
-#~ "from\n"
+#~ "and execute modified versions of a covered work in that User Product from\n"
 #~ "a modified version of its Corresponding Source.  The information must\n"
 #~ "suffice to ensure that the continued functioning of the modified object\n"
 #~ "code is in no case prevented or interfered with solely because\n"
@@ -731,8 +716,7 @@ msgstr ""
 #~ "  The requirement to provide Installation Information does not include a\n"
 #~ "requirement to continue to provide support service, warranty, or updates\n"
 #~ "for a work that has been modified or installed by the recipient, or for\n"
-#~ "the User Product in which it has been modified or installed.  Access to "
-#~ "a\n"
+#~ "the User Product in which it has been modified or installed.  Access to a\n"
 #~ "network may be denied when the modification itself materially and\n"
 #~ "adversely affects the operation of the network or violates the rules and\n"
 #~ "protocols for communication across the network.\n"
@@ -762,8 +746,7 @@ msgstr ""
 #~ "for which you have or can give appropriate copyright permission.\n"
 #~ "\n"
 #~ "  Notwithstanding any other provision of this License, for material you\n"
-#~ "add to a covered work, you may (if authorized by the copyright holders "
-#~ "of\n"
+#~ "add to a covered work, you may (if authorized by the copyright holders of\n"
 #~ "that material) supplement the terms of this License with terms:\n"
 #~ "\n"
 #~ "    a) Disclaiming warranty or limiting liability differently from the\n"
@@ -947,10 +930,8 @@ msgstr ""
 #~ "otherwise) that contradict the conditions of this License, they do not\n"
 #~ "excuse you from the conditions of this License.  If you cannot convey a\n"
 #~ "covered work so as to satisfy simultaneously your obligations under this\n"
-#~ "License and any other pertinent obligations, then as a consequence you "
-#~ "may\n"
-#~ "not convey it at all.  For example, if you agree to terms that obligate "
-#~ "you\n"
+#~ "License and any other pertinent obligations, then as a consequence you may\n"
+#~ "not convey it at all.  For example, if you agree to terms that obligate you\n"
 #~ "to collect a royalty for further conveying from those to whom you convey\n"
 #~ "the Program, the only way you could satisfy both those terms and this\n"
 #~ "License would be to refrain entirely from conveying the Program.\n"
@@ -968,10 +949,8 @@ msgstr ""
 #~ "\n"
 #~ "  14. Revised Versions of this License.\n"
 #~ "\n"
-#~ "  The Free Software Foundation may publish revised and/or new versions "
-#~ "of\n"
-#~ "the GNU General Public License from time to time.  Such new versions "
-#~ "will\n"
+#~ "  The Free Software Foundation may publish revised and/or new versions of\n"
+#~ "the GNU General Public License from time to time.  Such new versions will\n"
 #~ "be similar in spirit to the present version, but may differ in detail to\n"
 #~ "address new problems or concerns.\n"
 #~ "\n"
@@ -998,30 +977,23 @@ msgstr ""
 #~ "\n"
 #~ "  THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY\n"
 #~ "APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT\n"
-#~ "HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM \"AS IS\" WITHOUT "
-#~ "WARRANTY\n"
+#~ "HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM \"AS IS\" WITHOUT WARRANTY\n"
 #~ "OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,\n"
 #~ "THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\n"
-#~ "PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE "
-#~ "PROGRAM\n"
+#~ "PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM\n"
 #~ "IS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF\n"
 #~ "ALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n"
 #~ "\n"
 #~ "  16. Limitation of Liability.\n"
 #~ "\n"
 #~ "  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING\n"
-#~ "WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR "
-#~ "CONVEYS\n"
-#~ "THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING "
-#~ "ANY\n"
+#~ "WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS\n"
+#~ "THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY\n"
 #~ "GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE\n"
-#~ "USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS "
-#~ "OF\n"
-#~ "DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR "
-#~ "THIRD\n"
+#~ "USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF\n"
+#~ "DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD\n"
 #~ "PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),\n"
-#~ "EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY "
-#~ "OF\n"
+#~ "EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF\n"
 #~ "SUCH DAMAGES.\n"
 #~ "\n"
 #~ "  17. Interpretation of Sections 15 and 16.\n"
@@ -1039,16 +1011,14 @@ msgstr ""
 #~ "\n"
 #~ "  If you develop a new program, and you want it to be of the greatest\n"
 #~ "possible use to the public, the best way to achieve this is to make it\n"
-#~ "free software which everyone can redistribute and change under these "
-#~ "terms.\n"
+#~ "free software which everyone can redistribute and change under these terms.\n"
 #~ "\n"
 #~ "  To do so, attach the following notices to the program.  It is safest\n"
 #~ "to attach them to the start of each source file to most effectively\n"
 #~ "state the exclusion of warranty; and each file should have at least\n"
 #~ "the \"copyright\" line and a pointer to where the full notice is found.\n"
 #~ "\n"
-#~ "    <one line to give the program's name and a brief idea of what it does."
-#~ ">\n"
+#~ "    <one line to give the program's name and a brief idea of what it does.>\n"
 #~ "    Copyright (C) <year>  <name of author>\n"
 #~ "\n"
 #~ "    This program is free software: you can redistribute it and/or modify\n"
@@ -1062,8 +1032,7 @@ msgstr ""
 #~ "    GNU General Public License for more details.\n"
 #~ "\n"
 #~ "    You should have received a copy of the GNU General Public License\n"
-#~ "    along with this program.  If not, see <http://www.gnu.org/licenses/"
-#~ ">.\n"
+#~ "    along with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
 #~ "\n"
 #~ "Also add information on how to contact you by electronic and paper mail.\n"
 #~ "\n"
@@ -1071,29 +1040,24 @@ msgstr ""
 #~ "notice like this when it starts in an interactive mode:\n"
 #~ "\n"
 #~ "    <program>  Copyright (C) <year>  <name of author>\n"
-#~ "    This program comes with ABSOLUTELY NO WARRANTY; for details type "
-#~ "`show w'.\n"
+#~ "    This program comes with ABSOLUTELY NO WARRANTY; for details type `show "
+#~ "w'.\n"
 #~ "    This is free software, and you are welcome to redistribute it\n"
 #~ "    under certain conditions; type `show c' for details.\n"
 #~ "\n"
-#~ "The hypothetical commands `show w' and `show c' should show the "
-#~ "appropriate\n"
+#~ "The hypothetical commands `show w' and `show c' should show the appropriate\n"
 #~ "parts of the General Public License.  Of course, your program's commands\n"
 #~ "might be different; for a GUI interface, you would use an \"about box\".\n"
 #~ "\n"
 #~ "  You should also get your employer (if you work as a programmer) or "
 #~ "school,\n"
-#~ "if any, to sign a \"copyright disclaimer\" for the program, if "
-#~ "necessary.\n"
-#~ "For more information on this, and how to apply and follow the GNU GPL, "
-#~ "see\n"
+#~ "if any, to sign a \"copyright disclaimer\" for the program, if necessary.\n"
+#~ "For more information on this, and how to apply and follow the GNU GPL, see\n"
 #~ "<http://www.gnu.org/licenses/>.\n"
 #~ "\n"
-#~ "  The GNU General Public License does not permit incorporating your "
-#~ "program\n"
+#~ "  The GNU General Public License does not permit incorporating your program\n"
 #~ "into proprietary programs.  If your program is a subroutine library, you\n"
-#~ "may consider it more useful to permit linking proprietary applications "
-#~ "with\n"
+#~ "may consider it more useful to permit linking proprietary applications with\n"
 #~ "the library.  If this is what you want to do, use the GNU Lesser General\n"
 #~ "Public License instead of this License.  But first, please read\n"
 #~ "<http://www.gnu.org/philosophy/why-not-lgpl.html>.\n"
@@ -1173,11 +1137,9 @@ msgstr ""
 #~ "\n"
 #~ "  0. Definitions.\n"
 #~ "\n"
-#~ "  \"This License\" refers to version 3 of the GNU General Public "
-#~ "License.\n"
+#~ "  \"This License\" refers to version 3 of the GNU General Public License.\n"
 #~ "\n"
-#~ "  \"Copyright\" also means copyright-like laws that apply to other kinds "
-#~ "of\n"
+#~ "  \"Copyright\" also means copyright-like laws that apply to other kinds of\n"
 #~ "works, such as semiconductor masks.\n"
 #~ " \n"
 #~ "  \"The Program\" refers to any copyrightable work licensed under this\n"
@@ -1186,9 +1148,25 @@ msgstr ""
 #~ "\n"
 #~ "  To \"modify\" a work means to copy from or adapt all or part of\n"
 
+#~ msgid "Wiimote off"
+#~ msgstr "Wii Remote está desligado"
+
+#~ msgid "Are you sure you want to completely remove "
+#~ msgstr "Você tem certeza que deseja remover permanentemente "
+
 #~ msgid "translator-credits"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
 #~ "  J. Félix Ontañón https://launchpad.net/~fontanon\n"
 #~ "  Jean Roberto Souza https://launchpad.net/~sjeanr\n"
-#~ "  Licio Fonseca https://launchpad.net/~licio"
+#~ "  Licio Fonseca https://launchpad.net/~licio\n"
+#~ "  Moraes Junior https://launchpad.net/~moraesjunior\n"
+#~ "  Sam Samuels https://launchpad.net/~gemini-sam-samuels\n"
+#~ "  feen https://launchpad.net/~feen\n"
+#~ "  pcgaldo https://launchpad.net/~pcgaldo"
+
+#~ msgid "Wrong perms on user config dir"
+#~ msgstr "Permissões incorretas no diretório de configurações do usuário"
+
+#~ msgid "<b>Mappings</b>"
+#~ msgstr "<b>Mapeamentos</b>"

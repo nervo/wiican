@@ -7,31 +7,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-13 14:30+0100\n"
-"PO-Revision-Date: 2010-02-14 06:12+0000\n"
-"Last-Translator: Wiican Team <Unknown>\n"
+"POT-Creation-Date: 2010-11-13 14:38+0100\n"
+"PO-Revision-Date: 2011-01-22 12:56+0000\n"
+"Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
-"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-15 04:50+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-12 22:44+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
+"Language: sv\n"
 
 #: ../bin/wiican:102
-#, fuzzy
 msgid "Plug a bluetooth adapter"
-msgstr "Inga bluetooth adaptrar funna"
+msgstr "Anslut en bluetooth adapter"
 
 #: ../bin/wiican:107
 msgid "Please load uinput module first"
-msgstr ""
+msgstr "Var god läs in inmatningsmodulen först"
 
 #: ../bin/wiican:113
 msgid ""
 "Hold left button for use wiimote\n"
 "Right button for menu"
 msgstr ""
+"Håll ned vänster knapp för att använda Wiimote\n"
+"Höger knapp för meny"
 
 #: ../bin/wiican:125
 msgid "Discovering Wiimote"
@@ -39,7 +40,7 @@ msgstr "Söker efter Wii handkontroll"
 
 #: ../bin/wiican:160
 msgid "Add visible mappings"
-msgstr ""
+msgstr "Lägg till synliga kartläggning"
 
 #: ../bin/wiican:205 ../wiican/ui/editordlg.py:148
 msgid "Editing "
@@ -47,67 +48,66 @@ msgstr "Redigerar "
 
 #: ../bin/wiican:218 ../wiican/ui/editordlg.py:266
 msgid "Press 1+2"
-msgstr ""
+msgstr "Tryck 1+2"
 
 #: ../bin/wiican:219 ../wiican/ui/editordlg.py:267
 msgid "To put you Wiimote in discoverable mode now"
-msgstr ""
+msgstr "För att sätta din Wiimote i synligt läge nu"
 
 #: ../bin/wiican:239 ../wiican/mapping/manager.py:106
 #, python-format
 msgid "Not %s file found on wiican package"
-msgstr ""
+msgstr "Filen %s hittades inte i Wiican-paketet"
 
 #: ../bin/wiican:243 ../wiican/mapping/manager.py:110
 #, python-format
 msgid "Not %s file found  on wiican package"
-msgstr ""
+msgstr "Filen %s hittades inte i Wiican-paketet"
 
 #: ../bin/wiican:282
 msgid "Wiican Mapping Package load failed!"
-msgstr ""
+msgstr "Inläsningen av Wiican-kartläggningspaketet misslyckades!"
 
 #: ../bin/wiican:289
 msgid "usage: %prog [options] arg"
-msgstr ""
+msgstr "användning: %prog [inställningar] arg"
 
 #: ../bin/wiican:291
 msgid "loads mapping package from FILENAME"
-msgstr ""
+msgstr "läser in kartläggningspaket från FILNAMN"
 
 #: ../bin/wiican:310
 #, python-format
 msgid "No wiican package mapping found: %s"
-msgstr ""
+msgstr "Inga Wiican-paketskartläggning hittades: %s"
 
 #: ../wiican/ui/managerdlg.py:38
 msgid "Wiican Mapping Package"
-msgstr ""
+msgstr "Wiican-kartläggningspaket"
 
 #: ../wiican/ui/managerdlg.py:88
 msgid "Editing new mapping"
-msgstr ""
+msgstr "Ändra ny kartläggning"
 
 #: ../wiican/ui/managerdlg.py:143
-#, fuzzy
 msgid "Are you sure you want to completely remove this mapping?"
-msgstr "Är du säker på att du helt vill ta bort "
+msgstr "Är du säker på att du vill ta bort den här kartläggningen?"
 
 #: ../wiican/ui/managerdlg.py:152
 msgid "Deleting mappings"
-msgstr ""
+msgstr "Raderar kartläggningar"
 
 #: ../wiican/ui/managerdlg.py:179
 msgid "Import mapping..."
-msgstr ""
+msgstr "Importera kartläggning..."
 
 #: ../wiican/ui/managerdlg.py:197
 msgid "Wiican Mapping Package import failed!"
-msgstr ""
+msgstr "Wiican-kartläggningspaketsimportering misslyckades!"
 
 #: ../wiican/ui/managerdlg.py:227
 msgid "Exporting mapping..."
-msgstr ""
+msgstr "Exportera kartläggning..."
 
 #: ../wiican/ui/editordlg.py:50
 msgid "Select image icon.."
@@ -119,16 +119,15 @@ msgstr "Grafik"
 
 #: ../wiican/ui/editordlg.py:171
 msgid "A mapping is running"
-msgstr ""
+msgstr "En kartläggning körs"
 
 #: ../wiican/ui/editordlg.py:176
 msgid "Execute this mapping"
-msgstr ""
+msgstr "Verkställ den här kartläggningen"
 
 #: ../wiican/ui/editordlg.py:185
-#, fuzzy
 msgid "Ensure a bluetooth "
-msgstr "Anslut en bluetooth adapter"
+msgstr ""
 
 #: ../wiican/mapping/manager.py:131 ../wiican/mapping/manager.py:171
 #: ../wiican/mapping/manager.py:174 ../wiican/mapping/manager.py:184
@@ -136,194 +135,189 @@ msgstr "Anslut en bluetooth adapter"
 #: ../wiican/mapping/manager.py:218 ../wiican/mapping/manager.py:232
 #: ../wiican/mapping/manager.py:238
 msgid "Mapping not found:"
-msgstr ""
+msgstr "Kartläggning hittades inte:"
 
 #: ../wiican/mapping/manager.py:221
 msgid "Cannot remove a system installed mapping"
-msgstr ""
+msgstr "Kan inte ta bort en systeminstallerad kartläggning"
 
 #: ../data/mapping.ui:21
 msgid "Wiican mappings"
-msgstr ""
+msgstr "Wiican-kartläggningar"
 
 #: ../data/mapping.ui:44
 msgid "toolbutton1"
-msgstr ""
+msgstr "verktygsknapp1"
 
 #: ../data/mapping.ui:57
 msgid "toolbutton2"
-msgstr ""
+msgstr "verktygsknapp2"
 
 #: ../data/mapping.ui:70
 msgid "toolbutton3"
-msgstr ""
+msgstr "verktygsknapp3"
 
 #: ../data/mapping.ui:92
 msgid "toolbutton4"
-msgstr ""
+msgstr "verktygsknapp4"
 
 #: ../data/mapping.ui:105
 msgid "toolbutton5"
-msgstr ""
+msgstr "verktygsknapp5"
 
 #: ../data/mapping.ui:314
-#, fuzzy
 msgid "_Name:"
-msgstr "Namn:"
+msgstr "_Namn:"
 
 #: ../data/mapping.ui:326
 msgid "Co_mment:"
-msgstr ""
+msgstr "Ko_mmentar:"
 
 #: ../data/mapping.ui:337
 msgid "A_uthor/s:"
-msgstr ""
+msgstr "_Författare:"
 
 #: ../data/mapping.ui:348
 msgid "_Version:"
-msgstr ""
+msgstr "_Version:"
 
 #: ../data/mapping.ui:443
 msgid "_Icon:"
-msgstr ""
+msgstr "_Ikon:"
 
 #: ../data/mapping.ui:466
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>Allmänt</b>"
 
 #: ../data/mapping.ui:539
 msgid ""
 "This is a system installed mapping. \n"
 "Changes will be saved in a new mapping."
 msgstr ""
+"Den här är en systeminstallerad kartläggning. \n"
+"Ändringar kommer att sparas i en ny kartläggning."
 
 #: ../data/mapping.ui:565
 msgid "Execute mapping"
-msgstr ""
+msgstr "Verkställ kartläggning"
 
 #: ../data/mapping.ui:586
 msgid "Mapping programming help"
-msgstr ""
+msgstr "Hjälp för kartläggningsprogrammering"
 
 #: ../data/mapping.ui:620
 msgid "<b>Mapping</b>"
-msgstr ""
+msgstr "<b>Kartläggning</b>"
 
 #: ../data/mapping.ui:684
-#, fuzzy
 msgid "Edit mapping"
-msgstr "Redigerar "
+msgstr "Ändra kartläggning"
 
 #: ../data/mapping.ui:685
-#, fuzzy
 msgid "_Edit"
-msgstr "Redigerar "
+msgstr "_Redigera"
 
 #: ../data/mapping.ui:686
 msgid "Edit mapping properties"
-msgstr ""
+msgstr "Ändra kartläggningsegenskaper"
 
 #: ../data/mapping.ui:691
 msgid "Delete mapping"
-msgstr ""
+msgstr "Radera kartläggning"
 
 #: ../data/mapping.ui:692
 msgid "_Delete"
-msgstr ""
+msgstr "_Radera"
 
 #: ../data/mapping.ui:693
 msgid "Removes the mapping from the catalog"
-msgstr ""
+msgstr "Tar bort kartläggningen från kategorin"
 
 #: ../data/mapping.ui:698
 msgid "Import mapping"
-msgstr ""
+msgstr "Importera kartläggning"
 
 #: ../data/mapping.ui:699
 msgid "_Import"
-msgstr ""
+msgstr "_Importera"
 
 #: ../data/mapping.ui:700
 msgid "Import a mapping from a .wii file"
-msgstr ""
+msgstr "Importera en kartläggning från en .wii-fil"
 
 #: ../data/mapping.ui:705
 msgid "_Export mapping"
-msgstr ""
+msgstr "_Exportera kartläggning"
 
 #: ../data/mapping.ui:706
 msgid "E_xport"
-msgstr ""
+msgstr "E_xportera"
 
 #: ../data/mapping.ui:707
 msgid "Export mapping as a .wii file"
-msgstr ""
+msgstr "Exportera kartläggning som en .wii-fil"
 
 #: ../data/mapping.ui:712
 msgid "New mapping"
-msgstr ""
+msgstr "Ny kartläggning"
 
 #: ../data/mapping.ui:713
 msgid "_New"
-msgstr ""
+msgstr "_Ny"
 
 #: ../data/mapping.ui:714
 msgid "Creates a new mapping"
-msgstr ""
+msgstr "Skapar en ny kartläggning"
 
 #: ../data/wiimotemanager.ui:13
 msgid ""
 "Yes wii can\n"
 "Wiimote usage assistant and mapping manager"
 msgstr ""
+"Ja Wiican\n"
+"Wiimote användningsassistent och kartläggningshanterare"
 
 #: ../data/wiimotemanager.ui:726
 msgid "Edit mappings..."
-msgstr ""
+msgstr "Ändra kartläggningar..."
 
 #: ../data/wiimotemanager.ui:759
 msgid "Mapping validation failed"
-msgstr ""
+msgstr "Kartläggningsgodkännande misslyckades"
 
 #: ../data/wiimotemanager.ui:788
 msgid "It looks the activated mapping contains errors."
-msgstr ""
-
-#~ msgid "Connected"
-#~ msgstr "Uppkopplad"
+msgstr "Det verkar som om den aktiverade kartläggningen innehåller fel."
 
 #~ msgid "Disconnected"
 #~ msgstr "Frånkopplad"
 
-#~ msgid "Use your wiimote"
-#~ msgstr "Använd din Wii handkontroll"
+#~ msgid "Connected"
+#~ msgstr "Uppkopplad"
 
 #~ msgid "Fail!"
 #~ msgstr "Misslyckades!"
 
-#~ msgid "Error discovering Wiimote"
-#~ msgstr "Ett fel uppstod under sökandet efter Wii handkontroll"
-
 #~ msgid "Unknown error"
 #~ msgstr "Okänt fel"
-
-#~ msgid "Can't discover or use wiimote"
-#~ msgstr "Kan inte hitta eller ansluta Wii handkontroll"
-
-#~ msgid "No Name"
-#~ msgstr "Inget namn"
 
 #~ msgid "Name"
 #~ msgstr "Namn"
 
+#~ msgid "No Name"
+#~ msgstr "Inget namn"
+
 #~ msgid "Visible"
 #~ msgstr "Synlig"
+
+#~ msgid "Name:"
+#~ msgstr "Namn:"
 
 #~ msgid "Description:"
 #~ msgstr "Beskrivning:"
 
-#~ msgid "2009 J. Félix Ontañón <fontanon@emergya.es>"
-#~ msgstr "2009 J. Félix Ontañón <fontanon@emergya.es>"
+#~ msgid "2009 J. Félix Ontañón <felixonta@gmail.com>"
+#~ msgstr "2009 J. Félix Ontañón <felixonta@gmail.com>"
 
 #~ msgid "gtk-cancel"
 #~ msgstr "Avbryt"
@@ -331,9 +325,31 @@ msgstr ""
 #~ msgid "http://dev.emergya.info/projects/show/wiican"
 #~ msgstr "http://dev.emergya.info/projects/show/wiican"
 
+#~ msgid "Are you sure you want to completely remove "
+#~ msgstr "Är du säker på att du helt vill ta bort "
+
+#~ msgid "Use your wiimote"
+#~ msgstr "Använd din Wii handkontroll"
+
+#~ msgid "Error discovering Wiimote"
+#~ msgstr "Ett fel uppstod under sökandet efter Wii handkontroll"
+
+#~ msgid "Can't discover or use wiimote"
+#~ msgstr "Kan inte hitta eller ansluta Wii handkontroll"
+
+#~ msgid "No bluetooth adapters"
+#~ msgstr "Inga bluetooth adaptrar funna"
+
 #~ msgid "translator-credits"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
 #~ "  Christian Widell https://launchpad.net/~christian.w\n"
 #~ "  Leopold Augustsson https://launchpad.net/~leopold-augustsson\n"
+#~ "  Phoenix https://launchpad.net/~thephoenix\n"
 #~ "  Wiican Team https://launchpad.net/~wiicanteam"
+
+#~ msgid "Wiimote mappings"
+#~ msgstr "Wiimote-kartläggningar"
+
+#~ msgid "<b>Mappings</b>"
+#~ msgstr "<b>Kartläggningar</b>"

@@ -7,25 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-13 14:30+0100\n"
-"PO-Revision-Date: 2010-04-02 04:19+0000\n"
-"Last-Translator: Wiican Team <Unknown>\n"
+"POT-Creation-Date: 2010-11-13 14:38+0100\n"
+"PO-Revision-Date: 2010-12-29 03:11+0000\n"
+"Last-Translator: Alexander 'FONTER' Zinin <spore_09@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
-"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-03 03:55+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-12 22:44+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
+"Language: ru\n"
 
 #: ../bin/wiican:102
-#, fuzzy
 msgid "Plug a bluetooth adapter"
-msgstr "Не найдены bluetooth адаптеры"
+msgstr "Подключите bluetooth адаптер"
 
 #: ../bin/wiican:107
 msgid "Please load uinput module first"
-msgstr ""
+msgstr "Пожалуйста, сначала загрузить модуль uinput"
 
 #: ../bin/wiican:113
 msgid ""
@@ -41,7 +40,7 @@ msgstr "Поиск wiimote"
 
 #: ../bin/wiican:160
 msgid "Add visible mappings"
-msgstr ""
+msgstr "Добавить видимые привязки"
 
 #: ../bin/wiican:205 ../wiican/ui/editordlg.py:148
 msgid "Editing "
@@ -49,17 +48,16 @@ msgstr "Редактирование "
 
 #: ../bin/wiican:218 ../wiican/ui/editordlg.py:266
 msgid "Press 1+2"
-msgstr ""
+msgstr "Нажмите одновременно кнопки 1+2"
 
 #: ../bin/wiican:219 ../wiican/ui/editordlg.py:267
-#, fuzzy
 msgid "To put you Wiimote in discoverable mode now"
-msgstr "Переключите Wiimote в режим обнаружения (нажмите 1+2)"
+msgstr "Чтобы перевести ваш Wiimote в режим обнаружения сейчас"
 
 #: ../bin/wiican:239 ../wiican/mapping/manager.py:106
 #, python-format
 msgid "Not %s file found on wiican package"
-msgstr ""
+msgstr "Файл, отличный от %s, найден в пакете wiican"
 
 #: ../bin/wiican:243 ../wiican/mapping/manager.py:110
 #, python-format
@@ -68,15 +66,15 @@ msgstr ""
 
 #: ../bin/wiican:282
 msgid "Wiican Mapping Package load failed!"
-msgstr ""
+msgstr "Не удалось загрузить пакет привязки Wiican Mapping Package!"
 
 #: ../bin/wiican:289
 msgid "usage: %prog [options] arg"
-msgstr ""
+msgstr "Использование: %prog [options] arg"
 
 #: ../bin/wiican:291
 msgid "loads mapping package from FILENAME"
-msgstr ""
+msgstr "загрузить пакет привязки Wiican  Mapping Package из файла FILENAME"
 
 #: ../bin/wiican:310
 #, python-format
@@ -85,53 +83,51 @@ msgstr ""
 
 #: ../wiican/ui/managerdlg.py:38
 msgid "Wiican Mapping Package"
-msgstr ""
+msgstr "Пакет привязки Wiican Mapping Package"
 
 #: ../wiican/ui/managerdlg.py:88
 msgid "Editing new mapping"
-msgstr ""
+msgstr "Редактировать новые привязки"
 
 #: ../wiican/ui/managerdlg.py:143
-#, fuzzy
 msgid "Are you sure you want to completely remove this mapping?"
-msgstr "Вы уверены, что хотите полностью удалить "
+msgstr "Вы действительно хотите удалить эту конфигурацию привязки?"
 
 #: ../wiican/ui/managerdlg.py:152
 msgid "Deleting mappings"
-msgstr ""
+msgstr "Удаление привязки"
 
 #: ../wiican/ui/managerdlg.py:179
 msgid "Import mapping..."
-msgstr ""
+msgstr "Импортировать файл привязки..."
 
 #: ../wiican/ui/managerdlg.py:197
 msgid "Wiican Mapping Package import failed!"
-msgstr ""
+msgstr "Не удалось загрузить файл привязки Wiican Mapping Package"
 
 #: ../wiican/ui/managerdlg.py:227
 msgid "Exporting mapping..."
-msgstr ""
+msgstr "Экспорт привязки..."
 
 #: ../wiican/ui/editordlg.py:50
 msgid "Select image icon.."
-msgstr "Выберите иконку изображения"
+msgstr "Выберите изображение для иконки..."
 
 #: ../wiican/ui/editordlg.py:80
 msgid "Images"
-msgstr "Изображения"
+msgstr "Images"
 
 #: ../wiican/ui/editordlg.py:171
 msgid "A mapping is running"
-msgstr ""
+msgstr "Привязка запущена"
 
 #: ../wiican/ui/editordlg.py:176
 msgid "Execute this mapping"
-msgstr ""
+msgstr "Запустить привязку"
 
 #: ../wiican/ui/editordlg.py:185
-#, fuzzy
 msgid "Ensure a bluetooth "
-msgstr "Подключите bluetooth адаптер"
+msgstr "Включите BlueTooth "
 
 #: ../wiican/mapping/manager.py:131 ../wiican/mapping/manager.py:171
 #: ../wiican/mapping/manager.py:174 ../wiican/mapping/manager.py:184
@@ -139,11 +135,11 @@ msgstr "Подключите bluetooth адаптер"
 #: ../wiican/mapping/manager.py:218 ../wiican/mapping/manager.py:232
 #: ../wiican/mapping/manager.py:238
 msgid "Mapping not found:"
-msgstr ""
+msgstr "Привязка не найдена:"
 
 #: ../wiican/mapping/manager.py:221
 msgid "Cannot remove a system installed mapping"
-msgstr ""
+msgstr "Невозможно удалить системную привязку"
 
 #: ../data/mapping.ui:21
 msgid "Wiican mappings"
@@ -151,88 +147,87 @@ msgstr ""
 
 #: ../data/mapping.ui:44
 msgid "toolbutton1"
-msgstr ""
+msgstr "toolbutton1"
 
 #: ../data/mapping.ui:57
 msgid "toolbutton2"
-msgstr ""
+msgstr "toolbutton2"
 
 #: ../data/mapping.ui:70
 msgid "toolbutton3"
-msgstr ""
+msgstr "toolbutton3"
 
 #: ../data/mapping.ui:92
 msgid "toolbutton4"
-msgstr ""
+msgstr "toolbutton4"
 
 #: ../data/mapping.ui:105
 msgid "toolbutton5"
-msgstr ""
+msgstr "toolbutton5"
 
 #: ../data/mapping.ui:314
-#, fuzzy
 msgid "_Name:"
-msgstr "Имя"
+msgstr "_Название"
 
 #: ../data/mapping.ui:326
 msgid "Co_mment:"
-msgstr ""
+msgstr "При_мечание:"
 
 #: ../data/mapping.ui:337
 msgid "A_uthor/s:"
-msgstr ""
+msgstr "А_втор(ы)"
 
 #: ../data/mapping.ui:348
 msgid "_Version:"
-msgstr ""
+msgstr "_Версия:"
 
 #: ../data/mapping.ui:443
 msgid "_Icon:"
-msgstr ""
+msgstr "_Значок:"
 
 #: ../data/mapping.ui:466
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>Общие</b>"
 
 #: ../data/mapping.ui:539
 msgid ""
 "This is a system installed mapping. \n"
 "Changes will be saved in a new mapping."
 msgstr ""
+"Эта привязка установлена системой. \n"
+"Изменения будут сохранены в новую конфигурацию привязки."
 
 #: ../data/mapping.ui:565
 msgid "Execute mapping"
-msgstr ""
+msgstr "Выполнить привязку"
 
 #: ../data/mapping.ui:586
 msgid "Mapping programming help"
-msgstr ""
+msgstr "Помощь в программировании привязок wiican"
 
 #: ../data/mapping.ui:620
 msgid "<b>Mapping</b>"
-msgstr ""
+msgstr "<b>Привязка</b>"
 
 #: ../data/mapping.ui:684
-#, fuzzy
 msgid "Edit mapping"
-msgstr "Редактирование "
+msgstr "Изменить отображение"
 
 #: ../data/mapping.ui:685
-#, fuzzy
 msgid "_Edit"
-msgstr "Редактирование "
+msgstr "_Правка"
 
 #: ../data/mapping.ui:686
 msgid "Edit mapping properties"
-msgstr ""
+msgstr "Изменить свойства отображения"
 
 #: ../data/mapping.ui:691
 msgid "Delete mapping"
-msgstr ""
+msgstr "Удалить отображение"
 
 #: ../data/mapping.ui:692
 msgid "_Delete"
-msgstr ""
+msgstr "_Удалить"
 
 #: ../data/mapping.ui:693
 msgid "Removes the mapping from the catalog"
@@ -240,11 +235,11 @@ msgstr ""
 
 #: ../data/mapping.ui:698
 msgid "Import mapping"
-msgstr ""
+msgstr "Импорт отображения"
 
 #: ../data/mapping.ui:699
 msgid "_Import"
-msgstr ""
+msgstr "_Импорт"
 
 #: ../data/mapping.ui:700
 msgid "Import a mapping from a .wii file"
@@ -252,23 +247,23 @@ msgstr ""
 
 #: ../data/mapping.ui:705
 msgid "_Export mapping"
-msgstr ""
+msgstr "_Экспорт Отображения"
 
 #: ../data/mapping.ui:706
 msgid "E_xport"
-msgstr ""
+msgstr "Э_кспорт"
 
 #: ../data/mapping.ui:707
 msgid "Export mapping as a .wii file"
-msgstr ""
+msgstr "Экспорт отображения как *.wii файл"
 
 #: ../data/mapping.ui:712
 msgid "New mapping"
-msgstr ""
+msgstr "Новое отображение"
 
 #: ../data/mapping.ui:713
 msgid "_New"
-msgstr ""
+msgstr "_Создать"
 
 #: ../data/mapping.ui:714
 msgid "Creates a new mapping"
@@ -282,24 +277,40 @@ msgstr ""
 
 #: ../data/wiimotemanager.ui:726
 msgid "Edit mappings..."
-msgstr ""
+msgstr "Изменить настройки..."
 
 #: ../data/wiimotemanager.ui:759
 msgid "Mapping validation failed"
-msgstr ""
+msgstr "Проверка правильность привязки не удалась"
 
 #: ../data/wiimotemanager.ui:788
 msgid "It looks the activated mapping contains errors."
-msgstr ""
+msgstr "Похоже, активированная привязка содержит ошибки."
 
-#~ msgid "Connected"
-#~ msgstr "Подключено"
+#~ msgid "translator-credits"
+#~ msgstr ""
+#~ "Launchpad Contributions:\n"
+#~ "  Alexander 'FONTER' Zinin https://launchpad.net/~spore-09\n"
+#~ "  Alexey Afanasyev https://launchpad.net/~alein-taseevo\n"
+#~ "  Anton Lashkov https://launchpad.net/~onto\n"
+#~ "  Darth Raven https://launchpad.net/~webmaster-darkguard\n"
+#~ "  Papazu https://launchpad.net/~pavel-z\n"
+#~ "  Voronin Viktor https://launchpad.net/~wizard-wcs"
+
+#~ msgid "Wiimote off"
+#~ msgstr "Wiimote выключен"
+
+#~ msgid "No bluetooth adapters"
+#~ msgstr "Не найдены bluetooth адаптеры"
+
+#~ msgid "Put Wiimote in discoverable mode now (press 1+2)"
+#~ msgstr "Переключите Wiimote в режим обнаружения (нажмите 1+2)"
 
 #~ msgid "Disconnected"
 #~ msgstr "Отключено"
 
-#~ msgid "Wiimote off"
-#~ msgstr "Wiimote выключен"
+#~ msgid "Connected"
+#~ msgstr "Подключено"
 
 #~ msgid "Use your wiimote"
 #~ msgstr "Используйте ваш wiimote"
@@ -313,11 +324,14 @@ msgstr ""
 #~ msgid "uinput module it's not loaded"
 #~ msgstr "модуль uinput не загружен"
 
+#~ msgid "Can't discover or use wiimote"
+#~ msgstr "Невозможно обнаружить или использовать wiimote"
+
 #~ msgid "Unknown error"
 #~ msgstr "Неизвестная ошибка"
 
-#~ msgid "Can't discover or use wiimote"
-#~ msgstr "Невозможно обнаружить или использовать wiimote"
+#~ msgid "Name"
+#~ msgstr "Имя"
 
 #~ msgid "No Name"
 #~ msgstr "Нет имени"
@@ -325,9 +339,17 @@ msgstr ""
 #~ msgid "Visible"
 #~ msgstr "Видимый"
 
+#~ msgid "Wrong perms on user config dir"
+#~ msgstr "Неверные праметры доступа на директорию с конфигурацией пользователя"
+
+#~ msgid "Are you sure you want to completely remove "
+#~ msgstr "Вы уверены, что хотите полностью удалить "
+
 #~ msgid "Skel config dir doesn't exists"
 #~ msgstr "Каталог для шаблона файла конфигурации не существует"
 
-#~ msgid "Wrong perms on user config dir"
-#~ msgstr ""
-#~ "Неверные праметры доступа на директорию с конфигурацией пользователя"
+#~ msgid "Wiimote mappings"
+#~ msgstr "Wiimote привзяки"
+
+#~ msgid "<b>Mappings</b>"
+#~ msgstr "<b>Привязки</b>"

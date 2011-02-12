@@ -1,42 +1,41 @@
-# German translation for wiican
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# Galician translation for wiican
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the wiican package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: wiican\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-13 14:38+0100\n"
-"PO-Revision-Date: 2010-11-19 13:27+0000\n"
-"Last-Translator: Rico Eberle <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
+"PO-Revision-Date: 2010-06-20 00:25+0000\n"
+"Last-Translator: pcgaldo <Unknown>\n"
+"Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-02-12 22:44+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
-"Language: de\n"
 
 #: ../bin/wiican:102
 msgid "Plug a bluetooth adapter"
-msgstr "Bluetoothadapter anschließen"
+msgstr "Conecte un adaptador Bluetooth"
 
 #: ../bin/wiican:107
 msgid "Please load uinput module first"
-msgstr "Bitte laden Sie zuerst das uinput-Modul"
+msgstr ""
 
 #: ../bin/wiican:113
 msgid ""
 "Hold left button for use wiimote\n"
 "Right button for menu"
 msgstr ""
-"Linke Maustaste: Wiimote benutzen\n"
-"Rechte Maustaste: Menü"
+"Prema o botón esquerdo para usar o mando Wii. \n"
+"Prema o botón dereito para o menú."
 
 #: ../bin/wiican:125
 msgid "Discovering Wiimote"
-msgstr "Wiimote entdecken"
+msgstr "Buscando o mando Wii"
 
 #: ../bin/wiican:160
 msgid "Add visible mappings"
@@ -44,11 +43,11 @@ msgstr ""
 
 #: ../bin/wiican:205 ../wiican/ui/editordlg.py:148
 msgid "Editing "
-msgstr "Bearbeiten "
+msgstr "Editando "
 
 #: ../bin/wiican:218 ../wiican/ui/editordlg.py:266
 msgid "Press 1+2"
-msgstr "Drücken Sie 1+2"
+msgstr "Pulsar 1+2"
 
 #: ../bin/wiican:219 ../wiican/ui/editordlg.py:267
 msgid "To put you Wiimote in discoverable mode now"
@@ -57,12 +56,12 @@ msgstr ""
 #: ../bin/wiican:239 ../wiican/mapping/manager.py:106
 #, python-format
 msgid "Not %s file found on wiican package"
-msgstr "Datei %s wurde im wiican-Paket nicht gefunden"
+msgstr ""
 
 #: ../bin/wiican:243 ../wiican/mapping/manager.py:110
 #, python-format
 msgid "Not %s file found  on wiican package"
-msgstr "Datei %s wurde im wiican-Paket nicht gefunden"
+msgstr ""
 
 #: ../bin/wiican:282
 msgid "Wiican Mapping Package load failed!"
@@ -70,7 +69,7 @@ msgstr ""
 
 #: ../bin/wiican:289
 msgid "usage: %prog [options] arg"
-msgstr "Aufruf: %prog [Optionen] Argumente"
+msgstr ""
 
 #: ../bin/wiican:291
 msgid "loads mapping package from FILENAME"
@@ -87,7 +86,7 @@ msgstr ""
 
 #: ../wiican/ui/managerdlg.py:88
 msgid "Editing new mapping"
-msgstr "Neue Zuordnung bearbeiten"
+msgstr ""
 
 #: ../wiican/ui/managerdlg.py:143
 msgid "Are you sure you want to completely remove this mapping?"
@@ -95,7 +94,7 @@ msgstr ""
 
 #: ../wiican/ui/managerdlg.py:152
 msgid "Deleting mappings"
-msgstr ""
+msgstr "Eliminando mapeados"
 
 #: ../wiican/ui/managerdlg.py:179
 msgid "Import mapping..."
@@ -111,11 +110,11 @@ msgstr ""
 
 #: ../wiican/ui/editordlg.py:50
 msgid "Select image icon.."
-msgstr "Bildsymbol auswählen …"
+msgstr "Seleccione unha imaxe para o ícone"
 
 #: ../wiican/ui/editordlg.py:80
 msgid "Images"
-msgstr "Bilder"
+msgstr "Imaxes"
 
 #: ../wiican/ui/editordlg.py:171
 msgid "A mapping is running"
@@ -167,27 +166,27 @@ msgstr ""
 
 #: ../data/mapping.ui:314
 msgid "_Name:"
-msgstr "_Name:"
+msgstr ""
 
 #: ../data/mapping.ui:326
 msgid "Co_mment:"
-msgstr "_Kommentar:"
+msgstr ""
 
 #: ../data/mapping.ui:337
 msgid "A_uthor/s:"
-msgstr "A_utor(en):"
+msgstr ""
 
 #: ../data/mapping.ui:348
 msgid "_Version:"
-msgstr "_Version:"
+msgstr ""
 
 #: ../data/mapping.ui:443
 msgid "_Icon:"
-msgstr "_Symbol:"
+msgstr ""
 
 #: ../data/mapping.ui:466
 msgid "<b>General</b>"
-msgstr "<b>Allgemein</b>"
+msgstr ""
 
 #: ../data/mapping.ui:539
 msgid ""
@@ -237,7 +236,7 @@ msgstr ""
 
 #: ../data/mapping.ui:699
 msgid "_Import"
-msgstr "_Importieren"
+msgstr ""
 
 #: ../data/mapping.ui:700
 msgid "Import a mapping from a .wii file"
@@ -249,7 +248,7 @@ msgstr ""
 
 #: ../data/mapping.ui:706
 msgid "E_xport"
-msgstr "E_xportieren"
+msgstr ""
 
 #: ../data/mapping.ui:707
 msgid "Export mapping as a .wii file"
@@ -285,71 +284,72 @@ msgstr ""
 msgid "It looks the activated mapping contains errors."
 msgstr ""
 
-#~ msgid "Disconnected"
-#~ msgstr "Verbindung getrennt"
-
-#~ msgid "Connected"
-#~ msgstr "Verbunden"
-
-#~ msgid "Unknown error"
-#~ msgstr "Unbekannter Fehler"
-
-#~ msgid "Visible"
-#~ msgstr "Sichtbar"
-
-#~ msgid "New entry"
-#~ msgstr "Neuer Eintrag"
-
-#~ msgid "Name:"
-#~ msgstr "Name:"
-
-#~ msgid "Description:"
-#~ msgstr "Beschreibung:"
-
-#~ msgid "2009 J. Félix Ontañón <felixonta@gmail.com>"
-#~ msgstr "2009 J. Félix Ontañón <felixonta@gmail.com>"
-
-#~ msgid "http://dev.emergya.info/projects/show/wiican"
-#~ msgstr "http://dev.emergya.info/projects/show/wiican"
-
-#~ msgid "Wiimote off"
-#~ msgstr "Wiimote aus"
-
-#~ msgid "No bluetooth adapters"
-#~ msgstr "Kein Bluetoothadapter"
-
-#~ msgid "Fail!"
-#~ msgstr "Fehlgeschlagen!"
-
-#~ msgid "Use your wiimote"
-#~ msgstr "Benutze deine Wiimote"
-
-#~ msgid "Error discovering Wiimote"
-#~ msgstr "Fehler beim Auffinden der Wiimote"
-
-#~ msgid "check mapping syntax"
-#~ msgstr "Kontrolliere die Zuordnungsyntax"
-
-#~ msgid "uinput module it's not loaded"
-#~ msgstr "uinput Modul ist nicht geladen"
-
-#~ msgid "Can't discover or use wiimote"
-#~ msgstr "Kann Wiimote nicht finden oder benutzen"
-
-#~ msgid "Name"
-#~ msgstr "Name"
-
-#~ msgid "No Name"
-#~ msgstr "Unbenannt"
-
 #~ msgid "translator-credits"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
-#~ "  Ceelight https://launchpad.net/~forum-ceelight\n"
-#~ "  Daniel Garcia Stelzner https://launchpad.net/~dani-garcia87\n"
-#~ "  Gregor Santner https://launchpad.net/~gregi94\n"
-#~ "  J. Félix Ontañón https://launchpad.net/~fontanon\n"
-#~ "  Mario Blättermann https://launchpad.net/~mariobl-freenet\n"
-#~ "  Wiican Team https://launchpad.net/~wiicanteam\n"
-#~ "  siziwi https://launchpad.net/~siziwi\n"
-#~ "  yanuzz https://launchpad.net/~3000-janus"
+#~ "  csrparga https://launchpad.net/~csrparga\n"
+#~ "  pcgaldo https://launchpad.net/~pcgaldo"
+
+#~ msgid "Wiimote off"
+#~ msgstr "Mando Wii desconectado"
+
+#~ msgid "No bluetooth adapters"
+#~ msgstr "Nengún adaptador bluetooth"
+
+#~ msgid "Put Wiimote in discoverable mode now (press 1+2)"
+#~ msgstr "Coloque o mando Wii en modo detectábel (presione 1+2)"
+
+#~ msgid "Connected"
+#~ msgstr "Conectado"
+
+#~ msgid "Disconnected"
+#~ msgstr "Desconectado"
+
+#~ msgid "Use your wiimote"
+#~ msgstr "Use o seu mando Wii"
+
+#~ msgid "Fail!"
+#~ msgstr "Erro!"
+
+#~ msgid "Error discovering Wiimote"
+#~ msgstr "Erro ao buscar o mando Wii"
+
+#~ msgid "uinput module it's not loaded"
+#~ msgstr "O módulo uinput non está cargado"
+
+#~ msgid "Can't discover or use wiimote"
+#~ msgstr "Non se pode atopar ou utilizar o mando Wii"
+
+#~ msgid "Name"
+#~ msgstr "Nome"
+
+#~ msgid "No Name"
+#~ msgstr "Sen nome"
+
+#~ msgid "Visible"
+#~ msgstr "Visíbel"
+
+#~ msgid "Unknown error"
+#~ msgstr "Erro descoñecido"
+
+#~ msgid ""
+#~ "this mappings?:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "estes mapeados?:\n"
+#~ "\n"
+
+#~ msgid "Skel config dir doesn't exists"
+#~ msgstr "A configuración Skel non existe"
+
+#~ msgid "Are you sure you want to completely remove "
+#~ msgstr "Ten a certeza que quere borrar completamente "
+
+#~ msgid "Can't remove mapping "
+#~ msgstr "Non foi posíbel eliminar o mapeado "
+
+#~ msgid "check mapping syntax"
+#~ msgstr "comprobar sintaxe de mapeamento"
+
+#~ msgid "Wrong perms on user config dir"
+#~ msgstr "Permisos incorrectos nas configuracións do usuario"
