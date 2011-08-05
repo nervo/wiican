@@ -101,5 +101,19 @@
             </locale>
         </schema>
 
+        <schema>
+            <key>/schemas/apps/wiican/show_manager_on_startup</key>
+            <applyto>/apps/wiican/show_manager_on_startup</applyto>
+            <owner>wiican</owner>
+            <type>bool</type>
+            <default>True</default>
+            <locale name="C">
+                <short>Mapping manager to be launched on wiican startup</short>
+                <long>Determines whether the mapping manager will be displayed
+                at wiican startup or not.
+                </long>
+            </locale>
+        </schema>
+
     </schemalist>
 </gconfschemafile>
