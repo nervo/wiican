@@ -124,12 +124,7 @@ setup(
                       ('share/icons/hicolor/32x32/devices', glob.glob('data/icons/32x32/devices/*')),
                       ('share/icons/hicolor/48x48/devices', glob.glob('data/icons/48x48/devices/*')),
                       ('share/icons/hicolor/scalable/devices', glob.glob('data/icons/scalable/devices/*')),
-                      ('share/icons/hicolor/16x16/status', glob.glob('data/icons/16x16/status/*')),
-                      ('share/icons/hicolor/22x22/status', glob.glob('data/icons/22x22/status/*')),
                       ('share/icons/hicolor/24x24/status', glob.glob('data/icons/24x24/status/*')),
-                      ('share/icons/hicolor/48x48/status', glob.glob('data/icons/48x48/status/*')),
-                      ('share/icons/hicolor/64x64/status', glob.glob('data/icons/64x64/status/*')),
-                      ('share/icons/hicolor/scalable/status', glob.glob('data/icons/scalable/status/*')),
                       ('share/icons/hicolor/scalable/mimetypes', glob.glob('data/icons/scalable/mimetypes/*')),
 
                       ('share/dbus-1/services', ['data/org.gnome.wiican.service']),
