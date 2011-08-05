@@ -33,6 +33,7 @@ import tempfile
 import shutil
 
 from wiican.defs import *
+from wiican.utils import GConfStore
 from wiican.ui import Notificator, PngAnimation
 from wiican.ui import MappingManagerDialog, MappingEditorDialog
 from wiican.ui.validationerrordlg import ValidationErrorDialog
@@ -52,9 +53,15 @@ wiican_disc3_icon = theme.load_icon('wiican-discover3', 24, 0)
 
 mapping_manager = MappingManager()
 
-class WiimoteStatusIcon(gtk.StatusIcon):
+class WiimoteStatusIcon(gtk.StatusIcon, GConfStore):
+    defaults = {
+            'show_manager_on_startup': True
+    }
+
     def __init__(self):
-        super(WiimoteStatusIcon, self).__init__()
+        gtk.StatusIcon.__init__(self)
+        GConfStore.__init__(self, GCONF_KEY)
+
         self.set_visible(True)
 
         # Load UI
@@ -65,6 +72,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
 
         self.aboutdlg = builder.get_object('WiiAboutDialog')
         self.main_menu = builder.get_object('main_menu')
+        self.mngrstartup_menuitem = builder.get_object('mngrstartup_menuitem')
 
         self.aboutdlg.connect('response', lambda d, r: d.hide())
         self.connect('popup-menu', self.__icon_popupmenu_cb, None)
@@ -84,6 +92,12 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.__load_mappings_menu()
         self.__notificator = Notificator('wiican')
         self.__status_cb(self.__cur_status)
+
+        # Check whether to show Mapping Manager on startup
+        self.loadconf(only_defaults=True)
+        self.mngrstartup_menuitem.set_active(self.options['show_manager_on_startup'])
+        if self.options['show_manager_on_startup']:
+            self.preferences_cb(None)
 
     def __status_cb(self, new_status):
         if not new_status & WC_BLUEZ_PRESENT:
@@ -173,6 +187,9 @@ class WiimoteStatusIcon(gtk.StatusIcon):
                     gtk.status_icon_position_menu, 1, 
                     gtk.get_current_event_time(), status_icon)
 
+    def mngrstartup_menuitem_toggled_cb(self, widget):
+        self.options['show_manager_on_startup'] = widget.get_active()
+
     def preferences_cb(self, widget):
         mapping_dlg = MappingManagerDialog()
         mapping_dlg.run()
@@ -182,6 +199,7 @@ class WiimoteStatusIcon(gtk.StatusIcon):
         self.aboutdlg.run()
 
     def quit_cb(self, widget):
+        self.saveconf()
         mapping_manager.saveconf()
         sys.exit(0)
 
