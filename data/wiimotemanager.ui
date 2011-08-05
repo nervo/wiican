@@ -2,7 +2,112 @@
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy toplevel-contextual -->
+  <object class="GtkDialog" id="ValidationErrorDialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">Mapping validation failed</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="icon_name">error</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_pager_hint">True</property>
+    <property name="urgency_hint">True</property>
+    <child internal-child="vbox">
+      <object class="GtkVBox" id="dialog-vbox2">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="dialog-action_area2">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="no_btn">
+                <property name="label">gtk-close</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="open_editor_btn">
+                <property name="label">gtk-edit</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHBox" id="hbox1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkImage" id="icon_image">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="stock">gtk-missing-image</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="padding">6</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">It looks the activated mapping contains errors.</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="padding">6</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="padding">12</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="-9">no_btn</action-widget>
+      <action-widget response="-8">open_editor_btn</action-widget>
+    </action-widgets>
+  </object>
   <object class="GtkAboutDialog" id="WiiAboutDialog">
+    <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="window_position">center</property>
     <property name="destroy_with_parent">True</property>
@@ -726,10 +831,14 @@ Ulisse &lt;ulisail@yahoo.it&gt;</property>
     <property name="wrap_license">True</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
+        <property name="can_focus">False</property>
         <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area1"/>
+          <object class="GtkHButtonBox" id="dialog-action_area1">
+            <property name="can_focus">False</property>
+          </object>
           <packing>
             <property name="expand">False</property>
+            <property name="fill">True</property>
             <property name="pack_type">end</property>
             <property name="position">0</property>
           </packing>
@@ -737,136 +846,67 @@ Ulisse &lt;ulisail@yahoo.it&gt;</property>
       </object>
     </child>
   </object>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-jump-to</property>
+  </object>
+  <object class="GtkImage" id="image2">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-edit</property>
+  </object>
   <object class="GtkMenu" id="main_menu">
     <property name="visible">True</property>
+    <property name="can_focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="edit_menuitem">
         <property name="label" translatable="yes">Edit mappings...</property>
         <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="use_action_appearance">False</property>
         <property name="image">image2</property>
         <property name="use_stock">False</property>
-        <signal name="activate" handler="preferences_cb"/>
+        <signal name="activate" handler="preferences_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkCheckMenuItem" id="mngrstartup_menuitem">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="use_action_appearance">False</property>
+        <property name="label" translatable="yes">Show mappings on startup</property>
+        <property name="use_underline">True</property>
+        <signal name="toggled" handler="mngrstartup_menuitem_toggled_cb" swapped="no"/>
       </object>
     </child>
     <child>
       <object class="GtkSeparatorMenuItem" id="menuitem3">
         <property name="visible">True</property>
+        <property name="can_focus">False</property>
       </object>
     </child>
     <child>
       <object class="GtkImageMenuItem" id="menuitem4">
         <property name="label">gtk-about</property>
         <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
-        <signal name="activate" handler="about_cb"/>
+        <signal name="activate" handler="about_cb" swapped="no"/>
       </object>
     </child>
     <child>
       <object class="GtkImageMenuItem" id="menuitem5">
         <property name="label">gtk-quit</property>
         <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="use_action_appearance">False</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
-        <signal name="activate" handler="quit_cb"/>
+        <signal name="activate" handler="quit_cb" swapped="no"/>
       </object>
     </child>
-  </object>
-  <object class="GtkDialog" id="ValidationErrorDialog">
-    <property name="border_width">5</property>
-    <property name="title" translatable="yes">Mapping validation failed</property>
-    <property name="resizable">False</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="destroy_with_parent">True</property>
-    <property name="icon_name">error</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_pager_hint">True</property>
-    <property name="urgency_hint">True</property>
-    <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox2">
-        <property name="visible">True</property>
-        <property name="spacing">2</property>
-        <child>
-          <object class="GtkHBox" id="hbox1">
-            <property name="visible">True</property>
-            <child>
-              <object class="GtkImage" id="icon_image">
-                <property name="visible">True</property>
-                <property name="stock">gtk-missing-image</property>
-              </object>
-              <packing>
-                <property name="padding">6</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label1">
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">It looks the activated mapping contains errors.</property>
-              </object>
-              <packing>
-                <property name="padding">6</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="padding">12</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area2">
-            <property name="visible">True</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="no_btn">
-                <property name="label">gtk-close</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="open_editor_btn">
-                <property name="label">gtk-edit</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-    <action-widgets>
-      <action-widget response="-9">no_btn</action-widget>
-      <action-widget response="-8">open_editor_btn</action-widget>
-    </action-widgets>
-  </object>
-  <object class="GtkImage" id="image1">
-    <property name="visible">True</property>
-    <property name="stock">gtk-jump-to</property>
-  </object>
-  <object class="GtkImage" id="image2">
-    <property name="visible">True</property>
-    <property name="stock">gtk-edit</property>
   </object>
 </interface>
