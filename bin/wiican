@@ -56,7 +56,7 @@ class WiicanIndicator(appindicator.Indicator, GConfStore):
     }
 
     def __init__(self):
-        appindicator.Indicator.__init__(self, "wiican-tray", "wiican",
+        appindicator.Indicator.__init__(self, "wiican", "wiican",
             appindicator.CATEGORY_HARDWARE)
         GConfStore.__init__(self, GCONF_KEY)
 
