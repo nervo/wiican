@@ -860,6 +860,15 @@ Ulisse &lt;ulisail@yahoo.it&gt;</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
+      <object class="GtkMenuItem" id="error_menuitem">
+        <property name="sensitive">False</property>
+        <property name="can_focus">False</property>
+        <property name="use_action_appearance">False</property>
+        <property name="label">error</property>
+        <property name="use_underline">True</property>
+      </object>
+    </child>
+    <child>
       <object class="GtkImageMenuItem" id="edit_menuitem">
         <property name="label" translatable="yes">Edit mappings...</property>
         <property name="visible">True</property>

@@ -67,6 +67,7 @@ class WiicanIndicator(appindicator.Indicator, GConfStore):
         self.aboutdlg = builder.get_object('WiiAboutDialog')
         self.main_menu = builder.get_object('main_menu')
         self.mngrstartup_menuitem = builder.get_object('mngrstartup_menuitem')
+        self.error_menuitem = builder.get_object('error_menuitem')
 
         self.set_menu(self.main_menu)
         self.aboutdlg.connect('response', lambda d, r: d.hide())
@@ -106,19 +107,20 @@ class WiicanIndicator(appindicator.Indicator, GConfStore):
 
     def __set_no_bluetooth_st(self):
         self.set_icon('wiican-off')
-        #self.set_tooltip(_('Plug a bluetooth adapter'))
+        self.error_menuitem.get_child().set_text(_('Plug a bluetooth adapter'))
+        self.error_menuitem.set_visible(True)
         self.__disconnect_item.set_sensitive(False)
 
     def __set_no_uinput_st(self):
         self.set_icon('wiican-off')
-        #self.set_tooltip(_('Please load uinput module first'))
+        self.error_menuitem.get_child().set_text(_('Please load uinput module first'))
+        self.error_menuitem.set_visible(True)
         self.__disconnect_item.set_sensitive(False)
 
     def __idle_st(self):
         self.__disconnect_item.set_sensitive(False)
+        self.error_menuitem.set_visible(False)
         self.set_icon('wiican-on')
-        #self.set_tooltip(_('Hold left button for use wiimote\n' \
-                #'Right button for menu'))
 
     def __discovering_st(self):
         def animate():
@@ -129,7 +131,6 @@ class WiicanIndicator(appindicator.Indicator, GConfStore):
                 return True
 
         self.__disconnect_item.set_sensitive(True)
-        #self.set_tooltip(_('Discovering Wiimote'))
         gobject.timeout_add(500, animate)
 
     def __load_mappings_menu(self):
