@@ -28,6 +28,8 @@ import gtk
 import gobject
 import dbus, dbus.exceptions
 
+import appindicator
+
 import tarfile
 import tempfile
 import shutil
@@ -53,16 +55,17 @@ wiican_disc3_icon = theme.load_icon('wiican-discover3', 24, 0)
 
 mapping_manager = MappingManager()
 
-class WiimoteStatusIcon(gtk.StatusIcon, GConfStore):
+class WiicanIndicator(appindicator.Indicator, GConfStore):
     defaults = {
             'show_manager_on_startup': True
     }
 
     def __init__(self):
-        gtk.StatusIcon.__init__(self)
+        appindicator.Indicator.__init__(self, "example", "wewe",
+            appindicator.CATEGORY_APPLICATION_STATUS)
         GConfStore.__init__(self, GCONF_KEY)
 
-        self.set_visible(True)
+        self.set_status (appindicator.STATUS_ACTIVE)
 
         # Load UI
         builder = gtk.Builder()
@@ -74,9 +77,8 @@ class WiimoteStatusIcon(gtk.StatusIcon, GConfStore):
         self.main_menu = builder.get_object('main_menu')
         self.mngrstartup_menuitem = builder.get_object('mngrstartup_menuitem')
 
+        self.set_menu(self.main_menu)
         self.aboutdlg.connect('response', lambda d, r: d.hide())
-        self.connect('popup-menu', self.__icon_popupmenu_cb, None)
-        self.connect('activate', self.__activate_cb)
 
         self.__animation = PngAnimation([wiican_on_icon, wiican_disc1_icon, 
             wiican_disc2_icon, wiican_disc3_icon])
@@ -112,20 +114,20 @@ class WiimoteStatusIcon(gtk.StatusIcon, GConfStore):
         self.__cur_status = new_status
 
     def __set_no_bluetooth_st(self):
-        self.set_from_icon_name('wiican-off')
-        self.set_tooltip(_('Plug a bluetooth adapter'))
+        self.set_icon('wiican-off')
+        #self.set_tooltip(_('Plug a bluetooth adapter'))
         self.__disconnect_item.set_sensitive(False)
 
     def __set_no_uinput_st(self):
-        self.set_from_icon_name('wiican-off')
-        self.set_tooltip(_('Please load uinput module first'))
+        self.set_icon('wiican-off')
+        #self.set_tooltip(_('Please load uinput module first'))
         self.__disconnect_item.set_sensitive(False)
 
     def __idle_st(self):
         self.__disconnect_item.set_sensitive(False)
-        self.set_from_icon_name('wiican-on')
-        self.set_tooltip(_('Hold left button for use wiimote\n' \
-                'Right button for menu'))
+        self.set_icon('wiican-on')
+        #self.set_tooltip(_('Hold left button for use wiimote\n' \
+                #'Right button for menu'))
 
     def __discovering_st(self):
         def animate():
@@ -136,7 +138,7 @@ class WiimoteStatusIcon(gtk.StatusIcon, GConfStore):
                 return True
 
         self.__disconnect_item.set_sensitive(True)
-        self.set_tooltip(_('Discovering Wiimote'))
+        #self.set_tooltip(_('Discovering Wiimote'))
         gobject.timeout_add(500, animate)
 
     def __load_mappings_menu(self):
@@ -178,7 +180,7 @@ class WiimoteStatusIcon(gtk.StatusIcon, GConfStore):
 
     def __icon_popupmenu_cb(self, status_icon, button, activate_time, data):
         self.main_menu.popup(None, None, gtk.status_icon_position_menu, button, 
-			        activate_time, status_icon)
+                activate_time, status_icon)
 
     def __activate_cb(self, status_icon):
         if self.__cur_status & WC_UINPUT_PRESENT and \
@@ -284,11 +286,11 @@ class MappingLauncherDialog(MappingEditorDialog):
         shutil.rmtree(self.mapping_path)
         
 if __name__ == '__main__':
-    def launch_statusicon():
+    def launch_indicator():
         from dbus.mainloop.glib import DBusGMainLoop
 
         DBusGMainLoop(set_as_default=True)
-        wiican = WiimoteStatusIcon()
+        wiican = WiicanIndicator()
         gobject.MainLoop().run()
 
     def display_error(message):
@@ -329,5 +331,5 @@ if __name__ == '__main__':
             sys.exit(-2)
 
     else:
-        launch_statusicon()
+        launch_indicator()
         sys.exit(0)
