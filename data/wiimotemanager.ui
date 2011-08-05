@@ -893,6 +893,24 @@ Ulisse &lt;ulisail@yahoo.it&gt;</property>
       <object class="GtkSeparatorMenuItem" id="menuitem3">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="resize_mode">queue</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkImageMenuItem" id="disconnect_menuitem">
+        <property name="label">gtk-disconnect</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="use_action_appearance">False</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="menuitem1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="use_action_appearance">False</property>
       </object>
     </child>
     <child>
