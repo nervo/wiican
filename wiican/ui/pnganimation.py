@@ -24,20 +24,10 @@ import gtk.gdk
 
 #TODO: Replace this with gtk.gdk.PixbufAnimation
 class PngAnimation:
-    def __init__(self, pixbufs=[], thumb_pixbuf=None):
-        self.__frames = []
+    def __init__(self, frames=[]):
+        self.__frames = frames
         self.__current_frame = -1
- 
-        for pixbuf in pixbufs:
-            self.append(pixbuf, thumb_pixbuf)
 
-    def append(self, frame, thumb_pixbuf=None):
-        if thumb_pixbuf:
-            frame = self.__composite_thumb(thumb_pixbuf, frame)
-
-        self.__frames.append(frame)
-
-    #TODO: Maybe a not-to-cycle arg?
     #TODO: Use yield for generator
     def next(self):
         self.__current_frame = (self.__current_frame + 1) % len(self.__frames)

@@ -44,15 +44,6 @@ from wiican.service import WIICAN_PATH, WIICAN_URI
 from wiican.service import WC_DISABLED, WC_BLUEZ_PRESENT, WC_UINPUT_PRESENT, \
     WC_WIIMOTE_DISCOVERING
 
-# Load icons
-theme = gtk.icon_theme_get_default()
-
-wiican_on_icon = theme.load_icon('wiican-on', 24, 0)
-wiican_off_icon = theme.load_icon('wiican-off', 24, 0)
-wiican_disc1_icon = theme.load_icon('wiican-discover1', 24, 0)
-wiican_disc2_icon = theme.load_icon('wiican-discover2', 24, 0)
-wiican_disc3_icon = theme.load_icon('wiican-discover3', 24, 0)
-
 mapping_manager = MappingManager()
 
 class WiicanIndicator(appindicator.Indicator, GConfStore):
@@ -61,7 +52,7 @@ class WiicanIndicator(appindicator.Indicator, GConfStore):
     }
 
     def __init__(self):
-        appindicator.Indicator.__init__(self, "example", "wewe",
+        appindicator.Indicator.__init__(self, "wiican-tray", "wiican",
             appindicator.CATEGORY_APPLICATION_STATUS)
         GConfStore.__init__(self, GCONF_KEY)
 
@@ -80,9 +71,9 @@ class WiicanIndicator(appindicator.Indicator, GConfStore):
         self.set_menu(self.main_menu)
         self.aboutdlg.connect('response', lambda d, r: d.hide())
 
-        self.__animation = PngAnimation([wiican_on_icon, wiican_disc1_icon, 
-            wiican_disc2_icon, wiican_disc3_icon])
-            
+        self.__animation = PngAnimation(['wiican-on', 'wiican-discover1', 
+            'wiican-discover2', 'wiican-discover3'])
+
         # Connect to wiican service
         bus = dbus.SessionBus()  
         self.__wiican_iface = dbus.Interface(bus.get_object (WIICAN_URI, 
@@ -131,10 +122,10 @@ class WiicanIndicator(appindicator.Indicator, GConfStore):
 
     def __discovering_st(self):
         def animate():
-    	    if not self.__cur_status & WC_WIIMOTE_DISCOVERING:
+            if not self.__cur_status & WC_WIIMOTE_DISCOVERING:
                 return False
             else:
-                self.set_from_pixbuf(self.__animation.next())
+                self.set_icon(self.__animation.next())
                 return True
 
         self.__disconnect_item.set_sensitive(True)
@@ -251,7 +242,7 @@ class MappingLauncherDialog(MappingEditorDialog):
 
         self.save_btn.connect('clicked', self.save_mapping)
         self.cancel_btn.connect('clicked', self.cancel_cb)
-        
+
     def load_mapping_in_tmp(self, package_path):
         package_file = tarfile.open(package_path)
 
@@ -268,7 +259,7 @@ class MappingLauncherDialog(MappingEditorDialog):
         package_file.close()
 
         return mapping_path
-        
+
     def save_mapping(self, widget):
         mapping = self.get_mapping()
         save_path = tempfile.mkdtemp()
@@ -284,7 +275,7 @@ class MappingLauncherDialog(MappingEditorDialog):
 
     def cancel_cb(self, widget):
         shutil.rmtree(self.mapping_path)
-        
+
 if __name__ == '__main__':
     def launch_indicator():
         from dbus.mainloop.glib import DBusGMainLoop
