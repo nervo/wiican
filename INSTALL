@@ -17,6 +17,7 @@ Other dependencies:
     - PLY
     - gnome-bluetooth (bluez-gnome in older versions)
     - udev
+    - python-appindicator
 
 Load uinput module with perms for non-root users:
     - Copy udev-rules/* to your udev rules directory (i.e.: /lib/udev/rules.d)

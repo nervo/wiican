@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-# vim: ts=4 
+# vim: ts=4
 ###
 #
-# Mostly taken from Pluglib
-#
-# Copyright (c) 2010 J. Félix Ontañón
+# Copyright (c) 2009-2011 J. Félix Ontañón
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 3 as
@@ -19,7 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Authors : J. Félix Ontañón <fontanon@emergya.es>
-# 
+#
 ###
 
 import gconf

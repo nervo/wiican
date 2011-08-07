@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# vim: ts=4 
+# vim: ts=4
 ###
 #
-# Copyright (c) 2010 J. Félix Ontañón
+# Copyright (c) 2009-2011 J. Félix Ontañón
 #
 # Totally ripped from wminput/action_enum.txt file included in cwiid
 # cwiid it's a great piece of software by L. Donnie Smith
@@ -21,7 +21,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Authors : J. Félix Ontañón <fontanon@emergya.es>
-# 
+#
 ###
 
 BTN_ACTION_ENUM = [

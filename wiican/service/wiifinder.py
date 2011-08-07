@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
-# vim: ts=4 
+# vim: ts=4
 ###
 #
-# Copyright (c) 2010 J. Félix Ontañón
+# Copyright (c) 2009-2011 J. Félix Ontañón
 #
-# Almost based on arista.inputs module:
-# Copyright 2008 - 2010 Daniel G. Taylor <dan@programmer-art.org>
-# 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 3 as
 # published by the Free Software Foundation
@@ -20,7 +17,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Authors : J. Félix Ontañón <fontanon@emergya.es>
-# 
+#
+###
 
 import gobject
 import gudev

@@ -4,7 +4,7 @@
 #
 # Mostly inspired from Listen's mediaplayer notify widged
 #
-# Copyright (c) 2010 J. Félix Ontañón
+# Copyright (c) 2009-2011 J. Félix Ontañón
 # 
 # Listen is the legal property of mehdi abaakouk <theli48@gmail.com>
 # Copyright (c) 2006 Mehdi Abaakouk 

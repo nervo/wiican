@@ -1,5 +1,9 @@
+Follow Wiican's roadmap at:
+http://live.gnome.org/Wiican/Roadmap
+
+Legacy TODO list
+================
 "using-wiimote" state
-drag'n'drop on mapping dialog
 fix some issues on wminput file syntax checker
 new mapping syntax for wiimote_events-atk_actions binding
 source code documentation
