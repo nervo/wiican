@@ -1,133 +1,132 @@
-# German translation for wiican
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# Chinese (Traditional) translation for wiican
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the wiican package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: wiican\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-13 14:38+0100\n"
-"PO-Revision-Date: 2011-02-13 16:28+0000\n"
-"Last-Translator: J. Félix Ontañón <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
+"PO-Revision-Date: 2011-04-16 01:55+0000\n"
+"Last-Translator: kentxchang <Unknown>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-08-07 23:04+0000\n"
 "X-Generator: Launchpad (build 13613)\n"
-"Language: de\n"
 
 #: ../bin/wiican:102
 msgid "Plug a bluetooth adapter"
-msgstr "Bluetoothadapter anschließen"
+msgstr "插入藍芽裝置"
 
 #: ../bin/wiican:107
 msgid "Please load uinput module first"
-msgstr "Bitte laden Sie zuerst das uinput-Modul"
+msgstr "請先載入uinput模式(需先安裝mouseemu套件)"
 
 #: ../bin/wiican:113
 msgid ""
 "Hold left button for use wiimote\n"
 "Right button for menu"
 msgstr ""
-"Linke Maustaste: Wiimote benutzen\n"
-"Rechte Maustaste: Menü"
+"點擊滑鼠左鍵啟用wiimote\n"
+"點擊滑鼠右鍵呼叫程式選單"
 
 #: ../bin/wiican:125
 msgid "Discovering Wiimote"
-msgstr "Wiimote entdecken"
+msgstr "正在檢測wiimote中"
 
 #: ../bin/wiican:160
 msgid "Add visible mappings"
-msgstr ""
+msgstr "新增可使用的設定檔"
 
 #: ../bin/wiican:205 ../wiican/ui/editordlg.py:148
 msgid "Editing "
-msgstr "Bearbeiten "
+msgstr "編輯中 "
 
 #: ../bin/wiican:218 ../wiican/ui/editordlg.py:266
 msgid "Press 1+2"
-msgstr "Drücken Sie 1+2"
+msgstr "同時按wiimote1+2鍵"
 
 #: ../bin/wiican:219 ../wiican/ui/editordlg.py:267
 msgid "To put you Wiimote in discoverable mode now"
-msgstr ""
+msgstr "現在將wiimote設置為可發現的模式"
 
 #: ../bin/wiican:239 ../wiican/mapping/manager.py:106
 #, python-format
 msgid "Not %s file found on wiican package"
-msgstr "Datei %s wurde im wiican-Paket nicht gefunden"
+msgstr "在wiican文件包中找不到 %s 檔案"
 
 #: ../bin/wiican:243 ../wiican/mapping/manager.py:110
 #, python-format
 msgid "Not %s file found  on wiican package"
-msgstr "Datei %s wurde im wiican-Paket nicht gefunden"
+msgstr "在wiican文件包中找不到 %s 檔案"
 
 #: ../bin/wiican:282
 msgid "Wiican Mapping Package load failed!"
-msgstr ""
+msgstr "wiican設定檔文件包載入失敗！"
 
 #: ../bin/wiican:289
 msgid "usage: %prog [options] arg"
-msgstr "Aufruf: %prog [Optionen] Argumente"
+msgstr "usage: %prog [options] arg"
 
 #: ../bin/wiican:291
 msgid "loads mapping package from FILENAME"
-msgstr ""
+msgstr "從 FILENAME 載入設定檔文件包"
 
 #: ../bin/wiican:310
 #, python-format
 msgid "No wiican package mapping found: %s"
-msgstr ""
+msgstr "找不到wiican文件包設定檔: %s"
 
 #: ../wiican/ui/managerdlg.py:38
 msgid "Wiican Mapping Package"
-msgstr ""
+msgstr "Wiican設定檔文件包"
 
 #: ../wiican/ui/managerdlg.py:88
 msgid "Editing new mapping"
-msgstr "Neue Zuordnung bearbeiten"
+msgstr "編輯新的設定檔"
 
 #: ../wiican/ui/managerdlg.py:143
 msgid "Are you sure you want to completely remove this mapping?"
-msgstr ""
+msgstr "你確定要完全移除這個設定檔嗎?"
 
 #: ../wiican/ui/managerdlg.py:152
 msgid "Deleting mappings"
-msgstr ""
+msgstr "刪除設定檔"
 
 #: ../wiican/ui/managerdlg.py:179
 msgid "Import mapping..."
-msgstr ""
+msgstr "匯入設定檔..."
 
 #: ../wiican/ui/managerdlg.py:197
 msgid "Wiican Mapping Package import failed!"
-msgstr ""
+msgstr "匯入Wiican設定檔文件包失敗！"
 
 #: ../wiican/ui/managerdlg.py:227
 msgid "Exporting mapping..."
-msgstr ""
+msgstr "匯出設定檔..."
 
 #: ../wiican/ui/editordlg.py:50
 msgid "Select image icon.."
-msgstr "Bildsymbol auswählen …"
+msgstr "選擇圖片圖示.."
 
 #: ../wiican/ui/editordlg.py:80
 msgid "Images"
-msgstr "Bilder"
+msgstr "圖片"
 
 #: ../wiican/ui/editordlg.py:171
 msgid "A mapping is running"
-msgstr ""
+msgstr "已有設定檔在執行中"
 
 #: ../wiican/ui/editordlg.py:176
 msgid "Execute this mapping"
-msgstr ""
+msgstr "執行這個設定檔"
 
 #: ../wiican/ui/editordlg.py:185
 msgid "Ensure a bluetooth "
-msgstr ""
+msgstr "確保藍芽有連接上 "
 
 #: ../wiican/mapping/manager.py:131 ../wiican/mapping/manager.py:171
 #: ../wiican/mapping/manager.py:174 ../wiican/mapping/manager.py:184
@@ -135,152 +134,156 @@ msgstr ""
 #: ../wiican/mapping/manager.py:218 ../wiican/mapping/manager.py:232
 #: ../wiican/mapping/manager.py:238
 msgid "Mapping not found:"
-msgstr ""
+msgstr "找不到設定檔:"
 
 #: ../wiican/mapping/manager.py:221
 msgid "Cannot remove a system installed mapping"
-msgstr ""
+msgstr "無法移除系統中已安裝的設定檔"
 
 #: ../data/mapping.ui:21
 msgid "Wiican mappings"
-msgstr ""
+msgstr "Wiican設定檔"
 
 #: ../data/mapping.ui:44
 msgid "toolbutton1"
-msgstr ""
+msgstr "工具按鈕1"
 
 #: ../data/mapping.ui:57
 msgid "toolbutton2"
-msgstr ""
+msgstr "工具按鈕2"
 
 #: ../data/mapping.ui:70
 msgid "toolbutton3"
-msgstr ""
+msgstr "工具按鈕3"
 
 #: ../data/mapping.ui:92
 msgid "toolbutton4"
-msgstr ""
+msgstr "工具按鈕4"
 
 #: ../data/mapping.ui:105
 msgid "toolbutton5"
-msgstr ""
+msgstr "工具按鈕5"
 
 #: ../data/mapping.ui:314
 msgid "_Name:"
-msgstr "_Name:"
+msgstr "名稱 (_N):"
 
 #: ../data/mapping.ui:326
 msgid "Co_mment:"
-msgstr "_Kommentar:"
+msgstr "備註(_M)："
 
 #: ../data/mapping.ui:337
 msgid "A_uthor/s:"
-msgstr "A_utor(en):"
+msgstr "作者(_A):"
 
 #: ../data/mapping.ui:348
 msgid "_Version:"
-msgstr "_Version:"
+msgstr "版本(_V)："
 
 #: ../data/mapping.ui:443
 msgid "_Icon:"
-msgstr "_Symbol:"
+msgstr "圖示(_I)："
 
 #: ../data/mapping.ui:466
 msgid "<b>General</b>"
-msgstr "<b>Allgemein</b>"
+msgstr "<b>一般設定</b>"
 
 #: ../data/mapping.ui:539
 msgid ""
 "This is a system installed mapping. \n"
 "Changes will be saved in a new mapping."
 msgstr ""
+"這是一個系統已安裝的設定檔。\n"
+"修改將會另存為一個新的設定檔。"
 
 #: ../data/mapping.ui:565
 msgid "Execute mapping"
-msgstr ""
+msgstr "執行設定檔"
 
 #: ../data/mapping.ui:586
 msgid "Mapping programming help"
-msgstr ""
+msgstr "設定檔編程幫助"
 
 #: ../data/mapping.ui:620
 msgid "<b>Mapping</b>"
-msgstr ""
+msgstr "<b>設定檔</b>"
 
 #: ../data/mapping.ui:684
 msgid "Edit mapping"
-msgstr ""
+msgstr "編輯設定檔"
 
 #: ../data/mapping.ui:685
 msgid "_Edit"
-msgstr ""
+msgstr "編輯(_E)"
 
 #: ../data/mapping.ui:686
 msgid "Edit mapping properties"
-msgstr ""
+msgstr "編輯設定檔屬性"
 
 #: ../data/mapping.ui:691
 msgid "Delete mapping"
-msgstr ""
+msgstr "刪除設定檔"
 
 #: ../data/mapping.ui:692
 msgid "_Delete"
-msgstr ""
+msgstr "刪除(_D)"
 
 #: ../data/mapping.ui:693
 msgid "Removes the mapping from the catalog"
-msgstr ""
+msgstr "從目錄刪除設定檔"
 
 #: ../data/mapping.ui:698
 msgid "Import mapping"
-msgstr ""
+msgstr "匯入設定檔"
 
 #: ../data/mapping.ui:699
 msgid "_Import"
-msgstr "_Importieren"
+msgstr "匯入(_I)"
 
 #: ../data/mapping.ui:700
 msgid "Import a mapping from a .wii file"
-msgstr ""
+msgstr "從.wii檔匯入設定檔"
 
 #: ../data/mapping.ui:705
 msgid "_Export mapping"
-msgstr ""
+msgstr "匯出設定檔(_E)"
 
 #: ../data/mapping.ui:706
 msgid "E_xport"
-msgstr "E_xportieren"
+msgstr "匯出(_X)"
 
 #: ../data/mapping.ui:707
 msgid "Export mapping as a .wii file"
-msgstr ""
+msgstr "將設定檔匯出成.wii檔"
 
 #: ../data/mapping.ui:712
 msgid "New mapping"
-msgstr ""
+msgstr "新的設定檔"
 
 #: ../data/mapping.ui:713
 msgid "_New"
-msgstr ""
+msgstr "新增(_N)"
 
 #: ../data/mapping.ui:714
 msgid "Creates a new mapping"
-msgstr ""
+msgstr "建立新的設定檔"
 
 #: ../data/wiimotemanager.ui:13
 msgid ""
 "Yes wii can\n"
 "Wiimote usage assistant and mapping manager"
 msgstr ""
+"Yes wii can\n"
+"Wiimote使用情況及設定檔管理"
 
 #: ../data/wiimotemanager.ui:726
 msgid "Edit mappings..."
-msgstr ""
+msgstr "編輯設定檔..."
 
 #: ../data/wiimotemanager.ui:759
 msgid "Mapping validation failed"
-msgstr ""
+msgstr "設定檔驗證失敗"
 
 #: ../data/wiimotemanager.ui:788
 msgid "It looks the activated mapping contains errors."
-msgstr ""
+msgstr "它看起來是已啟用的設定檔包含錯誤。"

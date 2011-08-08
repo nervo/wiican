@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-11-13 14:38+0100\n"
-"PO-Revision-Date: 2010-01-04 06:01+0000\n"
+"PO-Revision-Date: 2011-02-13 16:35+0000\n"
 "Last-Translator: Wiican Team <wiican-list@gnome.org>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-12 22:44+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-08-07 23:04+0000\n"
+"X-Generator: Launchpad (build 13613)\n"
 "Language: da\n"
 
 #: ../bin/wiican:102
@@ -284,58 +284,3 @@ msgstr ""
 #: ../data/wiimotemanager.ui:788
 msgid "It looks the activated mapping contains errors."
 msgstr ""
-
-#~ msgid "Fail!"
-#~ msgstr "Fejl!"
-
-#~ msgid "Wiimote off"
-#~ msgstr "Wii controlleren er slukket"
-
-#~ msgid "No bluetooth adapters"
-#~ msgstr "Der er ingen bluetooth adapter"
-
-#~ msgid "Put Wiimote in discoverable mode now (press 1+2)"
-#~ msgstr "Gør din Wii controller søgbar (tryk 1+2)"
-
-#~ msgid "Disconnected"
-#~ msgstr "Afbrudt"
-
-#~ msgid "Connected"
-#~ msgstr "Forbundet"
-
-#~ msgid "Use your wiimote"
-#~ msgstr "Brug din Wii controller"
-
-#~ msgid "Can't discover or use wiimote"
-#~ msgstr "Kan ikke finde eller bruge Wii controlleren"
-
-#~ msgid "Error discovering Wiimote"
-#~ msgstr "Ingen Wii controller fundet"
-
-#~ msgid "Name"
-#~ msgstr "Navn"
-
-#~ msgid "No Name"
-#~ msgstr "Intet navn"
-
-#~ msgid "Are you sure you want to completely remove "
-#~ msgstr "Er du sikker på at du vil slette fuldstændigt "
-
-#~ msgid "Visible"
-#~ msgstr "Synlig"
-
-#~ msgid "Unknown error"
-#~ msgstr "Ukendt fejl"
-
-#~ msgid "Skel config dir doesn't exists"
-#~ msgstr "Skel config mappen eksisterer ikke."
-
-#~ msgid "Wrong perms on user config dir"
-#~ msgstr "Forkerte rettigheder i user config mappen"
-
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Launchpad Contributions:\n"
-#~ "  Niels Kristensen https://launchpad.net/~nielskri\n"
-#~ "  Wiican Team https://launchpad.net/~wiicanteam\n"
-#~ "  zpon https://launchpad.net/~zpon-dk"

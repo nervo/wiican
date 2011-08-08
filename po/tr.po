@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-12 22:44+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-08-07 23:04+0000\n"
+"X-Generator: Launchpad (build 13613)\n"
 "Language: tr\n"
 
 #: ../bin/wiican:102
@@ -287,111 +287,5 @@ msgstr ""
 msgid "It looks the activated mapping contains errors."
 msgstr ""
 
-#~ msgid "Wiimote off"
-#~ msgstr "Wiimote kapalı"
-
-#~ msgid "No bluetooth adapters"
-#~ msgstr "Bluetooth bağdaştırıcı bulunamadı"
-
-#~ msgid "Put Wiimote in discoverable mode now (press 1+2)"
-#~ msgstr "Wiimote aygıtını aktif hale getirin (1+2 ye basınız)"
-
-#~ msgid "Disconnected"
-#~ msgstr "Bağlı Değil"
-
-#~ msgid "Connected"
-#~ msgstr "Bağlandı"
-
-#~ msgid "Use your wiimote"
-#~ msgstr "Wimoote aygıtınızı kullanınız"
-
-#~ msgid "Fail!"
-#~ msgstr "Hata !"
-
-#~ msgid "Error discovering Wiimote"
-#~ msgstr "Wiimote taramasında hata"
-
-#~ msgid "check mapping syntax"
-#~ msgstr "eşleştirme sözdizimini kontrol ediniz"
-
-#~ msgid "uinput module it's not loaded"
-#~ msgstr "uinput modülü yüklenemedi"
-
-#~ msgid "Can't discover or use wiimote"
-#~ msgstr "Wiimote bulunamadı ya da aygıt kullanılamıyor"
-
-#~ msgid "Unknown error"
-#~ msgstr "Bilinmeyen hata"
-
-#~ msgid "Name"
-#~ msgstr "Adı"
-
-#~ msgid "No Name"
-#~ msgstr "Tanımlanmamış"
-
-#~ msgid "Visible"
-#~ msgstr "Görünür"
-
-#~ msgid ""
-#~ "this mappings?:\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Bu eşleştirmeler?:\n"
-#~ "\n"
-
-#~ msgid "Short name for the mapping"
-#~ msgstr "Eşleştirme için kısaltma"
-
-#~ msgid "New entry"
-#~ msgstr "Yeni kayıt"
-
-#~ msgid "Name:"
-#~ msgstr "İsim:"
-
-#~ msgid "Wrong perms on user config dir"
-#~ msgstr "Kullanıcı ayar dizini üzerinde hatalı izinler"
-
-#~ msgid "Skel config dir doesn't exists"
-#~ msgstr "Skel config dir bulunamıyor"
-
-#~ msgid "Are you sure you want to completely remove "
-#~ msgstr "Tamamen kaldırmak istediğinizden emin misiniz "
-
-#~ msgid "Can't remove mapping "
-#~ msgstr "Eşleştirme kaldırılamıyor "
-
 #~ msgid "Wiimote mappings"
 #~ msgstr "Wiimote eşleştirmeleri"
-
-#~ msgid "Mappings"
-#~ msgstr "Eşleştirmeler"
-
-#~ msgid "Description:"
-#~ msgstr "Açıklama:"
-
-#~ msgid "wminput help"
-#~ msgstr "wminput yardım"
-
-#~ msgid "Define buttons on wminput config file format"
-#~ msgstr "Butonları wminput ayar dosyası formatı üzerinde tanımlayınız"
-
-#~ msgid "Comment the use for this mapping"
-#~ msgstr "Bu eşleştirme için kullanıma yorum yapınız"
-
-#~ msgid "Mapping:"
-#~ msgstr "Eşleştirme"
-
-#~ msgid "gtk-cancel"
-#~ msgstr "gtk-vazgeç"
-
-#~ msgid "http://dev.emergya.info/projects/show/wiican"
-#~ msgstr "http://dev.emergya.info/projects/show/wiican"
-
-#~ msgid "2009 J. Félix Ontañón <felixonta@gmail.com>"
-#~ msgstr "2009 J. Félix Ontañón <felixonta@gmail.com>"
-
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Launchpad Contributions:\n"
-#~ "  J. Félix Ontañón https://launchpad.net/~fontanon\n"
-#~ "  Metin Akdere https://launchpad.net/~metinakdere"

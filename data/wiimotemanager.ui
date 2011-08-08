@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.16"/>
+  <requires lib="gtk+" version="2.24"/>
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkDialog" id="ValidationErrorDialog">
     <property name="can_focus">False</property>
@@ -796,34 +796,66 @@ Public License instead of this License.  But first, please read
 &lt;http://www.gnu.org/philosophy/why-not-lgpl.html&gt;.
 </property>
     <property name="authors">J. Félix Ontañón &lt;fontanon@emergya.es&gt;</property>
-    <property name="translator_credits" comments="TRANSLATORS: Replace this string with your names, one name per line.">J. Félix Ontañón &lt;fontanon@emergya.es&gt;
+    <property name="translator_credits">J. Félix Ontañón &lt;fontanon@emergya.es&gt;
 
 Launchpad contributors:
-(it) Andrea Amoroso &lt;andrea.amoroso@alice.com&gt;
-(it) Emanuele Aiello 
-(it) Emanuele Toscano 
-(it) Martino Barbon 
+(ast) Xandru &lt;xandru@softastur.org&gt;
+(ca) oriolsbd &lt;oriolsbd@yahoo.es&gt;
+(ca) Sergio Oller
+(ca) Siegfried Gevatter &lt;rainct@ubuntu.com&gt;
+(ca) noidelsucre
+(da) zpon &lt;zpon.dk@gmail.com&gt;
+(da) Niels Kristensen
+(de) Daniel Garcia Stelzner
+(de) Gregor Santner
+(de) Mario Blättermann &lt;mariobl@gnome.org&gt;
+(de) siziwi
+(en_GB) bouchard renaud 
+(es) Diego-arg &lt;toledo244@hotmail.com&gt;
+(es) pcgaldo
+(es) J. Félix Ontañón &lt;fontanon@emergya.es&gt;
+(et) lyyser
+(eu) Abel Camacho &lt;didaktika@santurtzieus.com&gt;
+(fi) Jani Välimaa
+(fi) Jiri Grönroos
+(fi) Tommi Saira
+(fr) Anthony Chaput
 (fr) Chris Murphy &lt;chrismurf+ubuntu@gmail.com&gt;
 (fr) Djiboun 
 (fr) Fabien Boutantin &lt;fabien.boutantin@laposte.net&gt;
 (fr) Florent Thévenet &lt;feuloren@free.fr&gt;
 (fr) Pierre Slamich &lt;pierre@slamich.net&gt;
-(en_GB) bouchard renaud 
+(gl) Gal_Escriban
+(gl) csrparga
+(gl) pcgaldo
+(it) Andrea Amoroso &lt;andrea.amoroso@alice.com&gt;
+(it) Emanuele Aiello 
+(it) Emanuele Toscano 
+(it) Martino Barbon 
+(nl) cumulus007 &lt;cumulus0007@gmail.com&gt;
+(nl) Bert de Bruijn
+(nl) Gwijde &lt;gwijde.maegherman@gmail.com&gt;
+(nl) Tico
+(pt) Claudio Novais
+(pt) Tiago Silva
 (pt_BR) Jean Roberto Souza 
 (pt_BR) Licio Fonseca &lt;licio@ubuntu.com&gt;
 (pt_BR) Moraes Junior &lt;moraesjunior@gmail.com&gt;
 (pt_BR) Sam Samuels &lt;gemini_sam_samuels@hotmail.co.uk&gt;
 (pt_BR) feen 
-(pt_BR) pcgaldo 
-(sv) Christian Widell &lt;christian.widell@gmail.com&gt;
-(sv) Leopold Augustsson 
-(sv) Phoenix 
+(pt_BR) pcgaldo
 (ru) Alexander 'FONTER' Zinin &lt;spore_09@mail.ru&gt;
 (ru) Alexey Afanasyev 
 (ru) Anton Lashkov 
 (ru) Darth Raven 
 (ru) Papazu 
-(ru) Voronin Viktor </property>
+(ru) Voronin Viktor b
+(ru) Fil0sOFF
+(sv) Christian Widell &lt;christian.widell@gmail.com&gt;
+(sv) Leopold Augustsson 
+(sv) Phoenix 
+(tr) Metin Akdere
+(zh_TW) kentxchang</property>
     <property name="artists">Dani Planas &lt;daniplanas.a@gmail.com&gt;
 Ulisse &lt;ulisail@yahoo.it&gt;</property>
     <property name="logo">wiican.svg</property>

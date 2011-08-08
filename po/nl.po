@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-11-13 14:38+0100\n"
-"PO-Revision-Date: 2010-08-02 22:15+0000\n"
-"Last-Translator: Bert de Bruijn <Unknown>\n"
+"PO-Revision-Date: 2011-04-18 06:58+0000\n"
+"Last-Translator: Tico <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-12 22:44+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-08-07 23:04+0000\n"
+"X-Generator: Launchpad (build 13613)\n"
 "Language: nl\n"
 
 #: ../bin/wiican:102
@@ -40,7 +40,7 @@ msgstr "Wiimote detecteren"
 
 #: ../bin/wiican:160
 msgid "Add visible mappings"
-msgstr ""
+msgstr "Zichtbare mappings toevoegen"
 
 #: ../bin/wiican:205 ../wiican/ui/editordlg.py:148
 msgid "Editing "
@@ -57,41 +57,41 @@ msgstr "Om uw Wiimote in de waarneembare modus te zetten"
 #: ../bin/wiican:239 ../wiican/mapping/manager.py:106
 #, python-format
 msgid "Not %s file found on wiican package"
-msgstr ""
+msgstr "Geen %s bestand gevonden in wiican package"
 
 #: ../bin/wiican:243 ../wiican/mapping/manager.py:110
 #, python-format
 msgid "Not %s file found  on wiican package"
-msgstr ""
+msgstr "Geen %s-bestand gevonden in wiican package"
 
 #: ../bin/wiican:282
 msgid "Wiican Mapping Package load failed!"
-msgstr ""
+msgstr "Het laden van het Wiican Mapping Package is mislukt!"
 
 #: ../bin/wiican:289
 msgid "usage: %prog [options] arg"
-msgstr ""
+msgstr "gebruik: %prog [opties] arg"
 
 #: ../bin/wiican:291
 msgid "loads mapping package from FILENAME"
-msgstr ""
+msgstr "Laadt het mapping package uit BESTANDSNAAM"
 
 #: ../bin/wiican:310
 #, python-format
 msgid "No wiican package mapping found: %s"
-msgstr ""
+msgstr "Geen wiican package mapping gevonden: %s"
 
 #: ../wiican/ui/managerdlg.py:38
 msgid "Wiican Mapping Package"
-msgstr ""
+msgstr "Wiican Mapping Package"
 
 #: ../wiican/ui/managerdlg.py:88
 msgid "Editing new mapping"
-msgstr ""
+msgstr "Nieuwe mapping wordt bewerkt"
 
 #: ../wiican/ui/managerdlg.py:143
 msgid "Are you sure you want to completely remove this mapping?"
-msgstr ""
+msgstr "Bent u zeker dat u de mapping helemaal wil verwijderen?"
 
 #: ../wiican/ui/managerdlg.py:152
 msgid "Deleting mappings"
@@ -99,15 +99,15 @@ msgstr "Mappings verwijderen"
 
 #: ../wiican/ui/managerdlg.py:179
 msgid "Import mapping..."
-msgstr ""
+msgstr "Importeer mapping..."
 
 #: ../wiican/ui/managerdlg.py:197
 msgid "Wiican Mapping Package import failed!"
-msgstr ""
+msgstr "Het importeren van het Wiican Mapping Package is mislukt!"
 
 #: ../wiican/ui/managerdlg.py:227
 msgid "Exporting mapping..."
-msgstr ""
+msgstr "Mapping wordt geëxporteerd..."
 
 #: ../wiican/ui/editordlg.py:50
 msgid "Select image icon.."
@@ -119,11 +119,11 @@ msgstr "Afbeeldingen"
 
 #: ../wiican/ui/editordlg.py:171
 msgid "A mapping is running"
-msgstr ""
+msgstr "Een mapping is bezig"
 
 #: ../wiican/ui/editordlg.py:176
 msgid "Execute this mapping"
-msgstr ""
+msgstr "Deze mapping uitvoeren"
 
 #: ../wiican/ui/editordlg.py:185
 msgid "Ensure a bluetooth "
@@ -135,43 +135,43 @@ msgstr ""
 #: ../wiican/mapping/manager.py:218 ../wiican/mapping/manager.py:232
 #: ../wiican/mapping/manager.py:238
 msgid "Mapping not found:"
-msgstr ""
+msgstr "Mapping niet gevonden:"
 
 #: ../wiican/mapping/manager.py:221
 msgid "Cannot remove a system installed mapping"
-msgstr ""
+msgstr "Kan systeemgeïnstalleerde mapping niet verwijderen"
 
 #: ../data/mapping.ui:21
 msgid "Wiican mappings"
-msgstr ""
+msgstr "Wiican mappings"
 
 #: ../data/mapping.ui:44
 msgid "toolbutton1"
-msgstr ""
+msgstr "toolbutton1"
 
 #: ../data/mapping.ui:57
 msgid "toolbutton2"
-msgstr ""
+msgstr "toolbutton2"
 
 #: ../data/mapping.ui:70
 msgid "toolbutton3"
-msgstr ""
+msgstr "toolbutton3"
 
 #: ../data/mapping.ui:92
 msgid "toolbutton4"
-msgstr ""
+msgstr "toolbutton4"
 
 #: ../data/mapping.ui:105
 msgid "toolbutton5"
-msgstr ""
+msgstr "toolbutton5"
 
 #: ../data/mapping.ui:314
 msgid "_Name:"
-msgstr ""
+msgstr "_Naam:"
 
 #: ../data/mapping.ui:326
 msgid "Co_mment:"
-msgstr ""
+msgstr "_Opmerking:"
 
 #: ../data/mapping.ui:337
 msgid "A_uthor/s:"
@@ -179,178 +179,115 @@ msgstr ""
 
 #: ../data/mapping.ui:348
 msgid "_Version:"
-msgstr ""
+msgstr "_Versie"
 
 #: ../data/mapping.ui:443
 msgid "_Icon:"
-msgstr ""
+msgstr "P_ictogram:"
 
 #: ../data/mapping.ui:466
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>Algemeen</b>"
 
 #: ../data/mapping.ui:539
 msgid ""
 "This is a system installed mapping. \n"
 "Changes will be saved in a new mapping."
 msgstr ""
+"Dit is een door het systeem geinstalleerde mapping. \n"
+"Aanpassingen worden opgeslagen in een nieuwe mapping."
 
 #: ../data/mapping.ui:565
 msgid "Execute mapping"
-msgstr ""
+msgstr "Mapping uitvoeren"
 
 #: ../data/mapping.ui:586
 msgid "Mapping programming help"
-msgstr ""
+msgstr "Mapping programmeerhulp"
 
 #: ../data/mapping.ui:620
 msgid "<b>Mapping</b>"
-msgstr ""
+msgstr "<b>Mapping</b>"
 
 #: ../data/mapping.ui:684
 msgid "Edit mapping"
-msgstr ""
+msgstr "Mapping bewerken"
 
 #: ../data/mapping.ui:685
 msgid "_Edit"
-msgstr ""
+msgstr "B_ewerken"
 
 #: ../data/mapping.ui:686
 msgid "Edit mapping properties"
-msgstr ""
+msgstr "Instellingen van mapping bewerken"
 
 #: ../data/mapping.ui:691
 msgid "Delete mapping"
-msgstr ""
+msgstr "Mapping verwijderen"
 
 #: ../data/mapping.ui:692
 msgid "_Delete"
-msgstr ""
+msgstr "Verwij_deren"
 
 #: ../data/mapping.ui:693
 msgid "Removes the mapping from the catalog"
-msgstr ""
+msgstr "Verwijdert de mapping uit de catalogus"
 
 #: ../data/mapping.ui:698
 msgid "Import mapping"
-msgstr ""
+msgstr "Mapping importeren"
 
 #: ../data/mapping.ui:699
 msgid "_Import"
-msgstr ""
+msgstr "_Importeren"
 
 #: ../data/mapping.ui:700
 msgid "Import a mapping from a .wii file"
-msgstr ""
+msgstr "Een mapping importeren uit een .wii-bestand"
 
 #: ../data/mapping.ui:705
 msgid "_Export mapping"
-msgstr ""
+msgstr "Mapping _exporteren"
 
 #: ../data/mapping.ui:706
 msgid "E_xport"
-msgstr ""
+msgstr "E_xporteren"
 
 #: ../data/mapping.ui:707
 msgid "Export mapping as a .wii file"
-msgstr ""
+msgstr "Een mapping exporteren als een .wii-bestand"
 
 #: ../data/mapping.ui:712
 msgid "New mapping"
-msgstr ""
+msgstr "Nieuwe mapping"
 
 #: ../data/mapping.ui:713
 msgid "_New"
-msgstr ""
+msgstr "_Nieuw"
 
 #: ../data/mapping.ui:714
 msgid "Creates a new mapping"
-msgstr ""
+msgstr "Maakt een nieuwe mapping aan"
 
 #: ../data/wiimotemanager.ui:13
 msgid ""
 "Yes wii can\n"
 "Wiimote usage assistant and mapping manager"
 msgstr ""
+"Yes wii can\n"
+"Wiimote gebruikersondersteuning en mappingbeheer"
 
 #: ../data/wiimotemanager.ui:726
 msgid "Edit mappings..."
-msgstr ""
+msgstr "Mappings bewerken..."
 
 #: ../data/wiimotemanager.ui:759
 msgid "Mapping validation failed"
-msgstr ""
+msgstr "Validatie van mapping mislukt"
 
 #: ../data/wiimotemanager.ui:788
 msgid "It looks the activated mapping contains errors."
-msgstr ""
+msgstr "Waarschijnlijk bevat de geactiveerde mapping fouten."
 
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Launchpad Contributions:\n"
-#~ "  Bert de Bruijn https://launchpad.net/~lpdebruijn\n"
-#~ "  cumulus007 https://launchpad.net/~cumulus-007"
-
-#~ msgid "Wiimote off"
-#~ msgstr "Wiimote uitgeschakeld"
-
-#~ msgid "No bluetooth adapters"
-#~ msgstr "Geen bluetooth-adapters"
-
-#~ msgid "Put Wiimote in discoverable mode now (press 1+2)"
-#~ msgstr "Zet de Wiimote nu in de ontdekbare modus (druk op 1+2)"
-
-#~ msgid "Disconnected"
-#~ msgstr "Niet verbonden"
-
-#~ msgid "Connected"
-#~ msgstr "Verbonden"
-
-#~ msgid "Fail!"
-#~ msgstr "Mislukt!"
-
-#~ msgid "Use your wiimote"
-#~ msgstr "Gebruik uw wiimote"
-
-#~ msgid "Error discovering Wiimote"
-#~ msgstr "Fout bij detecteren van Wiimote"
-
-#~ msgid "check mapping syntax"
-#~ msgstr "controleer mapping syntaxis"
-
-#~ msgid "uinput module it's not loaded"
-#~ msgstr "uinput-module is niet geladen"
-
-#~ msgid "Can't discover or use wiimote"
-#~ msgstr "Kan wiimote niet detecteren of gebruiken"
-
-#~ msgid "Unknown error"
-#~ msgstr "Onbekende fout"
-
-#~ msgid "Name"
-#~ msgstr "Naam"
-
-#~ msgid "No Name"
-#~ msgstr "Geen naam"
-
-#~ msgid "Visible"
-#~ msgstr "Zichtbaar"
-
-#~ msgid ""
-#~ "this mappings?:\n"
-#~ "\n"
-#~ msgstr ""
-#~ "deze mappings?:\n"
-#~ "\n"
-
-#~ msgid "Wrong perms on user config dir"
-#~ msgstr "Onjuiste permissies voor configuratiemap"
-
-#~ msgid "Skel config dir doesn't exists"
-#~ msgstr "Configuratiemap voor Skel bestaat niet"
-
-#~ msgid "Are you sure you want to completely remove "
-#~ msgstr "Weet u zeker dat u volledig wilt verwijderen: "
-
-#~ msgid "Can't remove mapping "
-#~ msgstr "Kan deze mapping niet verwijderen: "
+#~ msgid "Wiimote mappings"
+#~ msgstr "Wiimote mappings"
