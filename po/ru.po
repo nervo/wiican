@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-11-13 14:38+0100\n"
-"PO-Revision-Date: 2010-12-29 03:11+0000\n"
+"PO-Revision-Date: 2011-02-13 16:34+0000\n"
 "Last-Translator: Alexander 'FONTER' Zinin <spore_09@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-12 22:44+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-08-07 23:04+0000\n"
+"X-Generator: Launchpad (build 13613)\n"
 "Language: ru\n"
 
 #: ../bin/wiican:102
@@ -286,67 +286,6 @@ msgstr "Проверка правильность привязки не удал
 #: ../data/wiimotemanager.ui:788
 msgid "It looks the activated mapping contains errors."
 msgstr "Похоже, активированная привязка содержит ошибки."
-
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Launchpad Contributions:\n"
-#~ "  Alexander 'FONTER' Zinin https://launchpad.net/~spore-09\n"
-#~ "  Alexey Afanasyev https://launchpad.net/~alein-taseevo\n"
-#~ "  Anton Lashkov https://launchpad.net/~onto\n"
-#~ "  Darth Raven https://launchpad.net/~webmaster-darkguard\n"
-#~ "  Papazu https://launchpad.net/~pavel-z\n"
-#~ "  Voronin Viktor https://launchpad.net/~wizard-wcs"
-
-#~ msgid "Wiimote off"
-#~ msgstr "Wiimote выключен"
-
-#~ msgid "No bluetooth adapters"
-#~ msgstr "Не найдены bluetooth адаптеры"
-
-#~ msgid "Put Wiimote in discoverable mode now (press 1+2)"
-#~ msgstr "Переключите Wiimote в режим обнаружения (нажмите 1+2)"
-
-#~ msgid "Disconnected"
-#~ msgstr "Отключено"
-
-#~ msgid "Connected"
-#~ msgstr "Подключено"
-
-#~ msgid "Use your wiimote"
-#~ msgstr "Используйте ваш wiimote"
-
-#~ msgid "Fail!"
-#~ msgstr "Ошибка!"
-
-#~ msgid "Error discovering Wiimote"
-#~ msgstr "Ошибка обнаружения wiimote"
-
-#~ msgid "uinput module it's not loaded"
-#~ msgstr "модуль uinput не загружен"
-
-#~ msgid "Can't discover or use wiimote"
-#~ msgstr "Невозможно обнаружить или использовать wiimote"
-
-#~ msgid "Unknown error"
-#~ msgstr "Неизвестная ошибка"
-
-#~ msgid "Name"
-#~ msgstr "Имя"
-
-#~ msgid "No Name"
-#~ msgstr "Нет имени"
-
-#~ msgid "Visible"
-#~ msgstr "Видимый"
-
-#~ msgid "Wrong perms on user config dir"
-#~ msgstr "Неверные праметры доступа на директорию с конфигурацией пользователя"
-
-#~ msgid "Are you sure you want to completely remove "
-#~ msgstr "Вы уверены, что хотите полностью удалить "
-
-#~ msgid "Skel config dir doesn't exists"
-#~ msgstr "Каталог для шаблона файла конфигурации не существует"
 
 #~ msgid "Wiimote mappings"
 #~ msgstr "Wiimote привзяки"

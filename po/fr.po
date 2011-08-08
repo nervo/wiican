@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-11-13 14:38+0100\n"
-"PO-Revision-Date: 2010-12-20 21:23+0000\n"
-"Last-Translator: bouchard renaud <Unknown>\n"
+"PO-Revision-Date: 2011-02-13 16:33+0000\n"
+"Last-Translator: J. Félix Ontañón <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-12 22:44+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-08-07 23:04+0000\n"
+"X-Generator: Launchpad (build 13613)\n"
 "Language: fr\n"
 
 #: ../bin/wiican:102
@@ -289,100 +289,5 @@ msgstr "Validation du mapping échoué"
 msgid "It looks the activated mapping contains errors."
 msgstr "Il semblerait que le mapping activé contienne des erreurs."
 
-#~ msgid "Disconnected"
-#~ msgstr "Déconnecté"
-
-#~ msgid "Connected"
-#~ msgstr "Connecté"
-
-#~ msgid "Fail!"
-#~ msgstr "Échec!"
-
-#~ msgid "Unknown error"
-#~ msgstr "Erreur inconnue"
-
-#~ msgid "Name:"
-#~ msgstr "Nom:"
-
-#~ msgid "Name"
-#~ msgstr "Nom"
-
-#~ msgid "Error discovering Wiimote"
-#~ msgstr "Erreur lors de la recherche de wiimotes"
-
-#~ msgid "Put Wiimote in discoverable mode now (press 1+2)"
-#~ msgstr "Mettez la wiimote en mode visible (appuyez sur 1 et 2)"
-
-#~ msgid "uinput module it's not loaded"
-#~ msgstr "Le module uinput n'est pas chargé"
-
-#~ msgid "Use your wiimote"
-#~ msgstr "Utilisez votre wiimote"
-
-#~ msgid "Wiimote off"
-#~ msgstr "Wiimote éteinte"
-
-#~ msgid "No Name"
-#~ msgstr "Sans nom"
-
-#~ msgid "Visible"
-#~ msgstr "Visible"
-
-#~ msgid "Description:"
-#~ msgstr "Description :"
-
-#~ msgid "wminput help"
-#~ msgstr "aide de wminput"
-
-#~ msgid "http://dev.emergya.info/projects/show/wiican"
-#~ msgstr "http://dev.emergya.info/projects/show/wiican"
-
-#~ msgid "2009 J. Félix Ontañón <felixonta@gmail.com>"
-#~ msgstr "2009 J. Félix Ontañón <felixonta@gmail.com>"
-
-#~ msgid "gtk-cancel"
-#~ msgstr "gtk-cancel"
-
-#~ msgid "Wrong perms on user config dir"
-#~ msgstr ""
-#~ "Mauvaises permissions sur le répertoire de configuration de l'utilisateur"
-
-#~ msgid "No bluetooth adapters"
-#~ msgstr "Pas d'adaptateur bluetooth"
-
-#~ msgid "check mapping syntax"
-#~ msgstr "Vérifiez la synthaxe du mapping"
-
-#~ msgid "Can't discover or use wiimote"
-#~ msgstr "Impossible de découvrir ou d'utiliser une wiimote"
-
-#~ msgid ""
-#~ "this mappings?:\n"
-#~ "\n"
-#~ msgstr ""
-#~ "ce mapping?\n"
-#~ "\n"
-
-#~ msgid "Skel config dir doesn't exists"
-#~ msgstr "Le fichier de configuration de base n'existe pas"
-
-#~ msgid "Can't remove mapping "
-#~ msgstr "Impossible de supprimer le mapping "
-
 #~ msgid "Wiimote mappings"
 #~ msgstr "Mappings de Wiimote"
-
-#~ msgid "Comment the use for this mapping"
-#~ msgstr "Commentez l'utilisation de ce mapping"
-
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Launchpad Contributions:\n"
-#~ "  Chris Murphy https://launchpad.net/~chrismurf\n"
-#~ "  Djiboun https://launchpad.net/~djiboun\n"
-#~ "  Fabien Boutantin https://launchpad.net/~fabien-boutantin-laposte\n"
-#~ "  Florent Thévenet https://launchpad.net/~florent-thevenet\n"
-#~ "  Pierre Slamich https://launchpad.net/~pierre-slamich"
-
-#~ msgid "Are you sure you want to completely remove "
-#~ msgstr "Souhaitez-vous bien complètement retirer "

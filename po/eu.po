@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-11-13 14:38+0100\n"
-"PO-Revision-Date: 2010-01-19 06:11+0000\n"
+"PO-Revision-Date: 2011-02-13 16:38+0000\n"
 "Last-Translator: Abel Camacho <didaktika@santurtzieus.com>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-12 22:44+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-08-07 23:04+0000\n"
+"X-Generator: Launchpad (build 13613)\n"
 "Language: eu\n"
 
 #: ../bin/wiican:102
@@ -282,26 +282,3 @@ msgstr ""
 #: ../data/wiimotemanager.ui:788
 msgid "It looks the activated mapping contains errors."
 msgstr ""
-
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Launchpad Contributions:\n"
-#~ "  Abel Camacho https://launchpad.net/~abel2es"
-
-#~ msgid "Disconnected"
-#~ msgstr "Deskonektatuta"
-
-#~ msgid "Connected"
-#~ msgstr "Konektatuta"
-
-#~ msgid "Unknown error"
-#~ msgstr "Errore ezezaguna"
-
-#~ msgid "Name"
-#~ msgstr "Izena"
-
-#~ msgid "No Name"
-#~ msgstr "Izenik ez"
-
-#~ msgid "Visible"
-#~ msgstr "Agerian"

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: wiican\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-11-13 14:38+0100\n"
-"PO-Revision-Date: 2010-11-13 16:19+0000\n"
-"Last-Translator: josep87 <josep87@gmail.com>\n"
+"PO-Revision-Date: 2011-03-12 15:56+0000\n"
+"Last-Translator: oriolsbd <oriolsbd@yahoo.es>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-12 22:44+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-08-07 23:04+0000\n"
+"X-Generator: Launchpad (build 13613)\n"
 "Language: ca\n"
 
 #: ../bin/wiican:102
@@ -31,8 +31,8 @@ msgid ""
 "Hold left button for use wiimote\n"
 "Right button for menu"
 msgstr ""
-"Premeu el botó esquerra per a utilitzar el Wiimote\n"
-"o el botó dret per a accedir al menú"
+"Mantingueu premut el botó esquerra per a utilitzar el Wiimote o el bot dret "
+"per accedir al menú."
 
 #: ../bin/wiican:125
 msgid "Discovering Wiimote"
@@ -40,7 +40,7 @@ msgstr "S'està cercant el Wiimote"
 
 #: ../bin/wiican:160
 msgid "Add visible mappings"
-msgstr ""
+msgstr "Afegeix el mapeig visible"
 
 #: ../bin/wiican:205 ../wiican/ui/editordlg.py:148
 msgid "Editing "
@@ -52,46 +52,46 @@ msgstr "Premeu 1+2"
 
 #: ../bin/wiican:219 ../wiican/ui/editordlg.py:267
 msgid "To put you Wiimote in discoverable mode now"
-msgstr "Per posar el vostre Wiimote en mode descobriment ara"
+msgstr "Posar el vostre Wiimote en mode descobriment ara"
 
 #: ../bin/wiican:239 ../wiican/mapping/manager.py:106
 #, python-format
 msgid "Not %s file found on wiican package"
-msgstr ""
+msgstr "No s'ha trobat el fitxer %s al paquet del wiican"
 
 #: ../bin/wiican:243 ../wiican/mapping/manager.py:110
 #, python-format
 msgid "Not %s file found  on wiican package"
-msgstr ""
+msgstr "No s'ha trobat el fitxer %s al paquet del wiican"
 
 #: ../bin/wiican:282
 msgid "Wiican Mapping Package load failed!"
-msgstr ""
+msgstr "Ha fallat la càrrega del paquet de mapeig de Wiican."
 
 #: ../bin/wiican:289
 msgid "usage: %prog [options] arg"
-msgstr ""
+msgstr "ús: %prog [opcions] arguments"
 
 #: ../bin/wiican:291
 msgid "loads mapping package from FILENAME"
-msgstr ""
+msgstr "carrega el paquet de mapeig de NOM_DE_FITXER"
 
 #: ../bin/wiican:310
 #, python-format
 msgid "No wiican package mapping found: %s"
-msgstr ""
+msgstr "No s'ha trobat el paquet de mapeig de wiican: %s"
 
 #: ../wiican/ui/managerdlg.py:38
 msgid "Wiican Mapping Package"
-msgstr ""
+msgstr "Paquet de mapeig de Wiican"
 
 #: ../wiican/ui/managerdlg.py:88
 msgid "Editing new mapping"
-msgstr ""
+msgstr "S'està editant un nou mapeig"
 
 #: ../wiican/ui/managerdlg.py:143
 msgid "Are you sure you want to completely remove this mapping?"
-msgstr ""
+msgstr "Esteu segur que voleu eliminar aquest mapeig?"
 
 #: ../wiican/ui/managerdlg.py:152
 msgid "Deleting mappings"
@@ -99,15 +99,15 @@ msgstr "S'està esborrant els mapatges"
 
 #: ../wiican/ui/managerdlg.py:179
 msgid "Import mapping..."
-msgstr ""
+msgstr "S'està important el mapeig..."
 
 #: ../wiican/ui/managerdlg.py:197
 msgid "Wiican Mapping Package import failed!"
-msgstr ""
+msgstr "Ha fallat la importació del paquet de mapeig de wiican."
 
 #: ../wiican/ui/managerdlg.py:227
 msgid "Exporting mapping..."
-msgstr ""
+msgstr "S'està exportant el mapeig..."
 
 #: ../wiican/ui/editordlg.py:50
 msgid "Select image icon.."
@@ -119,15 +119,15 @@ msgstr "Imatges"
 
 #: ../wiican/ui/editordlg.py:171
 msgid "A mapping is running"
-msgstr ""
+msgstr "S'està executant un mapeig"
 
 #: ../wiican/ui/editordlg.py:176
 msgid "Execute this mapping"
-msgstr ""
+msgstr "Executa aquest mapeig"
 
 #: ../wiican/ui/editordlg.py:185
 msgid "Ensure a bluetooth "
-msgstr ""
+msgstr "Assegura un bluetooth "
 
 #: ../wiican/mapping/manager.py:131 ../wiican/mapping/manager.py:171
 #: ../wiican/mapping/manager.py:174 ../wiican/mapping/manager.py:184
@@ -135,253 +135,159 @@ msgstr ""
 #: ../wiican/mapping/manager.py:218 ../wiican/mapping/manager.py:232
 #: ../wiican/mapping/manager.py:238
 msgid "Mapping not found:"
-msgstr ""
+msgstr "No s'ha trobat el mapeig:"
 
 #: ../wiican/mapping/manager.py:221
 msgid "Cannot remove a system installed mapping"
-msgstr ""
+msgstr "No es pot eliminar un mapeig instal·lat al sistema"
 
 #: ../data/mapping.ui:21
 msgid "Wiican mappings"
-msgstr ""
+msgstr "Mapejos de wiican"
 
 #: ../data/mapping.ui:44
 msgid "toolbutton1"
-msgstr ""
+msgstr "botó1"
 
 #: ../data/mapping.ui:57
 msgid "toolbutton2"
-msgstr ""
+msgstr "botó2"
 
 #: ../data/mapping.ui:70
 msgid "toolbutton3"
-msgstr ""
+msgstr "botó3"
 
 #: ../data/mapping.ui:92
 msgid "toolbutton4"
-msgstr ""
+msgstr "botó4"
 
 #: ../data/mapping.ui:105
 msgid "toolbutton5"
-msgstr ""
+msgstr "botó5"
 
 #: ../data/mapping.ui:314
 msgid "_Name:"
-msgstr ""
+msgstr "_Nom:"
 
 #: ../data/mapping.ui:326
 msgid "Co_mment:"
-msgstr ""
+msgstr "Co_mentari:"
 
 #: ../data/mapping.ui:337
 msgid "A_uthor/s:"
-msgstr ""
+msgstr "A_utor/s:"
 
 #: ../data/mapping.ui:348
 msgid "_Version:"
-msgstr ""
+msgstr "_Versió"
 
 #: ../data/mapping.ui:443
 msgid "_Icon:"
-msgstr ""
+msgstr "_Icona:"
 
 #: ../data/mapping.ui:466
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>General</b>"
 
 #: ../data/mapping.ui:539
 msgid ""
 "This is a system installed mapping. \n"
 "Changes will be saved in a new mapping."
 msgstr ""
+"Això és un mapeig instaŀlat al sistema. \n"
+"Es desaran els canvis en un mapeig nou."
 
 #: ../data/mapping.ui:565
 msgid "Execute mapping"
-msgstr ""
+msgstr "Executa el mapeig"
 
 #: ../data/mapping.ui:586
 msgid "Mapping programming help"
-msgstr ""
+msgstr "Ajuda del programa de mapeig"
 
 #: ../data/mapping.ui:620
 msgid "<b>Mapping</b>"
-msgstr ""
+msgstr "<b>Mapeig</b>"
 
 #: ../data/mapping.ui:684
 msgid "Edit mapping"
-msgstr ""
+msgstr "Edita el mapeig"
 
 #: ../data/mapping.ui:685
 msgid "_Edit"
-msgstr ""
+msgstr "_Edita"
 
 #: ../data/mapping.ui:686
 msgid "Edit mapping properties"
-msgstr ""
+msgstr "Edita les propietats del mapeig"
 
 #: ../data/mapping.ui:691
 msgid "Delete mapping"
-msgstr ""
+msgstr "Elimina el mapeig"
 
 #: ../data/mapping.ui:692
 msgid "_Delete"
-msgstr ""
+msgstr "_Elimina"
 
 #: ../data/mapping.ui:693
 msgid "Removes the mapping from the catalog"
-msgstr ""
+msgstr "Elimina el mapeig del catàleg"
 
 #: ../data/mapping.ui:698
 msgid "Import mapping"
-msgstr ""
+msgstr "Importa el mapeig"
 
 #: ../data/mapping.ui:699
 msgid "_Import"
-msgstr ""
+msgstr "_Importa"
 
 #: ../data/mapping.ui:700
 msgid "Import a mapping from a .wii file"
-msgstr ""
+msgstr "Importa un mapeig d'un fitxer .wii"
 
 #: ../data/mapping.ui:705
 msgid "_Export mapping"
-msgstr ""
+msgstr "_Exporta el mapeig"
 
 #: ../data/mapping.ui:706
 msgid "E_xport"
-msgstr ""
+msgstr "E_xporta"
 
 #: ../data/mapping.ui:707
 msgid "Export mapping as a .wii file"
-msgstr ""
+msgstr "Exporta el mapeig com a fitxer .wii"
 
 #: ../data/mapping.ui:712
 msgid "New mapping"
-msgstr ""
+msgstr "Mapeig nou"
 
 #: ../data/mapping.ui:713
 msgid "_New"
-msgstr ""
+msgstr "_Nou"
 
 #: ../data/mapping.ui:714
 msgid "Creates a new mapping"
-msgstr ""
+msgstr "Crea un nou mapeig"
 
 #: ../data/wiimotemanager.ui:13
 msgid ""
 "Yes wii can\n"
 "Wiimote usage assistant and mapping manager"
 msgstr ""
+"Wiican\n"
+"Assistent d'ús i gestor de mapejos del WiiMote"
 
 #: ../data/wiimotemanager.ui:726
 msgid "Edit mappings..."
-msgstr ""
+msgstr "Edita els mapejos..."
 
 #: ../data/wiimotemanager.ui:759
 msgid "Mapping validation failed"
-msgstr ""
+msgstr "Ha fallat la validació del mapeig"
 
 #: ../data/wiimotemanager.ui:788
 msgid "It looks the activated mapping contains errors."
-msgstr ""
-
-#~ msgid "Wiimote off"
-#~ msgstr "Wiimote apagat"
-
-#~ msgid "Put Wiimote in discoverable mode now (press 1+2)"
-#~ msgstr "Poseu el Wiimote en mode detectable (premeu 1+2)"
-
-#~ msgid "Disconnected"
-#~ msgstr "Desconnectat"
-
-#~ msgid "Connected"
-#~ msgstr "Connectat"
-
-#~ msgid "Use your wiimote"
-#~ msgstr "Utilitzeu el vostre Wiimote"
-
-#~ msgid "Fail!"
-#~ msgstr "S'ha produït un error!"
-
-#~ msgid "check mapping syntax"
-#~ msgstr "comproveu la sintaxi del mapatge"
-
-#~ msgid "uinput module it's not loaded"
-#~ msgstr "El mòdul «uinput» no està carregat"
-
-#~ msgid "Can't discover or use wiimote"
-#~ msgstr "No s'ha pogut trobar o utilitzar el Wiimote"
-
-#~ msgid "Unknown error"
-#~ msgstr "S'ha produït un error desconegut"
-
-#~ msgid "Error discovering Wiimote"
-#~ msgstr "S'ha produït un error al intentar trobar el Wiimote"
-
-#~ msgid "Name"
-#~ msgstr "Nom"
-
-#~ msgid "No Name"
-#~ msgstr "Sense nom"
-
-#~ msgid "Visible"
-#~ msgstr "Visible"
-
-#~ msgid ""
-#~ "this mappings?:\n"
-#~ "\n"
-#~ msgstr ""
-#~ "aquests mapatges?\n"
-#~ "\n"
-
-#~ msgid "New entry"
-#~ msgstr "Nova entrada"
-
-#~ msgid "Name:"
-#~ msgstr "Nom:"
-
-#~ msgid "Are you sure you want to completely remove "
-#~ msgstr "Esteu segur que voleu esborrar completament "
-
-#~ msgid "Can't remove mapping "
-#~ msgstr "No s'ha pogut esborrar el mapatge "
-
-#~ msgid "Short name for the mapping"
-#~ msgstr "Nom curt per al mapatge"
+msgstr "Sembla que el mapeig que heu activat conté errors."
 
 #~ msgid "Wiimote mappings"
 #~ msgstr "Mapatges del Wiimote"
-
-#~ msgid "Mappings"
-#~ msgstr "Mapatges"
-
-#~ msgid "Description:"
-#~ msgstr "Descripció:"
-
-#~ msgid "Mapping:"
-#~ msgstr "Mapatge:"
-
-#~ msgid "2009 J. Félix Ontañón <felixonta@gmail.com>"
-#~ msgstr "2009 J. Félix Ontañón <felixonta@gmail.com>"
-
-#~ msgid "gtk-cancel"
-#~ msgstr "gtk-cancel"
-
-#~ msgid "http://dev.emergya.info/projects/show/wiican"
-#~ msgstr "http://dev.emergya.info/projects/show/wiican"
-
-#~ msgid "Wrong perms on user config dir"
-#~ msgstr "Permisos erronis a la carpeta de configuració de l'usuari"
-
-#~ msgid "No bluetooth adapters"
-#~ msgstr "No s'ha trobat adaptador Bluetooth"
-
-#~ msgid "Skel config dir doesn't exists"
-#~ msgstr "El directori de configuració Skel no existeix"
-
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Launchpad Contributions:\n"
-#~ "  Sergio Oller https://launchpad.net/~zeehio\n"
-#~ "  Siegfried Gevatter https://launchpad.net/~rainct\n"
-#~ "  josep87 https://launchpad.net/~josep87"
