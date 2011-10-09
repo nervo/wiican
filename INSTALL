@@ -27,8 +27,14 @@ Load uinput module with perms for non-root users:
 Running wiican:
     - Type wiican if installed
 
-Install wiican:
+Install wiican with /usr/local as prefix
     - Run as root: python setup.py install
+    - Run as root: gtk-update-icon-cache -f -t /usr/local/share/icons/hicolor
+
+Install wiican on /usr as prefix
+    - Run as root: python setup.py install --prefix=/usr
+    - Run as root: gtk-update-icon-cache -f -t /usr/share/icons/hicolor
+
 
 [1] http://abstrakraft.org/cwiid/
 [2] http://abstrakraft.org/cwiid/wiki/wminput
